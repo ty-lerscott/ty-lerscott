@@ -1,8 +1,8 @@
-name: GitHub Actions Demo
+name: ty.lerscott deploy
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Ty.lerscott-Deploy:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -16,3 +16,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Deploy to server
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}
+          ls -asl
