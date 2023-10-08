@@ -17,6 +17,11 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Deploy to server
-        run: |
-          ssh -i ${{secrets.SSH_KEY}} ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}
-          ls -asl
+        uses: Burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --delete
+          path: ${{ github.workspace }}
+          remote_path: ${{ secrets.SSH_PUBLIC_PATH }}
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
