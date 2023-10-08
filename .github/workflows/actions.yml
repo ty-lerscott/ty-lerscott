@@ -18,5 +18,5 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Deploy to server
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}
+          ssh -i $${{secrets.SSH_KEY}} ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}
           ls -asl
