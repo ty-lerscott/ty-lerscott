@@ -26,6 +26,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           connect_timeout: 10s
           scp: |
-            '.*' => /home/${{secrets.SSH_USER}}/test/
+            '*' => /home/${{secrets.SSH_USER}}/test/
           last_ssh: |
             echo $LASTSSH
