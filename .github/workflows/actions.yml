@@ -23,6 +23,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PUBLIC_KEY }}
           connect_timeout: 10s
           scp: |
             '.*' => /home/${{secrets.SSH_USER}}/test/
