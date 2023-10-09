@@ -16,12 +16,15 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Deploy to server
-        uses: Burnett01/rsync-deployments@6.0.0
+      - name: SCP SSH pipeline
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          LASTSSH: "Doing something after copying"
         with:
-          switches: -avzr --delete
-          path: ${{ github.workspace }}
-          remote_path: ${{ secrets.SSH_PUBLIC_PATH }}
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USER }}
+          connect_timeout: 10s
+          scp: |
+            '.*' => /home/${{secrets.SSH_USER}}/test/
+          last_ssh: |
+            echo $LASTSSH
