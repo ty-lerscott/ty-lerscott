@@ -15,6 +15,10 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - name: Build
+        run: |
+          npm ci;
+          npm run build;
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: SCP SSH pipeline
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
@@ -26,6 +30,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           connect_timeout: 10s
           scp: |
-            '*' => /home/${{secrets.SSH_USER}}/test/
-          last_ssh: |
-            echo $LASTSSH
+            '*' => /usr/share/www/ty.lerscott/
