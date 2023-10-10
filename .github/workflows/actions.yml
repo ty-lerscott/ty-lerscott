@@ -1,5 +1,5 @@
 name: ty.lerscott deploy
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is running GitHub Actions 🚀
 on: [push]
 jobs:
   Ty_lerscott-Deploy:
@@ -19,15 +19,15 @@ jobs:
         run: |
           npm ci;
           npm run build;
+          cd ../;
+          ls -asl;
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: SCP SSH pipeline
-        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-        env:
-          LASTSSH: "Doing something after copying"
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          connect_timeout: 10s
-          scp: |
-            '*' => /usr/share/www/ty.lerscott/
+      # - name: SCP SSH pipeline
+      #   uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     user: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     connect_timeout: 10s
+      #     scp: |
+      #       '*' => /usr/share/www/ty.lerscott/
