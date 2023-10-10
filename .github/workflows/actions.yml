@@ -19,15 +19,19 @@ jobs:
         run: |
           npm ci;
           npm run build;
-          cd ../;
-          ls -asl;
+          tar -zcvf ty.lerscott.tar.gz *;
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      # - name: SCP SSH pipeline
-      #   uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     user: ${{ secrets.SSH_USER }}
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     connect_timeout: 10s
-      #     scp: |
-      #       '*' => /usr/share/www/ty.lerscott/
+      - name: SCP pipeline
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          connect_timeout: 10s
+          scp: |
+            'ty.lerscott.tar.gz' => /usr/share/www/ty.lerscott
+          last_ssh: |
+            cd /usr/share/www/ty.lerscott;
+            tar -zxvf ty.lerscott.tar.gz;
+            rm ty.lerscott.tar.gz;
+            # pm2 restart ty.lerscott;
