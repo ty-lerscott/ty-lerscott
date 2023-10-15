@@ -19,7 +19,7 @@ jobs:
         run: |
           npm ci;
           npm run build;
-          tar -zcvf ty.lerscott.tar.gz * .*;
+          tar -zcvf ty.lerscott.tar.gz * .next;
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: SCP pipeline
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
