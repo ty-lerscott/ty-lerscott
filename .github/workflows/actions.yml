@@ -34,4 +34,3 @@ jobs:
             cd /usr/share/www/ty.lerscott;
             tar -zxvf ty.lerscott.tar.gz;
             rm ty.lerscott.tar.gz;
-            # pm2 restart ty.lerscott;
