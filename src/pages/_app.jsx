@@ -1,6 +1,9 @@
-import "@/app/styles/globals.css";
-
 import { Open_Sans, Montserrat } from "next/font/google";
+
+import { cn } from "@/utils";
+import { Navigation } from "@/components/Navigation";
+
+import "@/app/styles/globals.css";
 
 export const OpenSansFont = Open_Sans({
   subsets: ["latin"],
@@ -15,19 +18,22 @@ export const MontserratFont = Montserrat({
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <main className={OpenSansFont.className}>
-      <style jsx global>{`
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-          font-family: ${MontserratFont.style.fontFamily};
-          font-weight: 700;
-        }
-      `}</style>
-      <Component {...pageProps} />
-    </main>
+    <>
+      <Navigation {...pageProps} />
+      <main className={cn(OpenSansFont.className, "container")}>
+        <style jsx global>{`
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            font-family: ${MontserratFont.style.fontFamily};
+            font-weight: 700;
+          }
+        `}</style>
+        <Component {...pageProps} />
+      </main>
+    </>
   );
 }
