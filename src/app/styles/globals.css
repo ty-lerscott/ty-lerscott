@@ -2,12 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #223843;
-  --text: #EFF1F3;
-  --primary: #D8B4A0;
-  --secondary: #DBD3D8;
+@layer base {
+  html {
+    --background: #533745;
+    --text: #EFF1F3;
+    --primary: #AB4E68;
+    --secondary: #B07156;
+  }
+
+  html[data-theme='dark'] {
+    --background: #0C1618;
+    --text: #FAF4D3;
+    --primary: #D1AC00;
+    --secondary: #004643;
+  }
 }
+
 
 body {
   background: var(--background);

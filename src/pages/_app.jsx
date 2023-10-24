@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Open_Sans, Montserrat } from "next/font/google";
 
 import { cn } from "@/utils";
@@ -16,10 +17,20 @@ export const MontserratFont = Montserrat({
   variable: "--font-montserrat",
 });
 
+const THEMES = {
+  default: "default",
+};
+
 export default function MyApp({ Component, pageProps }) {
+  const [theme, setTheme] = useState(THEMES.default);
+
+  const themeSetter = (theme) => {
+    document.querySelector("html").setAttribute("data-theme", theme);
+    setTheme(theme);
+  };
   return (
     <>
-      <Navigation {...pageProps} />
+      <Navigation {...pageProps} theme={theme} setTheme={themeSetter} />
       <main className={cn(OpenSansFont.className, "container")}>
         <style jsx global>{`
           h1,
