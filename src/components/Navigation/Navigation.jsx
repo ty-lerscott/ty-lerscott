@@ -13,9 +13,7 @@ import {
 
 const Navigation = ({ theme, setTheme }) => {
   return (
-    <nav
-      className={`flex w-screen py-2 px-4 justify-between border-b border-b-primary ${theme}`}
-    >
+    <nav className="flex w-screen py-2 px-4 justify-between border-b border-b-primary">
       <h1 className="text-lg">
         <Link href="/">Tyler Scott</Link>
       </h1>

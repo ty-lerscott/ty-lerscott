@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import useLocalStorage from "use-local-storage";
 import { Open_Sans, Montserrat } from "next/font/google";
 
 import { cn } from "@/utils";
@@ -22,16 +23,16 @@ const THEMES = {
 };
 
 export default function MyApp({ Component, pageProps }) {
-  const [theme, setTheme] = useState(THEMES.default);
+  const [theme, setTheme] = useLocalStorage("theme", THEMES.default);
 
-  const themeSetter = (theme) => {
+  useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
-    setTheme(theme);
-  };
+  }, [theme]);
+
   return (
     <>
-      <Navigation {...pageProps} theme={theme} setTheme={themeSetter} />
-      <main className={cn(OpenSansFont.className, "container")}>
+      <Navigation {...pageProps} theme={theme} setTheme={setTheme} />
+      <main className={cn(OpenSansFont.className, "container", "pt-4")}>
         <style jsx global>{`
           h1,
           h2,
