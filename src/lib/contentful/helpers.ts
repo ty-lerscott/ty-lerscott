@@ -1,4 +1,3 @@
-import type { Menu, MenuItem } from "@/types/components/menu.types";
 import type { ContentfulResponse, EntryType } from "@/types/contentful.types";
 
 const IS_PROD = process.env.NEXT_PUBLIC_ENVIRONMENT === "production";
@@ -26,12 +25,12 @@ type NormalizedType = ContentfulResponse & {
   fields?: EntryType;
 };
 
-function normalize<GenericType>(data: NormalizedType) {
+const normalize = <GenericType>(data: NormalizedType) => {
   const { items: entries, fields } = data;
   // TODO: check if entries array ever has more than 1 item
 
   return (fields || entries?.[0].fields) as GenericType;
-}
+};
 
 const setQueryParams = (params?: Record<string, string>) => {
   const contentType = params?.contentType;
@@ -42,13 +41,13 @@ const setQueryParams = (params?: Record<string, string>) => {
   }).toString();
 };
 
-const getEntryById = async (id: string) => {
+const getEntryById = async <GenericType>(id: string) => {
   try {
     const resp = await fetch(
       `${PATHS.entries}/${id}/?${setQueryParams()}`,
     ).then((resp) => resp.json());
 
-    return normalize(resp);
+    return normalize<GenericType>(resp);
   } catch (err) {
     console.log(
       err instanceof Error
@@ -57,10 +56,10 @@ const getEntryById = async (id: string) => {
     );
   }
 
-  return [];
+  return [] as GenericType;
 };
 
-const getEntries = async <GenericType>(contentType: string) => {
+const getEntriesByType = async <GenericType>(contentType: string) => {
   try {
     const resp = await fetch(
       `${PATHS.entries}?${setQueryParams({ contentType })}`,
@@ -78,21 +77,4 @@ const getEntries = async <GenericType>(contentType: string) => {
   return [] as GenericType;
 };
 
-const getMenu = async () => {
-  try {
-    const { menuItems } = await getEntries<Menu>("menu");
-
-    const items = await Promise.all(
-      menuItems.map(({ sys }) => getEntryById(sys.id)),
-    );
-    return items as MenuItem[];
-  } catch (err) {
-    console.log(
-      err instanceof Error ? `getMenu error: ${err.message}` : "Unknown Error",
-    );
-  }
-
-  return [] as MenuItem[];
-};
-
-export { getMenu };
+export { PATHS, getEntryById, setQueryParams, getEntriesByType };

@@ -2,9 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
-import { getMenu } from "@/lib/contentful";
 import Header from "@/components/menus/header";
-import Providers from "@/components/providers";
 
 import "./tailwind.css";
 
@@ -19,22 +17,16 @@ const RootLayout = async ({
   children,
 }: Readonly<{
   children: ReactNode;
-}>) => {
-  const menuItems = await getMenu();
-
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          <header className="flex items-center justify-between px-4 py-4 border-b-2">
-            <Link href="/">Tyler Scott</Link>
-            <Header menuItems={menuItems} />
-          </header>
-          <main>{children}</main>
-        </Providers>
-      </body>
-    </html>
-  );
-};
+}>) => (
+  <html lang="en">
+    <body className={inter.className}>
+      <header className="flex items-center justify-between px-4 py-4 border-b-2">
+        <Link href="/">Tyler Scott</Link>
+        <Header />
+      </header>
+      <main>{children}</main>
+    </body>
+  </html>
+);
 
 export default RootLayout;

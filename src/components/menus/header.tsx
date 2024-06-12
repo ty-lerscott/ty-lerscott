@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import type { MenuItem } from "@/types/components/menu.types";
 
@@ -9,8 +7,11 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { getMenu } from "@/lib/contentful";
 
-const HeaderMenu = ({ menuItems }: { menuItems: MenuItem[] }) => {
+const HeaderMenu = async () => {
+  const menuItems = await getMenu();
+
   if (!menuItems) return null;
 
   return (
