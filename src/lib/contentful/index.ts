@@ -1,4 +1,9 @@
-import type { Menu, MenuItem } from "@/types/components/menu.types";
+import type {
+  PageType,
+  HomepageType,
+  BlurbType,
+} from "@/types/contentful.types";
+import type { Menu, MenuItem } from "@/types/components.types";
 import { getEntriesByType, getEntryById } from "@/lib/contentful/helpers";
 
 const getMenu = async () => {
@@ -17,4 +22,19 @@ const getMenu = async () => {
   return [] as MenuItem[];
 };
 
-export { getMenu };
+const getPage = async <GenericPageType>(pageType: string) =>
+  getEntriesByType<PageType & GenericPageType>(pageType);
+
+const getHomepage = async () => {
+  const { blurb: blurbs } = await getPage<HomepageType>("landingPage");
+
+  const settledBlurbs = await Promise.all(
+    blurbs.map(({ sys }) => getEntryById<BlurbType>(sys.id)),
+  );
+
+  return {
+    blurb: settledBlurbs,
+  };
+};
+
+export { getMenu, getPage, getHomepage };

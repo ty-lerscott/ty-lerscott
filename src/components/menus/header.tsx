@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { MenuItem } from "@/types/components/menu.types";
 
 import {
   NavigationMenu,

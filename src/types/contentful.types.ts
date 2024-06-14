@@ -1,3 +1,5 @@
+import { GenericSysType } from "@/types/generics.types";
+
 export type EntryType = {
   metadata: {
     tags: Array<string>;
@@ -45,4 +47,32 @@ export type ContentfulResponse = {
     Entry: EntryType[];
     //TODO: asset type
   };
+};
+
+export type PageType = {
+  pageName: string;
+};
+
+type TextTag =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "p"
+  | "span"
+  | "strong"
+  | "em"
+  | "mark"
+  | "del"
+  | "ins";
+
+export type HomepageType = PageType & {
+  blurb: Array<GenericSysType>;
+};
+
+export type BlurbType = {
+  text: string;
+  tag: TextTag;
 };
