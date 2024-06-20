@@ -25,26 +25,42 @@ type NormalizedType = ContentfulResponse & {
   fields?: EntryType;
 };
 
+type SearchParams = {
+  contentType: string;
+  order?: string;
+  limit?: string;
+};
+
+const setQueryParams = ({ contentType, order, limit }: SearchParams) => {
+  return new URLSearchParams({
+    order: order || "sys.createdAt",
+    limit: limit || "10",
+    ...(contentType && { content_type: contentType }),
+  }).toString();
+};
+
 const normalize = <GenericType>(data: NormalizedType) => {
   const { items: entries, fields } = data;
   // TODO: check if entries array ever has more than 1 item
 
-  return (fields || entries?.[0].fields) as GenericType;
-};
-
-const setQueryParams = (params?: Record<string, string>) => {
-  const contentType = params?.contentType;
-
-  return new URLSearchParams({
-    ...(contentType && { content_type: contentType }),
-    access_token: API_KEY,
-  }).toString();
+  return {
+    ...fields,
+    ...(entries?.[0] && entries[0].fields),
+    date: data.sys.updatedAt,
+  } as GenericType;
 };
 
 const getEntryById = async <GenericType>(id: string) => {
   try {
     const resp = await fetch(
-      `${PATHS.entries}/${id}/?${setQueryParams()}`,
+      `${PATHS.entries}/${id}/?${setQueryParams({
+        contentType: "",
+      })}`,
+      {
+        headers: new Headers({
+          Authorization: `Bearer ${API_KEY}`,
+        }),
+      },
     ).then((resp) => resp.json());
 
     return normalize<GenericType>(resp);
@@ -59,11 +75,20 @@ const getEntryById = async <GenericType>(id: string) => {
   return [] as GenericType;
 };
 
-const getEntriesByType = async <GenericType>(contentType: string) => {
+const getEntriesByType = async <GenericType>(searchParams: SearchParams) => {
   try {
     const resp = await fetch(
-      `${PATHS.entries}?${setQueryParams({ contentType })}`,
+      `${PATHS.entries}?${setQueryParams(searchParams)}`,
+      {
+        headers: new Headers({
+          Authorization: `Bearer ${API_KEY}`,
+        }),
+      },
     ).then((resp) => resp.json());
+
+    if (searchParams.contentType === "post") {
+      // console.log({ resp });
+    }
 
     return normalize<GenericType>(resp);
   } catch (err) {

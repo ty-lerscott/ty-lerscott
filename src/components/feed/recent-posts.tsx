@@ -1,4 +1,4 @@
-const RecentPosts = () => {
+const RecentPosts = async () => {
   return (
     <section data-testid="RecentPosts">
       <h2 className="font-bold">Recent Posts</h2>

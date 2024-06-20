@@ -39,6 +39,8 @@ export type EntryType = {
 export type ContentfulResponse = {
   sys: {
     type: string;
+    createdAt: string;
+    updatedAt: string;
   };
   total: number;
   skip: number;

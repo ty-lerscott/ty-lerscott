@@ -8,7 +8,7 @@ import { getEntriesByType, getEntryById } from "@/lib/contentful/helpers";
 
 const getMenu = async () => {
   try {
-    const { menuItems } = await getEntriesByType<Menu>("menu");
+    const { menuItems } = await getEntriesByType<Menu>({ contentType: "menu" });
 
     return Promise.all(
       menuItems.map(({ sys }) => getEntryById<MenuItem>(sys.id)),
@@ -23,16 +23,18 @@ const getMenu = async () => {
 };
 
 const getPage = async <GenericPageType>(pageType: string) =>
-  getEntriesByType<PageType & GenericPageType>(pageType);
+  getEntriesByType<PageType & GenericPageType>({ contentType: pageType });
 
 const getHomepage = async () => {
   const { blurb: blurbs } = await getPage<HomepageType>("landingPage");
+  const posts = await getEntriesByType({ contentType: "post" });
 
   const settledBlurbs = await Promise.all(
     blurbs.map(({ sys }) => getEntryById<BlurbType>(sys.id)),
   );
 
   return {
+    posts,
     blurb: settledBlurbs,
   };
 };
