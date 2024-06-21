@@ -39,15 +39,49 @@ const setQueryParams = ({ contentType, order, limit }: SearchParams) => {
   }).toString();
 };
 
-const normalize = <GenericType>(data: NormalizedType) => {
-  const { items: entries, fields } = data;
-  // TODO: check if entries array ever has more than 1 item
+const recursiveInjection = <GenericType>(
+  obj: GenericType,
+  id: string,
+  injection: {
+    createdAt: string;
+    fields: Record<string, any>;
+  },
+) => {
+  for (const key in obj) {
+    if (key === "id" && obj[key] === id) {
+      for (const injectKey in injection) {
+        // @ts-ignore
+        obj[injectKey] = injection[injectKey];
+      }
+      break;
+    }
+    if (typeof obj[key] === "object") {
+      recursiveInjection(obj[key], id, injection);
+    }
+  }
+};
 
-  return {
+const normalize = <GenericType>(data: NormalizedType) => {
+  const { items: entries, fields, includes, ...rest } = data;
+
+  const normalized = {
     ...fields,
     ...(entries?.[0] && entries[0].fields),
-    date: data.sys.updatedAt,
   } as GenericType;
+
+  const include = [...includes.Entry].concat(includes.Asset).filter(Boolean);
+
+  for (let i = 0; i <= include.length - 1; i++) {
+    const item = include[i];
+    const { id, createdAt } = item.sys;
+    const { fields } = item;
+
+    recursiveInjection<GenericType>(normalized, id, { createdAt, fields });
+  }
+
+  console.log(entries);
+
+  return normalized;
 };
 
 const getEntryById = async <GenericType>(id: string) => {
@@ -67,7 +101,7 @@ const getEntryById = async <GenericType>(id: string) => {
   } catch (err) {
     console.log(
       err instanceof Error
-        ? `getEntries error: ${err.message}`
+        ? `getEntryById error: ${err.message}`
         : "Unknown Error",
     );
   }
@@ -86,15 +120,11 @@ const getEntriesByType = async <GenericType>(searchParams: SearchParams) => {
       },
     ).then((resp) => resp.json());
 
-    if (searchParams.contentType === "post") {
-      // console.log({ resp });
-    }
-
     return normalize<GenericType>(resp);
   } catch (err) {
     console.log(
       err instanceof Error
-        ? `getEntries error: ${err.message}`
+        ? `getEntriesByType error: ${err.message}`
         : "Unknown Error",
     );
   }

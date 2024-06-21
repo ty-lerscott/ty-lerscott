@@ -1,14 +1,16 @@
-import type { GenericSysType } from "@/types/generics.types";
+import { GenericWrapper } from "@/types/generics.types";
 
-export type MenuItemsResponse = GenericSysType;
+export type MenuItem = GenericWrapper & {
+  fields: {
+    url: string;
+    text: string;
+    external: boolean;
+  };
+};
 
 export type Menu = {
   menuTitle: string;
-  menuItems: MenuItemsResponse[];
-};
-
-export type MenuItem = {
-  url: string;
-  text: string;
-  external: boolean;
+  menuItems: {
+    sys: MenuItem;
+  }[];
 };

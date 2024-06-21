@@ -1,5 +1,6 @@
-export type GenericSysType = {
-  sys: {
-    id: string;
-  };
+export type GenericWrapper = {
+  type: string;
+  linkType: string;
+  id: string;
+  createdAt: string;
 };

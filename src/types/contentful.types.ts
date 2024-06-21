@@ -1,4 +1,4 @@
-import { GenericSysType } from "@/types/generics.types";
+import { GenericWrapper } from "@/types/generics.types";
 
 export type EntryType = {
   metadata: {
@@ -47,12 +47,55 @@ export type ContentfulResponse = {
   limit: number;
   includes: {
     Entry: EntryType[];
-    //TODO: asset type
+    Asset: EntryType[]; //TODO: may not be the proper type check later
   };
 };
 
-export type PageType = {
-  pageName: string;
+type ImageType = {
+  sys: {
+    type: string;
+    linkType: "Asset";
+    id: string;
+    createdAt: string;
+    fields: {
+      title: string;
+      file: {
+        url: string;
+        details: {
+          size: number;
+          image: {
+            width: number;
+            height: number;
+          };
+        };
+        fileName: string;
+        contentType: string;
+      };
+    };
+  };
+};
+
+type TagType = {
+  sys: {
+    type: string;
+    linkType: "Entry";
+    id: string;
+    createdAt: string;
+    fields: {
+      text: string;
+      slug: string;
+      color: string;
+    };
+  };
+};
+
+export type PostType = {
+  title: string;
+  description: string;
+  publishDate: string;
+  image: ImageType;
+  tags: TagType[];
+  body: any[]; // TODO: maybe not have an any object here, make it of the valid types that can go in body
 };
 
 type TextTag =
@@ -70,11 +113,17 @@ type TextTag =
   | "del"
   | "ins";
 
-export type HomepageType = PageType & {
-  blurb: Array<GenericSysType>;
+export type BlurbType = {
+  sys: GenericWrapper & {
+    fields: {
+      text: string;
+      tag: TextTag;
+    };
+  };
 };
 
-export type BlurbType = {
-  text: string;
-  tag: TextTag;
+export type HomepageType = {
+  pageName: string;
+  description: string;
+  blurb: Array<BlurbType>;
 };

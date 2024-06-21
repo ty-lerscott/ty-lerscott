@@ -1,5 +1,5 @@
 import type {
-  PageType,
+  PostType,
   HomepageType,
   BlurbType,
 } from "@/types/contentful.types";
@@ -10,32 +10,33 @@ const getMenu = async () => {
   try {
     const { menuItems } = await getEntriesByType<Menu>({ contentType: "menu" });
 
-    return Promise.all(
-      menuItems.map(({ sys }) => getEntryById<MenuItem>(sys.id)),
-    );
+    return menuItems.map(({ sys }) => sys.fields);
   } catch (err) {
     console.log(
       err instanceof Error ? `getMenu error: ${err.message}` : "Unknown Error",
     );
+    // TODO: match the return type of the try here as well
+    return;
   }
-
-  return [] as MenuItem[];
 };
 
 const getPage = async <GenericPageType>(pageType: string) =>
-  getEntriesByType<PageType & GenericPageType>({ contentType: pageType });
+  getEntriesByType<GenericPageType>({ contentType: pageType });
 
 const getHomepage = async () => {
-  const { blurb: blurbs } = await getPage<HomepageType>("landingPage");
-  const posts = await getEntriesByType({ contentType: "post" });
-
-  const settledBlurbs = await Promise.all(
-    blurbs.map(({ sys }) => getEntryById<BlurbType>(sys.id)),
-  );
+  const { blurb, pageName, description } =
+    await getPage<HomepageType>("landingPage");
+  const posts = await getEntriesByType<PostType[]>({
+    contentType: "post",
+  });
 
   return {
-    posts,
-    blurb: settledBlurbs,
+    description,
+    title: pageName,
+    posts: Array.isArray(posts) ? posts : [posts],
+    blurb: blurb.map(({ sys }) => sys.fields) as Array<
+      BlurbType["sys"]["fields"]
+    >,
   };
 };
 
