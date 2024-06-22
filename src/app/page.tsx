@@ -30,7 +30,7 @@ const Home = async () => {
 
   return (
     <div data-testid="page-home">
-      <section data-testid="blurb" className="flex flex-col gap-4">
+      <section data-testid="blurb" className="flex flex-col gap-2">
         {(page.blurb || []).map((blurb, index) => {
           const Tag = blurb.tag;
 

@@ -29,7 +29,7 @@ const RootLayout = async ({
           <Header />
         </header>
         <Separator />
-        <main className="container max-w-screen-md px-4 pt-8">{children}</main>
+        <main className="container max-w-screen-md px-4 pt-4">{children}</main>
       </body>
     </html>
   );

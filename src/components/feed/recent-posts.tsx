@@ -17,12 +17,12 @@ const Post = ({
         </Link>
       </h2>
       <div className="flex items-center gap-2">
-        <FaRegCalendar />
+        <FaRegCalendar className="w-[0.75rem]" />
         <span className="italic text-sm">
           {dayjs(publishDate).format("MMMM D, YYYY | HH:mm a")}
         </span>
       </div>
-      <p className="leading-4 text-sm">{description}</p>
+      <p className="text-sm">{description}</p>
     </div>
   );
 };
