@@ -1,6 +1,5 @@
 import { getHomepage } from "@/lib/contentful";
 import { cache } from "react";
-import Head from "next/head";
 import { Separator } from "@/components/ui/separator";
 import RecentPosts from "@/components/feed/recent-posts";
 
@@ -31,14 +30,15 @@ const Home = async () => {
 
   return (
     <div data-testid="page-home">
-      <Head>
-        <title>{page.title}</title>
-      </Head>
       <section data-testid="blurb" className="flex flex-col gap-4">
-        {(page?.blurb || []).map((blurb, index) => {
+        {(page.blurb || []).map((blurb, index) => {
           const Tag = blurb.tag;
 
-          return <Tag key={`blurb-${index}`}>{blurb.text}</Tag>;
+          return (
+            <Tag key={`blurb-${index}`} className="text-sm">
+              {blurb.text}
+            </Tag>
+          );
         })}
       </section>
 

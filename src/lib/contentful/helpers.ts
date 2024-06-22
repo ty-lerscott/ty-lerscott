@@ -21,7 +21,7 @@ const PATHS = Object.entries(PATHS_OBJ).reduce(
 );
 
 type NormalizedType = ContentfulResponse & {
-  items?: EntryType[];
+  items: EntryType[];
   fields?: EntryType;
 };
 
@@ -29,59 +29,57 @@ type SearchParams = {
   contentType: string;
   order?: string;
   limit?: string;
+  sort?: "asc" | "desc";
 };
 
-const setQueryParams = ({ contentType, order, limit }: SearchParams) => {
+const setQueryParams = ({ contentType, order, limit, sort }: SearchParams) => {
+  const sortOrder = `${sort === "asc" ? "-" : ""}${order || "sys.createdAt"}`;
+
   return new URLSearchParams({
-    order: order || "sys.createdAt",
+    order: sortOrder,
     limit: limit || "10",
     ...(contentType && { content_type: contentType }),
   }).toString();
 };
 
-const recursiveInjection = <GenericType>(
-  obj: GenericType,
+const recursiveInjection = (
+  targetArr: EntryType[],
   id: string,
   injection: {
     createdAt: string;
     fields: Record<string, any>;
   },
 ) => {
-  for (const key in obj) {
-    if (key === "id" && obj[key] === id) {
-      for (const injectKey in injection) {
-        // @ts-ignore
-        obj[injectKey] = injection[injectKey];
+  for (const obj of targetArr) {
+    for (const key in obj) {
+      if (key === "id" && obj[key] === id) {
+        (Object.keys(injection) as Array<keyof typeof injection>).forEach(
+          (injectionKey) => {
+            obj[injectionKey] = injection[injectionKey];
+          },
+        );
+        break;
       }
-      break;
-    }
-    if (typeof obj[key] === "object") {
-      recursiveInjection(obj[key], id, injection);
+      if (typeof obj[key] === "object") {
+        recursiveInjection([obj[key]], id, injection);
+      }
     }
   }
 };
 
 const normalize = <GenericType>(data: NormalizedType) => {
-  const { items: entries, fields, includes, ...rest } = data;
-
-  const normalized = {
-    ...fields,
-    ...(entries?.[0] && entries[0].fields),
-  } as GenericType;
+  const { items: entries, includes } = data;
 
   const include = [...includes.Entry].concat(includes.Asset).filter(Boolean);
 
-  for (let i = 0; i <= include.length - 1; i++) {
-    const item = include[i];
-    const { id, createdAt } = item.sys;
+  include.forEach((item) => {
     const { fields } = item;
+    const { id, createdAt } = item.sys;
 
-    recursiveInjection<GenericType>(normalized, id, { createdAt, fields });
-  }
+    recursiveInjection(entries, id, { createdAt, fields });
+  });
 
-  console.log(entries);
-
-  return normalized;
+  return (entries.length > 1 ? entries : entries[0]) as GenericType;
 };
 
 const getEntryById = async <GenericType>(id: string) => {

@@ -34,6 +34,7 @@ export type EntryType = {
     locale: string;
   };
   fields: Record<string, any>;
+  [key: string]: any;
 };
 
 export type ContentfulResponse = {
@@ -90,12 +91,16 @@ type TagType = {
 };
 
 export type PostType = {
-  title: string;
-  description: string;
-  publishDate: string;
-  image: ImageType;
-  tags: TagType[];
-  body: any[]; // TODO: maybe not have an any object here, make it of the valid types that can go in body
+  sys: GenericWrapper;
+  fields: {
+    title: string;
+    slug: string;
+    description: string;
+    publishDate: string;
+    image: ImageType;
+    tags: TagType[];
+    body: any[]; // TODO: maybe not have an any object here, make it of the valid types that can go in body
+  };
 };
 
 type TextTag =
@@ -123,7 +128,13 @@ export type BlurbType = {
 };
 
 export type HomepageType = {
-  pageName: string;
-  description: string;
-  blurb: Array<BlurbType>;
+  metadata: {
+    tags: string[];
+  };
+  sys: GenericWrapper;
+  fields: {
+    pageName: string;
+    description: string;
+    blurb: BlurbType[];
+  };
 };
