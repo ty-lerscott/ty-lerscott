@@ -128,13 +128,11 @@ export type BlurbType = {
 };
 
 export type HomepageType = {
-  metadata: {
-    tags: string[];
-  };
-  sys: GenericWrapper;
-  fields: {
-    pageName: string;
-    description: string;
-    blurb: BlurbType[];
+  data: {
+    fields: {
+      pageName: string;
+      description: string;
+      blurb: BlurbType[];
+    };
   };
 };

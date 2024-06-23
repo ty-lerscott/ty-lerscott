@@ -11,12 +11,14 @@ export type MenuItem = {
 };
 
 export type Menu = {
-  metadata: {
-    tags: string[];
-  };
-  sys: Record<string, any>; // I don't really care about this for now
-  fields: {
-    menuTitle: string;
-    menuItems: MenuItem[];
+  data: {
+    metadata: {
+      tags: string[];
+    };
+    sys: Record<string, any>; // I don't really care about this for now
+    fields: {
+      menuTitle: string;
+      menuItems: MenuItem[];
+    };
   };
 };

@@ -1,7 +1,8 @@
-import { getHomepage } from "@/lib/contentful";
 import { cache } from "react";
+import { getHomepage } from "@/lib/contentful";
 import { Separator } from "@/components/ui/separator";
 import RecentPosts from "@/components/feed/recent-posts";
+import Link from "next/link";
 
 const getData = cache(async () => {
   return getHomepage();
@@ -44,7 +45,13 @@ const Home = async () => {
 
       <Separator className="my-8" />
 
-      <RecentPosts posts={page.posts} />
+      <RecentPosts>
+        <div className="flex justify-center">
+          <Link href="/posts" className="p-1 text-sm">
+            All Posts &gt;
+          </Link>
+        </div>
+      </RecentPosts>
     </div>
   );
 };

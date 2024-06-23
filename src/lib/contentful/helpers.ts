@@ -25,19 +25,30 @@ type NormalizedType = ContentfulResponse & {
   fields?: EntryType;
 };
 
-type SearchParams = {
+export type SearchParams = {
   contentType: string;
   order?: string;
-  limit?: string;
+  skip?: number;
+  limit?: number;
+  select?: string;
   sort?: "asc" | "desc";
 };
 
-const setQueryParams = ({ contentType, order, limit, sort }: SearchParams) => {
+const setQueryParams = ({
+  contentType,
+  order,
+  limit,
+  sort,
+  skip,
+  select,
+}: SearchParams) => {
   const sortOrder = `${sort === "asc" ? "-" : ""}${order || "sys.createdAt"}`;
 
   return new URLSearchParams({
     order: sortOrder,
-    limit: limit || "10",
+    select: select || "",
+    limit: limit?.toString() || "10",
+    ...(skip && { skip: skip.toString() }),
     ...(contentType && { content_type: contentType }),
   }).toString();
 };
@@ -70,7 +81,10 @@ const recursiveInjection = (
 const normalize = <GenericType>(data: NormalizedType) => {
   const { items: entries, includes } = data;
 
-  const include = [...includes.Entry].concat(includes.Asset).filter(Boolean);
+  const include = [
+    ...(includes && includes.Entry ? includes.Entry : []),
+    ...(includes && includes.Asset ? includes.Asset : []),
+  ];
 
   include.forEach((item) => {
     const { fields } = item;
@@ -92,6 +106,7 @@ const getEntryById = async <GenericType>(id: string) => {
         headers: new Headers({
           Authorization: `Bearer ${API_KEY}`,
         }),
+        cache: "force-cache",
       },
     ).then((resp) => resp.json());
 
@@ -115,10 +130,19 @@ const getEntriesByType = async <GenericType>(searchParams: SearchParams) => {
         headers: new Headers({
           Authorization: `Bearer ${API_KEY}`,
         }),
+        cache: "force-cache",
       },
     ).then((resp) => resp.json());
 
-    return normalize<GenericType>(resp);
+    const normalizedResp = normalize<GenericType>(resp);
+
+    return {
+      pagination: {
+        total: resp.total,
+        skip: resp.skip,
+      },
+      data: normalizedResp,
+    } as GenericType;
   } catch (err) {
     console.log(
       err instanceof Error
