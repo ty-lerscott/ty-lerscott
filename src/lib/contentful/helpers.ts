@@ -1,3 +1,4 @@
+import { querify } from "@/lib/utils";
 import type { ContentfulResponse, EntryType } from "@/types/contentful.types";
 
 const IS_PROD = process.env.NEXT_PUBLIC_ENVIRONMENT === "production";
@@ -25,12 +26,15 @@ type NormalizedType = ContentfulResponse & {
   fields?: EntryType;
 };
 
+export type PageType = "home" | "about" | "posts" | "resume";
+
 export type SearchParams = {
   contentType: string;
   order?: string;
   skip?: number;
   limit?: number;
   select?: string;
+  pageType?: PageType;
   sort?: "asc" | "desc";
 };
 
@@ -41,16 +45,18 @@ const setQueryParams = ({
   sort,
   skip,
   select,
+  pageType,
 }: SearchParams) => {
   const sortOrder = `${sort === "asc" ? "-" : ""}${order || "sys.createdAt"}`;
 
-  return new URLSearchParams({
+  return querify({
     order: sortOrder,
     select: select || "",
     limit: limit?.toString() || "10",
     ...(skip && { skip: skip.toString() }),
+    ...(pageType && { "fields.type[in]": pageType }),
     ...(contentType && { content_type: contentType }),
-  }).toString();
+  });
 };
 
 const recursiveInjection = (

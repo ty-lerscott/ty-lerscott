@@ -130,9 +130,9 @@ export type BlurbType = {
 export type HomepageType = {
   data: {
     fields: {
-      pageName: string;
+      title: string;
       description: string;
-      blurb: BlurbType[];
+      body: BlurbType[];
     };
   };
 };

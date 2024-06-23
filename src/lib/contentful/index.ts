@@ -8,6 +8,7 @@ import {
   getEntriesByType,
   getEntryById,
   type SearchParams,
+  type PageType,
 } from "@/lib/contentful/helpers";
 
 const getMenu = async () => {
@@ -64,14 +65,15 @@ const getHomepage = async () => {
   const {
     data: { fields },
   } = await getPage<HomepageType>({
-    contentType: "landingPage",
-    select: ["fields.pageName", "fields.description", "fields.blurb"].join(","),
+    contentType: "page",
+    pageType: "home",
+    select: ["fields.title", "fields.description", "fields.body"].join(","),
   });
 
   return {
-    title: fields.pageName,
+    title: fields.title,
     description: fields.description,
-    blurb: (fields.blurb || []).map(({ sys }) => sys.fields) as Array<
+    blurb: (fields.body || []).map(({ sys }) => sys.fields) as Array<
       BlurbType["sys"]["fields"]
     >,
   };
