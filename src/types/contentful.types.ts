@@ -46,6 +46,6 @@ export type ContentfulResponse = {
   limit: number;
   includes: {
     Entry: EntryType[];
-    Asset: EntryType[]; //TODO: may not be the proper type check later
+    Asset: EntryType[];
   };
 };

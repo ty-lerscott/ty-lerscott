@@ -47,7 +47,7 @@ export type Tag = {
   type: "tag";
   text: string;
   slug: string;
-  variant: BadgeProps["variant"]; // TODO: be specific here
+  variant: BadgeProps["variant"];
 };
 
 export type Text = {
