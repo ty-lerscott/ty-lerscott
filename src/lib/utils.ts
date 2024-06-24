@@ -1,12 +1,30 @@
-import { type ClassValue, clsx } from "clsx";
+import merge from "deepmerge";
+import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-export function querify(obj: Record<string, any>) {
-  return Object.entries(obj)
+const querify = (obj: Record<string, any>) =>
+  Object.entries(obj)
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
-}
+
+const setMetadata = (metadata: Metadata): Metadata => {
+  return merge(
+    {
+      metadataBase: "https://ty-lerscott.com",
+      alternates: {
+        canonical: "/",
+      },
+      title: "",
+      description: "",
+      keywords: [],
+      authors: [{ name: "Tyler Scott" }],
+      creator: "Tyler Scott",
+    },
+    metadata,
+  );
+};
+
+export { cn, querify, setMetadata };

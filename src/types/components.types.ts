@@ -10,6 +10,7 @@ export type MenuItem = {
   };
 };
 
+// TODO: clean this up to match the page model
 export type Menu = {
   data: {
     metadata: {

@@ -29,33 +29,36 @@ type NormalizedType = ContentfulResponse & {
 export type PageType = "home" | "about" | "posts" | "resume";
 
 export type SearchParams = {
-  contentType: string;
-  order?: string;
   skip?: number;
+  slug?: string;
+  order?: string;
   limit?: number;
-  select?: string;
+  select?: string[];
+  contentType: string;
   pageType?: PageType;
   sort?: "asc" | "desc";
 };
 
 const setQueryParams = ({
-  contentType,
-  order,
-  limit,
-  sort,
+  slug,
   skip,
+  sort,
+  limit,
+  order,
   select,
   pageType,
+  contentType,
 }: SearchParams) => {
   const sortOrder = `${sort === "asc" ? "-" : ""}${order || "sys.createdAt"}`;
 
   return querify({
     order: sortOrder,
-    select: select || "",
     limit: limit?.toString() || "10",
     ...(skip && { skip: skip.toString() }),
+    select: select?.join(",") || "",
     ...(pageType && { "fields.type[in]": pageType }),
     ...(contentType && { content_type: contentType }),
+    ...(slug && { "fields.slug[in]": slug.replace(/^\//, "") }),
   });
 };
 
@@ -160,4 +163,4 @@ const getEntriesByType = async <GenericType>(searchParams: SearchParams) => {
   return [] as GenericType;
 };
 
-export { PATHS, getEntryById, setQueryParams, getEntriesByType };
+export { getEntryById, setQueryParams, getEntriesByType };

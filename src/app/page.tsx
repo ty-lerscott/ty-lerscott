@@ -1,27 +1,20 @@
+import Link from "next/link";
 import { cache } from "react";
-import { getHomepage } from "@/lib/contentful";
+import { setMetadata } from "@/lib/utils";
+import { getPage } from "@/lib/contentful";
 import { Separator } from "@/components/ui/separator";
 import RecentPosts from "@/components/feed/recent-posts";
-import Link from "next/link";
 
-const getData = cache(async () => {
-  return getHomepage();
-});
+const getData = cache(async () => getPage("home"));
 
 export const generateMetadata = async () => {
   const resp = await getData();
 
-  return {
-    metadataBase: new URL("https://ty-lerscott.com"),
-    alternates: {
-      canonical: "/",
-    },
+  return setMetadata({
     title: resp.title,
+    keywords: resp.keywords,
     description: resp.description,
-    keywords: [],
-    authors: [{ name: "Tyler Scott" }],
-    creator: "Tyler Scott",
-  };
+  });
 };
 
 const Home = async () => {
@@ -32,7 +25,7 @@ const Home = async () => {
   return (
     <div data-testid="page-home">
       <section data-testid="blurb" className="flex flex-col gap-2">
-        {(page.blurb || []).map((blurb, index) => {
+        {(page.body || []).map((blurb, index) => {
           const Tag = blurb.tag;
 
           return (

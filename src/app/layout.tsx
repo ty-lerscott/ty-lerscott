@@ -1,13 +1,18 @@
 import Link from "next/link";
 import type { Viewport } from "next";
 import type { ReactNode } from "react";
+import Footer from "@/components/footer";
 import { Inter } from "next/font/google";
 import Header from "@/components/menus/header";
 import { Separator } from "@/components/ui/separator";
 
 import "./tailwind.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal"],
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -23,13 +28,17 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header className="container max-w-screen-md flex items-center justify-between px-4 py-4">
-          <Link href="/">Tyler Scott</Link>
-          <Header />
-        </header>
-        <Separator />
-        <main className="container max-w-screen-md px-4 pt-4">{children}</main>
+      <body
+        className={`${inter.className} grid min-h-screen`}
+        style={{ gridTemplateRows: "auto 1fr auto" }}
+      >
+        <Header />
+
+        <main className="container max-w-screen-md min-h-full px-4 pt-4">
+          {children}
+        </main>
+
+        <Footer />
       </body>
     </html>
   );

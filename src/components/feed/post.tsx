@@ -1,14 +1,9 @@
-import type { PostType } from "@/types/contentful.types";
+import dayjs from "dayjs";
 import Link from "next/link";
 import { FaRegCalendar } from "react-icons/fa6";
-import dayjs from "dayjs";
+import type { Post as PostType } from "@/types/generics.types";
 
-const Post = ({
-  title,
-  publishDate,
-  description,
-  slug,
-}: PostType["fields"]) => {
+const Post = ({ slug, title, publishDate, description }: PostType) => {
   return (
     <div data-testid="Post" className="flex flex-col gap-1">
       <h2>

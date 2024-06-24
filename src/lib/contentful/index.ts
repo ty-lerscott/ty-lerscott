@@ -1,15 +1,7 @@
-import type {
-  PostType,
-  HomepageType,
-  BlurbType,
-} from "@/types/contentful.types";
+import merge from "deepmerge";
+import type { Page, Post, Tag } from "@/types/generics.types";
 import type { Menu, MenuItem } from "@/types/components.types";
-import {
-  getEntriesByType,
-  getEntryById,
-  type SearchParams,
-  type PageType,
-} from "@/lib/contentful/helpers";
+import { type PageType, getEntriesByType } from "@/lib/contentful/helpers";
 
 const getMenu = async () => {
   try {
@@ -31,7 +23,7 @@ const getPosts = async (select?: string[], skip?: number) => {
       total: number;
       skip: number;
     };
-    data: PostType[];
+    data: { fields: Post }[];
   }>({
     limit: 10,
     contentType: "post",
@@ -41,42 +33,79 @@ const getPosts = async (select?: string[], skip?: number) => {
       "fields.description",
       "fields.publishDate",
       "fields.slug",
-      select && select.join(","),
     ]
-      .filter(Boolean)
-      .join(","),
+      .concat(select as string[])
+      .filter(Boolean),
   });
 
   return {
     pagination,
     posts: (Array.isArray(data) ? data : [data]).map((post) => {
-      return {
-        ...post.fields,
+      return merge(post.fields, {
         slug: post.fields.slug.replace(/^\//, ""),
-      } as PostType["fields"];
+      }) as Post;
     }),
   };
 };
 
-const getPage = async <GenericPageType>(searchParams: SearchParams) =>
-  getEntriesByType<GenericPageType>(searchParams);
-
-const getHomepage = async () => {
+const getPost = async (slug: string) => {
   const {
-    data: { fields },
-  } = await getPage<HomepageType>({
-    contentType: "page",
-    pageType: "home",
-    select: ["fields.title", "fields.description", "fields.body"].join(","),
+    data: { fields: post },
+  } = await getEntriesByType<{
+    data: {
+      fields: Omit<Post, "image" | "tags"> & {
+        image: {
+          sys: {
+            fields: Post["image"];
+          };
+        };
+        tags: {
+          sys: {
+            fields: Tag;
+          };
+        }[];
+      };
+    };
+  }>({
+    contentType: "post",
+    slug: slug,
+    select: [
+      "fields.title",
+      "fields.description",
+      "fields.keywords",
+      "fields.image",
+      "fields.body",
+      "fields.tags",
+      "fields.slug",
+    ],
   });
 
   return {
-    title: fields.title,
-    description: fields.description,
-    blurb: (fields.body || []).map(({ sys }) => sys.fields) as Array<
-      BlurbType["sys"]["fields"]
-    >,
+    ...post,
+    image: post.image?.sys.fields,
+    tags: post.tags.map(({ sys }) => sys.fields) as Tag[],
+  } as Post;
+};
+
+const getPage = async (type: PageType) => {
+  const {
+    data: { fields },
+  } = await getEntriesByType<Page>({
+    contentType: "page",
+    pageType: type,
+    select: [
+      "fields.title",
+      "fields.description",
+      "fields.keywords",
+      "fields.body",
+      "fields.slug",
+    ],
+  });
+
+  return {
+    ...fields,
+    body: (fields.body || []).map(({ sys }) => sys.fields),
   };
 };
 
-export { getMenu, getPage, getHomepage, getPosts };
+export { getMenu, getPage, getPosts, getPost };

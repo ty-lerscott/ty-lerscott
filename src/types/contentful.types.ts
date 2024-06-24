@@ -1,5 +1,3 @@
-import { GenericWrapper } from "@/types/generics.types";
-
 export type EntryType = {
   metadata: {
     tags: Array<string>;
@@ -49,90 +47,5 @@ export type ContentfulResponse = {
   includes: {
     Entry: EntryType[];
     Asset: EntryType[]; //TODO: may not be the proper type check later
-  };
-};
-
-type ImageType = {
-  sys: {
-    type: string;
-    linkType: "Asset";
-    id: string;
-    createdAt: string;
-    fields: {
-      title: string;
-      file: {
-        url: string;
-        details: {
-          size: number;
-          image: {
-            width: number;
-            height: number;
-          };
-        };
-        fileName: string;
-        contentType: string;
-      };
-    };
-  };
-};
-
-type TagType = {
-  sys: {
-    type: string;
-    linkType: "Entry";
-    id: string;
-    createdAt: string;
-    fields: {
-      text: string;
-      slug: string;
-      color: string;
-    };
-  };
-};
-
-export type PostType = {
-  sys: GenericWrapper;
-  fields: {
-    title: string;
-    slug: string;
-    description: string;
-    publishDate: string;
-    image: ImageType;
-    tags: TagType[];
-    body: any[]; // TODO: maybe not have an any object here, make it of the valid types that can go in body
-  };
-};
-
-type TextTag =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "p"
-  | "span"
-  | "strong"
-  | "em"
-  | "mark"
-  | "del"
-  | "ins";
-
-export type BlurbType = {
-  sys: GenericWrapper & {
-    fields: {
-      text: string;
-      tag: TextTag;
-    };
-  };
-};
-
-export type HomepageType = {
-  data: {
-    fields: {
-      title: string;
-      description: string;
-      body: BlurbType[];
-    };
   };
 };
