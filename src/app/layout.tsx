@@ -1,10 +1,8 @@
-import Link from "next/link";
 import type { Viewport } from "next";
 import type { ReactNode } from "react";
 import Footer from "@/components/footer";
 import { Inter } from "next/font/google";
 import Header from "@/components/menus/header";
-import { Separator } from "@/components/ui/separator";
 
 import "./tailwind.css";
 

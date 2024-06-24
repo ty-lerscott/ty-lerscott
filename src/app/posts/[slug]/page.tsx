@@ -7,7 +7,6 @@ import { FaRegCalendar } from "react-icons/fa6";
 import { PageParams } from "@/types/generics.types";
 import ComponentMap from "@/components/component-map";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
-import tags from "@/components/tags";
 
 const getData = cache(async (slug: string) => getPost(slug));
 
@@ -36,9 +35,7 @@ export const generateMetadata = async ({ params: { slug } }: PageParams) => {
 };
 
 const Post = async ({ params: { slug } }: PageParams) => {
-  const { title, publishDate, image, tags } = await getData(slug);
-
-  const components = [];
+  const { title, publishDate, image, tags, body } = await getData(slug);
 
   return (
     <>
@@ -59,7 +56,7 @@ const Post = async ({ params: { slug } }: PageParams) => {
         ></div>
       ) : null}
 
-      <ComponentMap components={components} />
+      <ComponentMap components={body} />
 
       <Tags tags={tags} />
     </>

@@ -1,10 +1,15 @@
 import { BadgeProps } from "@/components/ui/badge";
 
-export type GenericWrapper = {
-  type: string;
-  linkType: string;
-  id: string;
-  createdAt: string;
+export type MenuItem = {
+  url: string;
+  type: "link";
+  text: string;
+  external: boolean;
+};
+
+export type Menu = {
+  menuTitle: string;
+  menuItems: MenuItem[];
 };
 
 export type PageParams = {
@@ -15,18 +20,14 @@ export type PageParams = {
 };
 
 export type Page = {
-  data: {
-    fields: {
-      slug: string;
-      title: string;
-      keywords: string[];
-      description: string;
-      body: any[]; // TODO: conditional elements
-    };
-  };
+  slug: string;
+  title: string;
+  keywords: string[];
+  description: string;
+  body: any[]; // TODO: conditional elements
 };
 
-type Image = {
+export type Image = {
   title: string;
   file: {
     url: string;
@@ -43,10 +44,34 @@ type Image = {
 };
 
 export type Tag = {
+  type: "tag";
   text: string;
   slug: string;
   variant: BadgeProps["variant"]; // TODO: be specific here
 };
+
+export type Text = {
+  tag:
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "p"
+    | "span"
+    | "strong"
+    | "em"
+    | "mark"
+    | "del"
+    | "ins";
+  text: string;
+  type: "text";
+};
+
+export type Body = Text;
+
+export type Component = "text";
 
 export type Post = {
   tags: Tag[];
@@ -56,20 +81,5 @@ export type Post = {
   keywords: string[];
   description: string;
   publishDate: string;
-  body: any[]; // TODO: maybe not have an any object here, make it of the valid types that can go in body
+  body: Body[];
 };
-
-type TextTag =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "p"
-  | "span"
-  | "strong"
-  | "em"
-  | "mark"
-  | "del"
-  | "ins";

@@ -2,8 +2,10 @@ import Link from "next/link";
 import { cache } from "react";
 import { setMetadata } from "@/lib/utils";
 import { getPage } from "@/lib/contentful";
+import Text from "@/components/component-map/text";
 import { Separator } from "@/components/ui/separator";
 import RecentPosts from "@/components/feed/recent-posts";
+import type { Text as TextType } from "@/types/generics.types";
 
 const getData = cache(async () => getPage("home"));
 
@@ -25,14 +27,11 @@ const Home = async () => {
   return (
     <div data-testid="page-home">
       <section data-testid="blurb" className="flex flex-col gap-2">
-        {/*  TODO: type the blurb */}
-        {(page.body || []).map((blurb, index) => {
-          const Tag = blurb.tag;
-
+        {(page.body || []).map(({ text, tag }: TextType) => {
           return (
-            <Tag key={`blurb-${index}`} className="text-sm">
-              {blurb.text}
-            </Tag>
+            <Text className="text-sm" tag={tag} key={`blurb-${text}`}>
+              {text}
+            </Text>
           );
         })}
       </section>

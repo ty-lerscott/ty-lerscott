@@ -66,6 +66,7 @@ const recursiveInjection = (
   targetArr: EntryType[],
   id: string,
   injection: {
+    type?: string;
     createdAt: string;
     fields: Record<string, any>;
   },
@@ -97,9 +98,13 @@ const normalize = <GenericType>(data: NormalizedType) => {
 
   include.forEach((item) => {
     const { fields } = item;
-    const { id, createdAt } = item.sys;
+    const { id, createdAt, contentType } = item.sys;
 
-    recursiveInjection(entries, id, { createdAt, fields });
+    recursiveInjection(entries, id, {
+      fields,
+      createdAt,
+      type: contentType?.sys.id || fields?.file.contentType,
+    });
   });
 
   return (entries.length > 1 ? entries : entries[0]) as GenericType;

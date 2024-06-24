@@ -1,20 +1,50 @@
 import merge from "deepmerge";
-import type { Page, Post, Tag } from "@/types/generics.types";
-import type { Menu, MenuItem } from "@/types/components.types";
 import { type PageType, getEntriesByType } from "@/lib/contentful/helpers";
+import type {
+  Tag,
+  Menu,
+  Page,
+  Post,
+  Body,
+  Image,
+  MenuItem,
+} from "@/types/generics.types";
+
+type ExtractType<T> = T extends { type: infer U } ? U : never;
+
+const extract = <GenericType>(
+  arr: { sys: { type?: ExtractType<GenericType>; fields: GenericType } }[],
+) =>
+  (arr || []).map(({ sys }) => ({
+    ...sys.fields,
+    type: sys.type,
+  })) as GenericType[];
 
 const getMenu = async () => {
-  try {
-    const { data } = await getEntriesByType<Menu>({ contentType: "menu" });
+  let menuItems = [] as MenuItem[];
 
-    return (data.fields.menuItems || []).map(({ sys }) => sys.fields);
+  try {
+    const {
+      data: { fields },
+    } = await getEntriesByType<{
+      data: {
+        fields: Omit<Menu, "menuItems"> & {
+          menuItems: {
+            sys: {
+              fields: MenuItem;
+            };
+          }[];
+        };
+      };
+    }>({ contentType: "menu" });
+
+    menuItems = extract(fields.menuItems);
   } catch (err) {
     console.log(
       err instanceof Error ? `getMenu error: ${err.message}` : "Unknown Error",
     );
-
-    return [] as MenuItem["sys"]["fields"][];
   }
+  return menuItems;
 };
 
 const getPosts = async (select?: string[], skip?: number) => {
@@ -25,6 +55,7 @@ const getPosts = async (select?: string[], skip?: number) => {
     };
     data: { fields: Post }[];
   }>({
+    skip,
     limit: 10,
     contentType: "post",
     order: "fields.publishDate",
@@ -53,12 +84,17 @@ const getPost = async (slug: string) => {
     data: { fields: post },
   } = await getEntriesByType<{
     data: {
-      fields: Omit<Post, "image" | "tags"> & {
+      fields: Omit<Post, "image" | "tags" | "body"> & {
         image: {
           sys: {
-            fields: Post["image"];
+            fields: Image;
           };
         };
+        body: {
+          sys: {
+            fields: Body;
+          };
+        }[];
         tags: {
           sys: {
             fields: Tag;
@@ -70,27 +106,31 @@ const getPost = async (slug: string) => {
     contentType: "post",
     slug: slug,
     select: [
-      "fields.title",
-      "fields.description",
-      "fields.keywords",
-      "fields.image",
       "fields.body",
       "fields.tags",
       "fields.slug",
+      "fields.title",
+      "fields.image",
+      "fields.keywords",
+      "fields.description",
+      "fields.publishDate",
     ],
   });
 
   return {
     ...post,
+    tags: extract(post.tags),
+    body: extract(post.body),
     image: post.image?.sys.fields,
-    tags: post.tags.map(({ sys }) => sys.fields) as Tag[],
   } as Post;
 };
 
 const getPage = async (type: PageType) => {
   const {
     data: { fields },
-  } = await getEntriesByType<Page>({
+  } = await getEntriesByType<{
+    data: { fields: Page };
+  }>({
     contentType: "page",
     pageType: type,
     select: [
@@ -104,8 +144,8 @@ const getPage = async (type: PageType) => {
 
   return {
     ...fields,
-    body: (fields.body || []).map(({ sys }) => sys.fields),
-  };
+    body: extract(fields.body),
+  } as Page;
 };
 
 export { getMenu, getPage, getPosts, getPost };

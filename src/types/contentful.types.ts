@@ -22,7 +22,7 @@ export type EntryType = {
       };
     };
     revision: number;
-    contentType: {
+    contentType?: {
       sys: {
         type: string;
         linkType: string;
