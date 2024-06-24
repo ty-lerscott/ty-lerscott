@@ -1,3 +1,5 @@
+import { BadgeProps } from "@/components/ui/badge";
+
 export type GenericWrapper = {
   type: string;
   linkType: string;
@@ -43,7 +45,7 @@ type Image = {
 export type Tag = {
   text: string;
   slug: string;
-  variant: string; // TODO: be specific here
+  variant: BadgeProps["variant"]; // TODO: be specific here
 };
 
 export type Post = {
@@ -71,12 +73,3 @@ type TextTag =
   | "mark"
   | "del"
   | "ins";
-
-export type BlurbType = {
-  sys: GenericWrapper & {
-    fields: {
-      text: string;
-      tag: TextTag;
-    };
-  };
-};

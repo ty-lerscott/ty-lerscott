@@ -25,6 +25,7 @@ const Home = async () => {
   return (
     <div data-testid="page-home">
       <section data-testid="blurb" className="flex flex-col gap-2">
+        {/*  TODO: type the blurb */}
         {(page.body || []).map((blurb, index) => {
           const Tag = blurb.tag;
 
