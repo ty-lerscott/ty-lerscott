@@ -69,9 +69,17 @@ export type Text = {
   type: "text";
 };
 
-export type Body = Text;
+export type Default = {
+  type: "default";
+};
 
-export type Component = "text";
+export type Code = {
+  type: "code";
+  text: string;
+  syntax: "typescript" | "css" | "gleam" | "scss";
+};
+
+export type Body = Text | Code | Default;
 
 export type Post = {
   tags: Tag[];
