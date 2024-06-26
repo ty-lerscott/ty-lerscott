@@ -1,44 +1,53 @@
 import dynamic from "next/dynamic";
 import type { Body } from "@/types/generics.types";
 
-const List = dynamic(() => import("@/components/component-map/list"));
 const Link = dynamic(() => import("@/components/component-map/link"));
-const Code = dynamic(() => import("@/components/component-map/code"));
+const Table = dynamic(() => import("@/components/component-map/table"));
+const List = dynamic(() => import("@/components/component-map/list"));
 const Text = dynamic(() => import("@/components/component-map/text"));
+const Code = dynamic(() => import("@/components/component-map/code"));
+const Quote = dynamic(() => import("@/components/component-map/quote"));
 
 const getComponent = (component: Body, index: number) => {
-  // console.log(component);
-  // switch (component.type) {
-  //   // case "text": {
-  //   //   return (
-  //   //     <Text key={`Component-${component.type}-${index}`} {...component} />
-  //   //   );
-  //   // }
-  //   // case "code": {
-  //   //   return (
-  //   //     <Code key={`Component-${component.type}-${index}`} {...component} />
-  //   //   );
-  //   // }
-  //   // case "link": {
-  //   //   return (
-  //   //     <Link key={`Component-${component.type}-${index}`} {...component} />
-  //   //   );
-  //   // }
-  //   // case "list": {
-  //   //   return (
-  //   //     <List key={`Component-${component.type}-${index}`} {...component} />
-  //   //   );
-  //   // }
-  //   default: {
-  //     return (
-  //       <div key={`Component-${component.type}-${index}`}>
-  //         Component Map looking for: {component.type}
-  //       </div>
-  //     );
-  //   }
-  // }
-
-  return <div key={`temp-${index}`}>WOO</div>;
+  switch (component.type) {
+    case "text": {
+      return (
+        <Text key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    case "code": {
+      return (
+        <Code key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    case "link": {
+      return (
+        <Link key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    case "list": {
+      return (
+        <List key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    case "quote": {
+      return (
+        <Quote key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    case "table": {
+      return (
+        <Table key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    default: {
+      return (
+        <div key={`Component-${component.type}-${index}`}>
+          Component Map looking for: {component.type}
+        </div>
+      );
+    }
+  }
 };
 
 const ComponentMap = ({ components }: { components: Body[] }) => {

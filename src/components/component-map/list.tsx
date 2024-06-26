@@ -1,8 +1,24 @@
-import type { Link as LinkType } from "@/types/generics.types";
+import type { List as ListType } from "@/types/generics.types";
 
-const List = (props: LinkType) => {
-  // console.dir(props, { depth: null });
-  return <div>LIST</div>;
+const List = ({ ordered, body }: Omit<ListType, "name">) => {
+  const Tag = ordered ? "ol" : "ul";
+
+  return (
+    <Tag data-testid="List">
+      {body.map((item, index) => {
+        return item.type === "list" ? (
+          <List
+            type="list"
+            body={item.body}
+            ordered={ordered}
+            key={`SubList-${index}`}
+          />
+        ) : (
+          <li key={`ListItem-${index}`}>{item.text}</li>
+        );
+      })}
+    </Tag>
+  );
 };
 
 export default List;

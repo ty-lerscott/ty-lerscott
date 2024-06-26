@@ -1,11 +1,11 @@
 import merge from "deepmerge";
 import { extract, setQueryParams, normalize } from "@/lib/utils";
-import type {
+import {
   Entry,
-  PageType,
   SearchParams,
   ResponseBody,
   ContentfulResponse,
+  ContentfulResponseItem,
 } from "@/types/contentful.types";
 
 import type { Image } from "@/types/generics.types";
@@ -61,6 +61,25 @@ const getAssetById = async <GenericType>(id: string) => {
 
   return {} as GenericType;
 };
+const getEntryById = async <GenericType>(id: string) => {
+  let response = {} as GenericType;
+
+  try {
+    const resp = await fetcher<ContentfulResponseItem>(
+      `${PATHS.entries}/${id}`,
+    );
+
+    response = resp.fields as GenericType;
+  } catch (err) {
+    console.log(
+      err instanceof Error
+        ? `getEntryById error: ${err.message}`
+        : "Unknown Error",
+    );
+  }
+
+  return response;
+};
 
 const getEntriesByType = async <GenericType extends Record<string, any>>(
   searchParams: SearchParams,
@@ -102,4 +121,4 @@ const getEntriesByType = async <GenericType extends Record<string, any>>(
   return response;
 };
 
-export { setQueryParams, getEntriesByType };
+export { setQueryParams, getEntryById, getEntriesByType };

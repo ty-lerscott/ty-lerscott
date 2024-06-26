@@ -7,7 +7,6 @@ import type {
   SearchParams,
   ContentfulResponse,
 } from "@/types/contentful.types";
-import type { Tag, Body } from "@/types/generics.types";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 

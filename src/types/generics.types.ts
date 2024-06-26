@@ -71,9 +71,15 @@ export type Text = {
 
 export type List = {
   type: "list";
-  name: string;
-  ordered?: boolean;
-  listItems: (Text | Link | List)[];
+  name: string; // This is not optional, but recursive calls dont pass it down
+  ordered: boolean;
+  body: (Text | Link | List)[];
+};
+
+export type Quote = {
+  type: "quote";
+  text: string;
+  author: string;
 };
 
 export type Default = {
@@ -88,7 +94,21 @@ export type Code = {
   syntax: "typescript" | "css" | "gleam" | "scss";
 };
 
-export type Body = Text | Code | Link | List | Default;
+export type TableRow = {
+  name: string;
+  body: string[];
+};
+
+export type Table = {
+  type: "table";
+  name: string;
+  header?: string;
+  subheader?: string;
+  columns: string[];
+  body: TableRow[];
+};
+
+export type Body = Text | Code | Link | List | Quote | Table | Default;
 
 export type Post = {
   tags: Tag[];

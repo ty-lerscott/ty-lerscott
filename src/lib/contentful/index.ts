@@ -1,6 +1,15 @@
-import { PageType } from "@/types/contentful.types";
-import { getEntriesByType } from "@/lib/contentful/helpers";
-import type { Menu, Page, Post, Link } from "@/types/generics.types";
+import merge from "deepmerge";
+import { PageType, Entry, ResponseBody } from "@/types/contentful.types";
+import { getEntriesByType, getEntryById } from "@/lib/contentful/helpers";
+import type {
+  Menu,
+  Page,
+  Post,
+  Link,
+  List,
+  Table,
+  TableRow,
+} from "@/types/generics.types";
 
 const getMenu = async (name: string = "Header") => {
   let menuItems = [] as Link[];
@@ -62,6 +71,58 @@ const getPost = async (slug: string) => {
       "fields.publishDate",
     ],
   });
+
+  const listBody = await Promise.all(
+    post.body
+      .filter((bodyItem) => ["list"].includes(bodyItem.type))
+      .map((item) => {
+        const list = item as List;
+
+        return getEntriesByType<List>({
+          contentType: list.type,
+          name: list.name,
+        });
+      }),
+  );
+
+  listBody.forEach(({ data: bodyItem }) => {
+    const index = post.body.findIndex(
+      (postBodyItem) => (postBodyItem as List).name === bodyItem.name,
+    );
+    post.body[index] = {
+      ...(post.body[index] as List),
+      ...bodyItem,
+    };
+  });
+
+  /** TODO: this only allows for 1 table per post
+   *  FIX
+   */
+  const tableBody = await Promise.all(
+    post.body
+      .filter((bodyItem) => ["table"].includes(bodyItem.type))
+      .reduce((acc, bodyItem) => {
+        const table = bodyItem as Table;
+
+        table.body.forEach((item) => {
+          const row = item as unknown as Entry;
+
+          acc.push(getEntryById<TableRow>(row.sys.id));
+        });
+        return acc;
+      }, [] as Promise<TableRow>[]),
+  );
+
+  if (tableBody.length) {
+    const tableIndex = post.body.findIndex((bodyItem) =>
+      ["table"].includes(bodyItem.type),
+    );
+
+    post.body[tableIndex] = {
+      ...post.body[tableIndex],
+      body: tableBody,
+    } as Table;
+  }
 
   return post;
 };

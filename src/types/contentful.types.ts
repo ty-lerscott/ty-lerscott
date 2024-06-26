@@ -1,4 +1,4 @@
-import { Image, Tag } from "@/types/generics.types";
+import { Image, Tag, List } from "@/types/generics.types";
 
 export type PageType = "home" | "about" | "posts" | "resume";
 
