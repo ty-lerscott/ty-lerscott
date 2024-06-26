@@ -4,7 +4,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-8">
       <Separator />
       <div className="container max-w-screen-md flex items-center justify-between px-4 py-4">
         <footer>

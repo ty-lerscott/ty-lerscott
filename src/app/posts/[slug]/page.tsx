@@ -4,6 +4,7 @@ import Tags from "@/components/tags";
 import { setMetadata } from "@/lib/utils";
 import { getPost } from "@/lib/contentful";
 import { FaRegCalendar } from "react-icons/fa6";
+import Separator from "@/components/ui/separator";
 import { PageParams } from "@/types/generics.types";
 import ComponentMap from "@/components/component-map";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
@@ -40,25 +41,28 @@ const Post = async ({ params: { slug } }: PageParams) => {
   return (
     <>
       <Breadcrumbs breadcrumbs={BREADCRUMBS.concat({ title, href: slug })} />
+
       <h1 className="text-2xl mt-4 font-bold">{title}</h1>
+
       <div className="flex items-center gap-2 mb-2">
         <FaRegCalendar className="w-4 h-4" />
         <span className="text-md">
           {dayjs(publishDate).format("MMMM D, YYYY | h:mm a")}
         </span>
       </div>
+
+      <Tags tags={tags} className="my-4" />
+
       {image ? (
         <div
-          className={`w-full h-[24rem] bg-no-repeat bg-cover mb-2`}
+          className={`w-full h-[24rem] bg-no-repeat bg-cover mb-4`}
           style={{
             backgroundImage: `url(${image.url})`,
           }}
-        ></div>
+        />
       ) : null}
 
       <ComponentMap components={body} />
-
-      <Tags tags={tags} />
     </>
   );
 };
