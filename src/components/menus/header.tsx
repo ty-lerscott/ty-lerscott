@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { getMenu } from "@/lib/contentful";
-import { Separator } from "@/components/ui/separator";
+import Separator from "@/components/ui/separator";
 
 const HeaderMenu = async () => {
   const menuItems = await getMenu();

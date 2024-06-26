@@ -1,4 +1,4 @@
-import { Separator } from "@/components/ui/separator";
+import Separator from "@/components/ui/separator";
 
 const Footer = () => {
   const year = new Date().getFullYear();

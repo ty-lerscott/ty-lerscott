@@ -108,7 +108,19 @@ export type Table = {
   body: TableRow[];
 };
 
-export type Body = Text | Code | Link | List | Quote | Table | Default;
+export type Separator = {
+  type: "separator";
+};
+
+export type Body =
+  | Text
+  | Code
+  | Link
+  | List
+  | Quote
+  | Table
+  | Separator
+  | Default;
 
 export type Post = {
   tags: Tag[];

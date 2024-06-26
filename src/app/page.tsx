@@ -2,8 +2,8 @@ import Link from "next/link";
 import { cache } from "react";
 import { setMetadata } from "@/lib/utils";
 import { getPage } from "@/lib/contentful";
+import Separator from "@/components/ui/separator";
 import Text from "@/components/component-map/text";
-import { Separator } from "@/components/ui/separator";
 import RecentPosts from "@/components/feed/recent-posts";
 import type { Text as TextType } from "@/types/generics.types";
 
