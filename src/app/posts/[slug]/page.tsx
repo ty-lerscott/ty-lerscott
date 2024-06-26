@@ -51,7 +51,7 @@ const Post = async ({ params: { slug } }: PageParams) => {
         <div
           className={`w-full h-[24rem] bg-no-repeat bg-cover mb-2`}
           style={{
-            backgroundImage: `url(${image.file.url})`,
+            backgroundImage: `url(${image.url})`,
           }}
         ></div>
       ) : null}

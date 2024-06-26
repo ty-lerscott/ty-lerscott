@@ -10,8 +10,10 @@ const Text = ({
 }) => {
   const Tag = tag;
 
+  const fontSize = tag === "small" ? "text-sm" : "";
+
   return (
-    <Tag data-testid="Text" className={cn(className)}>
+    <Tag data-testid="Text" className={cn(className, fontSize)}>
       {text}
     </Tag>
   );

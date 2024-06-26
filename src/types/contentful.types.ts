@@ -1,6 +1,10 @@
-export type EntryType = {
+import { Image, Tag } from "@/types/generics.types";
+
+export type PageType = "home" | "about" | "posts" | "resume";
+
+export type Entry = {
   metadata: {
-    tags: Array<string>;
+    tags: string[];
   };
   sys: {
     space: {
@@ -31,8 +35,43 @@ export type EntryType = {
     };
     locale: string;
   };
-  fields: Record<string, any>;
-  [key: string]: any;
+  fields: {
+    file?: {
+      contentType: string;
+    };
+    [key: string]: any;
+  };
+  // [key: string]: any;
+};
+
+export type Pagination = {
+  total: number;
+  skip: number;
+};
+
+export type SearchParams = {
+  skip?: number;
+  slug?: string;
+  name?: string;
+  order?: string;
+  limit?: number;
+  select?: string[];
+  contentType: string;
+  pageType?: PageType;
+  sort?: "asc" | "desc";
+};
+
+export type ContentfulResponseItem = {
+  fields: {
+    body?: any[];
+    image?: Image;
+    tags?: (Tag & {
+      sys: {
+        id: string;
+      };
+    })[];
+    [key: string]: any;
+  };
 };
 
 export type ContentfulResponse = {
@@ -41,11 +80,17 @@ export type ContentfulResponse = {
     createdAt: string;
     updatedAt: string;
   };
-  total: number;
-  skip: number;
+  total: Pagination["total"];
+  skip: Pagination["skip"];
   limit: number;
+  items: ContentfulResponseItem[];
   includes: {
-    Entry: EntryType[];
-    Asset: EntryType[];
+    Entry: Entry[];
+    Asset: Entry[];
   };
+};
+
+export type ResponseBody<T> = {
+  pagination: Pagination;
+  data: T;
 };

@@ -1,15 +1,16 @@
+import { type LinkProps } from "next/link";
 import { BadgeProps } from "@/components/ui/badge";
 
-export type MenuItem = {
+export type Link = Omit<LinkProps, "href"> & {
   url: string;
-  type: "link";
   text: string;
-  external: boolean;
+  type: "link";
+  external?: boolean;
 };
 
 export type Menu = {
-  menuTitle: string;
-  menuItems: MenuItem[];
+  name: string;
+  body: Link[];
 };
 
 export type PageParams = {
@@ -29,18 +30,16 @@ export type Page = {
 
 export type Image = {
   title: string;
-  file: {
-    url: string;
-    details: {
-      size: number;
-      image: {
-        width: number;
-        height: number;
-      };
+  url: string;
+  details: {
+    size: number;
+    image: {
+      width: number;
+      height: number;
     };
-    fileName: string;
-    contentType: string;
   };
+  fileName: string;
+  contentType: string;
 };
 
 export type Tag = {
@@ -64,9 +63,17 @@ export type Text = {
     | "em"
     | "mark"
     | "del"
-    | "ins";
+    | "ins"
+    | "small";
   text: string;
   type: "text";
+};
+
+export type List = {
+  type: "list";
+  name: string;
+  ordered?: boolean;
+  listItems: (Text | Link | List)[];
 };
 
 export type Default = {
@@ -76,10 +83,12 @@ export type Default = {
 export type Code = {
   type: "code";
   text: string;
+  header?: string;
+  subheader?: string;
   syntax: "typescript" | "css" | "gleam" | "scss";
 };
 
-export type Body = Text | Code | Default;
+export type Body = Text | Code | Link | List | Default;
 
 export type Post = {
   tags: Tag[];

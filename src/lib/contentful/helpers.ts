@@ -1,15 +1,24 @@
-import { querify } from "@/lib/utils";
-import type { ContentfulResponse, EntryType } from "@/types/contentful.types";
+import merge from "deepmerge";
+import { extract, setQueryParams, normalize } from "@/lib/utils";
+import type {
+  Entry,
+  PageType,
+  SearchParams,
+  ResponseBody,
+  ContentfulResponse,
+} from "@/types/contentful.types";
 
-const IS_PROD = process.env.NEXT_PUBLIC_ENVIRONMENT === "production";
+import type { Image } from "@/types/generics.types";
+
 const API_URI = "https://cdn.contentful.com";
+const IS_PROD = process.env.NEXT_PUBLIC_ENVIRONMENT === "production";
 const SPACE_ID = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID as string;
 const API_KEY = process.env.NEXT_PUBLIC_CONTENTFUL_API_KEY as string;
 const ENVIRONMENT_ID = IS_PROD ? "main" : "dev";
 
 const PATHS_OBJ = {
-  entries: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries
-`,
+  entries: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries`,
+  assets: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/assets`,
 };
 
 const PATHS = Object.entries(PATHS_OBJ).reduce(
@@ -18,113 +27,30 @@ const PATHS = Object.entries(PATHS_OBJ).reduce(
 
     return acc;
   },
-  {} as Record<string, string>,
-);
+  {} as Record<string, any>,
+) as Record<keyof typeof PATHS_OBJ, string>;
 
-type NormalizedType = ContentfulResponse & {
-  items: EntryType[];
-  fields?: EntryType;
-};
+const fetcher = <GenericType = ContentfulResponse>(url: string) =>
+  fetch(url, {
+    headers: new Headers({
+      Authorization: `Bearer ${API_KEY}`,
+    }),
+    cache: "force-cache",
+  }).then(async (resp) => {
+    const data = await resp.json();
 
-export type PageType = "home" | "about" | "posts" | "resume";
-
-export type SearchParams = {
-  skip?: number;
-  slug?: string;
-  order?: string;
-  limit?: number;
-  select?: string[];
-  contentType: string;
-  pageType?: PageType;
-  sort?: "asc" | "desc";
-};
-
-const setQueryParams = ({
-  slug,
-  skip,
-  sort,
-  limit,
-  order,
-  select,
-  pageType,
-  contentType,
-}: SearchParams) => {
-  const sortOrder = `${sort === "asc" ? "-" : ""}${order || "sys.createdAt"}`;
-
-  return querify({
-    order: sortOrder,
-    limit: limit?.toString() || "10",
-    ...(skip && { skip: skip.toString() }),
-    select: select?.join(",") || "",
-    ...(pageType && { "fields.type[in]": pageType }),
-    ...(contentType && { content_type: contentType }),
-    ...(slug && { "fields.slug[in]": slug.replace(/^\//, "") }),
-  });
-};
-
-const recursiveInjection = (
-  targetArr: EntryType[],
-  id: string,
-  injection: {
-    type?: string;
-    createdAt: string;
-    fields: Record<string, any>;
-  },
-) => {
-  for (const obj of targetArr) {
-    for (const key in obj) {
-      if (key === "id" && obj[key] === id) {
-        (Object.keys(injection) as Array<keyof typeof injection>).forEach(
-          (injectionKey) => {
-            obj[injectionKey] = injection[injectionKey];
-          },
-        );
-        break;
-      }
-      if (typeof obj[key] === "object") {
-        recursiveInjection([obj[key]], id, injection);
-      }
-    }
-  }
-};
-
-const normalize = <GenericType>(data: NormalizedType) => {
-  const { items: entries, includes } = data;
-
-  const include = [
-    ...(includes && includes.Entry ? includes.Entry : []),
-    ...(includes && includes.Asset ? includes.Asset : []),
-  ];
-
-  include.forEach((item) => {
-    const { fields } = item;
-    const { id, createdAt, contentType } = item.sys;
-
-    recursiveInjection(entries, id, {
-      fields,
-      createdAt,
-      type: contentType?.sys.id || fields?.file.contentType,
-    });
+    return data as GenericType;
   });
 
-  return (entries.length > 1 ? entries : entries[0]) as GenericType;
-};
-
-const getEntryById = async <GenericType>(id: string) => {
+const getAssetById = async <GenericType>(id: string) => {
   try {
-    const resp = await fetch(
-      `${PATHS.entries}/${id}/?${setQueryParams({
+    const resp = await fetcher<Entry>(
+      `${PATHS.assets}/${id}/?${setQueryParams({
         contentType: "",
       })}`,
-      {
-        headers: new Headers({
-          Authorization: `Bearer ${API_KEY}`,
-        }),
-        cache: "force-cache",
-      },
-    ).then((resp) => resp.json());
+    );
 
-    return normalize<GenericType>(resp);
+    return extract(resp) as GenericType;
   } catch (err) {
     console.log(
       err instanceof Error
@@ -133,30 +59,38 @@ const getEntryById = async <GenericType>(id: string) => {
     );
   }
 
-  return [] as GenericType;
+  return {} as GenericType;
 };
 
-const getEntriesByType = async <GenericType>(searchParams: SearchParams) => {
+const getEntriesByType = async <GenericType extends Record<string, any>>(
+  searchParams: SearchParams,
+) => {
+  const response = {
+    pagination: {
+      total: 0,
+      skip: 0,
+    },
+  } as ResponseBody<GenericType>;
+
   try {
-    const resp = await fetch(
+    const resp = await fetcher(
       `${PATHS.entries}?${setQueryParams(searchParams)}`,
-      {
-        headers: new Headers({
-          Authorization: `Bearer ${API_KEY}`,
-        }),
-        cache: "force-cache",
-      },
-    ).then((resp) => resp.json());
+    );
 
-    const normalizedResp = normalize<GenericType>(resp);
+    response.pagination = {
+      total: resp.total,
+      skip: resp.skip,
+    };
 
-    return {
-      pagination: {
-        total: resp.total,
-        skip: resp.skip,
-      },
-      data: normalizedResp,
-    } as GenericType;
+    let image;
+    const data = normalize<GenericType>(resp);
+
+    if (data?.image?.sys.id) {
+      image = await getAssetById<Image>(data.image.sys.id);
+      response.data = merge(data, { image }) as GenericType;
+    } else {
+      response.data = data;
+    }
   } catch (err) {
     console.log(
       err instanceof Error
@@ -165,7 +99,7 @@ const getEntriesByType = async <GenericType>(searchParams: SearchParams) => {
     );
   }
 
-  return [] as GenericType;
+  return response;
 };
 
-export { getEntryById, setQueryParams, getEntriesByType };
+export { setQueryParams, getEntriesByType };

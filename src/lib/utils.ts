@@ -2,6 +2,12 @@ import merge from "deepmerge";
 import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
+import type {
+  Entry,
+  SearchParams,
+  ContentfulResponse,
+} from "@/types/contentful.types";
+import type { Tag, Body } from "@/types/generics.types";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -9,6 +15,31 @@ const querify = (obj: Record<string, any>) =>
   Object.entries(obj)
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
+
+const setQueryParams = ({
+  slug,
+  skip,
+  sort,
+  name,
+  limit,
+  order,
+  select,
+  pageType,
+  contentType,
+}: SearchParams) => {
+  const sortOrder = order ? `${sort === "asc" ? "-" : ""}${order}` : "";
+
+  return querify({
+    order: sortOrder,
+    limit: limit?.toString() || "10",
+    ...(name && { "fields.name[in]": name }),
+    ...(skip && { skip: skip.toString() }),
+    select: select?.join(",") || "",
+    ...(pageType && { "fields.type[in]": pageType }),
+    ...(contentType && { content_type: contentType }),
+    ...(slug && { "fields.slug[in]": slug.replace(/^\//, "") }),
+  });
+};
 
 const setMetadata = (metadata: Metadata): Metadata => {
   return merge(
@@ -27,4 +58,43 @@ const setMetadata = (metadata: Metadata): Metadata => {
   );
 };
 
-export { cn, querify, setMetadata };
+const extract = ({ sys, fields: { file, ...fields } }: Entry) => {
+  return {
+    ...fields,
+    ...file,
+    type: sys?.contentType?.sys?.id || file?.contentType,
+  };
+};
+
+const normalize = <Generic>(resp: ContentfulResponse) => {
+  const { items, includes } = resp;
+
+  const included = [
+    ...(includes?.Entry ? includes.Entry : []),
+    ...(includes?.Asset ? includes.Asset : []),
+  ].reduce(
+    (acc, item) => {
+      acc[item.sys.id] = extract(item);
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
+
+  const normalizedItems = items.map((item) => {
+    return {
+      ...item.fields,
+      ...(item.fields.body && {
+        body: item.fields.body.map((bodyItem) => included[bodyItem.sys.id]),
+      }),
+      ...(item.fields.tags && {
+        tags: item.fields.tags.map((tag) => included[tag.sys.id]),
+      }),
+    };
+  }) as Generic[];
+
+  return (
+    normalizedItems.length > 1 ? normalizedItems : normalizedItems[0]
+  ) as Generic;
+};
+
+export { cn, extract, setQueryParams, setMetadata, normalize };
