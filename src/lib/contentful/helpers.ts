@@ -36,7 +36,7 @@ const fetcher = <GenericType = ContentfulResponse>(url: string) =>
       Authorization: `Bearer ${API_KEY}`,
     }),
     cache: "force-cache",
-  }).then(async (resp) => {
+  } as RequestInit).then(async (resp) => {
     const data = await resp.json();
 
     return data as GenericType;

@@ -94,8 +94,8 @@ const getPost = async (slug: string) => {
     };
   });
 
-  /** TODO: this only allows for 1 table per post
-   *  FIX
+  /**
+   *  FIX: this only allows for 1 table per post
    */
   const tableBody = await Promise.all(
     post.body
@@ -138,6 +138,7 @@ const getPage = async <Type extends Record<string, any> = Page>(
       "fields.title",
       "fields.keywords",
       "fields.education",
+      "fields.resumeBio",
       "fields.description",
       "fields.resumeSkills",
       "fields.workExperience",

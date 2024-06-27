@@ -140,7 +140,7 @@ type WorkExperience = {
   title: string;
   company: string;
   location: string;
-  workStyle: string;
+  workStyle: "hybrid" | "in-office" | "remote";
   startDate: string;
   endDate?: string;
   body: string;
@@ -150,6 +150,7 @@ export type Resume = Page & {
   resumeSkills: ResumeSkill[];
   workExperience: WorkExperience[];
   education: Header[];
+  resumeBio: string;
 };
 
 export type Post = {

@@ -15,7 +15,7 @@ const HeaderMenu = async () => {
   if (!menuItems) return null;
 
   return (
-    <div>
+    <div data-testid="Header">
       <header className="container max-w-screen-md flex items-center justify-between px-4 py-4">
         <Link href="/">Tyler Scott</Link>
         <NavigationMenu>

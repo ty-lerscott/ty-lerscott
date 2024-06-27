@@ -11,7 +11,7 @@ import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 const getData = cache(async (slug: string) => getPost(slug));
 
-const BREADCRUMBS: Breadcrumb[] = [
+const BREADCRUMBS = [
   {
     title: "Home",
     href: "/",
@@ -20,7 +20,7 @@ const BREADCRUMBS: Breadcrumb[] = [
     title: "Posts",
     href: "/posts",
   },
-];
+] as Breadcrumb[];
 
 export const generateMetadata = async ({ params: { slug } }: PageParams) => {
   const resp = await getData(slug);

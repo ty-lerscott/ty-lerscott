@@ -27,8 +27,7 @@ const RootLayout = async ({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} grid min-h-screen`}
-        style={{ gridTemplateRows: "auto 1fr auto" }}
+        className={`${inter.className} grid min-h-screen grid-rows-[auto_1fr_auto]`}
       >
         <Header />
 
