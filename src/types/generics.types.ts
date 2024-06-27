@@ -1,20 +1,23 @@
-import { type LinkProps } from "next/link";
+import type { ReactNode } from "react";
+import type { LinkProps } from "next/link";
 import { BadgeProps } from "@/components/ui/badge";
 
-export type Link = Omit<LinkProps, "href"> & {
-  url: string;
+export type Link = LinkProps & {
   text: string;
   type: "link";
   external?: boolean;
+  target?: string;
+  rel?: string;
+  href: string;
 };
 
 type HeaderTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export type Header = {
   type: "header";
-  header: string;
-  tag: HeaderTag;
+  tag?: HeaderTag;
   subheader?: string;
+  header: string | ReactNode;
 };
 
 export type Menu = {

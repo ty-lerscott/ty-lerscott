@@ -1,0 +1,8 @@
+.Link {
+    @apply transition-[color,background-size] duration-300;
+    @apply bg-[size:100%_0.1em,0_0.1em] bg-[position:100%_95%,0_95%] bg-no-repeat;
+    background-image:
+            linear-gradient(to right, var(--color-medium), var(--color-medium)),
+            linear-gradient(to right, var(--color-medium), var(--color-light), var(--color-white));
+    @apply hover:text-[var(--color-white)] hover:bg-[size:0_2px,100%_2px];
+}

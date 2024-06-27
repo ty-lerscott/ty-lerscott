@@ -1,6 +1,6 @@
 import type { Viewport } from "next";
 import type { ReactNode } from "react";
-import Footer from "@/components/footer";
+import Footer from "@/components/footer/footer";
 import { Inter } from "next/font/google";
 import Header from "@/components/menus/header";
 
@@ -26,14 +26,10 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} grid min-h-screen grid-rows-[auto_1fr_auto]`}
-      >
+      <body className={`${inter.className} Body`}>
         <Header />
 
-        <main className="container max-w-screen-md min-h-full px-4 pt-4">
-          {children}
-        </main>
+        <main className="Main">{children}</main>
 
         <Footer />
       </body>

@@ -1,13 +1,14 @@
 import Link from "next/link";
-
+import { getMenu } from "@/lib/contentful";
+import Separator from "@/components/ui/separator";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { getMenu } from "@/lib/contentful";
-import Separator from "@/components/ui/separator";
+
+import styles from "./styles.module.css";
 
 const HeaderMenu = async () => {
   const menuItems = await getMenu();
@@ -16,14 +17,14 @@ const HeaderMenu = async () => {
 
   return (
     <div data-testid="Header">
-      <header className="container max-w-screen-md flex items-center justify-between px-4 py-4">
+      <header className={styles.Header}>
         <Link href="/">Tyler Scott</Link>
         <NavigationMenu>
-          <NavigationMenuList className="gap-4">
-            {menuItems.map((menuItem) => (
-              <NavigationMenuItem key={`menuItem-${menuItem.text}`}>
-                <Link href={menuItem.url} legacyBehavior passHref>
-                  <NavigationMenuLink>{menuItem.text}</NavigationMenuLink>
+          <NavigationMenuList className={styles.MenuList}>
+            {menuItems.map(({ text, href }) => (
+              <NavigationMenuItem key={`menuItem-${text}`}>
+                <Link href={href} legacyBehavior passHref>
+                  <NavigationMenuLink>{text}</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             ))}

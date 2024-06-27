@@ -1,3 +1,4 @@
+import colors from "tailwindcss/colors";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -5,6 +6,18 @@ const config = {
   content: ["./components/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      gray: colors.gray,
+      primary: {
+        white: "#dad7cd",
+        light: "#a3b18a",
+        medium: "#588157",
+        DEFAULT: "#3a5a40",
+        dark: "#1d2b24",
+      },
+    },
     container: {
       center: true,
       padding: "2rem",

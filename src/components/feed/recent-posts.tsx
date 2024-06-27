@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 import { getPosts } from "@/lib/contentful";
 import Post from "@/components/feed/post";
+import Header from "@/components/component-map/header";
+
+import styles from "./styles.module.css";
 
 const RecentPosts = async ({ children }: { children?: ReactNode }) => {
   const { posts } = await getPosts();
@@ -9,8 +12,8 @@ const RecentPosts = async ({ children }: { children?: ReactNode }) => {
 
   return (
     <section data-testid="RecentPosts">
-      <h2 className="font-bold mb-4">Recent Posts</h2>
-      <div className="flex flex-col gap-4 mb-4">
+      <Header header="Recent Posts" className="mb-4" tag="h1" />
+      <div className={styles.Posts}>
         {posts.map((post, index) => {
           return <Post key={index} {...post} />;
         })}

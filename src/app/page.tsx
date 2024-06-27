@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { cache } from "react";
 import { setMetadata } from "@/lib/utils";
 import { getPage } from "@/lib/contentful";
 import Separator from "@/components/ui/separator";
+import Link from "@/components/component-map/link";
 import Text from "@/components/component-map/text";
 import RecentPosts from "@/components/feed/recent-posts";
 import type { Text as TextType } from "@/types/generics.types";
@@ -45,9 +45,12 @@ const Home = async () => {
 
       <RecentPosts>
         <div className="flex justify-center">
-          <Link href="/posts" className="p-1 text-sm">
-            All Posts &gt;
-          </Link>
+          <Link
+            href="/posts"
+            className="p-1 text-sm"
+            text="
+            All Posts &gt;"
+          />
         </div>
       </RecentPosts>
     </div>

@@ -1,0 +1,18 @@
+.Posts {
+    @apply flex flex-col gap-8 mb-4;
+
+    .Post {
+        @apply flex flex-col gap-1;
+    }
+
+    .PostHeader {
+        @apply mb-0.5;
+    }
+
+    .PostDate {
+        @apply flex items-center gap-1.5 mb-0.5;
+    }
+}
+
+
+

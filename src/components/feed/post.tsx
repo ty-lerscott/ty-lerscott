@@ -1,19 +1,24 @@
 import dayjs from "dayjs";
-import Link from "next/link";
+import Link from "@/components/component-map/link";
 import { FaRegCalendar } from "react-icons/fa6";
+import Header from "@/components/component-map/header";
 import type { Post as PostType } from "@/types/generics.types";
+
+import styles from "./styles.module.css";
 
 const Post = ({ slug, title, publishDate, description }: PostType) => {
   return (
-    <div data-testid="Post" className="flex flex-col gap-1">
-      <h2>
-        <Link href={`/posts/${slug}`} className="py-1 pr-1">
-          {title}
-        </Link>
-      </h2>
-      <div className="flex items-center gap-2">
-        <FaRegCalendar className="w-[0.75rem]" />
-        <span className="italic text-sm">
+    <div data-testid="Post" className={styles.Post}>
+      <Header
+        tag="h4"
+        className={styles.PostHeader}
+        header={
+          <Link href={`/posts/${slug}`} className="py-1 pr-1" text={title} />
+        }
+      />
+      <div className={styles.PostDate}>
+        <FaRegCalendar className="w-3 h-3" />
+        <span className="text-xs">
           {dayjs(publishDate).format("MMMM D, YYYY | h:mm a")}
         </span>
       </div>

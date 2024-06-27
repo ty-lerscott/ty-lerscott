@@ -1,0 +1,3 @@
+.Footer {
+    @apply container max-w-screen-md flex items-center justify-between p-4;
+}

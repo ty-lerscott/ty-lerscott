@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-white: theme('colors.primary.white');
+    --color-light: theme('colors.primary.light');
+    --color-medium: theme('colors.primary.medium');
+    --color-dark: theme('colors.primary.dark');
+    --color: theme('colors.primary.DEFAULT');
+  }
+}
+
+.Body {
+  @apply grid min-h-screen grid-rows-[auto_1fr_auto] bg-[var(--color-dark)] text-[var(--color-light)];
+
+  .Main {
+    @apply container max-w-screen-md min-h-full px-4 pt-4;
+  }
+}
