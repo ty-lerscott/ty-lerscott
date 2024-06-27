@@ -8,6 +8,15 @@ export type Link = Omit<LinkProps, "href"> & {
   external?: boolean;
 };
 
+type HeaderTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+export type Header = {
+  type: "header";
+  header: string;
+  tag: HeaderTag;
+  subheader?: string;
+};
+
 export type Menu = {
   name: string;
   body: Link[];
@@ -18,14 +27,6 @@ export type PageParams = {
     slug: string;
   };
   searchParams: Record<string, string>;
-};
-
-export type Page = {
-  slug: string;
-  title: string;
-  keywords: string[];
-  description: string;
-  body: any[]; // TODO: conditional elements
 };
 
 export type Image = {
@@ -51,12 +52,7 @@ export type Tag = {
 
 export type Text = {
   tag:
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6"
+    | HeaderTag
     | "p"
     | "span"
     | "strong"
@@ -119,8 +115,42 @@ export type Body =
   | List
   | Quote
   | Table
+  | Header
   | Separator
   | Default;
+
+export type Page = {
+  slug: string;
+  title: string;
+  keywords: string[];
+  description: string;
+  body: Body[];
+};
+
+type ResumeSkill = {
+  name: string;
+  type: "resumeSkill";
+  proficiency: number;
+  startDate: string;
+};
+
+type WorkExperience = {
+  type: "workExperience";
+  name: string;
+  title: string;
+  company: string;
+  location: string;
+  workStyle: string;
+  startDate: string;
+  endDate?: string;
+  body: string;
+};
+
+export type Resume = Page & {
+  resumeSkills: ResumeSkill[];
+  workExperience: WorkExperience[];
+  education: Header[];
+};
 
 export type Post = {
   tags: Tag[];

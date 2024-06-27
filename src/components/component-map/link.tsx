@@ -12,7 +12,7 @@ const Link = (args: LinkType) => {
   };
 
   return (
-    <NextLink {...props} {...additionalProps} href={url}>
+    <NextLink {...props} {...additionalProps} href={url} data-testid="Link">
       {text}
     </NextLink>
   );

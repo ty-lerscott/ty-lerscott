@@ -2,8 +2,9 @@ import dynamic from "next/dynamic";
 import type { Body } from "@/types/generics.types";
 
 const Link = dynamic(() => import("@/components/component-map/link"));
-const Separator = dynamic(() => import("@/components/ui/separator"));
 const Table = dynamic(() => import("@/components/component-map/table"));
+const Header = dynamic(() => import("@/components/component-map/header"));
+const Separator = dynamic(() => import("@/components/ui/separator"));
 const List = dynamic(() => import("@/components/component-map/list"));
 const Text = dynamic(() => import("@/components/component-map/text"));
 const Code = dynamic(() => import("@/components/component-map/code"));
@@ -39,6 +40,11 @@ const getComponent = (component: Body, index: number) => {
     case "table": {
       return (
         <Table key={`Component-${component.type}-${index}`} {...component} />
+      );
+    }
+    case "header": {
+      return (
+        <Header key={`Component-${component.type}-${index}`} {...component} />
       );
     }
     case "separator": {

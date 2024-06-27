@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 import type {
   Entry,
+  BaseType,
   SearchParams,
   ContentfulResponse,
 } from "@/types/contentful.types";
@@ -79,17 +80,29 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
     {} as Record<string, any>,
   );
 
+  const find = (obj: Record<string, any>) => (item: BaseType) =>
+    obj[item.sys.id];
+
   const normalizedItems = items.map((item) => {
     return {
       ...item.fields,
       ...(item.fields.body && {
-        body: item.fields.body.map((bodyItem) => included[bodyItem.sys.id]),
+        body: item.fields.body.map(find(included)),
       }),
       ...(item.fields.tags && {
-        tags: item.fields.tags.map((tag) => included[tag.sys.id]),
+        tags: item.fields.tags.map(find(included)),
+      }),
+      ...(item.fields.education && {
+        education: item.fields.education.map(find(included)),
+      }),
+      ...(item.fields.resumeSkills && {
+        resumeSkills: item.fields.resumeSkills.map(find(included)),
+      }),
+      ...(item.fields.workExperience && {
+        workExperience: item.fields.workExperience.map(find(included)),
       }),
     };
-  }) as Generic[];
+  });
 
   return (
     normalizedItems.length > 1 ? normalizedItems : normalizedItems[0]

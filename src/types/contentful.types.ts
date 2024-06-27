@@ -1,4 +1,4 @@
-import { Image, Tag, List } from "@/types/generics.types";
+import { Image } from "@/types/generics.types";
 
 export type PageType = "home" | "about" | "posts" | "resume";
 
@@ -61,15 +61,20 @@ export type SearchParams = {
   sort?: "asc" | "desc";
 };
 
+export type BaseType = {
+  sys: {
+    id: string;
+  };
+};
+
 export type ContentfulResponseItem = {
   fields: {
     body?: any[];
     image?: Image;
-    tags?: (Tag & {
-      sys: {
-        id: string;
-      };
-    })[];
+    tags?: BaseType[];
+    workExperience?: BaseType[];
+    resumeSkills?: BaseType[];
+    education?: BaseType[];
     [key: string]: any;
   };
 };

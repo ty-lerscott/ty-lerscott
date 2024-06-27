@@ -2,7 +2,7 @@ import type { Table as TableType } from "@/types/generics.types";
 
 const Table = ({ header, subheader, columns, body }: TableType) => {
   return (
-    <div data-testid="table">
+    <div data-testid="Table">
       {header ? (
         <div>
           <h2>{header}</h2>

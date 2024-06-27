@@ -27,7 +27,9 @@ const Home = async () => {
   return (
     <div data-testid="page-home">
       <section data-testid="blurb" className="flex flex-col gap-2">
-        {(page.body || []).map(({ text, tag }: TextType) => {
+        {(page.body || []).map((item) => {
+          const { tag, text } = item as TextType;
+
           return (
             <Text
               tag={tag}

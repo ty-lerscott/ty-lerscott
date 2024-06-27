@@ -1,9 +1,8 @@
-import merge from "deepmerge";
-import { PageType, Entry, ResponseBody } from "@/types/contentful.types";
+import { PageType, Entry } from "@/types/contentful.types";
 import { getEntriesByType, getEntryById } from "@/lib/contentful/helpers";
 import type {
-  Menu,
   Page,
+  Menu,
   Post,
   Link,
   List,
@@ -127,8 +126,10 @@ const getPost = async (slug: string) => {
   return post;
 };
 
-const getPage = async (type: PageType) => {
-  const { data } = await getEntriesByType<Page>({
+const getPage = async <Type extends Record<string, any> = Page>(
+  type: PageType,
+) => {
+  const { data } = await getEntriesByType<Type>({
     contentType: "page",
     pageType: type,
     select: [
@@ -136,11 +137,14 @@ const getPage = async (type: PageType) => {
       "fields.slug",
       "fields.title",
       "fields.keywords",
+      "fields.education",
       "fields.description",
+      "fields.resumeSkills",
+      "fields.workExperience",
     ],
   });
 
-  return data as Page;
+  return data as Type;
 };
 
 export { getMenu, getPage, getPosts, getPost };
