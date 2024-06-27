@@ -39,7 +39,7 @@ const Post = async ({ params: { slug } }: PageParams) => {
   const { title, publishDate, image, tags, body } = await getData(slug);
 
   return (
-    <>
+    <div data-testid="Page-Post">
       <Breadcrumbs breadcrumbs={BREADCRUMBS.concat({ title, href: slug })} />
 
       <h1 className="text-2xl mt-4 font-bold">{title}</h1>
@@ -63,7 +63,7 @@ const Post = async ({ params: { slug } }: PageParams) => {
       ) : null}
 
       <ComponentMap components={body} />
-    </>
+    </div>
   );
 };
 
