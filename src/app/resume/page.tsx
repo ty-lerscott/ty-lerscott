@@ -49,6 +49,7 @@ const Resume = async () => {
 
   return (
     <div data-testid="Page-Resume">
+      <Breadcrumbs breadcrumbs={BREADCRUMBS} />
       <div data-testid="ResumeHeader" className="border-2 bg-lime-500 p-4">
         <div>
           <h1>Tyler Scott Williams</h1>
