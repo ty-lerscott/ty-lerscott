@@ -45,12 +45,7 @@ const Home = async () => {
 
       <RecentPosts>
         <div className="flex justify-center">
-          <Link
-            href="/posts"
-            className="p-1 text-sm"
-            text="
-            All Posts &gt;"
-          />
+          <Link href="/posts" className="p-1 text-sm" text="All Posts &gt;" />
         </div>
       </RecentPosts>
     </div>

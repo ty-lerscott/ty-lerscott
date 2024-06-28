@@ -10,10 +10,6 @@
     --color-dark: theme('colors.primary.dark');
     --color: theme('colors.primary.DEFAULT');
   }
-
-  .Link {
-    @apply hover:text-[--color-white] transition-colors;
-  }
 }
 
 .Body {

@@ -19,6 +19,14 @@ export type Header = {
   subheader?: string | ReactNode;
 };
 
+export type Tag = {
+  type: "tag";
+  text: string;
+  href?: string;
+  variant: string;
+  dashed: boolean;
+};
+
 export type Menu = {
   name: string;
   body: Link[];
@@ -43,13 +51,6 @@ export type Image = {
   };
   fileName: string;
   contentType: string;
-};
-
-export type Tag = {
-  type: "tag";
-  text: string;
-  slug?: string;
-  variant: string;
 };
 
 export type Text = {

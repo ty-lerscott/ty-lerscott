@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
-import { isValidElement } from "react";
+import { isValidElement, PropsWithChildren } from "react";
 import type { Header as HeaderType } from "@/types/generics.types";
-
-import styles from "./styles.module.css";
-import { PropsWithChildren, ReactNode } from "react";
 
 const Tag = ({
   tag = "h2",
@@ -12,7 +9,7 @@ const Tag = ({
 }: PropsWithChildren & { className?: string; tag: HeaderType["tag"] }) => {
   const Component = tag;
   const props = {
-    className: cn(styles.Header, styles[tag], className),
+    className: cn("font-bold", className),
   };
   return <Component {...props}>{children}</Component>;
 };
