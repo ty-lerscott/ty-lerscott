@@ -18,13 +18,17 @@ const HeaderMenu = async () => {
   return (
     <div data-testid="Header">
       <header className={styles.Header}>
-        <Link href="/">Tyler Scott</Link>
+        <Link href="/" className="Link">
+          Tyler Scott
+        </Link>
         <NavigationMenu>
           <NavigationMenuList className={styles.MenuList}>
             {menuItems.map(({ text, href }) => (
               <NavigationMenuItem key={`menuItem-${text}`}>
                 <Link href={href} legacyBehavior passHref>
-                  <NavigationMenuLink>{text}</NavigationMenuLink>
+                  <NavigationMenuLink className="Link">
+                    {text}
+                  </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             ))}

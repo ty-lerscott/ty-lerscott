@@ -4,5 +4,5 @@
     background-image:
             linear-gradient(to right, var(--color-medium), var(--color-medium)),
             linear-gradient(to right, var(--color-medium), var(--color-light), var(--color-white));
-    @apply hover:text-[var(--color-white)] hover:bg-[size:0_2px,100%_2px];
+    @apply hover:text-[--color-white] hover:bg-[size:0_2px,100%_2px];
 }

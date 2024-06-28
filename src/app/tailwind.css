@@ -10,10 +10,14 @@
     --color-dark: theme('colors.primary.dark');
     --color: theme('colors.primary.DEFAULT');
   }
+
+  .Link {
+    @apply hover:text-[--color-white] transition-colors;
+  }
 }
 
 .Body {
-  @apply grid min-h-screen grid-rows-[auto_1fr_auto] bg-[var(--color-dark)] text-[var(--color-light)];
+  @apply grid min-h-screen grid-rows-[auto_1fr_auto] bg-[--color-dark] text-[--color-light];
 
   .Main {
     @apply container max-w-screen-md min-h-full px-4 pt-4;

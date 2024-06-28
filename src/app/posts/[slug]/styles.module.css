@@ -1,0 +1,7 @@
+.Subheader {
+    @apply flex items-center gap-2 mb-2;
+}
+
+.PostImage {
+    @apply w-full h-[24rem] bg-no-repeat bg-cover mb-4;
+}

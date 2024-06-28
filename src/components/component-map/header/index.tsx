@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { isValidElement } from "react";
 import type { Header as HeaderType } from "@/types/generics.types";
 
 import styles from "./styles.module.css";
@@ -27,7 +28,11 @@ const Header = ({
       <Tag className={className} tag={tag}>
         {header}
       </Tag>
-      {subheader ? <span>{subheader}</span> : null}
+      {!subheader ? null : isValidElement(subheader) ? (
+        subheader
+      ) : (
+        <span>{subheader}</span>
+      )}
     </div>
   );
 };

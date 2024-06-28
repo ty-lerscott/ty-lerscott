@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import type { LinkProps } from "next/link";
-import { BadgeProps } from "@/components/ui/badge";
 
 export type Link = LinkProps & {
   text: string;
@@ -16,8 +15,8 @@ type HeaderTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export type Header = {
   type: "header";
   tag?: HeaderTag;
-  subheader?: string;
   header: string | ReactNode;
+  subheader?: string | ReactNode;
 };
 
 export type Menu = {
@@ -49,8 +48,8 @@ export type Image = {
 export type Tag = {
   type: "tag";
   text: string;
-  slug: string;
-  variant: BadgeProps["variant"];
+  slug?: string;
+  variant: string;
 };
 
 export type Text = {
