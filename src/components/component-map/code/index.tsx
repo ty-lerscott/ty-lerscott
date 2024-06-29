@@ -2,11 +2,18 @@ import Prism from "prismjs";
 import { cn } from "@/lib/utils";
 import CodeClient from "./client";
 import dynamic from "next/dynamic";
-import type { Code } from "@/types/generics.types";
+import { type Code } from "@/types/generics.types";
 
-import "./code.styles.css";
+import "./overrides.css";
+import styles from "./styles.module.css";
 
-const Text = dynamic(() => import("@/components/component-map/text"));
+const Header = dynamic(() => import("@/components/component-map/header"));
+
+Prism.languages["typescript"] = Prism.languages.extend("javascript", {
+  type: /\b(?:type|string|number|boolean|any)\b/,
+  punctuation: /[{}[\]()]/,
+  endline: /[,.:;]/,
+});
 
 const Code = ({
   text,
@@ -15,22 +22,23 @@ const Code = ({
   subheader,
   className,
 }: Omit<Code, "type"> & { className?: string }) => {
-  const language = syntax === "typescript" ? "javascript" : syntax;
+  const html = Prism.highlight(text, Prism.languages[syntax], syntax);
 
-  const html = Prism.highlight(text, Prism.languages[language], language);
-
+  const headerProps = {
+    header,
+    subheader,
+  };
   return (
     <div data-testid="Code">
-      {header ? <Text tag="h2" text={header} /> : null}
-      {subheader ? <Text tag="small" text={subheader} /> : null}
+      {header ? <Header {...headerProps} /> : null}
+
       <CodeClient text={text} syntax={syntax}>
-        <code
-          dangerouslySetInnerHTML={{ __html: html }}
-          className={cn(
-            `language-${syntax} [&>span]:text-xs text-xs`,
-            className,
-          )}
-        />
+        <pre>
+          <code
+            dangerouslySetInnerHTML={{ __html: html }}
+            className={cn(styles.Code, className)}
+          />
+        </pre>
       </CodeClient>
     </div>
   );

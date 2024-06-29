@@ -57,7 +57,7 @@ const Post = async ({ params: { slug } }: PageParams) => {
         }
       />
 
-      <Tags tags={tags} className="my-4" />
+      <Tags tags={tags} />
 
       {image ? (
         <div

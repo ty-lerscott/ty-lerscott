@@ -1,5 +1,5 @@
 .Subheader {
-    @apply flex items-center gap-2 mb-2;
+    @apply flex items-center gap-2 mb-2 mt-1;
 }
 
 .PostImage {

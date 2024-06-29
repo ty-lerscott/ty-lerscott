@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import type { ReactElement } from "react";
 import type { Body } from "@/types/generics.types";
 
 const Link = dynamic(() => import("@/components/component-map/link"));
@@ -10,50 +11,42 @@ const Text = dynamic(() => import("@/components/component-map/text"));
 const Code = dynamic(() => import("@/components/component-map/code"));
 const Quote = dynamic(() => import("@/components/component-map/quote"));
 
-const getComponent = (component: Body, index: number) => {
-  switch (component.type) {
+const getComponent = ({ type, ...props }: Body, index: number) => {
+  const keyString = `Component-${type}-${index}`;
+
+  switch (type) {
     case "text": {
-      return (
-        <Text key={`Component-${component.type}-${index}`} {...component} />
-      );
+      return <Text key={keyString} {...props} />;
     }
     case "code": {
-      return (
-        <Code key={`Component-${component.type}-${index}`} {...component} />
-      );
+      return <Code key={keyString} {...props} />;
     }
     case "link": {
       return (
-        <Link key={`Component-${component.type}-${index}`} {...component} />
+        <div key={keyString}>
+          <Link {...props} />
+        </div>
       );
     }
     case "list": {
-      return (
-        <List key={`Component-${component.type}-${index}`} {...component} />
-      );
+      return <List key={keyString} {...props} />;
     }
     case "quote": {
-      return (
-        <Quote key={`Component-${component.type}-${index}`} {...component} />
-      );
+      return <Quote key={keyString} {...props} />;
     }
     case "table": {
-      return (
-        <Table key={`Component-${component.type}-${index}`} {...component} />
-      );
+      return <Table key={keyString} {...props} />;
     }
     case "header": {
-      return (
-        <Header key={`Component-${component.type}-${index}`} {...component} />
-      );
+      return <Header key={keyString} {...props} />;
     }
     case "separator": {
-      return <Separator key={`Component-${component.type}-${index}`} />;
+      return (<Separator key={keyString} {...props} />) as ReactElement;
     }
     default: {
       return (
-        <div key={`Component-${component.type}-${index}`}>
-          Component Map looking for: {component.type}
+        <div key={`Component-${type}-${index}`}>
+          Component Map looking for: {type}
         </div>
       );
     }
@@ -62,7 +55,7 @@ const getComponent = (component: Body, index: number) => {
 
 const ComponentMap = ({ components }: { components: Body[] }) => {
   return (
-    <section data-testid="ComponentMap" className="flex flex-col gap-2">
+    <section data-testid="ComponentMap" className="flex flex-col gap-6">
       {components.map(getComponent)}
     </section>
   );

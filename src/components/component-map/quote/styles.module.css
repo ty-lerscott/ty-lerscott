@@ -1,0 +1,27 @@
+.QuoteWrapper {
+    @apply border-l-4 border-[--color-dark] bg-[--color-darkest] py-2 px-4 rounded;
+}
+
+.Quote {
+    @apply flex;
+
+    &>svg {
+        @apply text-[--color-darker] size-8 shrink-0;
+    }
+
+    &>svg:first-of-type {
+        @apply self-start;
+    }
+
+    .Text {
+        @apply px-4 my-4 text-xl font-bold tracking-wide text-center;
+    }
+
+    &>svg:last-of-type {
+        @apply self-end;
+    }
+}
+
+.Author {
+    @apply mt-2 flex justify-end italic text-[--color-dark];
+}

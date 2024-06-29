@@ -109,8 +109,4 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
   ) as Generic;
 };
 
-const buildVariants = () => {
-  return {};
-};
-
-export { cn, extract, setQueryParams, setMetadata, normalize, buildVariants };
+export { cn, extract, setQueryParams, setMetadata, normalize };

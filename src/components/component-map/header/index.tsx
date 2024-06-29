@@ -9,7 +9,7 @@ const Tag = ({
 }: PropsWithChildren & { className?: string; tag: HeaderType["tag"] }) => {
   const Component = tag;
   const props = {
-    className: cn("font-bold", className),
+    className: cn("leading-none", className),
   };
   return <Component {...props}>{children}</Component>;
 };
@@ -19,16 +19,20 @@ const Header = ({
   className,
   subheader,
   tag = "h2",
-}: Omit<HeaderType, "type"> & { className?: string }) => {
+  wrapperClassName,
+}: Omit<HeaderType, "type"> & {
+  className?: string;
+  wrapperClassName?: string;
+}) => {
   return (
-    <div data-testid="Header">
+    <div data-testid="Header" className={cn("flex flex-col", wrapperClassName)}>
       <Tag className={className} tag={tag}>
         {header}
       </Tag>
       {!subheader ? null : isValidElement(subheader) ? (
         subheader
       ) : (
-        <span>{subheader}</span>
+        <span className="text-sm">{subheader}</span>
       )}
     </div>
   );

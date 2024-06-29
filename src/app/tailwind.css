@@ -4,16 +4,40 @@
 
 @layer base {
   :root {
-    --color-white: theme('colors.primary.white');
-    --color-light: theme('colors.primary.light');
-    --color-medium: theme('colors.primary.medium');
-    --color-dark: theme('colors.primary.dark');
+    --color-white: theme('colors.primary.50');
+    --color-lightest: theme('colors.primary.100');
+    --color-lighter: theme('colors.primary.200');
+    --color-light: theme('colors.primary.300');
+    --color-medium-light: theme('colors.primary.400');
     --color: theme('colors.primary.DEFAULT');
+    --color-medium: theme('colors.primary.DEFAULT');
+    --color-dark:theme('colors.primary.600');
+    --color-darker:theme('colors.primary.700');
+    --color-darkest:theme('colors.primary.800');
+    --color-black:theme('colors.primary.900');
+    --shadow: theme('colors.primary.950');
+
+    ul:not([class]) li :first-child {
+      @apply -ml-2;
+    }
+
+    ol:not([class]) li :first-child {
+      @apply ml-1;
+    }
+
+    code {
+      @apply font-firaCode text-sm;
+    }
+
+    small {
+      @apply text-sm;
+    }
   }
 }
 
 .Body {
-  @apply grid min-h-screen grid-rows-[auto_1fr_auto] bg-[--color-dark] text-[--color-light];
+  @apply grid min-h-screen grid-rows-[auto_1fr_auto] bg-[--color-black] text-[--color-lighter];
+  @apply selection:text-[--color-darkest] selection:bg-[--color-medium];
 
   .Main {
     @apply container max-w-screen-md min-h-full px-4 pt-4;

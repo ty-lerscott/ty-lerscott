@@ -1,0 +1,19 @@
+.Table {
+    @apply w-full rounded overflow-hidden table-fixed;
+}
+
+.Head {
+    @apply text-xs text-[--color-medium] uppercase bg-[--color-lightest] filter-none;
+}
+
+.Column {
+    @apply px-4 py-2 text-start text-xs font-semibold text-[--color-darkest] uppercase;
+}
+
+.Row {
+    @apply odd:bg-[--color-darkest] even:bg-[--color-darker] text-[--color-light];
+}
+
+.Cell {
+    @apply px-4 py-2 text-sm font-medium;
+}

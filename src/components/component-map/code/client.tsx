@@ -1,16 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { FiClipboard, FiCheck } from "react-icons/fi";
 import { IoWarningOutline } from "react-icons/io5";
-import type { PropsWithChildren } from "react";
 import type { Code } from "@/types/generics.types";
+import { FiClipboard, FiCheck } from "react-icons/fi";
+import { useState, useEffect, type PropsWithChildren } from "react";
 
-const Client = ({
-  text,
-  syntax,
-  children,
-}: PropsWithChildren & Omit<Code, "type">) => {
+import styles from "./styles.module.css";
+
+const Client = ({ text, children }: PropsWithChildren & Omit<Code, "type">) => {
   const [status, setStatus] = useState<"success" | "error" | "">("");
 
   const onClick = async () => {
@@ -38,16 +35,12 @@ const Client = ({
         : FiClipboard;
 
   return (
-    <pre className={`language-${syntax} relative`}>
-      <button
-        type="button"
-        onClick={onClick}
-        className="absolute top-0 right-0 text-white p-2 h-auto w-auto"
-      >
+    <div data-testid="ClientWrapper" className={styles.CodeWrapper}>
+      <button type="button" onClick={onClick} className={styles.Copy}>
         <Clipboard />
       </button>
       {children}
-    </pre>
+    </div>
   );
 };
 

@@ -71,18 +71,28 @@ export type Text = {
 export type List = {
   type: "list";
   name: string; // This is not optional, but recursive calls dont pass it down
+  header?: string;
   ordered: boolean;
+  subheader?: string;
   body: (Text | Link | List)[];
 };
 
 export type Quote = {
   type: "quote";
   text: string;
-  author: string;
+  author?: string;
 };
 
 export type Default = {
   type: "default";
+};
+
+export const codeSyntax = {
+  typescript: "typescript",
+  javascript: "javascript",
+  css: "css",
+  scss: "scss",
+  gleam: "gleam",
 };
 
 export type Code = {
@@ -90,7 +100,7 @@ export type Code = {
   text: string;
   header?: string;
   subheader?: string;
-  syntax: "typescript" | "css" | "gleam" | "scss";
+  syntax: keyof typeof codeSyntax;
 };
 
 export type TableRow = {

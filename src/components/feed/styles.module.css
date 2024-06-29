@@ -6,7 +6,7 @@
     }
 
     .PostHeader {
-        @apply mb-0.5;
+        @apply mb-1.5;
     }
 
     .PostDate {
