@@ -17,6 +17,10 @@
 }
 
 .Copy {
-    @apply absolute top-0 right-0 p-2 h-auto w-auto transition-colors text-[--color-medium-light] text-shadow [&>*]:text-xs text-xs;
+    @apply absolute top-0 right-0 p-2 transition-colors text-[--color-dark] text-shadow [&>*]:text-xs text-xs;
     @apply hover:text-[--color-lighter];
+
+    &>svg {
+        @apply size-4;
+    }
 }

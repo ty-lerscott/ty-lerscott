@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { cache } from "react";
+import Image from "next/image";
 import Tags from "@/components/tags";
 import { setMetadata } from "@/lib/utils";
 import { getPost } from "@/lib/contentful";

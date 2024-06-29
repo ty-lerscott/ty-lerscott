@@ -3,15 +3,17 @@
 }
 
 .Head {
-    @apply text-xs text-[--color-medium] uppercase bg-[--color-lightest] filter-none;
+    @apply bg-[--color-dark] text-[--color-light-medium];
+    @apply text-xs uppercase filter-none;
 }
 
 .Column {
-    @apply px-4 py-2 text-start text-xs font-semibold text-[--color-darkest] uppercase;
+    @apply px-4 py-2 text-start text-xs font-semibold uppercase;
 }
 
 .Row {
-    @apply odd:bg-[--color-darkest] even:bg-[--color-darker] text-[--color-light];
+    @apply text-[--color-light];
+    @apply odd:bg-[--color-darkest] even:bg-[--color-darker];
 }
 
 .Cell {
