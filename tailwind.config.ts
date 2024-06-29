@@ -16,7 +16,7 @@ const config = {
       current: "currentColor",
       gray: colors.gray,
       ...newColors,
-      primary: newColors.laudableLime,
+      primary: newColors.marineGreen,
     },
     container: {
       center: true,
@@ -54,6 +54,13 @@ const config = {
     require("tailwindcss-animate"),
     plugin(({ addBase, matchUtilities, theme }) => {
       addBase({
+        code: {
+          fontSize: theme("fontSize.sm"),
+          fontFamily: theme("font.firaCode"),
+        },
+        small: {
+          fontSize: theme("fontSize.sm"),
+        },
         h1: {
           fontWeight: theme("fontWeight.bold"),
           fontSize: theme("fontSize.2xl"),

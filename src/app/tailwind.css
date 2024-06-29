@@ -24,14 +24,6 @@
     ol:not([class]) li :first-child {
       @apply ml-1;
     }
-
-    code {
-      @apply font-firaCode text-sm;
-    }
-
-    small {
-      @apply text-sm;
-    }
   }
 }
 
