@@ -1,0 +1,39 @@
+.Skill {
+    @apply even:bg-[--color-darkest] py-3 px-4;
+
+    &:nth-of-type(odd) .Svg,
+    &:nth-of-type(odd) .SkillName {
+        @apply text-[--color-medium-light];
+    }
+    &:nth-of-type(odd) .SkillRow {
+        @apply text-[--color-dark] border-[--color-darkest];
+    }
+
+    &:nth-of-type(even) .Svg,
+    &:nth-of-type(even) .SkillName {
+        @apply text-[--color-light];
+    }
+    &:nth-of-type(even) .SkillRow {
+        @apply text-[--color-medium] border-[--color-darker];
+    }
+}
+
+.SkillHeader {
+    @apply flex items-center gap-1 leading-none mb-1;
+}
+
+.SkillName {
+    @apply text-xs tracking-wider leading-none;
+}
+
+.Svg {
+    @apply size-2.5;
+}
+
+.SkillRow {
+    @apply flex justify-between text-3xs font-semibold odd:border-t;
+}
+
+.SkillTitle {
+    @apply uppercase leading-4 tracking-widest;
+}

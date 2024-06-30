@@ -8,6 +8,7 @@ import type {
   List,
   Table,
   TableRow,
+  WorkExperiences,
 } from "@/types/generics.types";
 
 const getMenu = async (name: string = "Header") => {
@@ -132,6 +133,7 @@ const getPage = async <Type extends Record<string, any> = Page>(
   const { data } = await getEntriesByType<Type>({
     contentType: "page",
     pageType: type,
+
     select: [
       "fields.body",
       "fields.slug",

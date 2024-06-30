@@ -1,0 +1,22 @@
+.Header {
+    @apply border-2 border-[--color-dark] p-4 text-center;
+
+    .Wrapper {
+        @apply relative;
+        @apply flex flex-col items-center p-4 pb-7;
+    }
+
+    .Name {
+        @apply text-3xl uppercase border-2 border-[--color-dark] w-max py-6 px-10 tracking-wide;
+    }
+
+    .AnimatedTextWrapper {
+        @apply absolute bottom-3.5 bg-[--color-black];
+    }
+
+    .AnimatedText {
+        @apply absolute bottom-0;
+        @apply bg-[--color-black] text-[--color-medium-light];
+        @apply text-lg font-semibold px-4 tracking-widest relative;
+    }
+}

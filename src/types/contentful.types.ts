@@ -56,6 +56,7 @@ export type SearchParams = {
   order?: string;
   limit?: number;
   select?: string[];
+  include?: number;
   contentType: string;
   pageType?: PageType;
   sort?: "asc" | "desc";

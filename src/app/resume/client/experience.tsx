@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
-import type { WorkExperience } from "@/types/generics.types";
+import type { WorkExperience, Header, Text } from "@/types/generics.types";
 
-import styles from "../styles.module.css";
+import styles from "./styles/experience.module.css";
 
 const Experience = ({
   body,
@@ -12,7 +12,7 @@ const Experience = ({
   workStyle,
   startDate,
 }: WorkExperience) => {
-  const located = `${company} - ${location}${workStyle !== "in-office" ? ` - ${workStyle}` : ""}`;
+  const located = `${company} - ${location}${workStyle !== "in-office" ? ` - (${workStyle})` : ""}`;
   const date = `${dayjs(startDate).format("MMM YYYY")} -
                           ${
                             endDate
@@ -31,7 +31,28 @@ const Experience = ({
         </div>
         <span className={styles.ExperienceSubheader}>{located}</span>
       </div>
-      <p className={styles.Body}>{body}</p>
+      <div className={styles.BodyList}>
+        {body.map((bodyItem, index) => {
+          return (
+            <p className={styles.Body} key={`${title}-${index}`}>
+              {(bodyItem as Header).header ? (
+                <>
+                  <span className={styles.BodyHeader}>
+                    {(bodyItem as Header).header}:{" "}
+                  </span>
+                  {(bodyItem as Header).subheader ? (
+                    <span className={styles.BodySubheader}>
+                      {(bodyItem as Header).subheader}
+                    </span>
+                  ) : null}
+                </>
+              ) : (
+                (bodyItem as Text).text
+              )}
+            </p>
+          );
+        })}
+      </div>
     </div>
   );
 };

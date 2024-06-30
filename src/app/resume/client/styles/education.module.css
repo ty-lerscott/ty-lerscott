@@ -1,0 +1,11 @@
+.Education {
+    @apply p-4 even:border-l-2 border-[--color-dark];
+}
+
+.EducationHeader {
+    @apply text-sm mb-1 text-[--color-medium-light] font-semibold leading-4;
+}
+
+.EducationSubheader {
+    @apply text-xs leading-none text-[--color-dark];
+}

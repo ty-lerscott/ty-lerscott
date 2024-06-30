@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "@/app/resume/styles.module.css";
+import styles from "./styles/header.module.css";
 import { motion, useAnimation } from "framer-motion";
 
-const ResumeHeader = ({ roles }: { roles: string[] }) => {
+const Header = ({ roles }: { roles: string[] }) => {
   const [position, setPosition] = useState<number>(0);
   const controls = useAnimation();
 
@@ -38,4 +38,4 @@ const ResumeHeader = ({ roles }: { roles: string[] }) => {
   );
 };
 
-export default ResumeHeader;
+export default Header;

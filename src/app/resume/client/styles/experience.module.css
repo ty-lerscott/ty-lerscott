@@ -1,0 +1,57 @@
+.Experience {
+    @apply even:bg-[--color-darkest] p-4;
+
+    &:nth-of-type(even) .ExperienceHeader {
+        @apply text-[--color-lighter];
+    }
+    &:nth-of-type(even) .ExperienceSubheader,
+    &:nth-of-type(even) .BodySubheader {
+        @apply text-[--color-medium];
+    }
+    &:nth-of-type(even) .Body {
+        @apply text-[--color-lighter];
+    }
+
+    &:nth-of-type(odd) .ExperienceHeader {
+        @apply text-[--color-medium-light];
+    }
+    &:nth-of-type(odd) .ExperienceSubheader,
+    &:nth-of-type(odd) .BodySubheader {
+        @apply text-[--color-dark];
+    }
+    &:nth-of-type(odd) .Body {
+        @apply text-[--color-medium-light];
+    }
+}
+
+.ExperienceHeaderWrapper {
+    @apply leading-none mb-3;
+}
+
+.ExperienceHeader {
+    @apply flex justify-between items-end leading-none;
+}
+
+.Title {
+    @apply leading-none tracking-wide font-semibold;
+}
+
+.Date {
+    @apply text-xs;
+}
+
+.ExperienceSubheader {
+    @apply text-xs leading-none;
+}
+
+.BodyList {
+    @apply flex flex-col gap-2;
+}
+
+.Body {
+    @apply text-xs;
+}
+
+.BodyHeader {
+    @apply font-semibold;
+}

@@ -24,6 +24,7 @@ const setQueryParams = ({
   limit,
   order,
   select,
+  include,
   pageType,
   contentType,
 }: SearchParams) => {
@@ -32,6 +33,7 @@ const setQueryParams = ({
   return querify({
     order: sortOrder,
     limit: limit?.toString() || "10",
+    include: include ? String(include) : "5",
     ...(name && { "fields.name[in]": name }),
     ...(skip && { skip: skip.toString() }),
     select: select?.join(",") || "",
@@ -66,6 +68,8 @@ const extract = ({ sys, fields: { file, ...fields } }: Entry) => {
   };
 };
 
+const find = (obj: Record<string, any>) => (item: BaseType) => obj[item.sys.id];
+
 const normalize = <Generic>(resp: ContentfulResponse) => {
   const { items, includes } = resp;
 
@@ -79,9 +83,6 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
     },
     {} as Record<string, any>,
   );
-
-  const find = (obj: Record<string, any>) => (item: BaseType) =>
-    obj[item.sys.id];
 
   const normalizedItems = items.map((item) => {
     return {
@@ -99,7 +100,14 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
         resumeSkills: item.fields.resumeSkills.map(find(included)),
       }),
       ...(item.fields.workExperience && {
-        workExperience: item.fields.workExperience.map(find(included)),
+        workExperience: item.fields.workExperience.map((item) => {
+          const experience = find(included)(item);
+
+          return {
+            ...experience,
+            body: experience.body.map(find(included)),
+          };
+        }),
       }),
     };
   });

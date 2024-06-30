@@ -1,7 +1,7 @@
 import { MdFavorite } from "react-icons/md";
 import type { ResumeSkill } from "@/types/generics.types";
 
-import styles from "../styles.module.css";
+import styles from "./styles/skills.module.css";
 
 const SkillRow = ({
   title,
@@ -21,7 +21,6 @@ const SkillRow = ({
 const Skill = ({
   name,
   years,
-  isActive,
   favorite,
   comfortLevel,
 }: ResumeSkill & { years: string }) => {
@@ -31,10 +30,8 @@ const Skill = ({
         <span className={styles.SkillName}>{name}</span>
         {favorite && <MdFavorite className={styles.Svg} />}
       </p>
-      <div>
-        <SkillRow value={comfortLevel} title="Comfort Level" />
-        <SkillRow value={years} title="Experience" />
-      </div>
+      <SkillRow value={comfortLevel} title="Comfort Level" />
+      <SkillRow value={years} title="Experience" />
     </div>
   );
 };

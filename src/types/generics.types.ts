@@ -159,7 +159,13 @@ export type WorkExperience = {
   workStyle: "hybrid" | "in-office" | "remote";
   startDate: string;
   endDate?: string;
-  body: string;
+  body: (Header | Text)[];
+};
+
+export type WorkExperiences = {
+  name: string;
+  type: "workExperiences";
+  experiences: WorkExperience[];
 };
 
 export type Resume = Page & {

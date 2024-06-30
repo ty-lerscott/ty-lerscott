@@ -1,0 +1,5 @@
+.SectionHeader {
+    @apply p-4;
+    @apply text-center tracking-wider text-lg uppercase leading-none;
+    @apply text-[--color-light] border-b-2 border-[--color-dark];
+}
