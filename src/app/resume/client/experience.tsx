@@ -12,7 +12,7 @@ const Experience = ({
   workStyle,
   startDate,
 }: WorkExperience) => {
-  const duration = `${company} - ${location}${workStyle !== "in-office" ? ` - ${workStyle}` : ""}`;
+  const located = `${company} - ${location}${workStyle !== "in-office" ? ` - ${workStyle}` : ""}`;
   const date = `${dayjs(startDate).format("MMM YYYY")} -
                           ${
                             endDate
@@ -29,7 +29,7 @@ const Experience = ({
           <small className={styles.Title}>{title}</small>
           <span className={styles.Date}>{date}</span>
         </div>
-        <span className={styles.Duration}>{duration}</span>
+        <span className={styles.ExperienceSubheader}>{located}</span>
       </div>
       <p className={styles.Body}>{body}</p>
     </div>
