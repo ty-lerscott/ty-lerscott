@@ -14,7 +14,7 @@ const API_URI = "https://cdn.contentful.com";
 const IS_PROD = process.env.NEXT_PUBLIC_ENVIRONMENT === "production";
 const SPACE_ID = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID as string;
 const API_KEY = process.env.NEXT_PUBLIC_CONTENTFUL_API_KEY as string;
-const ENVIRONMENT_ID = IS_PROD ? "main" : "dev";
+const ENVIRONMENT_ID = IS_PROD ? "master" : "dev";
 
 const PATHS_OBJ = {
   entries: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries`,
@@ -30,8 +30,9 @@ const PATHS = Object.entries(PATHS_OBJ).reduce(
   {} as Record<string, any>,
 ) as Record<keyof typeof PATHS_OBJ, string>;
 
-const fetcher = <GenericType = ContentfulResponse>(url: string) =>
-  fetch(url, {
+const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
+  console.log("fetcher url", url);
+  return fetch(url, {
     headers: new Headers({
       Authorization: `Bearer ${API_KEY}`,
     }),
@@ -41,6 +42,7 @@ const fetcher = <GenericType = ContentfulResponse>(url: string) =>
 
     return data as GenericType;
   });
+};
 
 const getAssetById = async <GenericType>(id: string) => {
   try {
@@ -95,6 +97,8 @@ const getEntriesByType = async <GenericType extends Record<string, any>>(
     const resp = await fetcher(
       `${PATHS.entries}?${setQueryParams(searchParams)}`,
     );
+
+    console.dir(resp, { depth: null });
 
     response.pagination = {
       total: resp.total,
