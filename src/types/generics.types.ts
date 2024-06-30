@@ -150,7 +150,7 @@ export type ResumeSkill = {
   favorite: boolean;
 };
 
-type WorkExperience = {
+export type WorkExperience = {
   type: "workExperience";
   name: string;
   title: string;

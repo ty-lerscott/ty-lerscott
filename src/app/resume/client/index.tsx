@@ -1,9 +1,11 @@
 "use client";
 
-import dayjs from "dayjs";
+import Skill from "./skill";
+import { cn } from "@/lib/utils";
 import { sort } from "fast-sort";
 import { useState } from "react";
-import ResumeSkill from "./resume-skill";
+import Education from "./education";
+import Experience from "./experience";
 import ResumeHeader from "./resume-header";
 import { yearsOfExperience } from "./utils";
 import SectionHeader from "./section-header";
@@ -48,96 +50,41 @@ const ResumeClient = ({
       <ResumeHeader roles={roles} />
       <div data-testid="ResumeBody" className={styles.ResumeBody}>
         <div data-testid="Experiences" className={styles.Experiences}>
-          <div data-testid="WorkExperience" className="p-4">
-            <SectionHeader header="Experience" />
-            <div className="mt-2">
-              {workExperience.map(
-                (
-                  {
-                    title,
-                    company,
-                    location,
-                    workStyle,
-                    startDate,
-                    endDate,
-                    body,
-                  },
-                  index,
-                ) => {
-                  const experienceLine2 = `${company} - ${location}${workStyle !== "in-office" ? ` - ${workStyle}` : ""}`;
-                  const date = `${dayjs(startDate).format("MMM YYYY")} -
-                          ${
-                            endDate
-                              ? dayjs(endDate).format("MMM YYYY")
-                              : "Present"
-                          }`;
-                  return (
-                    <div key={`WorkExperience-${title}-${index}`}>
-                      <div data-testid="Experience">
-                        <div data-testid="ExperienceHeader">
-                          <div>
-                            <span>{title}</span>
-                            <span>{experienceLine2}</span>
-                          </div>
-                          <span>{date}</span>
-                        </div>
-                        <p>{body}</p>
-                      </div>
-                    </div>
-                  );
-                },
-              )}
-            </div>
-          </div>
-          <div data-testid="Education" className="border-t-2 p-4">
+          <SectionHeader header="Experience" />
+          {workExperience.map((exp) => {
+            return <Experience key={exp.name} {...exp} />;
+          })}
+
+          <div data-testid="Education" className={styles.EducationWrapper}>
             <SectionHeader header="Education" />
-            {education.map((item) => {
-              return (
-                <div key={`Education-${item.header}`}>
-                  <span>{item.header}</span>
-                  <span>{item.subheader}</span>
-                </div>
-              );
-            })}
+            <div className={styles.EducationList}>
+              {education.map((props) => {
+                return <Education {...props} key={props.header as string} />;
+              })}
+            </div>
           </div>
         </div>
 
         <div data-testid="Sidebar" className={styles.Sidebar}>
-          <div data-testid="Bio" className="p-4">
-            <SectionHeader
-              header="About"
-              subheader={resumeBio.replace(/{{(.*?)}}/, professionalExperience)}
-            />
-          </div>
+          <SectionHeader header="About" />
+          <p className={styles.About}>
+            {resumeBio.replace(/{{(.*?)}}/, professionalExperience)}
+          </p>
           <div data-testid="Contact" className={styles.Contact}>
-            <SectionHeader
-              header="Contact"
-              subheader={
-                <>
-                  <span className="block text-[--color-medium]">
-                    607 882 0531
-                  </span>
-                  <span className="block mt-1 text-[--color-medium]">
-                    ty@lerscott.com
-                  </span>
-                  <span className="block mt-1 text-[--color-medium]">
-                    https://ty.lerscott.com
-                  </span>
-                </>
-              }
-            />
+            <SectionHeader header="Contact" />
+            <div className="p-4">
+              <p className={styles.ContactRow}>607 882 0531</p>
+              <p className={cn(styles.ContactRow, "mt-1")}>ty@lerscott.com</p>
+              <p className={cn(styles.ContactRow, "mt-1")}>
+                https://ty.lerscott.com
+              </p>
+            </div>
           </div>
-          <div data-testid="Skills" className="pt-4 border-t-2">
+          <div data-testid="Skills" className={styles.SkillsWrapper}>
             <SectionHeader header="Skills" />
             <div className={styles.SkillsList}>
-              {skills.map((props, index) => {
-                return (
-                  <ResumeSkill
-                    {...props}
-                    key={props.name}
-                    isEven={index % 2 === 0}
-                  />
-                );
+              {skills.map((props) => {
+                return <Skill {...props} key={props.name} />;
               })}
             </div>
           </div>

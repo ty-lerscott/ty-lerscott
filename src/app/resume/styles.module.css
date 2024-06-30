@@ -1,5 +1,5 @@
 .Header {
-    @apply border-4 p-4 text-center;
+    @apply border-2 border-[--color-dark] p-4 text-center;
 
     .Wrapper {
         @apply relative;
@@ -16,16 +16,17 @@
 
     .AnimatedText {
         @apply absolute bottom-0;
-        @apply text-lg text-[--color-dark] font-semibold bg-[--color-black] px-4 tracking-widest relative;
+        @apply text-lg text-[--color-medium] font-semibold bg-[--color-black] px-4 tracking-widest relative;
     }
 }
 
 .ResumeBody {
-    @apply grid grid-cols-[3fr_5fr] border-x-2 border-b-2;
+    @apply grid grid-cols-[3fr_5fr] grid-flow-dense border-x-2 border-b-2 border-[--color-dark];
 
     .SectionHeader {
-        @apply mb-2 text-center tracking-wider text-[--color-medium] text-lg uppercase leading-none;
-
+        @apply text-center tracking-wider text-lg uppercase leading-none;
+        @apply text-[--color-medium] border-b-2 border-[--color-dark];
+        @apply p-4;
     }
 
     .SectionSubheader {
@@ -33,22 +34,113 @@
     }
 
     .Experiences {
-        @apply order-2 border-l-2;
+        @apply order-2 border-l-2 border-[--color-dark] max-h-[268rem];
     }
 
     .Sidebar {
         @apply order-1;
     }
 
+    .Experience {
+        @apply even:bg-[--color-darkest] p-4;
+
+        &:nth-of-type(2n) .Body {
+            @apply text-[--color-medium];
+        }
+    }
+
+    .ExperienceHeaderWrapper {
+        @apply leading-none mb-3;
+    }
+
+    .ExperienceHeader {
+        @apply flex justify-between items-end leading-none;
+        @apply text-[--color-medium];
+    }
+
+    .Title {
+        @apply leading-none;
+    }
+
+    .Date {
+        @apply text-xs;
+    }
+
+    .Duration {
+        @apply text-[--color-dark] text-xs leading-none;
+    }
+
+    .Body {
+        @apply text-[--color-dark] text-xs mb-2;
+    }
+
+    .EducationList {
+        @apply p-4 flex justify-between;
+    }
+
+    .EducationWrapper {
+        @apply border-t-2 border-[--color-dark];
+    }
+
+    .EducationHeader {
+        @apply text-sm mb-1 text-[--color-dark];
+    }
+
+    .EducationSubheader {
+        @apply text-xs text-[--color-darker] leading-none;
+    }
+
+    .About {
+        @apply p-4 text-xs text-[--color-dark];
+    }
+
     .Contact {
-        @apply p-4 border-t-2 text-center bg-[--color-darkest];
+        @apply border-t-2 border-[--color-dark] text-center bg-[--color-darkest];
+    }
+
+    .ContactRow {
+        @apply text-xs text-[--color-medium] leading-5;
+    }
+
+    .SkillsWrapper {
+        @apply border-t-2 border-[--color-dark];
     }
 
     .SkillsList {
-        @apply flex flex-col gap-2 h-[100rem] scrollbar-hide overflow-y-scroll;
+        @apply flex flex-col scrollbar-hide overflow-y-scroll;
+        @apply border-t-2 border-[--color-darkest];
+        @apply max-h-[42rem] scrollbar-hide;
+    }
+
+    .Skill {
+        @apply even:bg-[--color-darkest] p-4;
+
+        &:nth-of-type(2n) .SkillRow {
+            @apply text-[--color-medium];
+        }
+
+        &:nth-of-type(2n) .Svg {
+            @apply text-[--color-medium];
+        }
+    }
+
+    .SkillHeader {
+        @apply flex items-center gap-1 leading-none mb-2;
+    }
+
+    .SkillName {
+        @apply text-sm tracking-wider text-[--color-medium-light];
+    }
+
+    .Svg {
+        @apply size-3 text-[--color-darker];
     }
 
     .SkillRow {
-        @apply flex justify-between text-2xs font-semibold text-[--color-darker];
+        @apply flex justify-between text-2xs font-semibold text-[--color-darker] even:border-t even:border-[--color-darker];
+    }
+
+    .SkillTitle {
+        @apply uppercase leading-4 tracking-wider;
     }
 }
