@@ -52,6 +52,7 @@ const config = {
   },
   plugins: [
     require("tailwindcss-animate"),
+    require("tailwind-scrollbar-hide"),
     plugin(({ addBase, matchUtilities, theme }) => {
       addBase({
         code: {

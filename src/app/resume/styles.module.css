@@ -2,18 +2,53 @@
     @apply border-4 p-4 text-center;
 
     .Wrapper {
-        @apply flex flex-col items-center p-4;
+        @apply relative;
+        @apply flex flex-col items-center p-4 pb-7;
     }
 
     .Name {
-        @apply text-3xl uppercase border-2 border-[--color-dark] w-max py-6 px-8 tracking-wide;
+        @apply text-3xl uppercase border-2 border-[--color-dark] w-max py-6 px-10 tracking-wide;
     }
 
     .AnimatedTextWrapper {
-        @apply text-lg text-[--color-dark] font-semibold bg-[--color-black] px-4 relative -top-4 tracking-widest relative;
+        @apply absolute bottom-3.5 bg-[--color-black];
     }
 
-    .TextWrapper {
-        @apply relative;
+    .AnimatedText {
+        @apply absolute bottom-0;
+        @apply text-lg text-[--color-dark] font-semibold bg-[--color-black] px-4 tracking-widest relative;
+    }
+}
+
+.ResumeBody {
+    @apply grid grid-cols-[3fr_5fr] border-x-2 border-b-2;
+
+    .SectionHeader {
+        @apply mb-2 text-center tracking-wider text-[--color-medium] text-lg uppercase leading-none;
+
+    }
+
+    .SectionSubheader {
+        @apply text-[--color-dark] text-xs tracking-wide;
+    }
+
+    .Experiences {
+        @apply order-2 border-l-2;
+    }
+
+    .Sidebar {
+        @apply order-1;
+    }
+
+    .Contact {
+        @apply p-4 border-t-2 text-center bg-[--color-darkest];
+    }
+
+    .SkillsList {
+        @apply flex flex-col gap-2 h-[100rem] scrollbar-hide overflow-y-scroll;
+    }
+
+    .SkillRow {
+        @apply flex justify-between text-2xs font-semibold text-[--color-darker];
     }
 }

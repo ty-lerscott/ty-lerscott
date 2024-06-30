@@ -140,11 +140,14 @@ export type Page = {
   body: Body[];
 };
 
-type ResumeSkill = {
+export type ResumeSkill = {
   name: string;
   type: "resumeSkill";
-  proficiency: number;
+  comfortLevel: number;
   startDate: string;
+  isActive: boolean;
+  endDate?: string;
+  favorite: boolean;
 };
 
 type WorkExperience = {
