@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import styles from "@/app/resume/styles.module.css";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
 
 const ResumeHeader = ({ roles }: { roles: string[] }) => {
   const [position, setPosition] = useState<number>(0);
