@@ -13,7 +13,7 @@ const Switch = React.forwardRef<
     className={cn(
       "border-[--color-dark] focus-visible:ring-[--color-light] data-[state=checked]:bg-[--color-darkest] data-[state=unchecked]:bg-[--color-black]",
       "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
-      "disabled:cursor-not-allowed disabled:border-[--color-darkest]",
+      "disabled:cursor-not-allowed disabled:border-[--color-darkest] disabled:data-[state=checked]:bg-[--color-black]",
       className,
     )}
     {...props}

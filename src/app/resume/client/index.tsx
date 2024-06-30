@@ -13,6 +13,7 @@ import { Switch } from "@/components/ui/switch";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import type {
   Resume,
+  WorkExperience,
   ResumeSkill as ResumeSkillType,
 } from "@/types/generics.types";
 import {
@@ -40,7 +41,11 @@ const BREADCRUMBS = [
   },
 ] as Breadcrumb[];
 
-const SORTER = (value: SortBy) => (i) => {
+const SORTER = (value: SortBy) => (i: ModifiedSkill) => {
+  if (value === "default") {
+    return i;
+  }
+
   return ["boolean", "number"].includes(typeof i[value])
     ? i[value]
     : (i[value] as string).toLowerCase();
@@ -57,10 +62,10 @@ const ResumeClient = ({
   resumeSkills: ModifiedSkill[];
 }) => {
   const [sortBy, setSortBy] = useState<SortBy>("default");
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
   const [skills, setSkills] = useState<ModifiedSkill[]>(resumeSkills);
 
-  const experiences = workExperience.toReversed();
+  const experiences = workExperience.toReversed() as WorkExperience[];
   const matches = resumeBio.match(/{{(.*?)}}/);
   const professionalExperience = Array.isArray(matches)
     ? yearsOfExperience(matches[1].split(":")[1])
@@ -68,12 +73,13 @@ const ResumeClient = ({
 
   const handleSort = (value: SortBy) => {
     setSortBy(value);
-    setIsChecked(false);
 
     setSkills((current) => {
       return value === "default"
         ? resumeSkills
-        : sort(current).asc([SORTER(value)]);
+        : isChecked
+          ? sort(current).asc([SORTER(value)])
+          : sort(current).desc([SORTER(value)]);
     });
   };
 
@@ -82,8 +88,8 @@ const ResumeClient = ({
 
     setSkills((current) => {
       return value
-        ? sort(current).desc([SORTER(sortBy)])
-        : sort(current).asc([SORTER(sortBy)]);
+        ? sort(current).asc([SORTER(sortBy)])
+        : sort(current).desc([SORTER(sortBy)]);
     });
   };
 
@@ -142,7 +148,7 @@ const ResumeClient = ({
                 </SelectContent>
                 <div className="flex justify-between items-center p-2">
                   <span className="text-2xs font-semibold text-[--color-medium-light]">
-                    asc
+                    desc
                   </span>
                   <Switch
                     checked={isChecked}
@@ -150,7 +156,7 @@ const ResumeClient = ({
                     disabled={sortBy === "default"}
                   />
                   <span className="text-2xs font-semibold text-[--color-medium-light]">
-                    desc
+                    asc
                   </span>
                 </div>
               </Select>

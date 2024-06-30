@@ -1,8 +1,8 @@
-import type { Viewport } from "next";
 import type { ReactNode } from "react";
-import { Fira_Code, Inter } from "next/font/google";
+import type { Viewport } from "next";
 import Header from "@/components/menus/header";
 import Footer from "@/components/footer/footer";
+import { Fira_Code, Inter } from "next/font/google";
 
 import "./tailwind.css";
 
