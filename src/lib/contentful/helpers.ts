@@ -31,7 +31,6 @@ const PATHS = Object.entries(PATHS_OBJ).reduce(
 ) as Record<keyof typeof PATHS_OBJ, string>;
 
 const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
-  console.log("fetcher url", url);
   return fetch(url, {
     headers: new Headers({
       Authorization: `Bearer ${API_KEY}`,
@@ -97,8 +96,6 @@ const getEntriesByType = async <GenericType extends Record<string, any>>(
     const resp = await fetcher(
       `${PATHS.entries}?${setQueryParams(searchParams)}`,
     );
-
-    console.dir(resp, { depth: null });
 
     response.pagination = {
       total: resp.total,

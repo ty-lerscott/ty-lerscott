@@ -1,3 +1,16 @@
+.Skills {
+}
+
+.SelectWrapper {
+    @apply border-b-2 border-[--color-dark];
+    @apply grid grid-cols-[5fr_4fr];
+}
+
+.SkillsList {
+    @apply flex flex-col scrollbar-hide overflow-y-scroll;
+    @apply max-h-[64.5rem];
+}
+
 .Skill {
     @apply even:bg-[--color-darkest] py-3 px-4;
 

@@ -1,5 +1,6 @@
 .Header {
-    @apply border-2 border-[--color-dark] p-4 text-center;
+    @apply border-[--color-dark];
+    @apply border-2 border-b-0 p-4 text-center;
 
     .Wrapper {
         @apply relative;

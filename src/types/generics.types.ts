@@ -10,6 +10,12 @@ export type Link = LinkProps & {
   href: string;
 };
 
+export type SocialLink = {
+  href: string;
+  type: "socialLink";
+  brand: "Instagram" | "Github" | "LinkedIn";
+};
+
 type HeaderTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export type Header = {
@@ -29,7 +35,7 @@ export type Tag = {
 
 export type Menu = {
   name: string;
-  body: Link[];
+  body: (Link | SocialLink)[];
 };
 
 export type PageParams = {
@@ -83,11 +89,7 @@ export type Quote = {
   author?: string;
 };
 
-export type Default = {
-  type: "default";
-};
-
-export const codeSyntax = {
+export const CodeSyntax = {
   typescript: "typescript",
   javascript: "javascript",
   css: "css",
@@ -100,7 +102,7 @@ export type Code = {
   text: string;
   header?: string;
   subheader?: string;
-  syntax: keyof typeof codeSyntax;
+  syntax: keyof typeof CodeSyntax;
 };
 
 export type TableRow = {
@@ -129,8 +131,7 @@ export type Body =
   | Quote
   | Table
   | Header
-  | Separator
-  | Default;
+  | Separator;
 
 export type Page = {
   slug: string;
@@ -160,12 +161,6 @@ export type WorkExperience = {
   startDate: string;
   endDate?: string;
   body: (Header | Text)[];
-};
-
-export type WorkExperiences = {
-  name: string;
-  type: "workExperiences";
-  experiences: WorkExperience[];
 };
 
 export type Resume = Page & {

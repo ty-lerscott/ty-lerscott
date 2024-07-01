@@ -7,11 +7,12 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import type { Link as LinkType } from "@/types/generics.types";
 
 import styles from "./styles.module.css";
 
 const HeaderMenu = async () => {
-  const menuItems = await getMenu();
+  const menuItems = (await getMenu()) as LinkType[];
 
   if (!menuItems) return null;
 

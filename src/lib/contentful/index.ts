@@ -1,4 +1,4 @@
-import { PageType, Entry } from "@/types/contentful.types";
+import { PageType } from "@/types/contentful.types";
 import { getEntriesByType, getEntryById } from "@/lib/contentful/helpers";
 import type {
   Page,
@@ -7,8 +7,10 @@ import type {
   Link,
   List,
   Table,
+  Resume,
+  Header,
   TableRow,
-  WorkExperiences,
+  WorkExperience,
 } from "@/types/generics.types";
 
 const getMenu = async (name: string = "Header") => {
@@ -74,7 +76,7 @@ const getPost = async (slug: string) => {
       "fields.publishDate",
     ],
   });
-  console.dir(post, { depth: null });
+
   // if (!post?.body) {
   //   console.log(post);
   //   throw new Error("Post body is empty");
@@ -158,6 +160,22 @@ const getPage = async <Type extends Record<string, any> = Page>(
       "fields.workExperience",
     ],
   });
+
+  // I dont like having to normalize an empty array for this if the API doesnt respond properly
+  if (type === "resume") {
+    const newData = data as unknown as Resume;
+    newData.workExperience =
+      Array.isArray(data.workExperience) && data.workExperience.length
+        ? data.workExperience
+        : ([] as WorkExperience[]);
+
+    newData.education =
+      Array.isArray(data.education) && data.education.length
+        ? data.education
+        : ([] as Header[]);
+
+    return newData;
+  }
 
   return data as Type;
 };

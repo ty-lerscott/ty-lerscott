@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles/header.module.css";
+import type { Body, Text } from "@/types/generics.types";
 import { motion, useAnimation } from "framer-motion";
 
-const Header = ({ roles }: { roles: string[] }) => {
+const Header = ({ body }: { body: Body[] }) => {
   const [position, setPosition] = useState<number>(0);
   const controls = useAnimation();
+  const roles = body.map((item) => (item as Text).text) as string[];
 
   useEffect(() => {
     controls.set({ top: "0px", opacity: 1 });

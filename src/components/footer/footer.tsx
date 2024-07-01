@@ -9,7 +9,7 @@ const Footer = () => {
     <div className="w-full mt-8" data-testid="Footer">
       <Separator />
       <footer className={styles.Footer}>
-        <span className="text-xs">
+        <span className="text-xs text-[--color-dark]">
           Copyright &copy; {year} | All rights reserved.
         </span>
       </footer>

@@ -84,6 +84,8 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
     {} as Record<string, any>,
   );
 
+  // i'm not a huge fan of all this looping, I'd like the data to come back in a more structured way
+  // lookup up Directus as an alternative
   const normalizedItems = items.map((item) => {
     return {
       ...item.fields,
