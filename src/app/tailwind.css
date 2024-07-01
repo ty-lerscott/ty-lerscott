@@ -28,10 +28,15 @@
 }
 
 .Body {
-  @apply grid min-h-screen grid-rows-[auto_1fr_auto] bg-[--color-black] text-[--color-lighter];
+  @apply grid min-h-screen grid-rows-[auto_1fr_auto] ;
+  @apply bg-[--color-black] text-[--color-medium-light];
   @apply selection:text-[--color-darkest] selection:bg-[--color-medium];
+}
 
-  .Main {
-    @apply container max-w-screen-md min-h-full px-4 pt-4;
+.Main {
+  @apply container max-w-screen-md min-h-full p-4;
+
+  &>div {
+    @apply flex flex-col gap-4;
   }
 }

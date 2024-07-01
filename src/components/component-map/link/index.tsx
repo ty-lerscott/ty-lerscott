@@ -11,7 +11,7 @@ const Link = ({
   external,
   className,
   ...rest
-}: Omit<LinkType, "type"> & { className?: string }) => {
+}: LinkType & { className?: string }) => {
   const props = {
     ...rest,
     ...(external && {

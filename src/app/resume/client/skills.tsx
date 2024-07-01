@@ -5,11 +5,7 @@ import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import SectionHeader from "../components/section-header";
 
-import type {
-  Resume,
-  ResumeSkill as ResumeSkillType,
-  ResumeSkill,
-} from "@/types/generics.types";
+import type { ResumeSkill } from "@/types/generics.types";
 import {
   Select,
   SelectItem,
@@ -23,7 +19,7 @@ import styles from "./styles/skills.module.css";
 
 type SortBy = "name" | "comfortLevel" | "years" | "favorite" | "default";
 
-type ModifiedSkill = ResumeSkillType & { years: string };
+type ModifiedSkill = ResumeSkill & { years: string };
 
 const SORTER = (value: SortBy) => (i: ModifiedSkill) => {
   if (value === "default") {
@@ -50,12 +46,7 @@ const SkillRow = ({
   );
 };
 
-const Skill = ({
-  name,
-  years,
-  favorite,
-  comfortLevel,
-}: ResumeSkill & { years: string }) => {
+const Skill = ({ name, years, favorite, comfortLevel }: ModifiedSkill) => {
   return (
     <div className={styles.Skill}>
       <p className={styles.SkillHeader}>
@@ -96,7 +87,7 @@ const Skills = ({ skills }: { skills: ModifiedSkill[] }) => {
   };
 
   return (
-    <div data-testid="Skills" className={styles.Skills}>
+    <>
       <SectionHeader header="Skills" />
       <div className={styles.SelectWrapper}>
         <Select onValueChange={handleSort}>
@@ -131,7 +122,7 @@ const Skills = ({ skills }: { skills: ModifiedSkill[] }) => {
           return <Skill {...props} key={props.name} />;
         })}
       </div>
-    </div>
+    </>
   );
 };
 

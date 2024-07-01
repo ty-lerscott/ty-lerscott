@@ -12,15 +12,9 @@
         @apply text-[--color-lighter];
     }
 
-    &:nth-of-type(odd) .ExperienceHeader {
-        @apply text-[--color-medium-light];
-    }
     &:nth-of-type(odd) .ExperienceSubheader,
     &:nth-of-type(odd) .BodySubheader {
         @apply text-[--color-dark];
-    }
-    &:nth-of-type(odd) .Body {
-        @apply text-[--color-medium-light];
     }
 }
 
@@ -33,11 +27,11 @@
 }
 
 .Title {
-    @apply leading-none tracking-wide font-semibold;
+    @apply leading-none;
 }
 
 .Date {
-    @apply text-xs;
+    @apply text-xs leading-none;
 }
 
 .ExperienceSubheader {

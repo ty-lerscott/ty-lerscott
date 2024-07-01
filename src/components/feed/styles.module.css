@@ -1,18 +1,29 @@
 .Posts {
-    @apply flex flex-col gap-8 mb-4;
-
-    .Post {
-        @apply flex flex-col gap-1;
-    }
-
-    .PostHeader {
-        @apply mb-1.5;
-    }
-
-    .PostDate {
-        @apply flex items-center gap-1.5 mb-0.5;
-    }
+    @apply flex flex-col gap-4
 }
 
+.Header {
+    /*@apply text-2xl;*/
+}
 
+.Post {
+    @apply flex flex-col;
+}
+
+.Link {
+    @apply py-1 pr-1 inline-block w-auto;
+}
+
+.Date {
+    @apply text-[--color-medium];
+    @apply flex items-center gap-2 text-sm my-1 leading-none;
+}
+
+.Calendar {
+    @apply size-3;
+}
+
+.Description {
+    @apply text-sm;
+}
 

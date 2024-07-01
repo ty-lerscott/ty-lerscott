@@ -23,7 +23,6 @@
 }
 
 .About {
-    @apply text-[--color-medium-light];
     @apply p-4 text-2xs tracking-widest text-center leading-3;
 }
 

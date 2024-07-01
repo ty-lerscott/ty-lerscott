@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./styles/header.module.css";
-import type { Body, Text } from "@/types/generics.types";
 import { motion, useAnimation } from "framer-motion";
+import type { Body, Text } from "@/types/generics.types";
+
+import styles from "./styles/header.module.css";
 
 const Header = ({ body }: { body: Body[] }) => {
   const [position, setPosition] = useState<number>(0);

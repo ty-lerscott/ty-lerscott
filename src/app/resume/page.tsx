@@ -75,48 +75,52 @@ const Resume = async () => {
   return (
     <div data-testid="Page-Resume">
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
-      <Header body={body} />
-      <div data-testid="ResumeBody" className={styles.ResumeBody}>
-        <div data-testid="Experiences" className={styles.Experiences}>
-          {experiences.length ? (
-            <>
-              <SectionHeader header="Experience" />
-              <div className={styles.ExperienceList}>
-                {experiences.map((exp) => {
-                  return <Experience key={exp.name} {...exp} />;
-                })}
-              </div>
-            </>
-          ) : null}
+      <div>
+        <Header body={body} />
+        <div data-testid="ResumeBody" className={styles.ResumeBody}>
+          <div data-testid="Experiences" className={styles.Experiences}>
+            {experiences.length ? (
+              <>
+                <SectionHeader header="Experience" />
+                <div className={styles.ExperienceList}>
+                  {experiences.map((exp) => {
+                    return <Experience key={exp.name} {...exp} />;
+                  })}
+                </div>
+              </>
+            ) : null}
 
-          {education.length ? (
-            <>
-              <SectionHeader header="Education" />
-              <div className={styles.EducationList}>
-                {education.map((props) => {
-                  return <Education {...props} key={props.header as string} />;
-                })}
-              </div>
-            </>
-          ) : null}
-        </div>
-
-        <div data-testid="Sidebar" className={styles.Sidebar}>
-          <SectionHeader header="About" />
-          <p className={styles.About}>
-            {resumeBio.replace(/{{(.*?)}}/, professionalExperience)}
-          </p>
-          <div data-testid="Contact" className={styles.Contact}>
-            <SectionHeader header="Contact" />
-            <div className="p-4">
-              <p className={styles.ContactRow}>607 882 0531</p>
-              <p className={cn(styles.ContactRow, "mt-1")}>ty@lerscott.com</p>
-              <p className={cn(styles.ContactRow, "mt-1")}>
-                https://ty.lerscott.com
-              </p>
-            </div>
+            {education.length ? (
+              <>
+                <SectionHeader header="Education" />
+                <div className={styles.EducationList}>
+                  {education.map((props) => {
+                    return (
+                      <Education {...props} key={props.header as string} />
+                    );
+                  })}
+                </div>
+              </>
+            ) : null}
           </div>
-          <Skills skills={skills} />
+
+          <div data-testid="Sidebar" className={styles.Sidebar}>
+            <SectionHeader header="About" />
+            <p className={styles.About}>
+              {resumeBio.replace(/{{(.*?)}}/, professionalExperience)}
+            </p>
+            <div data-testid="Contact" className={styles.Contact}>
+              <SectionHeader header="Contact" />
+              <div className="p-4">
+                <p className={styles.ContactRow}>607 882 0531</p>
+                <p className={cn(styles.ContactRow, "mt-1")}>ty@lerscott.com</p>
+                <p className={cn(styles.ContactRow, "mt-1")}>
+                  https://ty.lerscott.com
+                </p>
+              </div>
+            </div>
+            <Skills skills={skills} />
+          </div>
         </div>
       </div>
     </div>

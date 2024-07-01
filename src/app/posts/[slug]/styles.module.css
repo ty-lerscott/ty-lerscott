@@ -1,7 +1,12 @@
+.PostPage {
+    @apply flex flex-col gap-4;
+}
+
 .Subheader {
-    @apply flex items-center gap-2 mb-2 mt-1;
+    @apply text-[--color-medium];
+    @apply flex items-center gap-2 mt-1;
 }
 
 .PostImage {
-    @apply w-full h-[24rem] bg-no-repeat bg-cover mb-4;
+    @apply w-full h-[24rem] bg-no-repeat bg-cover;
 }

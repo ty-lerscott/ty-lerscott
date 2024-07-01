@@ -15,7 +15,7 @@ export type Breadcrumb = {
 
 const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) => {
   return (
-    <div className="mb-4" data-testid="Breadcrumbs">
+    <div data-testid="Breadcrumbs">
       <Breadcrumb>
         <BreadcrumbList>
           {breadcrumbs.map(({ href, title }, index) => {
@@ -23,9 +23,7 @@ const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) => {
               <Fragment key={title}>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href={href} className="Link">
-                      {title}
-                    </Link>
+                    <Link href={href}>{title}</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 {index !== breadcrumbs.length - 1 ? (

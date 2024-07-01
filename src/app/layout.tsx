@@ -1,23 +1,23 @@
-import type { ReactNode } from "react";
 import type { Viewport } from "next";
+import type { ReactNode } from "react";
 import Header from "@/components/menus/header";
 import Footer from "@/components/footer/footer";
-import { Fira_Code, Inter } from "next/font/google";
+import { Zilla_Slab, Inter } from "next/font/google";
 
 import "./tailwind.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "600"],
   style: ["normal"],
   variable: "--font-inter",
 });
 
-const fira = Fira_Code({
+const zillaSlab = Zilla_Slab({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal"],
-  variable: "--font-fira-code",
+  weight: ["300", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-zilla-slab",
 });
 
 export const viewport: Viewport = {
@@ -34,7 +34,7 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${fira.variable} Body`}>
+      <body className={`${inter.className} ${zillaSlab.variable} Body`}>
         <Header />
 
         <main className="Main">{children}</main>

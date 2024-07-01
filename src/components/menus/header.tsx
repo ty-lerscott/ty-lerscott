@@ -25,7 +25,9 @@ const HeaderMenu = async () => {
             {menuItems.map(({ text, href }) => (
               <NavigationMenuItem key={`menuItem-${text}`}>
                 <Link href={href} legacyBehavior passHref>
-                  <NavigationMenuLink>{text}</NavigationMenuLink>
+                  <NavigationMenuLink className={styles.Link}>
+                    {text}
+                  </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             ))}

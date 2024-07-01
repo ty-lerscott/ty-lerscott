@@ -8,7 +8,7 @@
     }
 
     .Name {
-        @apply text-3xl uppercase border-2 border-[--color-dark] w-max py-6 px-10 tracking-wide;
+        @apply uppercase border-2 border-[--color-dark] w-max py-6 px-10;
     }
 
     .AnimatedTextWrapper {
@@ -17,7 +17,7 @@
 
     .AnimatedText {
         @apply absolute bottom-0;
-        @apply bg-[--color-black] text-[--color-medium-light];
+        @apply bg-[--color-black];
         @apply text-lg font-semibold px-4 tracking-widest relative;
     }
 }

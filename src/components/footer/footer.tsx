@@ -6,10 +6,10 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="w-full mt-8" data-testid="Footer">
+    <div className="w-full" data-testid="Footer">
       <Separator />
       <footer className={styles.Footer}>
-        <span className="text-xs text-[--color-dark]">
+        <span className="text-xs ">
           Copyright &copy; {year} | All rights reserved.
         </span>
       </footer>

@@ -26,22 +26,17 @@ const Home = async () => {
 
   return (
     <div data-testid="Page-Home">
-      <section data-testid="blurb" className="flex flex-col gap-2">
+      <section data-testid="blurb" className="flex flex-col gap-4">
         {(page.body || []).map((item) => {
-          const { tag, text } = item as TextType;
+          const props = item as TextType;
 
           return (
-            <Text
-              tag={tag}
-              text={text}
-              className="text-sm"
-              key={`blurb-${text}`}
-            />
+            <Text {...props} className="text-sm" key={`blurb-${props.text}`} />
           );
         })}
       </section>
 
-      <Separator className="my-8" />
+      <Separator />
 
       <RecentPosts>
         <div className="flex justify-center">

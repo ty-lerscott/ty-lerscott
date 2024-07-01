@@ -26,7 +26,7 @@ const Experience = ({
         className={styles.ExperienceHeaderWrapper}
       >
         <div className={styles.ExperienceHeader}>
-          <small className={styles.Title}>{title}</small>
+          <h5 className={styles.Title}>{title}</h5>
           <span className={styles.Date}>{date}</span>
         </div>
         <span className={styles.ExperienceSubheader}>{located}</span>
