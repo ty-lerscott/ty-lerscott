@@ -1,6 +1,22 @@
 import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
-import newColors from "./colors";
+import newColors, { RANGE } from "./colors";
+
+const extractVars = (obj, prefix) => {
+  return Object.keys(obj).reduce((vars, key, index) => {
+    const value = obj[key];
+    const colorKey = prefix === "color" ? RANGE[index] : key;
+    const variable =
+      key === "DEFAULT" ? `--${prefix}` : `--${prefix}-${colorKey}`;
+
+    const newVars =
+      typeof value === "string"
+        ? { [variable]: value }
+        : extractVars(value, prefix);
+
+    return { ...vars, ...newVars };
+  }, {});
+};
 
 const config = {
   prefix: "",
@@ -28,9 +44,9 @@ const config = {
     },
     extend: {
       textShadow: {
-        sm: "0 1px 2px var(--shadow)",
-        DEFAULT: "0 2px 4px var(--shadow)",
-        lg: "0 8px 16px var(--shadow)",
+        sm: "0 1px 2px var(--color-deep)",
+        DEFAULT: "0 2px 4px var(--color-deep)",
+        lg: "0 8px 16px var(--color-deep)",
       },
       fontSize: {
         "2xs": "0.625rem",
@@ -124,6 +140,15 @@ const config = {
         },
         { values: theme("textShadow") },
       );
+    }),
+    plugin(({ addUtilities, theme }) => {
+      addUtilities({
+        ":root": {
+          ...extractVars(theme("spacing"), "spacing"),
+          // ...extractVars(theme("w"), "", "w"),
+          ...extractVars(theme("colors.primary"), "color"),
+        },
+      });
     }),
   ],
 };

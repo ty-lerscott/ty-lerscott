@@ -156,4 +156,18 @@ const colors = {
   },
 } as Record<TagClassesType, Record<string | number, string>>;
 
+export const RANGE = [
+  "lightest",
+  "lighter",
+  "light",
+  "soft",
+  "medium-light",
+  "medium",
+  "medium-dark",
+  "dark",
+  "darker",
+  "darkest",
+  "deep",
+] as const;
+
 export default colors;

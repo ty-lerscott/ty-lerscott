@@ -73,6 +73,13 @@ const getPost = async (slug: string) => {
     ],
   });
 
+  if (
+    !Array.isArray(post.tags) ||
+    (Array.isArray(post.tags) && !post.tags.length)
+  ) {
+    post.tags = [];
+  }
+
   return post;
 };
 

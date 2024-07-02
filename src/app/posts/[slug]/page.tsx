@@ -64,11 +64,17 @@ const Post = async ({ params: { slug } }: PageParams) => {
         }
       />
 
-      <Tags tags={tags} />
+      {tags.length ? <Tags tags={tags} /> : null}
 
       {image ? (
         <div className={styles.Image}>
-          <Image src={`https:${image.url}`} alt={image.title} fill />
+          <Image
+            fill
+            priority
+            src={`https:${image.url}`}
+            alt={image.description || image.title}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
       ) : null}
 

@@ -53,6 +53,7 @@ export type PageParams = {
 export type Image = {
   title: string;
   url: string;
+  description: string;
   details: {
     size: number;
     image: {
