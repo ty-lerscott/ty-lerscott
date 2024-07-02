@@ -4,6 +4,7 @@ import Header from "@/components/menus/header";
 import Footer from "@/components/footer/footer";
 import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./tailwind.css";
 
@@ -42,6 +43,7 @@ const RootLayout = async ({
 
         <Footer />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
