@@ -4,24 +4,22 @@
 
 @layer base {
   :root {
-    ul > :not([hidden]) ~ :not([hidden]) {
-      @apply my-[inherit];
-    }
+    --color-text-primary: var(--color-soft);
+    --color-text-secondary: var(--color-medium);
+    --color-text-secondary-hover: var(--color-soft);
 
-    ul:not([class]) li :first-child {
-      @apply -ml-2;
-    }
+    --color-text-primary-on-light: var(--color-light);
+    --color-text-secondary-on-light: var(--color-medium);
+    --color-text-secondary-on-light-hover: var(--color-light);
 
-    ol:not([class]) li :first-child {
-      @apply ml-1;
-    }
+    --color-diminish: var(--color-medium-dark);
   }
 }
 
 .Body {
   @apply grid min-h-screen grid-rows-[auto_1fr_auto] ;
-  @apply bg-[--color-darkest] text-[--color-medium-light];
-  @apply selection:text-[--color-darkest] selection:bg-[--color-medium];
+  @apply bg-[--color-darkest] text-[--color-text-primary];
+  @apply selection:text-[--color-deep] selection:bg-[--color-medium-light];
 }
 
 .Main {

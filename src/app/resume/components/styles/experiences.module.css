@@ -1,25 +1,27 @@
 .Experience {
-    @apply even:bg-[--color-darkest] p-4;
+    @apply even:bg-[--color-darker] p-4 flex flex-col gap-4;
 
+    &:nth-of-type(odd) .Body,
+    &:nth-of-type(odd) .ExperienceHeader {
+        @apply text-[--color-text-primary];
+    }
+    &:nth-of-type(odd) .BodySubheader,
+    &:nth-of-type(odd) .ExperienceSubheader {
+        @apply text-[--color-text-secondary];
+    }
+
+    &:nth-of-type(even) .Body,
     &:nth-of-type(even) .ExperienceHeader {
-        @apply text-[--color-lighter];
+        @apply text-[--color-text-primary-on-light];
     }
-    &:nth-of-type(even) .ExperienceSubheader,
-    &:nth-of-type(even) .BodySubheader {
-        @apply text-[--color-medium];
-    }
-    &:nth-of-type(even) .Body {
-        @apply text-[--color-lighter];
-    }
-
-    &:nth-of-type(odd) .ExperienceSubheader,
-    &:nth-of-type(odd) .BodySubheader {
-        @apply text-[--color-dark];
+    &:nth-of-type(even) .BodySubheader,
+    &:nth-of-type(even) .ExperienceSubheader {
+        @apply text-[--color-text-secondary-on-light];
     }
 }
 
 .ExperienceHeaderWrapper {
-    @apply leading-none mb-3;
+    @apply leading-none;
 }
 
 .ExperienceHeader {
@@ -35,7 +37,7 @@
 }
 
 .ExperienceSubheader {
-    @apply text-xs leading-none;
+    @apply text-xs leading-none mt-1;
 }
 
 .BodyList {

@@ -1,14 +1,14 @@
 .token.keyword,
 .token.type{
-    color: var(--color-white);
+    color: var(--color-lightest);
 }
 
 .token.literal-property {
-    color: var(--color-light);
+    color: var(--color-soft);
 }
 
 .token.endline {
-    color: var(--color-white);
+    color: var(--color-lightest);
 }
 
 

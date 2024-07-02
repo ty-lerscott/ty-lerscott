@@ -3,8 +3,8 @@
 }
 
 .Head {
-    @apply bg-[--color-dark] text-[--color-lightest];
-    @apply text-xs uppercase filter-none;
+    @apply bg-[--color-diminish] text-[--color-lighter];
+    @apply text-xs uppercase tracking-wider;
 }
 
 .Column {
@@ -12,8 +12,8 @@
 }
 
 .Row {
-    @apply text-[--color-light];
-    @apply odd:bg-[--color-darkest] even:bg-[--color-darker];
+    @apply odd:text-[--color-text-primary] even:text-[--color-text-primary-on-light];
+    @apply odd:bg-[--color-darker] even:bg-[--color-dark];
 }
 
 .Cell {

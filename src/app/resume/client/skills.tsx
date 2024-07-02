@@ -127,7 +127,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
       <SectionHeader header="Skills" />
       <div className={styles.SelectWrapper}>
         <Select onValueChange={handleSort}>
-          <SelectTrigger className="border-t-0 border-b-0 border-l-0 border-r-2 border-r-[--color-dark]">
+          <SelectTrigger className="border-t-0 border-b-0 border-l-0 border-r-2 border-r-[--color-medium-dark]">
             <SelectValue placeholder="Default" className="text-sm" />
           </SelectTrigger>
 
@@ -139,7 +139,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
             <SelectItem value="comfortLevel">Comfort Level</SelectItem>
           </SelectContent>
           <div className="flex justify-between items-center p-2">
-            <span className="text-2xs font-semibold text-[--color-medium-light]">
+            <span className="text-2xs font-semibold text-[--color-text-secondary]">
               asc
             </span>
             <Switch
@@ -147,7 +147,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
               onCheckedChange={toggleOrder}
               disabled={sortBy === "default"}
             />
-            <span className="text-2xs font-semibold text-[--color-medium-light]">
+            <span className="text-2xs font-semibold text-[--color-text-secondary]">
               desc
             </span>
           </div>

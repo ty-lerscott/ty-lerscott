@@ -1,5 +1,5 @@
 .Header {
-    @apply border-[--color-dark];
+    @apply border-[--color-diminish];
     @apply border-2 border-b-0 p-4 text-center;
 
     .Wrapper {
@@ -8,16 +8,16 @@
     }
 
     .Name {
-        @apply uppercase border-2 border-[--color-dark] w-max py-6 px-10;
+        @apply uppercase border-2 border-[--color-diminish] w-max py-6 px-10;
     }
 
     .AnimatedTextWrapper {
-        @apply absolute bottom-3.5 bg-[--color-black];
+        @apply absolute bottom-3.5 bg-[--color-darkest];
     }
 
     .AnimatedText {
         @apply absolute bottom-0;
-        @apply bg-[--color-black];
+        @apply bg-[--color-darkest] text-[--color-diminish];
         @apply text-lg font-semibold px-4 tracking-widest relative;
     }
 }

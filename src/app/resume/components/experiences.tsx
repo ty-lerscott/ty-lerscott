@@ -21,7 +21,7 @@ const Experience = ({
                               : "Present"
                           }`;
   return (
-    <div data-testid="Experiences" className={styles.Experience}>
+    <div data-testid="Experience" className={styles.Experience}>
       <div
         data-testid="ExperienceHeader"
         className={styles.ExperienceHeaderWrapper}
@@ -30,7 +30,7 @@ const Experience = ({
           <h5 className={styles.Title}>{title}</h5>
           <span className={styles.Date}>{date}</span>
         </div>
-        <span className={styles.ExperienceSubheader}>{located}</span>
+        <p className={styles.ExperienceSubheader}>{located}</p>
       </div>
       <div className={styles.BodyList}>
         {body.map((bodyItem, index) => {

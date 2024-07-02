@@ -1,18 +1,23 @@
-import type { Header } from "@/types/generics.types";
+import Header from "@/components/component-map/header";
 import SectionHeader from "@/app/resume/components/section-header";
+import type { Header as HeaderProps } from "@/types/generics.types";
 
 import styles from "./styles/education.module.css";
 
-const EducationItem = ({ header, subheader }: Header) => {
+const EducationItem = ({ header, subheader }: HeaderProps) => {
   return (
     <div className={styles.Education}>
-      <p className={styles.EducationHeader}>{header}</p>
-      <p className={styles.EducationSubheader}>{subheader}</p>
+      <Header
+        header={header}
+        subheader={subheader}
+        className={styles.EducationHeader}
+        subClassName={styles.EducationSubheader}
+      />
     </div>
   );
 };
 
-const Education = ({ education }: { education: Header[] }) => {
+const Education = ({ education }: { education: HeaderProps[] }) => {
   return (
     <>
       <SectionHeader header="Education" />

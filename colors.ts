@@ -159,6 +159,7 @@ const colors = {
 export const RANGE = [
   "lightest",
   "lighter",
+  //   text no lighter than light
   "light",
   "soft",
   "medium-light",

@@ -1,12 +1,12 @@
 .QuoteWrapper {
-    @apply border-l-4 border-[--color-dark] bg-[--color-darkest] py-2 px-4 rounded;
+    @apply border-l-4 border-[--color-diminish] bg-[--color-darker] py-2 px-4 rounded;
 }
 
 .Quote {
-    @apply flex;
+    @apply grid grid-cols-[auto_1fr_auto];
 
     &>svg {
-        @apply text-[--color-dark] size-8 shrink-0;
+        @apply text-[--color-dark] size-8 shrink;
     }
 
     &>svg:first-of-type {
@@ -14,8 +14,8 @@
     }
 
     .Text {
-        @apply text-[--color-lighter];
-        @apply p-4 text-xl font-bold tracking-wide text-center;
+        @apply text-[--color-primary-on-light];
+        @apply p-4 text-xl font-bold tracking-wide text-center shrink-0;
     }
 
     &>svg:last-of-type {
@@ -24,5 +24,5 @@
 }
 
 .Author {
-    @apply mt-2 flex justify-end italic text-[--color-dark];
+    @apply mt-2 flex justify-end italic text-[--color-diminish];
 }

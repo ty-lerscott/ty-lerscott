@@ -2,7 +2,10 @@ import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 import newColors, { RANGE } from "./colors";
 
-const extractVars = (obj, prefix) => {
+const extractVars = (
+  obj: Record<any, any>,
+  prefix: string,
+): Record<string, string> => {
   return Object.keys(obj).reduce((vars, key, index) => {
     const value = obj[key];
     const colorKey = prefix === "color" ? RANGE[index] : key;
@@ -82,53 +85,59 @@ const config = {
         },
         h1: {
           letterSpacing: "0.05em",
-          color: "var(--color-lighter)",
+          color: "var(--color-text-primary)",
           fontFamily: "var(--font-zilla-slab)",
           fontSize: theme("fontSize.3xl"),
           fontWeight: theme("fontWeight.medium"),
         },
         h2: {
           letterSpacing: "0.05em",
-          color: "var(--color-lighter)",
+          color: "var(--color-text-primary)",
           fontFamily: "var(--font-zilla-slab)",
           fontSize: theme("fontSize.2xl"),
           fontWeight: theme("fontWeight.medium"),
         },
         h3: {
           letterSpacing: "0.05em",
-          color: "var(--color-lighter)",
+          color: "var(--color-text-primary)",
           fontSize: theme("fontSize.xl"),
           fontFamily: "var(--font-zilla-slab)",
           fontWeight: theme("fontWeight.medium"),
         },
         h4: {
           letterSpacing: "0.05em",
-          color: "var(--color-lighter)",
+          color: "var(--color-text-primary)",
           fontSize: theme("fontSize.lg"),
           fontFamily: "var(--font-zilla-slab)",
           fontWeight: theme("fontWeight.medium"),
         },
         h5: {
           letterSpacing: "0.05em",
-          color: "var(--color-lighter)",
+          color: "var(--color-text-primary)",
           fontFamily: "var(--font-zilla-slab)",
           fontWeight: theme("fontWeight.medium"),
         },
         h6: {
           letterSpacing: "0.05em",
-          color: "var(--color-lighter)",
+          color: "var(--color-text-primary)",
           fontSize: theme("fontSize.sm"),
           fontFamily: "var(--font-zilla-slab)",
           fontWeight: theme("fontWeight.medium"),
         },
         a: {
-          "@apply transition-colors hover:text-[--color-lighter]": "",
+          "@apply transition-colors text-[--color-text-secondary] hover:text-[--color-text-secondary-hover]":
+            "",
         },
         ul: {
           "@apply space-y-1 list-disc list-inside": "",
+          "@apply [&:not([class])]:list-none": "",
+          "@apply [&>:not([hidden])~:not([hidden])]:my-[inherit]": "",
+          "@apply [&:not([class])~li:first-child]:-ml-2": "",
         },
         ol: {
           "@apply space-y-1 list-decimal list-inside": "",
+          "@apply [&:not([class])]:list-none": "",
+          "@apply [&:not([class])>li:first-child]:ml-1": "",
         },
       });
 

@@ -52,7 +52,7 @@ const Footer = async () => {
             return (
               <li key={item.brand}>
                 <Link
-                  className="block p-1 last:pr-0"
+                  className="block p-1"
                   target="_blank"
                   href={item.href}
                   rel="noopener noreferrer"

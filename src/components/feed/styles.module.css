@@ -11,16 +11,16 @@
 }
 
 .Link {
-    @apply py-1 pr-1 inline-block w-auto;
+    @apply py-1 pr-1 inline-block w-auto text-[inherit];
 }
 
 .Date {
-    @apply text-[--color-medium];
-    @apply flex items-center gap-2 text-sm my-1 leading-none;
+    @apply text-[--color-text-secondary];
+    @apply flex items-center gap-2 text-xs my-1 leading-none;
 }
 
 .Calendar {
-    @apply size-3;
+    @apply size-2.5;
 }
 
 .Description {

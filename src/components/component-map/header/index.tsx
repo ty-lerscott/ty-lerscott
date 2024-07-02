@@ -19,9 +19,11 @@ const Header = ({
   className,
   subheader,
   tag = "h2",
+  subClassName,
   wrapperClassName,
 }: Omit<HeaderType, "type"> & {
   className?: string;
+  subClassName?: string;
   wrapperClassName?: string;
 }) => {
   return (
@@ -32,7 +34,9 @@ const Header = ({
       {!subheader ? null : isValidElement(subheader) ? (
         subheader
       ) : (
-        <span className="text-[--color-dark]">{subheader}</span>
+        <span className={cn("text-[--color-text-secondary]", subClassName)}>
+          {subheader}
+        </span>
       )}
     </div>
   );

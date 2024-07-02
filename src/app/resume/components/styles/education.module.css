@@ -1,13 +1,13 @@
 .Education {
-    @apply p-4 even:border-l-2 border-[--color-dark];
+    @apply p-4 even:border-l-2 border-[--color-medium-dark];
 }
 
 .EducationHeader {
-    @apply text-sm mb-1 text-[--color-medium-light] font-semibold leading-4;
+    @apply text-sm mb-1 font-semibold leading-none tracking-widest;
 }
 
 .EducationSubheader {
-    @apply text-xs leading-none text-[--color-dark];
+    @apply text-xs leading-none text-[--color-text-secondary];
 }
 
 .EducationList {

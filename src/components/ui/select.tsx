@@ -19,7 +19,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center font-semibold justify-between border border-[--color-darker] text-[--color-medium] tracking-wider text-xs p-4 ring-offset-white placeholder:text-[--color-medium-light] text-left focus:outline-none focus:ring-2 focus:ring-[--color-medium] focus:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1",
+      "flex h-10 w-full items-center font-semibold justify-between border border-[--color-dark] text-[--color-medium] tracking-wider text-xs p-4 ring-offset-white placeholder:text-[--color-medium-light] text-left focus:outline-none focus:ring-2 focus:ring-[--color-medium] focus:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1",
       className,
     )}
     {...props}
@@ -77,7 +77,7 @@ const SelectContent = React.forwardRef<
       className={cn(
         "relative z-50 max-h-96 overflow-hidden rounded-none border shadow-md tracking-wide",
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        "bg-[--color-black] border-[--color-dark] text-[--medium-light]",
+        "bg-[--color-darkest] border-[--color-medium-dark] text-[--medium-light]",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
         className,
@@ -121,7 +121,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-default select-none items-center p-2 pl-6 text-xs outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      "focus:bg-[--color-darkest] focus:text-[--color-lightest]",
+      "focus:bg-[--color-darker] focus:text-[--color-lighter]",
       className,
     )}
     {...props}

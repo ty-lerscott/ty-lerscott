@@ -3,9 +3,10 @@
 }
 
 .BuiltWith {
-    @apply text-2xs text-[--color-dark] mt-1;
+    @apply text-2xs text-[--color-diminish] mt-1;
 }
 
 .List {
     @apply flex items-center list-none;
+    @apply [&>li:last-of-type>:first-child]:pr-0;
 }

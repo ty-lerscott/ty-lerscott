@@ -1,5 +1,5 @@
 .SelectWrapper {
-    @apply border-b-2 border-[--color-dark];
+    @apply border-b-2 border-[--color-diminish];
     @apply grid grid-cols-[5fr_4fr];
 }
 
@@ -9,25 +9,26 @@
 }
 
 .Skill {
-    @apply even:bg-[--color-darkest] py-3 px-4;
+    @apply even:bg-[--color-darker] py-3 px-4;
 
     &:nth-of-type(odd) .Svg,
-    &:nth-of-type(odd) .SkillRow {
-        @apply text-[--color-dark];
+    &:nth-of-type(odd) .SkillRow,
+    &:nth-of-type(odd) .SkillName {
+        @apply text-[--color-text-secondary];
     }
     &:nth-of-type(odd) [data-testid="separator"] {
-        @apply bg-[--color-darkest];
+        @apply bg-[--color-darker];
     }
 
     &:nth-of-type(even) .Svg,
     &:nth-of-type(even) .SkillName {
-        @apply text-[--color-light];
+        @apply text-[--color-text-primary];
     }
     &:nth-of-type(even) .SkillRow {
-        @apply text-[--color-medium];
+        @apply text-[--color-text-secondary];
     }
     &:nth-of-type(even) [data-testid="separator"] {
-        @apply bg-[--color-dark];
+        @apply bg-[--color-diminish];
     }
 
     .SkillHeader {
@@ -35,7 +36,7 @@
     }
 
     .SkillName {
-        @apply text-xs tracking-wider leading-none;
+        @apply text-xs tracking-widest leading-none;
     }
 
     .Svg {
@@ -43,7 +44,6 @@
     }
 
     .SkillRow {
-        @apply text-[--color-dark];
         @apply flex justify-between text-3xs font-semibold;
     }
 
