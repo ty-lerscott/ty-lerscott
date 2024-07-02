@@ -1,3 +1,4 @@
+import merge from "deepmerge";
 import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 import newColors, { RANGE } from "./colors";
@@ -152,11 +153,10 @@ const config = {
     }),
     plugin(({ addUtilities, theme }) => {
       addUtilities({
-        ":root": {
-          ...extractVars(theme("spacing"), "spacing"),
-          // ...extractVars(theme("w"), "", "w"),
-          ...extractVars(theme("colors.primary"), "color"),
-        },
+        ":root": merge(
+          extractVars(theme("spacing"), "spacing"),
+          extractVars(theme("colors.primary"), "color"),
+        ),
       });
     }),
   ],

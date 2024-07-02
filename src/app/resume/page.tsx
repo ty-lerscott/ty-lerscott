@@ -14,7 +14,9 @@ const About = dynamic(() => import("./components/about"));
 const Education = dynamic(() => import("./components/education"));
 const Experiences = dynamic(() => import("./components/experiences"));
 
-const getData = cache(async () => getPage<Resume>("resume"));
+const getData = cache(async () => {
+  return getPage<Resume>("resume");
+});
 
 const BREADCRUMBS = [
   {
@@ -44,7 +46,7 @@ export const generateMetadata = async () => {
   });
 };
 
-const Resume = async () => {
+export default async function Resume() {
   const { body, education, workExperience, resumeBio, resumeSkills } =
     await getData();
 
@@ -75,6 +77,4 @@ const Resume = async () => {
       </div>
     </div>
   );
-};
-
-export default Resume;
+}
