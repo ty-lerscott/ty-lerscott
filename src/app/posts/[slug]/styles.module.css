@@ -3,7 +3,7 @@
 }
 
 .Subheader {
-    @apply text-[--color-medium];
+    @apply text-[--color-dark];
     @apply flex items-center gap-2 mt-1;
 }
 

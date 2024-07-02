@@ -46,15 +46,15 @@ const setQueryParams = ({
 const setMetadata = (metadata: Metadata): Metadata => {
   return merge(
     {
+      title: "",
+      keywords: [],
+      description: "",
+      creator: "Tyler Scott",
+      authors: [{ name: "Tyler Scott" }],
       metadataBase: "https://ty-lerscott.com",
       alternates: {
         canonical: "/",
       },
-      title: "",
-      description: "",
-      keywords: [],
-      authors: [{ name: "Tyler Scott" }],
-      creator: "Tyler Scott",
     },
     metadata,
   );

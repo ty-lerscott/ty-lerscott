@@ -1,5 +1,5 @@
 import { PageType } from "@/types/contentful.types";
-import { getEntriesByType, getEntryById } from "@/lib/contentful/helpers";
+import { getEntriesByType, getEntryById } from "@/lib/contentful/api";
 import type {
   Page,
   Menu,
@@ -40,10 +40,10 @@ const getPosts = async (select?: string[], skip?: number) => {
     contentType: "post",
     order: "fields.publishDate",
     select: [
+      "fields.slug",
       "fields.title",
       "fields.description",
       "fields.publishDate",
-      "fields.slug",
     ]
       .concat(select as string[])
       .filter(Boolean),
@@ -76,6 +76,8 @@ const getPost = async (slug: string) => {
       "fields.publishDate",
     ],
   });
+
+  console.dir(post, { depth: null });
 
   // if (!post?.body) {
   //   console.log(post);

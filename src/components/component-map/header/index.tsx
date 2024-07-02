@@ -32,7 +32,7 @@ const Header = ({
       {!subheader ? null : isValidElement(subheader) ? (
         subheader
       ) : (
-        <span className="text-sm">{subheader}</span>
+        <span className="text-sm text-[--color-dark]">{subheader}</span>
       )}
     </div>
   );

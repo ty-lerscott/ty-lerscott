@@ -58,10 +58,8 @@ const Post = async ({ params: { slug } }: PageParams) => {
         header={title}
         subheader={
           <div className={styles.Subheader}>
-            <FaRegCalendar className="w-4 h-4" />
-            <span className="text-md">
-              {dayjs(publishDate).format("MMMM D, YYYY | h:mm a")}
-            </span>
+            <FaRegCalendar className="size-4" />
+            <span>{dayjs(publishDate).format("MMMM D, YYYY | h:mm a")}</span>
           </div>
         }
       />
