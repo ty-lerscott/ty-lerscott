@@ -34,7 +34,7 @@ const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
     headers: new Headers({
       Authorization: `Bearer ${API_KEY}`,
     }),
-    cache: "force-cache",
+    next: { revalidate: 60 },
   } as RequestInit).then(async (resp) => {
     const data = await resp.json();
 
