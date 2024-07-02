@@ -17,6 +17,10 @@
     --color-black:theme('colors.primary.900');
     --shadow: theme('colors.primary.950');
 
+    ul > :not([hidden]) ~ :not([hidden]) {
+      @apply my-[inherit];
+    }
+
     ul:not([class]) li :first-child {
       @apply -ml-2;
     }

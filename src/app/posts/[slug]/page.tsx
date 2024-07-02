@@ -67,15 +67,12 @@ const Post = async ({ params: { slug } }: PageParams) => {
       <Tags tags={tags} />
 
       {image ? (
-        <div
-          className={styles.PostImage}
-          style={{
-            backgroundImage: `url(${image.url})`,
-          }}
-        />
+        <div className={styles.Image}>
+          <Image src={`https:${image.url}`} alt={image.title} fill />
+        </div>
       ) : null}
 
-      {/*<ComponentMap components={body} />*/}
+      <ComponentMap components={body} />
     </div>
   );
 };

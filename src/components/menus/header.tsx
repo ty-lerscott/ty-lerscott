@@ -12,7 +12,7 @@ import type { Link as LinkType } from "@/types/generics.types";
 import styles from "./styles.module.css";
 
 const HeaderMenu = async () => {
-  const menuItems = (await getMenu()) as LinkType[];
+  const menuItems = await getMenu<LinkType>();
 
   if (!menuItems) return null;
 

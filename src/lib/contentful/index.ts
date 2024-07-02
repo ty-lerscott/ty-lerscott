@@ -1,20 +1,17 @@
 import { PageType } from "@/types/contentful.types";
-import { getEntriesByType, getEntryById } from "@/lib/contentful/api";
+import { getEntriesByType } from "@/lib/contentful/api";
 import type {
   Page,
   Menu,
   Post,
   Link,
-  List,
-  Table,
   Resume,
   Header,
-  TableRow,
   WorkExperience,
 } from "@/types/generics.types";
 
-const getMenu = async (name: string = "Header") => {
-  let menuItems = [] as Link[];
+const getMenu = async <Generic = Link>(name: string = "Header") => {
+  let menuItems = [] as Generic[];
 
   try {
     const {
@@ -24,13 +21,13 @@ const getMenu = async (name: string = "Header") => {
       contentType: "menu",
     });
 
-    return body;
+    menuItems = body as Generic[];
   } catch (err) {
     console.log(
       err instanceof Error ? `getMenu error: ${err.message}` : "Unknown Error",
     );
   }
-  return menuItems;
+  return menuItems as Generic[];
 };
 
 const getPosts = async (select?: string[], skip?: number) => {
@@ -58,9 +55,6 @@ const getPosts = async (select?: string[], skip?: number) => {
   };
 };
 
-const checkForType = (arr: any[], type: string) =>
-  arr.filter((item) => [type].includes(item.type));
-
 const getPost = async (slug: string) => {
   const { data: post } = await getEntriesByType<Post>({
     contentType: "post",
@@ -76,69 +70,6 @@ const getPost = async (slug: string) => {
       "fields.publishDate",
     ],
   });
-
-  console.dir(post, { depth: null });
-
-  // if (!post?.body) {
-  //   console.log(post);
-  //   throw new Error("Post body is empty");
-  // }
-  //
-  // if (checkForType(post.body, "list")) {
-  //   const listBody = await Promise.all(
-  //     post.body
-  //       .filter((bodyItem) => ["list"].includes(bodyItem.type))
-  //       .map((item) => {
-  //         const list = item as List;
-  //
-  //         return getEntriesByType<List>({
-  //           contentType: list.type,
-  //           name: list.name,
-  //         });
-  //       }),
-  //   );
-  //
-  //   listBody.forEach(({ data: bodyItem }) => {
-  //     const index = post.body.findIndex(
-  //       (postBodyItem) => (postBodyItem as List).name === bodyItem.name,
-  //     );
-  //     post.body[index] = {
-  //       ...(post.body[index] as List),
-  //       ...bodyItem,
-  //     };
-  //   });
-  // }
-  //
-  // if (checkForType(post.body, "table")) {
-  //   /**
-  //    *  FIX: this only allows for 1 table per post
-  //    */
-  //   const tableBody = await Promise.all(
-  //     post.body
-  //       .filter((bodyItem) => ["table"].includes(bodyItem.type))
-  //       .reduce((acc, bodyItem) => {
-  //         const table = bodyItem as Table;
-  //
-  //         table.body.forEach((item) => {
-  //           const row = item as unknown as Entry;
-  //
-  //           acc.push(getEntryById<TableRow>(row.sys.id));
-  //         });
-  //         return acc;
-  //       }, [] as Promise<TableRow>[]),
-  //   );
-  //
-  //   if (tableBody.length) {
-  //     const tableIndex = post.body.findIndex((bodyItem) =>
-  //       ["table"].includes(bodyItem.type),
-  //     );
-  //
-  //     post.body[tableIndex] = {
-  //       ...post.body[tableIndex],
-  //       body: tableBody,
-  //     } as Table;
-  //   }
-  // }
 
   return post;
 };
@@ -163,7 +94,8 @@ const getPage = async <Type extends Record<string, any> = Page>(
     ],
   });
 
-  // I dont like having to normalize an empty array for this if the API doesnt respond properly
+  // I dont like having to normalize an empty array for this if the API doesn't respond properly
+  // TODO: after moving to Directus of PocketBase
   if (type === "resume") {
     const newData = data as unknown as Resume;
     newData.workExperience =

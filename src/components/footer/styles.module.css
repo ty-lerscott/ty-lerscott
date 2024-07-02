@@ -1,3 +1,7 @@
 .Footer {
     @apply container max-w-screen-md flex items-center justify-between p-4;
 }
+
+.BuiltWith {
+    @apply py-2 px-4 container max-w-screen-md text-2xs;
+}

@@ -6,7 +6,7 @@
     @apply flex;
 
     &>svg {
-        @apply text-[--color-darker] size-8 shrink-0;
+        @apply text-[--color-dark] size-8 shrink-0;
     }
 
     &>svg:first-of-type {
@@ -14,8 +14,8 @@
     }
 
     .Text {
-        @apply text-[--color-medium];
-        @apply px-4 my-4 text-xl font-bold tracking-wide text-center;
+        @apply text-[--color-lighter];
+        @apply p-4 text-xl font-bold tracking-wide text-center;
     }
 
     &>svg:last-of-type {

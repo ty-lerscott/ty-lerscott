@@ -10,6 +10,11 @@ export type Link = LinkProps & {
   href: string;
 };
 
+export type Space = {
+  type: "space";
+  amount: "1x" | "2x" | "3x" | "4x" | "default";
+};
+
 export type SocialLink = {
   href: string;
   type: "socialLink";
@@ -131,6 +136,7 @@ export type Body =
   | Quote
   | Table
   | Header
+  | Space
   | Separator;
 
 export type Page = {

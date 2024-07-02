@@ -90,7 +90,17 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
     return {
       ...item.fields,
       ...(item.fields.body && {
-        body: item.fields.body.map(find(included)),
+        body: item.fields.body.map((bodyItem) => {
+          const item = find(included)(bodyItem);
+
+          // this only accounts for one deep,
+          // TODO: write function to recursive find and replace
+          if (Array.isArray(item.body)) {
+            item.body = item.body.map(find(included));
+          }
+
+          return item;
+        }),
       }),
       ...(item.fields.tags && {
         tags: item.fields.tags.map(find(included)),

@@ -7,6 +7,10 @@
     @apply flex items-center gap-2 mt-1;
 }
 
-.PostImage {
-    @apply w-full h-[24rem] bg-no-repeat bg-cover;
+.Image {
+    @apply relative w-full h-[24rem];
+
+    &>img {
+        @apply !w-auto;
+    }
 }

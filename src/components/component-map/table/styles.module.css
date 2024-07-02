@@ -1,9 +1,9 @@
 .Table {
-    @apply w-full rounded overflow-hidden table-fixed;
+    @apply w-full rounded overflow-hidden;
 }
 
 .Head {
-    @apply bg-[--color-dark] text-[--color-light-medium];
+    @apply bg-[--color-dark] text-[--color-lightest];
     @apply text-xs uppercase filter-none;
 }
 
