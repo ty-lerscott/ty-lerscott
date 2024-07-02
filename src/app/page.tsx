@@ -34,7 +34,7 @@ const Home = async () => {
             <Text
               {...props}
               key={`blurb-${props.text}`}
-              className={cn(/^h[123456]/i.test(item.tag) ? "" : "text-sm")}
+              className={cn(/^h[123456]/i.test(props.tag) ? "" : "text-sm")}
             />
           );
         })}

@@ -2,6 +2,7 @@ import type { Viewport } from "next";
 import type { ReactNode } from "react";
 import Header from "@/components/menus/header";
 import Footer from "@/components/footer/footer";
+import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
 
 import "./tailwind.css";
@@ -40,6 +41,7 @@ const RootLayout = async ({
         <main className="Main">{children}</main>
 
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
