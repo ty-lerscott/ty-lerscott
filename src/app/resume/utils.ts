@@ -1,2 +1,2 @@
-export const yearsOfExperience = (date: string): string =>
-  String(Number(new Date().getFullYear()) - Number(date));
+export const yearsOfExperience = (date: string): number =>
+  Number(new Date().getFullYear()) - Number(date);

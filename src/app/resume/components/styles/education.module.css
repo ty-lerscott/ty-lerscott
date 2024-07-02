@@ -9,3 +9,7 @@
 .EducationSubheader {
     @apply text-xs leading-none text-[--color-dark];
 }
+
+.EducationList {
+    @apply flex justify-between;
+}

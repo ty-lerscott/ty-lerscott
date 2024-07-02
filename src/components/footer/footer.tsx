@@ -45,7 +45,7 @@ const Footer = async () => {
         </div>
 
         <ul className={styles.List}>
-          {menuItems.map((item) => {
+          {(menuItems || []).map((item) => {
             const Icon =
               SOCIALS[item.brand.toLowerCase() as keyof typeof SOCIALS];
 

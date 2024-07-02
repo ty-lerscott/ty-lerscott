@@ -1,11 +1,15 @@
 "use client";
 
+import dayjs from "dayjs";
 import { sort } from "fast-sort";
-import { useState } from "react";
+import Index from "@/components/rating";
+import { MdFavorite } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
+import Separator from "@/components/ui/separator";
+import { yearsOfExperience } from "@/app/resume/utils";
 import SectionHeader from "../components/section-header";
-
 import type { ResumeSkill } from "@/types/generics.types";
+import { useState, type ReactNode, isValidElement } from "react";
 import {
   Select,
   SelectItem,
@@ -14,12 +18,28 @@ import {
   SelectContent,
 } from "@/components/ui/select";
 
-import { MdFavorite } from "react-icons/md";
 import styles from "./styles/skills.module.css";
 
 type SortBy = "name" | "comfortLevel" | "years" | "favorite" | "default";
 
 type ModifiedSkill = ResumeSkill & { years: string };
+
+const setSkill = (skills: ResumeSkill[]) =>
+  skills.map((item) => {
+    const start = dayjs(item.startDate);
+    const end = item.isActive || !item.endDate ? null : dayjs(item.endDate);
+    const newItem = item as ModifiedSkill;
+
+    const age = item.isActive
+      ? yearsOfExperience(start.format("YYYY"))
+      : end
+        ? end.year() - start.year()
+        : 0;
+
+    newItem.years = `${!age ? "<" : ""}${age || 1}y`;
+
+    return newItem;
+  });
 
 const SORTER = (value: SortBy) => (i: ModifiedSkill) => {
   if (value === "default") {
@@ -36,13 +56,17 @@ const SkillRow = ({
   value,
 }: {
   title: string;
-  value: number | string;
+  value: number | ReactNode;
 }) => {
   return (
-    <p className={styles.SkillRow}>
+    <div className={styles.SkillRow}>
       <span className={styles.SkillTitle}>{title}</span>
-      <span className="leading-4">{value}</span>
-    </p>
+      {isValidElement(value) ? (
+        value
+      ) : (
+        <span className={styles.SkillValue}>{value}</span>
+      )}
+    </div>
   );
 };
 
@@ -53,23 +77,28 @@ const Skill = ({ name, years, favorite, comfortLevel }: ModifiedSkill) => {
         <span className={styles.SkillName}>{name}</span>
         {favorite && <MdFavorite className={styles.Svg} />}
       </p>
-      <SkillRow value={comfortLevel} title="Comfort Level" />
+      <SkillRow
+        title="Comfort Level"
+        value={<Index rating={comfortLevel / 2} />}
+      />
+      <Separator className="h-[1px] my-1" data-testid="separator" />
       <SkillRow value={years} title="Experience" />
     </div>
   );
 };
 
-const Skills = ({ skills }: { skills: ModifiedSkill[] }) => {
+const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
   const [sortBy, setSortBy] = useState<SortBy>("default");
   const [isChecked, setIsChecked] = useState<boolean>(true);
-  const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(skills);
+  const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(setSkill(skills));
 
+  // TODO: sort by regular then alphabetize the sort
   const handleSort = (value: SortBy) => {
     setSortBy(value);
 
     setSkills((current) => {
       return value === "default"
-        ? skills
+        ? setSkill(skills)
         : isChecked
           ? sort(current).asc([SORTER(value)])
           : sort(current).desc([SORTER(value)]);
@@ -98,7 +127,7 @@ const Skills = ({ skills }: { skills: ModifiedSkill[] }) => {
           <SelectContent>
             <SelectItem value="default">Default</SelectItem>
             <SelectItem value="favorite">Preferred</SelectItem>
-            <SelectItem value="years">Years of Experience</SelectItem>
+            <SelectItem value="years">Years of Experiences</SelectItem>
             <SelectItem value="name">Alphabetical</SelectItem>
             <SelectItem value="comfortLevel">Comfort Level</SelectItem>
           </SelectContent>

@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
+import SectionHeader from "@/app/resume/components/section-header";
 import type { WorkExperience, Header, Text } from "@/types/generics.types";
 
-import styles from "./styles/experience.module.css";
+import styles from "./styles/experiences.module.css";
 
 const Experience = ({
   body,
@@ -20,7 +21,7 @@ const Experience = ({
                               : "Present"
                           }`;
   return (
-    <div data-testid="Experience" className={styles.Experience}>
+    <div data-testid="Experiences" className={styles.Experience}>
       <div
         data-testid="ExperienceHeader"
         className={styles.ExperienceHeaderWrapper}
@@ -57,4 +58,25 @@ const Experience = ({
   );
 };
 
-export default Experience;
+const Experiences = ({ experiences }: { experiences: WorkExperience[] }) => {
+  /**
+   * NOTE:
+   *      I would prefer Array.prototype.toReversed(), but that's not part of the standard yet
+   *      using slice reverse as a hacky alternative
+   *  TODO: Replace with toReversed when it's standardized
+   */
+  const ordered = experiences.slice().reverse() as WorkExperience[];
+
+  return (
+    <>
+      <SectionHeader header="Experience" />
+      <div className={styles.ExperienceList}>
+        {ordered.map((exp) => {
+          return <Experience key={exp.name} {...exp} />;
+        })}
+      </div>
+    </>
+  );
+};
+
+export default Experiences;

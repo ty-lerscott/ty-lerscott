@@ -1,0 +1,7 @@
+.Star {
+    @apply size-3.5 leading-none [&:not(:first-of-type)]:-ml-[1px];
+}
+
+.Rating {
+    @apply flex leading-none;
+}

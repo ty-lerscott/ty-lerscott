@@ -7,6 +7,7 @@ import type {
   Link,
   Resume,
   Header,
+  ResumeSkill,
   WorkExperience,
 } from "@/types/generics.types";
 
@@ -107,6 +108,13 @@ const getPage = async <Type extends Record<string, any> = Page>(
       Array.isArray(data.education) && data.education.length
         ? data.education
         : ([] as Header[]);
+
+    newData.resumeSkills =
+      Array.isArray(data.resumeSkills) && data.resumeSkills.length
+        ? data.resumeSkills
+        : ([] as ResumeSkill[]);
+
+    newData.resumeBio = newData.resumeBio || "";
 
     return newData;
   }

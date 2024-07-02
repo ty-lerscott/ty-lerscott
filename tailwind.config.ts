@@ -3,9 +3,9 @@ import plugin from "tailwindcss/plugin";
 import newColors from "./colors";
 
 const config = {
+  prefix: "",
   darkMode: ["class"],
   content: ["./components/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
-  prefix: "",
   theme: {
     fontFamily: {
       inter: ["var(--font-inner)", "sans-serif"],

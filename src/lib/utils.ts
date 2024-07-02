@@ -85,17 +85,17 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
   );
 
   // i'm not a huge fan of all this looping, I'd like the data to come back in a more structured way
-  // lookup up Directus as an alternative
+  // TODO: lookup up Directus as an alternative
   const normalizedItems = items.map((item) => {
     return {
       ...item.fields,
-      ...(item.fields.body && {
-        body: item.fields.body.map((bodyItem) => {
+      ...(Array.isArray(item?.fields?.body) && {
+        body: (item.fields.body || []).map((bodyItem) => {
           const item = find(included)(bodyItem);
 
           // this only accounts for one deep,
           // TODO: write function to recursive find and replace
-          if (Array.isArray(item.body)) {
+          if (Array.isArray(item?.body)) {
             item.body = item.body.map(find(included));
           }
 
@@ -111,14 +111,15 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
       ...(item.fields.resumeSkills && {
         resumeSkills: item.fields.resumeSkills.map(find(included)),
       }),
-      ...(item.fields.workExperience && {
+      ...(Array.isArray(item?.fields?.workExperience) && {
         workExperience: item.fields.workExperience.map((item) => {
           const experience = find(included)(item);
 
-          return {
-            ...experience,
-            body: experience.body.map(find(included)),
-          };
+          if (Array.isArray(experience.body) && experience.body.length) {
+            experience.body = experience?.body.map(find(included));
+          }
+
+          return experience;
         }),
       }),
     };

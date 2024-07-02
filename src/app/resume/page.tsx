@@ -1,17 +1,18 @@
-import dayjs from "dayjs";
 import { cache } from "react";
-import Skills from "./client/skills";
+import dynamic from "next/dynamic";
 import Header from "./client/header";
+import { setMetadata } from "@/lib/utils";
+import Contact from "./components/contact";
 import { getPage } from "@/lib/contentful";
-import { yearsOfExperience } from "./utils";
-import { cn, setMetadata } from "@/lib/utils";
-import Education from "./components/education";
-import Experience from "./components/experience";
-import SectionHeader from "./components/section-header";
-import type { Resume, WorkExperience } from "@/types/generics.types";
+import type { Resume } from "@/types/generics.types";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 import styles from "./styles.module.css";
+
+const Skills = dynamic(() => import("./client/skills"));
+const About = dynamic(() => import("./components/about"));
+const Education = dynamic(() => import("./components/education"));
+const Experiences = dynamic(() => import("./components/experiences"));
 
 const getData = cache(async () => getPage<Resume>("resume"));
 
@@ -36,90 +37,39 @@ export const generateMetadata = async () => {
     title: resp.title,
     description: resp.description,
     keywords: [resp.keywords]
-      .concat((resp.resumeSkills || []).map((item) => item.name))
+      .concat(
+        (resp.resumeSkills.filter(Boolean) || []).map((item) => item.name),
+      )
       .join(", "),
   });
 };
 
 const Resume = async () => {
-  const { body, education, workExperience, resumeBio, ...props } =
+  const { body, education, workExperience, resumeBio, resumeSkills } =
     await getData();
-
-  // I would prefer Array.prototype.toReversed(), but that's not part of the standard yet
-  // using slice reverse as a hacky alternative
-  const experiences = workExperience.slice().reverse() as WorkExperience[];
-
-  const skills = (props.resumeSkills || []).map((item) => {
-    const start = dayjs(item.startDate);
-    const end = item.isActive || !item.endDate ? null : dayjs(item.endDate);
-
-    const years = `${
-      item.isActive
-        ? yearsOfExperience(start.format("YYYY"))
-        : end
-          ? end.year() - start.year()
-          : ""
-    } y`;
-
-    return {
-      ...item,
-      years,
-    };
-  });
-
-  const matches = resumeBio.match(/{{(.*?)}}/);
-  const professionalExperience = Array.isArray(matches)
-    ? yearsOfExperience(matches[1].split(":")[1])
-    : "";
 
   return (
     <div data-testid="Page-Resume">
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
+
       <div>
         <Header body={body} />
+
         <div data-testid="ResumeBody" className={styles.ResumeBody}>
           <div data-testid="Experiences" className={styles.Experiences}>
-            {experiences.length ? (
-              <>
-                <SectionHeader header="Experience" />
-                <div className={styles.ExperienceList}>
-                  {experiences.map((exp) => {
-                    return <Experience key={exp.name} {...exp} />;
-                  })}
-                </div>
-              </>
+            {workExperience.length ? (
+              <Experiences experiences={workExperience} />
             ) : null}
 
-            {education.length ? (
-              <>
-                <SectionHeader header="Education" />
-                <div className={styles.EducationList}>
-                  {education.map((props) => {
-                    return (
-                      <Education {...props} key={props.header as string} />
-                    );
-                  })}
-                </div>
-              </>
-            ) : null}
+            {education.length ? <Education education={education} /> : null}
           </div>
 
           <div data-testid="Sidebar" className={styles.Sidebar}>
-            <SectionHeader header="About" />
-            <p className={styles.About}>
-              {resumeBio.replace(/{{(.*?)}}/, professionalExperience)}
-            </p>
-            <div data-testid="Contact" className={styles.Contact}>
-              <SectionHeader header="Contact" />
-              <div className="p-4">
-                <p className={styles.ContactRow}>607 882 0531</p>
-                <p className={cn(styles.ContactRow, "mt-1")}>ty@lerscott.com</p>
-                <p className={cn(styles.ContactRow, "mt-1")}>
-                  https://ty.lerscott.com
-                </p>
-              </div>
-            </div>
-            <Skills skills={skills} />
+            {resumeBio ? <About about={resumeBio} /> : null}
+
+            <Contact />
+
+            {resumeSkills.length ? <Skills skills={resumeSkills} /> : null}
           </div>
         </div>
       </div>

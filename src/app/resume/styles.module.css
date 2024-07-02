@@ -2,35 +2,18 @@
     @apply grid grid-cols-8;
     @apply border-2 border-t-0;
     @apply border-[--color-dark];
+}
 
-    .Experiences {
-        @apply border-l-2;
-        @apply order-2 col-span-5;
-        @apply border-[--color-dark];
-    }
+.Sidebar {
+    @apply order-1 col-span-3;
+}
 
-    .Sidebar {
-        @apply order-1 col-span-3;
-    }
+.Experiences {
+    @apply border-l-2;
+    @apply order-2 col-span-5;
+    @apply border-[--color-dark];
 }
 
 .ExperienceList {
     @apply max-h-[86rem] scrollbar-hide overflow-y-scroll;
-}
-
-.EducationList {
-    @apply flex justify-between;
-}
-
-.About {
-    @apply p-4 text-2xs tracking-widest text-center leading-3;
-}
-
-.Contact {
-    @apply text-center;
-}
-
-.ContactRow {
-    @apply text-[--color-medium-light];
-    @apply text-2xs tracking-widest text-center leading-none even:my-2;
 }

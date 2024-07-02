@@ -5,7 +5,6 @@ import {
   SearchParams,
   ResponseBody,
   ContentfulResponse,
-  ContentfulResponseItem,
 } from "@/types/contentful.types";
 
 import type { Image } from "@/types/generics.types";
@@ -62,25 +61,6 @@ const getAssetById = async <GenericType>(id: string) => {
 
   return {} as GenericType;
 };
-const getEntryById = async <GenericType>(id: string) => {
-  let response = {} as GenericType;
-
-  try {
-    const resp = await fetcher<ContentfulResponseItem>(
-      `${PATHS.entries}/${id}`,
-    );
-
-    response = resp.fields as GenericType;
-  } catch (err) {
-    console.log(
-      err instanceof Error
-        ? `getEntryById error: ${err.message}`
-        : "Unknown Error",
-    );
-  }
-
-  return response;
-};
 
 const getEntriesByType = async <GenericType extends Record<string, any>>(
   searchParams: SearchParams,
@@ -96,6 +76,12 @@ const getEntriesByType = async <GenericType extends Record<string, any>>(
     const resp = await fetcher(
       `${PATHS.entries}?${setQueryParams(searchParams)}`,
     );
+
+    if (!resp.total) {
+      // FIX: I dont think this typing is correct
+      response.data = { body: [] } as unknown as GenericType;
+      return response;
+    }
 
     response.pagination = {
       total: resp.total,
@@ -122,4 +108,4 @@ const getEntriesByType = async <GenericType extends Record<string, any>>(
   return response;
 };
 
-export { setQueryParams, getEntryById, getEntriesByType };
+export { setQueryParams, getEntriesByType };

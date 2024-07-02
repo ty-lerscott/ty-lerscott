@@ -13,7 +13,10 @@
 
     &:nth-of-type(odd) .Svg,
     &:nth-of-type(odd) .SkillRow {
-        @apply text-[--color-dark] border-[--color-darkest];
+        @apply text-[--color-dark];
+    }
+    &:nth-of-type(odd) [data-testid="separator"] {
+        @apply bg-[--color-darkest];
     }
 
     &:nth-of-type(even) .Svg,
@@ -21,26 +24,34 @@
         @apply text-[--color-light];
     }
     &:nth-of-type(even) .SkillRow {
-        @apply text-[--color-medium] border-[--color-darker];
+        @apply text-[--color-medium];
     }
-}
+    &:nth-of-type(even) [data-testid="separator"] {
+        @apply bg-[--color-dark];
+    }
 
-.SkillHeader {
-    @apply flex items-center gap-1 leading-none mb-1;
-}
+    .SkillHeader {
+        @apply flex items-center gap-1 leading-none mb-1;
+    }
 
-.SkillName {
-    @apply text-xs tracking-wider leading-none;
-}
+    .SkillName {
+        @apply text-xs tracking-wider leading-none;
+    }
 
-.Svg {
-    @apply size-2.5;
-}
+    .Svg {
+        @apply size-2.5;
+    }
 
-.SkillRow {
-    @apply flex justify-between text-3xs font-semibold odd:border-t;
-}
+    .SkillRow {
+        @apply text-[--color-dark];
+        @apply flex justify-between text-3xs font-semibold;
+    }
 
-.SkillTitle {
-    @apply uppercase leading-4 tracking-widest;
+    .SkillTitle {
+        @apply uppercase leading-none tracking-widest self-end;
+    }
+
+    .SkillValue {
+        @apply leading-none;
+    }
 }
