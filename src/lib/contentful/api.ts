@@ -10,9 +10,9 @@ import {
 import type { Image } from "@/types/generics.types";
 
 const API_URI = "https://cdn.contentful.com";
-const IS_PROD = process.env.NEXT_PUBLIC_ENVIRONMENT === "production";
-const SPACE_ID = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID as string;
-const API_KEY = process.env.NEXT_PUBLIC_CONTENTFUL_API_KEY as string;
+const API_KEY = process.env.CONTENTFUL_API_KEY as string;
+const IS_PROD = process.env.ENVIRONMENT === "production";
+const SPACE_ID = process.env.CONTENTFUL_SPACE_ID as string;
 const ENVIRONMENT_ID = IS_PROD ? "master" : "dev";
 
 const PATHS_OBJ = {
