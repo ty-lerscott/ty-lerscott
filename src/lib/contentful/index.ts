@@ -35,6 +35,7 @@ const getPosts = async (select?: string[], skip?: number) => {
   const { pagination, data } = await getEntriesByType<Post[]>({
     skip,
     limit: 10,
+    sort: "asc",
     contentType: "post",
     order: "fields.publishDate",
     select: [

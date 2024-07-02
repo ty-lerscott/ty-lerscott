@@ -1,23 +1,16 @@
 import merge from "deepmerge";
-import { extract, setQueryParams, normalize } from "@/lib/utils";
-import {
-  Entry,
-  SearchParams,
-  ResponseBody,
-  ContentfulResponse,
-} from "@/types/contentful.types";
-
 import type { Image } from "@/types/generics.types";
+import { fetcher, extract, setQueryParams, normalize } from "./helpers";
+import { Entry, SearchParams, ResponseBody } from "@/types/contentful.types";
 
 const API_URI = "https://cdn.contentful.com";
-const API_KEY = process.env.CONTENTFUL_API_KEY as string;
 const IS_PROD = process.env.ENVIRONMENT === "production";
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID as string;
 const ENVIRONMENT_ID = IS_PROD ? "master" : "dev";
 
 const PATHS_OBJ = {
-  entries: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries`,
   assets: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/assets`,
+  entries: `/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries`,
 };
 
 const PATHS = Object.entries(PATHS_OBJ).reduce(
@@ -28,19 +21,6 @@ const PATHS = Object.entries(PATHS_OBJ).reduce(
   },
   {} as Record<string, any>,
 ) as Record<keyof typeof PATHS_OBJ, string>;
-
-const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
-  return fetch(url, {
-    headers: new Headers({
-      Authorization: `Bearer ${API_KEY}`,
-    }),
-    next: { revalidate: 60 },
-  } as RequestInit).then(async (resp) => {
-    const data = await resp.json();
-
-    return data as GenericType;
-  });
-};
 
 const getAssetById = async <GenericType>(id: string) => {
   try {
