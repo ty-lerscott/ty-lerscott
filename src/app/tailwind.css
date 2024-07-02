@@ -38,7 +38,7 @@
 }
 
 .Main {
-  @apply container max-w-screen-md min-h-full p-4;
+  @apply container max-w-screen-md min-h-full p-4 pb-8;
 
   &>div {
     @apply flex flex-col gap-4;

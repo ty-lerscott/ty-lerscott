@@ -28,7 +28,7 @@ const setQueryParams = ({
   pageType,
   contentType,
 }: SearchParams) => {
-  const sortOrder = order ? `${sort === "asc" ? "-" : ""}${order}` : "";
+  const sortOrder = order ? `${sort === "desc" ? "-" : ""}${order}` : "";
 
   return querify({
     order: sortOrder,

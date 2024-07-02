@@ -1,6 +1,7 @@
 "use client";
 
 import dayjs from "dayjs";
+import { cn } from "@/lib/utils";
 import { sort } from "fast-sort";
 import Index from "@/components/rating";
 import { MdFavorite } from "react-icons/md";
@@ -22,7 +23,7 @@ import styles from "./styles/skills.module.css";
 
 type SortBy = "name" | "comfortLevel" | "years" | "favorite" | "default";
 
-type ModifiedSkill = ResumeSkill & { years: string };
+type ModifiedSkill = ResumeSkill & { years: number };
 
 const setSkill = (skills: ResumeSkill[]) =>
   skills.map((item) => {
@@ -30,13 +31,11 @@ const setSkill = (skills: ResumeSkill[]) =>
     const end = item.isActive || !item.endDate ? null : dayjs(item.endDate);
     const newItem = item as ModifiedSkill;
 
-    const age = item.isActive
+    newItem.years = item.isActive
       ? yearsOfExperience(start.format("YYYY"))
       : end
         ? end.year() - start.year()
         : 0;
-
-    newItem.years = `${!age ? "<" : ""}${age || 1}y`;
 
     return newItem;
   });
@@ -54,12 +53,14 @@ const SORTER = (value: SortBy) => (i: ModifiedSkill) => {
 const SkillRow = ({
   title,
   value,
+  className,
 }: {
   title: string;
+  className?: string;
   value: number | ReactNode;
 }) => {
   return (
-    <div className={styles.SkillRow}>
+    <div className={cn(styles.SkillRow, className)}>
       <span className={styles.SkillTitle}>{title}</span>
       {isValidElement(value) ? (
         value
@@ -82,36 +83,42 @@ const Skill = ({ name, years, favorite, comfortLevel }: ModifiedSkill) => {
         value={<Index rating={comfortLevel / 2} />}
       />
       <Separator className="h-[1px] my-1" data-testid="separator" />
-      <SkillRow value={years} title="Experience" />
+      <SkillRow
+        value={`${years || `<1`}y`}
+        title="Experience"
+        className="[&>span]:last:tracking-[0.125em]"
+      />
     </div>
   );
 };
 
 const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
   const [sortBy, setSortBy] = useState<SortBy>("default");
-  const [isChecked, setIsChecked] = useState<boolean>(true);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(setSkill(skills));
 
   // TODO: sort by regular then alphabetize the sort
   const handleSort = (value: SortBy) => {
     setSortBy(value);
 
+    const sorter = isChecked
+      ? [{ asc: SORTER(value) }]
+      : [{ desc: SORTER(value) }];
+
     setSkills((current) => {
-      return value === "default"
-        ? setSkill(skills)
-        : isChecked
-          ? sort(current).asc([SORTER(value)])
-          : sort(current).desc([SORTER(value)]);
+      return value === "default" ? setSkill(skills) : sort(current).by(sorter);
     });
   };
 
   const toggleOrder = (value: boolean) => {
     setIsChecked(value);
 
+    const sorter = value
+      ? [{ asc: SORTER(sortBy) }]
+      : [{ desc: SORTER(sortBy) }];
+
     setSkills((current) => {
-      return value
-        ? sort(current).asc([SORTER(sortBy)])
-        : sort(current).desc([SORTER(sortBy)]);
+      return sort(current).by(sorter);
     });
   };
 
@@ -133,7 +140,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
           </SelectContent>
           <div className="flex justify-between items-center p-2">
             <span className="text-2xs font-semibold text-[--color-medium-light]">
-              desc
+              asc
             </span>
             <Switch
               checked={isChecked}
@@ -141,7 +148,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
               disabled={sortBy === "default"}
             />
             <span className="text-2xs font-semibold text-[--color-medium-light]">
-              asc
+              desc
             </span>
           </div>
         </Select>

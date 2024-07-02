@@ -116,7 +116,8 @@ const getPage = async <Type extends Record<string, any> = Page>(
 
     newData.resumeBio = newData.resumeBio || "";
 
-    return newData;
+    // TODO: fix the type here, this unknown conversion is gross
+    return newData as unknown as Type;
   }
 
   return data as Type;

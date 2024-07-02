@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { setMetadata } from "@/lib/utils";
+import { cn, setMetadata } from "@/lib/utils";
 import { getPage } from "@/lib/contentful";
 import Separator from "@/components/ui/separator";
 import Link from "@/components/component-map/link";
@@ -31,7 +31,11 @@ const Home = async () => {
           const props = item as TextType;
 
           return (
-            <Text {...props} className="text-sm" key={`blurb-${props.text}`} />
+            <Text
+              {...props}
+              key={`blurb-${props.text}`}
+              className={cn(/^h[123456]/i.test(item.tag) ? "" : "text-sm")}
+            />
           );
         })}
       </section>
@@ -39,7 +43,7 @@ const Home = async () => {
       <Separator />
 
       <RecentPosts>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-8">
           <Link href="/posts" className="p-1 text-sm" text="All Posts &gt;" />
         </div>
       </RecentPosts>
