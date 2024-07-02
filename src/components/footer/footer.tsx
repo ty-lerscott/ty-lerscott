@@ -36,10 +36,15 @@ const Footer = async () => {
     <div className="w-full" data-testid="Footer">
       <Separator />
       <footer className={styles.Footer}>
-        <span className="text-xs">
-          Copyright &copy; {year} | All rights reserved.
-        </span>
-        <ul className="flex items-center list-none">
+        <div className="leading-none">
+          <span className="text-xs">
+            Copyright &copy; {year} | All rights reserved.
+          </span>
+
+          <p className={styles.BuiltWith}>Built with: {pkgs.join(", ")}</p>
+        </div>
+
+        <ul className={styles.List}>
           {menuItems.map((item) => {
             const Icon =
               SOCIALS[item.brand.toLowerCase() as keyof typeof SOCIALS];
@@ -59,9 +64,6 @@ const Footer = async () => {
           })}
         </ul>
       </footer>
-      <div className="bg-[--color-darkest] text-[--color-light] tracking-wide">
-        <p className={styles.BuiltWith}>Built with: {pkgs.join(", ")}</p>
-      </div>
     </div>
   );
 };

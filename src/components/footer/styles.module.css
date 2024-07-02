@@ -1,7 +1,11 @@
 .Footer {
-    @apply container max-w-screen-md flex items-center justify-between p-4;
+    @apply container max-w-screen-md p-4 flex items-center justify-between;
 }
 
 .BuiltWith {
-    @apply py-2 px-4 container max-w-screen-md text-2xs;
+    @apply text-2xs text-[--color-dark] mt-1;
+}
+
+.List {
+    @apply flex items-center list-none;
 }
