@@ -140,7 +140,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
           </SelectContent>
           <div className="flex justify-between items-center p-2">
             <span className="text-2xs font-semibold text-[--color-text-secondary]">
-              asc
+              desc
             </span>
             <Switch
               checked={isChecked}
@@ -148,7 +148,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
               disabled={sortBy === "default"}
             />
             <span className="text-2xs font-semibold text-[--color-text-secondary]">
-              desc
+              asc
             </span>
           </div>
         </Select>
