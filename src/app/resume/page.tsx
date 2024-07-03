@@ -46,13 +46,9 @@ export const generateMetadata = async () => {
   });
 };
 
-type TEMP = keyof JSX.IntrinsicElements;
-
 export default async function Resume() {
   const { body, education, workExperience, resumeBio, resumeSkills } =
     await getData();
-
-  // console.log(keyof JSX.IntrinsicElements);
 
   return (
     <div data-testid="Page-Resume">

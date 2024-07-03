@@ -49,7 +49,7 @@ const getPosts = async (select?: string[], skip?: number) => {
   });
   return {
     posts: (Array.isArray(data) ? data : [data]).map((post) => {
-      post.slug = post.slug.replace(/^\//, "");
+      post.slug = (post.slug || "").replace(/^\//, "");
 
       return post;
     }),
