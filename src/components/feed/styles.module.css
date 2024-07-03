@@ -16,7 +16,7 @@
 
 .Date {
     @apply text-[--color-text-secondary];
-    @apply flex items-center gap-2 text-xs my-1 leading-none;
+    @apply flex items-center gap-2 text-xs mt-1.5;
 }
 
 .Calendar {
@@ -24,6 +24,6 @@
 }
 
 .Description {
-    @apply text-sm;
+    @apply text-sm mt-2;
 }
 

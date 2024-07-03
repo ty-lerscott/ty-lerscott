@@ -12,7 +12,6 @@ const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
     headers: new Headers({
       Authorization: `Bearer ${API_KEY}`,
     }),
-    // revalidate every 6 hours in production, otherwise don't cache
     next: { revalidate: 0 },
   } as RequestInit).then(async (resp) => {
     const data = await resp.json();

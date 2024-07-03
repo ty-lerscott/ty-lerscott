@@ -32,6 +32,23 @@ const config = {
       firaCode: ["var(--font-fira-code)", "monospace"],
       zillaSlab: ["var(--font-zilla-slab)", "monospace"],
     },
+    fontSize: {
+      "3xs": "0.5rem",
+      "2xs": "0.625rem",
+      xs: "0.75rem",
+      sm: "0.875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem",
+      "7xl": "4.5rem",
+      "8xl": "6rem",
+      "9xl": "8rem",
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -51,10 +68,6 @@ const config = {
         sm: "0 1px 2px var(--color-deep)",
         DEFAULT: "0 2px 4px var(--color-deep)",
         lg: "0 8px 16px var(--color-deep)",
-      },
-      fontSize: {
-        "2xs": "0.625rem",
-        "3xs": "0.5rem",
       },
       keyframes: {
         "accordion-down": {
@@ -77,6 +90,12 @@ const config = {
     require("tailwind-scrollbar-hide"),
     plugin(({ addBase, matchUtilities, theme }) => {
       addBase({
+        "*": {
+          lineHeight: "1",
+        },
+        p: {
+          lineHeight: theme("lineHeight.normal"),
+        },
         code: {
           fontSize: theme("fontSize.sm"),
           fontFamily: theme("font.firaCode"),

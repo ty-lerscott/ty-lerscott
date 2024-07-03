@@ -32,11 +32,11 @@
     }
 
     .SkillHeader {
-        @apply flex items-center gap-1 leading-none mb-1;
+        @apply flex items-center gap-1 mb-1;
     }
 
     .SkillName {
-        @apply text-xs tracking-widest leading-none;
+        @apply text-xs tracking-widest;
     }
 
     .Svg {
@@ -48,10 +48,9 @@
     }
 
     .SkillTitle {
-        @apply uppercase leading-none tracking-widest self-end;
+        @apply uppercase tracking-widest self-end;
     }
 
     .SkillValue {
-        @apply leading-none;
     }
 }

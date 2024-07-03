@@ -3,11 +3,11 @@
 }
 
 .EducationHeader {
-    @apply text-sm mb-1 font-semibold leading-none tracking-widest;
+    @apply text-sm mb-1 font-semibold tracking-widest;
 }
 
 .EducationSubheader {
-    @apply text-xs leading-none text-[--color-text-secondary];
+    @apply text-xs text-[--color-text-secondary];
 }
 
 .EducationList {

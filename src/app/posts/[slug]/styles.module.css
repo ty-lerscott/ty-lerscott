@@ -4,7 +4,7 @@
 
 .Subheader {
     @apply text-[--color-text-secondary];
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 mt-0.5;
 }
 
 .Image {

@@ -1,17 +1,18 @@
 import { cn } from "@/lib/utils";
-import { isValidElement, PropsWithChildren } from "react";
+import { isValidElement, type ReactNode, ElementType } from "react";
 import type { Header as HeaderType } from "@/types/generics.types";
 
 const Tag = ({
-  tag = "h2",
+  tag,
   children,
   className,
-}: PropsWithChildren & { className?: string; tag: HeaderType["tag"] }) => {
-  const Component = tag;
-  const props = {
-    className: cn("leading-none", className),
-  };
-  return <Component {...props}>{children}</Component>;
+}: Pick<HeaderType, "tag"> & {
+  className?: string;
+  children?: ReactNode | JSX.Element | "string";
+}) => {
+  const Component = tag as keyof JSX.IntrinsicElements;
+
+  return <Component className={className}>{children}</Component>;
 };
 
 const Header = ({

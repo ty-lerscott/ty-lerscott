@@ -21,23 +21,22 @@
 }
 
 .ExperienceHeaderWrapper {
-    @apply leading-none;
+
 }
 
 .ExperienceHeader {
-    @apply flex justify-between items-end leading-none;
+    @apply flex justify-between items-end;
 }
 
 .Title {
-    @apply leading-none;
 }
 
 .Date {
-    @apply text-xs leading-none;
+    @apply text-xs;
 }
 
 .ExperienceSubheader {
-    @apply text-xs leading-none mt-1;
+    @apply block text-xs mt-0.5;
 }
 
 .BodyList {

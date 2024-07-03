@@ -20,9 +20,7 @@ const Post = ({ slug, title, publishDate, description }: PostType) => {
 
       <div className={styles.Date}>
         <FaRegCalendar className={styles.Calendar} />
-        <span className={styles.Date}>
-          {dayjs(publishDate).format("MMMM D, YYYY | h:mm a")}
-        </span>
+        <span>{dayjs(publishDate).format("MMMM D, YYYY | h:mm a")}</span>
       </div>
       <p className={styles.Description}>{description}</p>
     </div>

@@ -1,19 +1,18 @@
 import type { Text as TextType } from "@/types/generics.types";
 
 const Text = ({
-  tag,
+  tag = "p",
   text,
   className,
 }: Omit<TextType, "type"> & {
   className?: string;
 }) => {
-  const Tag = tag;
+  const Tag = tag as keyof JSX.IntrinsicElements;
 
-  const props = {
-    className,
-    "data-testid": "Text",
-  };
-
-  return <Tag {...props}>{text}</Tag>;
+  return (
+    <Tag className={className} data-testid="Text">
+      {text}
+    </Tag>
+  );
 };
 export default Text;

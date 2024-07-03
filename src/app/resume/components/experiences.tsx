@@ -30,7 +30,7 @@ const Experience = ({
           <h5 className={styles.Title}>{title}</h5>
           <span className={styles.Date}>{date}</span>
         </div>
-        <p className={styles.ExperienceSubheader}>{located}</p>
+        <span className={styles.ExperienceSubheader}>{located}</span>
       </div>
       <div className={styles.BodyList}>
         {body.map((bodyItem, index) => {

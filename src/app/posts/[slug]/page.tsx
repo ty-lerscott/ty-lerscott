@@ -6,10 +6,10 @@ import { cn, setMetadata } from "@/lib/utils";
 import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
 import { FaRegCalendar } from "react-icons/fa6";
-import { PageParams } from "@/types/generics.types";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
+import { PageParams, Header as HeaderType } from "@/types/generics.types";
 
 import styles from "./styles.module.css";
 
@@ -54,8 +54,8 @@ const Post = async ({ params: { slug } }: PageParams) => {
       <Breadcrumbs breadcrumbs={BREADCRUMBS.concat({ title, href: slug })} />
 
       <Header
-        tag="h1"
         header={title}
+        tag={"h1" as HeaderType["tag"]}
         subheader={
           <div className={styles.Subheader}>
             <FaRegCalendar className="size-4" />
