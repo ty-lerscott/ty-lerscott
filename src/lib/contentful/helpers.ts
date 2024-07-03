@@ -6,7 +6,6 @@ import type {
 } from "@/types/contentful.types";
 
 const API_KEY = process.env.CONTENTFUL_API_KEY as string;
-const isProduction = process.env.ENVIRONMENT === "production";
 
 const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
   return fetch(url, {
@@ -14,7 +13,7 @@ const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
       Authorization: `Bearer ${API_KEY}`,
     }),
     // revalidate every 6 hours in production, otherwise don't cache
-    next: { revalidate: isProduction ? 60 * 60 * 6 : 0 },
+    next: { revalidate: 0 },
   } as RequestInit).then(async (resp) => {
     const data = await resp.json();
 
