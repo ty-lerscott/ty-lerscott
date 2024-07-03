@@ -5,7 +5,7 @@
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply max-h-[65.75rem];
+    @apply max-h-[65.6rem];
 }
 
 .Skill {
