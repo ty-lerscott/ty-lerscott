@@ -1,5 +1,5 @@
 .SelectWrapper {
-    @apply border-b-2 border-[--primary-diminish];
+    @apply border-b-2 border-[--ghost];
     @apply grid grid-cols-[5fr_4fr];
 }
 
@@ -12,7 +12,7 @@
 }
 
 .OrderName {
-    @apply text-2xs font-semibold text-[--secondary];
+    @apply text-2xs font-semibold text-[--ghost];
 }
 
 .SkillsList {
@@ -21,23 +21,31 @@
 }
 
 .Skill {
-    @apply even:bg-[--primary-light-background] py-3 px-4;
+    @apply even:bg-[--background-secondary] py-3 px-4;
 
-    & > [data-testid="separator"] {
-        @apply bg-[--primary-diminish];
-    }
-
-    /* Dark background */
-    &:nth-of-type(odd) .Svg,
-    &:nth-of-type(odd) .SkillRow {
+    /*Dark background */
+    &:nth-of-type(odd) .SkillName,
+    &:nth-of-type(odd) .Svg {
         @apply text-[--secondary];
+    }
+    &:nth-of-type(odd) .SkillRow {
+        @apply text-[--ghost];
+    }
+    &:nth-of-type(odd) [data-testid="separator"] {
+        /*@apply bg-[--ghost-secondary];*/
     }
 
     /*Light background */
-    &:nth-of-type(even) .Svg,
-    &:nth-of-type(even) .SkillRow,
-    &:nth-of-type(even) .SkillName {
-        @apply text-[--primary-on-light];
+    &:nth-of-type(even) .SkillName,
+    &:nth-of-type(even) .Svg {
+        @apply text-[--primary-action];
+    }
+
+    &:nth-of-type(even) .SkillRow {
+        @apply text-[--ghost-secondary];
+    }
+    &:nth-of-type(even) [data-testid="separator"] {
+        @apply bg-[--ghost-secondary];
     }
 
     .SkillHeader {

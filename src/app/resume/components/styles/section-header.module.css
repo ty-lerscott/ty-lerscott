@@ -1,5 +1,5 @@
 .SectionHeader {
     @apply p-4 border-y-2;
-    @apply border-[--primary-diminish];
+    @apply border-[--ghost];
     @apply text-center uppercase tracking-widest;
 }

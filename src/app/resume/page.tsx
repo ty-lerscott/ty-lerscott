@@ -50,6 +50,7 @@ export default async function Resume() {
   const { body, education, workExperience, resumeBio, resumeSkills } =
     await getData();
 
+  // TODO: mobile styling
   return (
     <div data-testid="Page-Resume">
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />

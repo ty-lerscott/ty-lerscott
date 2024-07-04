@@ -1,5 +1,5 @@
 .Header {
-    @apply border-[--primary-diminish];
+    @apply border-[--ghost];
     @apply border-2 border-b-0 p-4 text-center;
 
     .Wrapper {
@@ -8,16 +8,16 @@
     }
 
     .Name {
-        @apply uppercase border-2 border-[--primary-diminish] w-max py-6 px-10;
+        @apply uppercase border-2 border-[--ghost] w-max py-6 px-10;
     }
 
     .AnimatedTextWrapper {
-        @apply absolute bottom-3.5 bg-[--primary-background];
+        @apply absolute bottom-3.5 bg-[--background];
     }
 
     .AnimatedText {
         @apply absolute bottom-0;
+        @apply bg-[--background] text-[--ghost];
         @apply text-lg font-semibold px-4 tracking-widest relative;
-        @apply bg-[--primary-background] text-[--secondary];
     }
 }

@@ -1,5 +1,5 @@
 .CodeWrapper {
-    @apply border-2 bg-[--primary-light-background] border-[--primary-diminish] relative p-2 rounded mt-2;
+    @apply border-2 bg-[--background-secondary] border-[--ghost] relative p-2 rounded mt-2;
 
     &>pre {
         overflow: auto;
@@ -7,7 +7,7 @@
 }
 
 .Code {
-    @apply text-[--secondary-on-light];
+    @apply text-[--secondary];
     @apply hyphens-none [&>*]:font-firaCode [&>*]:whitespace-pre text-left;
     tab-size: 4;
 
@@ -17,7 +17,7 @@
 }
 
 .Copy {
-    @apply text-[--primary] hover:text-[--primary-focus];
+    @apply text-[--ghost] hover:text-[--ghost-action];
     @apply absolute top-0 right-0 p-2 transition-colors [&>*]:text-xs text-xs;
 
     &>svg {

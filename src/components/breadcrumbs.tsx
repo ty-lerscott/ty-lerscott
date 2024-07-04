@@ -23,7 +23,9 @@ const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) => {
               <Fragment key={title}>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href={href}>{title}</Link>
+                    <Link href={href} className="text-[color:inherit]">
+                      {title}
+                    </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 {index !== breadcrumbs.length - 1 ? (

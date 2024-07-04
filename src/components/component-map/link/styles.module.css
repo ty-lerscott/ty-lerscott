@@ -3,6 +3,6 @@
     @apply bg-[size:100%_0.1em,0_0.1em] bg-[position:100%_100%,0_100%] bg-no-repeat;
     background-image:
             linear-gradient(to right, var(--primary), var(--primary)),
-            linear-gradient(to right, var(--primary), var(--secondary), var(--primary-gradient-end));
-    @apply hover:text-[--primary-gradient-end] hover:bg-[size:0_2px,100%_2px];
+            linear-gradient(to right, var(--primary), var(--secondary), var(--primary-action));
+    @apply hover:text-[--primary-action] hover:bg-[size:0_2px,100%_2px];
 }

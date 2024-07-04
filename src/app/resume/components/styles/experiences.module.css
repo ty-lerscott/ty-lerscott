@@ -1,31 +1,22 @@
 .ExperienceList {
-    @apply max-h-[100.5rem] scrollbar-hide overflow-y-scroll;
+    @apply h-[100.5rem] scrollbar-hide overflow-y-scroll;
 }
 
 .Experience {
-    @apply p-4 flex flex-col gap-4;
-    @apply even:bg-[--primary-light-background];
-
-    &:nth-of-type(odd) .Body,
-    &:nth-of-type(odd) .BodyHeader {
-        @apply text-[--primary-header];
-    }
-    &:nth-of-type(odd) .Date,
-    &:nth-of-type(odd) .BodySubheader,
-    &:nth-of-type(odd) .ExperienceSubheader {
-        @apply text-[--secondary];
-    }
+    @apply p-6 flex flex-col gap-4;
+    @apply even:bg-[--background-secondary];
 
     /* Light background */
-
-    &:nth-of-type(even) .Title,
-    &:nth-of-type(even) .Body,
-    &:nth-of-type(even) .BodyHeader {
-        @apply text-[--secondary-on-light];
+    &:nth-of-type(even) .Title {
+        @apply text-[--primary-action];
     }
+    &:nth-of-type(even) .Body {
+        @apply text-[--secondary];
+    }
+    &:nth-of-type(even) .Date,
     &:nth-of-type(even) .BodySubheader,
     &:nth-of-type(even) .ExperienceSubheader {
-        @apply text-[--primary];
+        @apply text-[--ghost-secondary];
     }
 }
 
@@ -34,22 +25,26 @@
 }
 
 .Date {
-    @apply text-xs;
+    @apply text-sm;
 }
 
 .ExperienceSubheader {
-    @apply block text-xs mt-0.5;
+    @apply block text-sm mt-1;
 }
 
 
 .BodyList {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-4;
 }
 
 .Body {
-    @apply text-xs;
+    @apply text-sm;
 }
 
 .BodyHeader {
     @apply font-semibold;
+}
+
+.Date, .BodySubheader, .ExperienceSubheader {
+    @apply text-[--ghost];
 }

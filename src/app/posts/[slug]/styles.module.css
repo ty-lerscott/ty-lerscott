@@ -3,8 +3,8 @@
 }
 
 .Subheader {
-    @apply text-[--secondary];
-    @apply flex items-center gap-2 mt-0.5;
+    @apply text-[--ghost];
+    @apply flex items-center gap-2 mt-2;
 }
 
 .Image {

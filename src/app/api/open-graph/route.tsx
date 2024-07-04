@@ -1,6 +1,10 @@
+import type { NextApiRequest } from "next";
 import { ImageResponse } from "next/og";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+
+  console.log(searchParams);
   return new ImageResponse(
     (
       <div

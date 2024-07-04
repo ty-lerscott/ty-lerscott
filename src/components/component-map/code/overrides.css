@@ -1,11 +1,11 @@
 .token.type,
 .token.keyword,
 .token.endline {
-    color: var(--primary-code-tokens);
+    color: var(--secondary);
 }
 
 .token.function,
 .token.punctuation,
 .token.literal-property {
-    color: var(--secondary-code-tokens);
+    color: var(--ghost-secondary);
 }

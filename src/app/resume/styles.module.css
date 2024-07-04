@@ -1,5 +1,5 @@
 .ResumeBody, .Experiences {
-    @apply border-[--primary-diminish];
+    @apply border-[--ghost];
 }
 
 .ResumeBody {

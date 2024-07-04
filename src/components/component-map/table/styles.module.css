@@ -5,7 +5,7 @@
 
 .Head {
     @apply uppercase tracking-wider border-t-2 border-x-2 font-semibold;
-    @apply bg-[--primary-diminish] border-[--primary-diminish] text-[--primary-header];
+    @apply bg-[--ghost] border-[--ghost] text-[--secondary];
 }
 
 .Column {
@@ -14,15 +14,14 @@
 
 .Body {
     &>.Row:last-of-type {
-        @apply border-[--primary-diminish] border-b-2;
+        @apply border-[--ghost] border-b-2;
     }
 }
 
 
 .Row {
-    /*@apply odd:text-[--primary-on-light];*/
-    @apply border-x-2 border-[--primary-diminish];
-    @apply even:bg-[--primary-light-background] even:text-[--primary-on-light];
+    @apply border-x-2 border-[--ghost];
+    @apply even:bg-[--background-secondary] even:text-[--secondary];
 }
 
 .Cell {

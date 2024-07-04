@@ -15,7 +15,7 @@
 }
 
 .Date {
-    @apply text-[--secondary];
+    @apply text-[--ghost];
     @apply flex items-center gap-2 text-xs mt-1.5;
 }
 

@@ -7,7 +7,7 @@
 }
 
 .EducationSubheader {
-    @apply text-xs text-[--secondary];
+    @apply text-xs text-[--ghost];
 }
 
 .EducationList {

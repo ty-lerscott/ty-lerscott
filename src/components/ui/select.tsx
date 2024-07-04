@@ -29,7 +29,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "border-[--primary-diminish] placeholder:text-[--primary] ring-offset-[--primary-focus] focus:ring-[--primary-focus]",
+      "border-[--ghost] placeholder:text-[--primary] ring-offset-[--primary-action] focus:ring-[--primary-action]",
       "flex h-10 w-full items-center font-semibold justify-between border tracking-wider text-xs p-4 text-left focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed [&>span]:line-clamp-1",
       className,
     )}
@@ -103,7 +103,7 @@ const SelectContent = React.forwardRef<
       className={cn(
         "relative z-50 max-h-96 overflow-hidden rounded-none border tracking-wide",
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        "bg-[--primary-background] border-[--primary-diminish]",
+        "bg-[--background] border-[--ghost]",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
         className,
@@ -147,7 +147,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-default select-none items-center p-2 pl-6 text-xs outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      "focus:bg-[--primary-diminish] focus:text-[--primary-focus]",
+      "focus:bg-[--ghost] focus:text-[--primary-action]",
       className,
     )}
     {...props}
@@ -169,7 +169,7 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-[--primary-diminish]", className)}
+    className={cn("-mx-1 my-1 h-px bg-[--ghost]", className)}
     {...props}
   />
 ));

@@ -1,22 +1,32 @@
 import merge from "deepmerge";
 import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
-import { primary, secondary, colors as newColors } from "./colors";
+import { keyMap, colors as newColors } from "./colors";
 
 const HeaderStyles = (
   theme: (theme: string) => string,
 ): Record<string, string> => ({
   letterSpacing: "0.05em",
-  color: "var(--primary-header)",
+  color: "var(--secondary)",
   fontFamily: "var(--font-zilla-slab)",
   fontWeight: theme("fontWeight.medium"),
 });
+
+const DEFAULT_SCREEN_SIZE = "1024px";
+
+const SCREENS = {
+  xs: "480px",
+  sm: "768px",
+  md: DEFAULT_SCREEN_SIZE,
+  DEFAULT: DEFAULT_SCREEN_SIZE,
+};
 
 const config = {
   prefix: "",
   darkMode: ["class"],
   content: ["./components/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   theme: {
+    screens: SCREENS,
     fontFamily: {
       inter: ["var(--font-inner)", "sans-serif"],
       firaCode: ["var(--font-fira-code)", "monospace"],
@@ -44,11 +54,16 @@ const config = {
       current: "currentColor",
       gray: colors.gray,
       ...newColors,
-      primary,
-      secondary,
+      ...keyMap,
     },
     container: {
       center: true,
+      padding: "2rem",
+      // screens: {
+      //   sm: "640px",
+      //   md: "768px",
+      //   DEFAULT: DEFAULT_SCREEN_SIZE,
+      // },
     },
     extend: {
       keyframes: {
@@ -70,7 +85,7 @@ const config = {
   plugins: [
     require("tailwindcss-animate"),
     require("tailwind-scrollbar-hide"),
-    plugin(({ addBase, matchUtilities, theme }) => {
+    plugin(({ addBase, theme }) => {
       addBase({
         "*": {
           lineHeight: "1",
@@ -79,17 +94,15 @@ const config = {
           display: "grid",
           color: "var(--primary)",
           gridTemplateRows: "auto 1fr auto",
+          backgroundColor: "var(--background)",
           minHeight: theme("minHeight.screen"),
-          backgroundColor: "var(--primary-background)",
-          "@apply selection:text-[--primary-select] selection:bg-[--primary-select-background]":
-            "",
+          "@apply selection:text-[--background] selection:bg-[--primary]": "",
         },
         main: {
-          minHeight: theme("minHeight.full"),
-          maxWidth: theme("maxWidth.screen-md"),
+          "@apply container": "",
           padding: theme("spacing.4"),
           paddingBottom: theme("spacing.8"),
-          "@apply container": "",
+          minHeight: theme("minHeight.full"),
           "@apply [&>div]:flex [&>div]:flex-col [&>div]:gap-4": "",
         },
         h1: merge(HeaderStyles(theme), {
@@ -119,7 +132,7 @@ const config = {
           fontSize: theme("fontSize.sm"),
         },
         a: {
-          "@apply transition-colors text-[--secondary] hover:text-[--secondary-hover]":
+          "@apply transition-colors text-[--ghost] hover:text-[--ghost-action]":
             "",
         },
         ul: {

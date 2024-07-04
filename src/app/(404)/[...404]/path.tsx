@@ -7,8 +7,8 @@ const Path = () => {
 
   return (
     <h1 className="text-center">
-      Womp Womp, <span className="text-[--color-diminish]">{pathname}</span>{" "}
-      doesnt seem available 😟
+      Womp Womp, <span className="text-[--ghost]">{pathname}</span> doesnt seem
+      available 😟
     </h1>
   );
 };

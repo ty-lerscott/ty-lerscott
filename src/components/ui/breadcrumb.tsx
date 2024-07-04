@@ -19,7 +19,7 @@ const BreadcrumbList = React.forwardRef<
   <ol
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center gap-1.5 break-words text-sm text-[--primary-select-background] sm:gap-2.5 list-none",
+      "flex flex-wrap items-center gap-1.5 break-words text-sm text-[--ghost] sm:gap-2.5 list-none",
       className,
     )}
     {...props}
@@ -60,7 +60,7 @@ const BreadcrumbPage = React.forwardRef<
     role="link"
     aria-disabled="true"
     aria-current="page"
-    className={cn("font-normal text-[--primary-select-background]", className)}
+    className={cn("font-normal text-[--primary]", className)}
     {...props}
   />
 ));
@@ -74,7 +74,7 @@ const BreadcrumbSeparator = ({
   <li
     role="presentation"
     aria-hidden="true"
-    className={cn("[&>svg]:size-3.5 !m-0 text-[--primary-diminish]", className)}
+    className={cn("[&>svg]:size-3.5 !m-0 ", className)}
     {...props}
   >
     {children ?? <ChevronRight />}
@@ -96,7 +96,7 @@ const BreadcrumbEllipsis = ({
     <span className="sr-only">More</span>
   </span>
 );
-BreadcrumbEllipsis.displayName = "BreadcrumbElipssis";
+BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";
 
 export {
   Breadcrumb,

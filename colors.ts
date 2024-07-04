@@ -151,15 +151,17 @@ export const RANGE = [
   "deep",
 ] as const;
 
+// TODO:
+//  this is unnecessary, just use a nested array, and change the range to an object with keys that are the aliases
 const ALIASES = {
-  lightest: ["code-tokens", "gradient-end"],
-  lighter: ["focus"],
-  light: ["secondary", "on-light", "header"],
-  "medium-light": ["select-background", "secondary-code-tokens"],
-  medium: ["DEFAULT"],
-  dark: ["diminish"],
-  darkest: ["light-background"],
-  deep: ["background", "select"],
+  lightest: ["secondary-action"],
+  lighter: ["action"],
+  light: ["secondary"],
+  medium: ["primary"],
+  "medium-dark": ["ghost-secondary"],
+  dark: ["ghost"],
+  darkest: ["background-secondary"],
+  deep: ["background"],
 } as Record<(typeof RANGE)[number], string[]>;
 
 // Extract the keys of ALIASES
@@ -174,7 +176,7 @@ const PRIMARY_COLOR_NAME = colorsArr[
 ] as (typeof colorsArr)[number];
 const primaryColor = Object.values(colors[PRIMARY_COLOR_NAME]);
 
-export const primary = ALIAS_KEYS.reduce(
+export const aliasMap = ALIAS_KEYS.reduce(
   (acc, alias, index) => {
     ALIASES[alias].forEach((subAlias) => {
       acc[subAlias] = primaryColor[RANGE.findIndex((i) => i === alias)];
@@ -185,9 +187,22 @@ export const primary = ALIAS_KEYS.reduce(
   {} as Record<AliasValues, string>,
 );
 
-export const secondary = {
-  DEFAULT: primary["diminish"],
-  "on-light": primary["secondary"],
-  hover: primary["select-background"],
-  "code-tokens": primary["secondary-code-tokens"],
+export const keyMap = {
+  primary: {
+    DEFAULT: aliasMap["primary"],
+    action: aliasMap["action"],
+  },
+  secondary: {
+    DEFAULT: aliasMap["secondary"],
+    action: aliasMap["secondary-action"],
+  },
+  ghost: {
+    DEFAULT: aliasMap["ghost"],
+    action: aliasMap["secondary"],
+    secondary: aliasMap["ghost-secondary"],
+  },
+  background: {
+    DEFAULT: aliasMap["background"],
+    secondary: aliasMap["background-secondary"],
+  },
 };
