@@ -17,11 +17,11 @@
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply max-h-[78.6rem];
+    @apply h-[78.5rem];
 }
 
 .Skill {
-    @apply even:bg-[--background-secondary] py-3 px-4;
+    @apply even:bg-[--background-secondary] p-4;
 
     /*Dark background */
     &:nth-of-type(odd) .SkillName,
@@ -30,9 +30,6 @@
     }
     &:nth-of-type(odd) .SkillRow {
         @apply text-[--ghost];
-    }
-    &:nth-of-type(odd) [data-testid="separator"] {
-        /*@apply bg-[--ghost-secondary];*/
     }
 
     /*Light background */
@@ -61,7 +58,7 @@
     }
 
     .SkillRow {
-        @apply flex justify-between text-3xs font-semibold;
+        @apply flex justify-between text-2xs font-semibold;
     }
 
     .SkillTitle {

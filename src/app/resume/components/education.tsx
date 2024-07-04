@@ -8,7 +8,7 @@ import styles from "./styles/education.module.css";
 
 const EducationItem = ({ header, subheader }: HeaderProps) => {
   return (
-    <div className={styles.Education}>
+    <div className={styles.EducationItem}>
       <Header
         header={header}
         subheader={subheader}

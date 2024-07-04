@@ -33,7 +33,6 @@ const config = {
       zillaSlab: ["var(--font-zilla-slab)", "monospace"],
     },
     fontSize: {
-      "3xs": "0.5rem",
       "2xs": "0.625rem",
       xs: "0.75rem",
       sm: "0.875rem",
@@ -132,8 +131,7 @@ const config = {
           fontSize: theme("fontSize.sm"),
         },
         a: {
-          "@apply transition-colors text-[--ghost] hover:text-[--ghost-action]":
-            "",
+          "@apply transition-colors hover:text-[--primary-action]": "",
         },
         ul: {
           "@apply space-y-1 list-disc list-inside": "",

@@ -23,7 +23,10 @@ const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) => {
               <Fragment key={title}>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href={href} className="text-[color:inherit]">
+                    <Link
+                      href={href}
+                      className="text-[color:inherit] hover:text-[--ghost-action]"
+                    >
                       {title}
                     </Link>
                   </BreadcrumbLink>
