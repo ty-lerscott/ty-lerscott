@@ -15,7 +15,7 @@
 }
 
 .Date {
-    @apply text-[--color-text-secondary];
+    @apply text-[--secondary];
     @apply flex items-center gap-2 text-xs mt-1.5;
 }
 

@@ -1,19 +1,28 @@
 .Table {
     @apply w-full rounded overflow-hidden;
+    border-spacing: 0;
 }
 
 .Head {
-    @apply bg-[--color-diminish] text-[--color-lighter];
-    @apply text-xs uppercase tracking-wider;
+    @apply uppercase tracking-wider border-t-2 border-x-2 font-semibold;
+    @apply bg-[--primary-diminish] border-[--primary-diminish] text-[--primary-header];
 }
 
 .Column {
-    @apply px-4 py-2 text-start text-xs font-semibold uppercase;
+    @apply px-4 py-2 text-start;
 }
 
+.Body {
+    &>.Row:last-of-type {
+        @apply border-[--primary-diminish] border-b-2;
+    }
+}
+
+
 .Row {
-    @apply odd:text-[--color-text-primary] even:text-[--color-text-primary-on-light];
-    @apply odd:bg-[--color-darker] even:bg-[--color-dark];
+    /*@apply odd:text-[--primary-on-light];*/
+    @apply border-x-2 border-[--primary-diminish];
+    @apply even:bg-[--primary-light-background] even:text-[--primary-on-light];
 }
 
 .Cell {

@@ -1,4 +1,3 @@
 .About {
-    @apply text-[--color-text-secondary];
     @apply p-4 text-2xs tracking-widest text-center leading-3;
 }

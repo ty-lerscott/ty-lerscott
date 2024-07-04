@@ -1,5 +1,5 @@
+import type { ReactNode } from "react";
 import type { LinkProps } from "next/link";
-import type { ReactNode, ElementType } from "react";
 
 export type Link = LinkProps & {
   text: string;

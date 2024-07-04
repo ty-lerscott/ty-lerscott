@@ -17,9 +17,9 @@ const Table = ({ header, subheader, columns, body }: TableType) => {
             {columns.map((text) => {
               return (
                 <th
-                  key={`TableColumnHeader-${text}`}
                   scope="col"
                   className={styles.Column}
+                  key={`TableColumnHeader-${text}`}
                 >
                   {text}
                 </th>
@@ -27,7 +27,7 @@ const Table = ({ header, subheader, columns, body }: TableType) => {
             })}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.Body}>
           {body.map((row) => {
             return (
               <tr key={`TableRow-${row.name}`} className={styles.Row}>

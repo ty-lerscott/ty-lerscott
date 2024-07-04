@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import type { ReactNode } from "react";
 import { getPosts } from "@/lib/contentful";
+import type { PropsWithChildren } from "react";
 import { FaRegCalendar } from "react-icons/fa6";
 import Link from "@/components/component-map/link";
 import Header from "@/components/component-map/header";
@@ -27,7 +27,10 @@ const Post = ({ slug, title, publishDate, description }: PostType) => {
   );
 };
 
-const RecentPosts = async ({ children }: { children?: ReactNode }) => {
+const RecentPosts = async ({
+  className,
+  children,
+}: PropsWithChildren & { className?: string }) => {
   const { posts } = await getPosts();
 
   if (!posts?.length) return null;

@@ -1,22 +1,24 @@
 import dayjs from "dayjs";
 import { cache } from "react";
-import Image from "next/image";
-import Tags from "@/components/tags";
-import { cn, setMetadata } from "@/lib/utils";
+import dynamic from "next/dynamic";
 import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
+import { cn, setMetadata } from "@/lib/utils";
 import { FaRegCalendar } from "react-icons/fa6";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import { PageParams, Header as HeaderType } from "@/types/generics.types";
 
+const Image = dynamic(() => import("next/image"));
+const Tags = dynamic(() => import("@/components/tags"));
+
 import styles from "./styles.module.css";
 
 const fira = Fira_Code({
-  subsets: ["latin"],
   weight: ["400"],
   style: ["normal"],
+  subsets: ["latin"],
   variable: "--font-fira-code",
 });
 

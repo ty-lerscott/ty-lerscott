@@ -27,6 +27,7 @@ const Code = ({
   const headerProps = {
     header,
     subheader,
+    wrapperClassName: "mb-2",
   };
   return (
     <div data-testid="Code">

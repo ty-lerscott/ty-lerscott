@@ -22,10 +22,7 @@ const Experience = ({
                           }`;
   return (
     <div data-testid="Experience" className={styles.Experience}>
-      <div
-        data-testid="ExperienceHeader"
-        className={styles.ExperienceHeaderWrapper}
-      >
+      <div data-testid="ExperienceHeader">
         <div className={styles.ExperienceHeader}>
           <h5 className={styles.Title}>{title}</h5>
           <span className={styles.Date}>{date}</span>
@@ -33,7 +30,7 @@ const Experience = ({
         <span className={styles.ExperienceSubheader}>{located}</span>
       </div>
       <div className={styles.BodyList}>
-        {body.map((bodyItem, index) => {
+        {(body || []).map((bodyItem, index) => {
           return (
             <p className={styles.Body} key={`${title}-${index}`}>
               {(bodyItem as Header).header ? (

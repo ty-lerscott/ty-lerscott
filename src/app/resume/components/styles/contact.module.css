@@ -3,6 +3,5 @@
 }
 
 .ContactRow {
-    @apply text-[--color-text-secondary];
     @apply text-2xs tracking-widest text-center leading-none even:my-2;
 }

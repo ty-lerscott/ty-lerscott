@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import type { ElementType } from "react";
 import type { List as ListType } from "@/types/generics.types";
 
 const Header = dynamic(() => import("@/components/component-map/header"));
@@ -10,7 +11,7 @@ const List = ({
   header,
   subheader,
 }: Omit<ListType, "name">) => {
-  const Tag = ordered ? "ol" : "ul";
+  const Tag = (ordered ? "ol" : "ul") as ElementType;
 
   const headerProps = { header, subheader, wrapperClassName: "mb-1" };
 

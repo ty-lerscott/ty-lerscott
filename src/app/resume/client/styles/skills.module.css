@@ -1,34 +1,43 @@
 .SelectWrapper {
-    @apply border-b-2 border-[--color-diminish];
+    @apply border-b-2 border-[--primary-diminish];
     @apply grid grid-cols-[5fr_4fr];
+}
+
+.Select {
+    @apply border-0 border-r-2;
+}
+
+.SortOrder {
+    @apply flex justify-between items-center p-2;
+}
+
+.OrderName {
+    @apply text-2xs font-semibold text-[--secondary];
 }
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply max-h-[72rem];
+    @apply max-h-[78.6rem];
 }
 
 .Skill {
-    @apply even:bg-[--color-darker] py-3 px-4;
+    @apply even:bg-[--primary-light-background] py-3 px-4;
 
+    & > [data-testid="separator"] {
+        @apply bg-[--primary-diminish];
+    }
+
+    /* Dark background */
     &:nth-of-type(odd) .Svg,
-    &:nth-of-type(odd) .SkillRow,
-    &:nth-of-type(odd) .SkillName {
-        @apply text-[--color-text-secondary];
-    }
-    &:nth-of-type(odd) [data-testid="separator"] {
-        @apply bg-[--color-darker];
+    &:nth-of-type(odd) .SkillRow {
+        @apply text-[--secondary];
     }
 
+    /*Light background */
     &:nth-of-type(even) .Svg,
+    &:nth-of-type(even) .SkillRow,
     &:nth-of-type(even) .SkillName {
-        @apply text-[--color-text-primary];
-    }
-    &:nth-of-type(even) .SkillRow {
-        @apply text-[--color-text-secondary];
-    }
-    &:nth-of-type(even) [data-testid="separator"] {
-        @apply bg-[--color-diminish];
+        @apply text-[--primary-on-light];
     }
 
     .SkillHeader {
@@ -49,8 +58,5 @@
 
     .SkillTitle {
         @apply uppercase tracking-widest self-end;
-    }
-
-    .SkillValue {
     }
 }

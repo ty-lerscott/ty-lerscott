@@ -10,7 +10,7 @@ const Tag = ({
   className?: string;
   children?: ReactNode | JSX.Element | "string";
 }) => {
-  const Component = tag as keyof JSX.IntrinsicElements;
+  const Component = tag as ElementType;
 
   return <Component className={className}>{children}</Component>;
 };
@@ -35,7 +35,7 @@ const Header = ({
       {!subheader ? null : isValidElement(subheader) ? (
         subheader
       ) : (
-        <span className={cn("text-[--color-text-secondary]", subClassName)}>
+        <span className={cn("text-sm text-[--secondary] mt-0.5", subClassName)}>
           {subheader}
         </span>
       )}

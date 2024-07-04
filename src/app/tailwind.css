@@ -1,31 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  :root {
-    --color-text-primary: var(--color-soft);
-    --color-text-secondary: var(--color-medium);
-    --color-text-secondary-hover: var(--color-soft);
-
-    --color-text-primary-on-light: var(--color-light);
-    --color-text-secondary-on-light: var(--color-medium);
-    --color-text-secondary-on-light-hover: var(--color-light);
-
-    --color-diminish: var(--color-medium-dark);
-  }
-}
-
-.Body {
-  @apply grid min-h-screen grid-rows-[auto_1fr_auto] ;
-  @apply bg-[--color-darkest] text-[--color-text-primary];
-  @apply selection:text-[--color-deep] selection:bg-[--color-medium-light];
-}
-
-.Main {
-  @apply container max-w-screen-md min-h-full p-4 pb-8;
-
-  &>div {
-    @apply flex flex-col gap-4;
-  }
-}

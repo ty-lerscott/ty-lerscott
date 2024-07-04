@@ -1,38 +1,36 @@
 .ExperienceList {
-    @apply max-h-[96rem] scrollbar-hide overflow-y-scroll;
+    @apply max-h-[100.5rem] scrollbar-hide overflow-y-scroll;
 }
 
 .Experience {
-    @apply even:bg-[--color-darker] p-4 flex flex-col gap-4;
+    @apply p-4 flex flex-col gap-4;
+    @apply even:bg-[--primary-light-background];
 
     &:nth-of-type(odd) .Body,
-    &:nth-of-type(odd) .ExperienceHeader {
-        @apply text-[--color-text-primary];
+    &:nth-of-type(odd) .BodyHeader {
+        @apply text-[--primary-header];
     }
+    &:nth-of-type(odd) .Date,
     &:nth-of-type(odd) .BodySubheader,
     &:nth-of-type(odd) .ExperienceSubheader {
-        @apply text-[--color-text-secondary];
+        @apply text-[--secondary];
     }
 
+    /* Light background */
+
+    &:nth-of-type(even) .Title,
     &:nth-of-type(even) .Body,
-    &:nth-of-type(even) .ExperienceHeader {
-        @apply text-[--color-text-primary-on-light];
+    &:nth-of-type(even) .BodyHeader {
+        @apply text-[--secondary-on-light];
     }
     &:nth-of-type(even) .BodySubheader,
     &:nth-of-type(even) .ExperienceSubheader {
-        @apply text-[--color-text-secondary-on-light];
+        @apply text-[--primary];
     }
-}
-
-.ExperienceHeaderWrapper {
-
 }
 
 .ExperienceHeader {
     @apply flex justify-between items-end;
-}
-
-.Title {
 }
 
 .Date {
@@ -42,6 +40,7 @@
 .ExperienceSubheader {
     @apply block text-xs mt-0.5;
 }
+
 
 .BodyList {
     @apply flex flex-col gap-2;

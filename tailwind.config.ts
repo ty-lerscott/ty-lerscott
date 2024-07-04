@@ -1,26 +1,16 @@
 import merge from "deepmerge";
 import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
-import newColors, { RANGE } from "./colors";
+import { primary, secondary, colors as newColors } from "./colors";
 
-const extractVars = (
-  obj: Record<any, any>,
-  prefix: string,
-): Record<string, string> => {
-  return Object.keys(obj).reduce((vars, key, index) => {
-    const value = obj[key];
-    const colorKey = prefix === "color" ? RANGE[index] : key;
-    const variable =
-      key === "DEFAULT" ? `--${prefix}` : `--${prefix}-${colorKey}`;
-
-    const newVars =
-      typeof value === "string"
-        ? { [variable]: value }
-        : extractVars(value, prefix);
-
-    return { ...vars, ...newVars };
-  }, {});
-};
+const HeaderStyles = (
+  theme: (theme: string) => string,
+): Record<string, string> => ({
+  letterSpacing: "0.05em",
+  color: "var(--primary-header)",
+  fontFamily: "var(--font-zilla-slab)",
+  fontWeight: theme("fontWeight.medium"),
+});
 
 const config = {
   prefix: "",
@@ -54,21 +44,13 @@ const config = {
       current: "currentColor",
       gray: colors.gray,
       ...newColors,
-      primary: newColors.marineGreen,
+      primary,
+      secondary,
     },
     container: {
       center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
     },
     extend: {
-      textShadow: {
-        sm: "0 1px 2px var(--color-deep)",
-        DEFAULT: "0 2px 4px var(--color-deep)",
-        lg: "0 8px 16px var(--color-deep)",
-      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -93,6 +75,39 @@ const config = {
         "*": {
           lineHeight: "1",
         },
+        body: {
+          display: "grid",
+          color: "var(--primary)",
+          gridTemplateRows: "auto 1fr auto",
+          minHeight: theme("minHeight.screen"),
+          backgroundColor: "var(--primary-background)",
+          "@apply selection:text-[--primary-select] selection:bg-[--primary-select-background]":
+            "",
+        },
+        main: {
+          minHeight: theme("minHeight.full"),
+          maxWidth: theme("maxWidth.screen-md"),
+          padding: theme("spacing.4"),
+          paddingBottom: theme("spacing.8"),
+          "@apply container": "",
+          "@apply [&>div]:flex [&>div]:flex-col [&>div]:gap-4": "",
+        },
+        h1: merge(HeaderStyles(theme), {
+          fontSize: theme("fontSize.3xl"),
+        }),
+        h2: merge(HeaderStyles(theme), {
+          fontSize: theme("fontSize.2xl"),
+        }),
+        h3: merge(HeaderStyles(theme), {
+          fontSize: theme("fontSize.xl"),
+        }),
+        h4: merge(HeaderStyles(theme), {
+          fontSize: theme("fontSize.lg"),
+        }),
+        h5: HeaderStyles(theme),
+        h6: merge(HeaderStyles(theme), {
+          fontSize: theme("fontSize.sm"),
+        }),
         p: {
           lineHeight: theme("lineHeight.normal"),
         },
@@ -103,49 +118,8 @@ const config = {
         small: {
           fontSize: theme("fontSize.sm"),
         },
-        h1: {
-          letterSpacing: "0.05em",
-          color: "var(--color-text-primary)",
-          fontFamily: "var(--font-zilla-slab)",
-          fontSize: theme("fontSize.3xl"),
-          fontWeight: theme("fontWeight.medium"),
-        },
-        h2: {
-          letterSpacing: "0.05em",
-          color: "var(--color-text-primary)",
-          fontFamily: "var(--font-zilla-slab)",
-          fontSize: theme("fontSize.2xl"),
-          fontWeight: theme("fontWeight.medium"),
-        },
-        h3: {
-          letterSpacing: "0.05em",
-          color: "var(--color-text-primary)",
-          fontSize: theme("fontSize.xl"),
-          fontFamily: "var(--font-zilla-slab)",
-          fontWeight: theme("fontWeight.medium"),
-        },
-        h4: {
-          letterSpacing: "0.05em",
-          color: "var(--color-text-primary)",
-          fontSize: theme("fontSize.lg"),
-          fontFamily: "var(--font-zilla-slab)",
-          fontWeight: theme("fontWeight.medium"),
-        },
-        h5: {
-          letterSpacing: "0.05em",
-          color: "var(--color-text-primary)",
-          fontFamily: "var(--font-zilla-slab)",
-          fontWeight: theme("fontWeight.medium"),
-        },
-        h6: {
-          letterSpacing: "0.05em",
-          color: "var(--color-text-primary)",
-          fontSize: theme("fontSize.sm"),
-          fontFamily: "var(--font-zilla-slab)",
-          fontWeight: theme("fontWeight.medium"),
-        },
         a: {
-          "@apply transition-colors text-[--color-text-secondary] hover:text-[--color-text-secondary-hover]":
+          "@apply transition-colors text-[--secondary] hover:text-[--secondary-hover]":
             "",
         },
         ul: {
@@ -160,22 +134,30 @@ const config = {
           "@apply [&:not([class])>li:first-child]:ml-1": "",
         },
       });
-
-      matchUtilities(
-        {
-          "text-shadow": (value) => ({
-            textShadow: value,
-          }),
-        },
-        { values: theme("textShadow") },
-      );
     }),
-    plugin(({ addUtilities, theme }) => {
-      addUtilities({
-        ":root": merge(
-          extractVars(theme("spacing"), "spacing"),
-          extractVars(theme("colors.primary"), "color"),
-        ),
+    plugin(function ({ addBase, theme }) {
+      const extractColorVars = (
+        colorObj: Record<string, any>,
+        colorGroup = "",
+      ): Record<string, string> => {
+        return Object.keys(colorObj).reduce((vars, colorKey) => {
+          const value = colorObj[colorKey];
+          const cssVariable =
+            colorKey === "DEFAULT"
+              ? `-${colorGroup}`
+              : `-${colorGroup}-${colorKey}`;
+
+          const newVars =
+            typeof value === "string"
+              ? { [cssVariable]: value }
+              : extractColorVars(value, `-${colorKey}`);
+
+          return { ...vars, ...newVars };
+        }, {});
+      };
+
+      addBase({
+        ":root": extractColorVars(theme("colors")),
       });
     }),
   ],

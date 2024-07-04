@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import type { ReactElement } from "react";
 import type {
   Body,
   Link as LinkType,
@@ -11,7 +10,7 @@ import type {
   Space as SpaceType,
   Header as HeaderType,
 } from "@/types/generics.types";
-import { Root as SeparatorRoot } from "@radix-ui/react-separator";
+import { Root as SeparatorType } from "@radix-ui/react-separator";
 
 const Table = dynamic(() => import("@/components/component-map/table"));
 const Link = dynamic(() => import("@/components/component-map/link"));
@@ -53,7 +52,7 @@ const getComponent = ({ type, ...props }: Body, index: number) => {
       return <Header key={keyString} {...(props as HeaderType)} />;
     }
     case "separator": {
-      return <Separator key={keyString} {...(props as typeof SeparatorRoot)} />;
+      return <Separator key={keyString} {...(props as typeof SeparatorType)} />;
     }
     case "space": {
       return <Space key={keyString} {...(props as SpaceType)} />;

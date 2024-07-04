@@ -3,7 +3,7 @@
 }
 
 .BuiltWith {
-    @apply text-2xs text-[--color-diminish] mt-1;
+    @apply text-2xs text-[--primary-diminish] mt-1;
 }
 
 .List {

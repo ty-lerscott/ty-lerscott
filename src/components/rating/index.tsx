@@ -24,14 +24,14 @@ const Star = ({ percent = 0 }: { percent: number }) => {
             offset={offset}
             style={{
               stopOpacity: 1,
-              stopColor: "var(--color-light)",
+              stopColor: "var(--primary-on-light)",
             }}
           />
           <stop
             offset={offset}
             style={{
               stopOpacity: 1,
-              stopColor: "var(--color-medium-dark)",
+              stopColor: "var(--primary-diminish)",
             }}
           />
         </linearGradient>

@@ -13,10 +13,12 @@ const Header = ({ body }: { body: Body[] }) => {
 
   useEffect(() => {
     controls.set({ top: "0px", opacity: 1 });
+
     const timer = setTimeout(async () => {
       await controls.start({ top: "0.5rem", opacity: 0 });
       setPosition((state) => (state === roles.length - 1 ? 0 : state + 1));
     }, 3000);
+
     return () => clearTimeout(timer);
   }, [setPosition, position, controls, roles.length]);
 

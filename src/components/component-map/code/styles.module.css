@@ -1,5 +1,5 @@
 .CodeWrapper {
-    @apply border-2 bg-[--color-darker] border-[--color-dark] relative p-2 rounded mt-2;
+    @apply border-2 bg-[--primary-light-background] border-[--primary-diminish] relative p-2 rounded mt-2;
 
     &>pre {
         overflow: auto;
@@ -7,9 +7,9 @@
 }
 
 .Code {
-    @apply text-[--color-primary-on-light] [&>*]:font-firaCode [&>*]:whitespace-pre text-left;
+    @apply text-[--secondary-on-light];
+    @apply hyphens-none [&>*]:font-firaCode [&>*]:whitespace-pre text-left;
     tab-size: 4;
-    hyphens: none;
 
     &>* {
         word-spacing: normal;
@@ -17,8 +17,8 @@
 }
 
 .Copy {
-    @apply absolute top-0 right-0 p-2 transition-colors text-[--color-text-secondary-on-light] text-shadow [&>*]:text-xs text-xs;
-    @apply hover:text-[--color-secondary-on-light-hover];
+    @apply text-[--primary] hover:text-[--primary-focus];
+    @apply absolute top-0 right-0 p-2 transition-colors [&>*]:text-xs text-xs;
 
     &>svg {
         @apply size-4;

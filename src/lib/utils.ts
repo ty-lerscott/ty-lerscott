@@ -17,6 +17,10 @@ const setMetadata = (metadata: Metadata): Metadata => {
       alternates: {
         canonical: "/",
       },
+      openGraph: {
+        title: "",
+        description: "",
+      },
     },
     metadata,
   );

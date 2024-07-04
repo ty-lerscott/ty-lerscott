@@ -1,3 +1,4 @@
+import type { ElementType } from "react";
 import type { Text as TextType } from "@/types/generics.types";
 
 const Text = ({
@@ -7,7 +8,7 @@ const Text = ({
 }: Omit<TextType, "type"> & {
   className?: string;
 }) => {
-  const Tag = tag as keyof JSX.IntrinsicElements;
+  const Tag = tag as ElementType;
 
   return (
     <Tag className={className} data-testid="Text">

@@ -1,7 +1,10 @@
+.ResumeBody, .Experiences {
+    @apply border-[--primary-diminish];
+}
+
 .ResumeBody {
     @apply grid grid-cols-8;
     @apply border-2 border-t-0;
-    @apply border-[--color-diminish];
 }
 
 .Sidebar {
@@ -11,5 +14,4 @@
 .Experiences {
     @apply border-l-2;
     @apply order-2 col-span-5;
-    @apply border-[--color-diminish];
 }

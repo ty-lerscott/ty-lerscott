@@ -14,9 +14,8 @@ import { useState, type ReactNode, isValidElement } from "react";
 import {
   Select,
   SelectItem,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
+  SelectPlaceholder,
 } from "@/components/ui/select";
 
 import styles from "./styles/skills.module.css";
@@ -62,11 +61,7 @@ const SkillRow = ({
   return (
     <div className={cn(styles.SkillRow, className)}>
       <span className={styles.SkillTitle}>{title}</span>
-      {isValidElement(value) ? (
-        value
-      ) : (
-        <span className={styles.SkillValue}>{value}</span>
-      )}
+      {isValidElement(value) ? value : <span>{value}</span>}
     </div>
   );
 };
@@ -97,29 +92,26 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(setSkill(skills));
 
-  // TODO: sort by regular then alphabetize the sort
   const handleSort = (value: SortBy) => {
     setSortBy(value);
 
-    const sorter = isChecked
-      ? [{ asc: SORTER(value) }]
-      : [{ desc: SORTER(value) }];
-
     setSkills((current) => {
-      return value === "default" ? setSkill(skills) : sort(current).by(sorter);
+      return value === "default"
+        ? setSkill(skills)
+        : sort(current).by(
+            isChecked ? [{ asc: SORTER(value) }] : [{ desc: SORTER(value) }],
+          );
     });
   };
 
   const toggleOrder = (value: boolean) => {
     setIsChecked(value);
 
-    const sorter = value
-      ? [{ asc: SORTER(sortBy) }]
-      : [{ desc: SORTER(sortBy) }];
-
-    setSkills((current) => {
-      return sort(current).by(sorter);
-    });
+    setSkills((current) =>
+      sort(current).by(
+        value ? [{ asc: SORTER(sortBy) }] : [{ desc: SORTER(sortBy) }],
+      ),
+    );
   };
 
   return (
@@ -127,31 +119,25 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
       <SectionHeader header="Skills" />
       <div className={styles.SelectWrapper}>
         <Select onValueChange={handleSort}>
-          <SelectTrigger className="border-t-0 border-b-0 border-l-0 border-r-2 border-r-[--color-medium-dark]">
-            <SelectValue placeholder="Default" className="text-sm" />
-          </SelectTrigger>
+          <SelectPlaceholder className={styles.Select} placeholder="Default" />
 
           <SelectContent>
             <SelectItem value="default">Default</SelectItem>
-            <SelectItem value="favorite">Preferred</SelectItem>
-            <SelectItem value="years">Years of Experiences</SelectItem>
             <SelectItem value="name">Alphabetical</SelectItem>
             <SelectItem value="comfortLevel">Comfort Level</SelectItem>
+            <SelectItem value="favorite">Preferred</SelectItem>
+            <SelectItem value="years">Years of Experience</SelectItem>
           </SelectContent>
-          <div className="flex justify-between items-center p-2">
-            <span className="text-2xs font-semibold text-[--color-text-secondary]">
-              desc
-            </span>
-            <Switch
-              checked={isChecked}
-              onCheckedChange={toggleOrder}
-              disabled={sortBy === "default"}
-            />
-            <span className="text-2xs font-semibold text-[--color-text-secondary]">
-              asc
-            </span>
-          </div>
         </Select>
+        <div className={styles.SortOrder}>
+          <span className={styles.OrderName}>desc</span>
+          <Switch
+            checked={isChecked}
+            onCheckedChange={toggleOrder}
+            disabled={sortBy === "default"}
+          />
+          <span className={styles.OrderName}>asc</span>
+        </div>
       </div>
       <div className={styles.SkillsList}>
         {sortedSkills.map((props) => {

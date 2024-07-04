@@ -1,5 +1,6 @@
 .QuoteWrapper {
-    @apply border-l-4 border-[--color-diminish] bg-[--color-darker] py-2 px-4 rounded;
+    @apply border-l-4 py-2 px-4 rounded;
+    @apply border-[--primary-diminish] bg-[--light-background];
 }
 
 .Quote {
@@ -14,7 +15,7 @@
     }
 
     .Text {
-        @apply text-[--color-primary-on-light];
+        @apply text-[--primary-on-light];
         @apply p-4 text-xl font-bold tracking-wide text-center shrink-0;
     }
 
@@ -24,5 +25,5 @@
 }
 
 .Author {
-    @apply mt-2 flex justify-end italic text-[--color-diminish];
+    @apply mt-2 flex justify-end italic text-[--primary-diminish];
 }

@@ -36,10 +36,10 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${zillaSlab.variable} Body`}>
+      <body className={`${inter.className} ${zillaSlab.variable}`}>
         <Header />
 
-        <main className="Main">{children}</main>
+        <main>{children}</main>
 
         <Footer />
         <Analytics />
