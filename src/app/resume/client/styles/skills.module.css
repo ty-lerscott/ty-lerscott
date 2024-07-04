@@ -8,16 +8,16 @@
 }
 
 .SortOrder {
-    @apply flex justify-between items-center p-2;
+    @apply flex justify-between items-center p-4;
 }
 
 .OrderName {
-    @apply text-2xs font-semibold text-[--ghost];
+    @apply text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--primary];
 }
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply sm:h-[73rem] md:h-[78.5rem];
+    @apply h-[74rem] md:h-[76.4rem];
 }
 
 .Skill {
@@ -46,7 +46,7 @@
     }
 
     .SkillHeader {
-        @apply flex items-center gap-1 mb-1;
+        @apply flex items-center gap-1 mb-2;
     }
 
     .SkillName {

@@ -3,5 +3,5 @@
 }
 
 .ContactRow {
-    @apply text-xs tracking-widest text-center leading-none even:my-2;
+    @apply text-xs tracking-widest text-center leading-none even:my-4;
 }

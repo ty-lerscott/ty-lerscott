@@ -9,8 +9,8 @@ const Contact = () => {
       <SectionHeader header="Contact" />
       <div className="p-4">
         <p className={styles.ContactRow}>607 882 0531</p>
-        <p className={cn(styles.ContactRow, "mt-1")}>ty@lerscott.com</p>
-        <p className={cn(styles.ContactRow, "mt-1")}>https://ty.lerscott.com</p>
+        <p className={styles.ContactRow}>ty@lerscott.com</p>
+        <p className={styles.ContactRow}>Hampton, VA</p>
       </div>
     </div>
   );

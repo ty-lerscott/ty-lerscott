@@ -130,13 +130,23 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
           </SelectContent>
         </Select>
         <div className={styles.SortOrder}>
-          <span className={styles.OrderName}>desc</span>
+          <span
+            className={styles.OrderName}
+            data-state={sortBy === "default" ? "disabled" : "enabled"}
+          >
+            desc
+          </span>
           <Switch
             checked={isChecked}
             onCheckedChange={toggleOrder}
             disabled={sortBy === "default"}
           />
-          <span className={styles.OrderName}>asc</span>
+          <span
+            className={styles.OrderName}
+            data-state={sortBy === "default" ? "disabled" : "enabled"}
+          >
+            asc
+          </span>
         </div>
       </div>
       <div className={styles.SkillsList}>
