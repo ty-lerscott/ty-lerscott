@@ -11,5 +11,5 @@
 }
 
 .EducationItem {
-    @apply p-4 text-center;
+    @apply p-4 flex justify-center items-center text-center;
 }
