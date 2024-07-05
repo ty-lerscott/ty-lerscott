@@ -40,21 +40,14 @@ const BREADCRUMBS = [
 export const generateMetadata = async ({
   params: { slug: pageSlug },
 }: PageParams) => {
-  const {
-    title: oldTitle,
-    description,
-    keywords,
-    image,
-    ...rest
-  } = await getData(pageSlug);
-
-  const title = `${oldTitle} | Post`;
+  const { title, description, keywords, image, ...rest } =
+    await getData(pageSlug);
 
   return setMetadata({
     alternates: {
       canonical: `/posts/${pageSlug}`,
     },
-    title,
+    title: `${title} | Post`,
     keywords,
     description,
     openGraph: {
