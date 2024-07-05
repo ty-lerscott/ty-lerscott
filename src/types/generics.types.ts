@@ -35,7 +35,6 @@ export type Tag = {
   text: string;
   href?: string;
   variant: string;
-  dashed: boolean;
 };
 
 export type Menu = {

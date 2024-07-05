@@ -1,62 +1,65 @@
 import { colorsArr, type TagClassesType } from "~/colors";
 
-const spacing = "py-1 px-2";
+const spacing = "inline-block py-1 px-2";
 
 const DEFAULT_STYLES =
-  "font-semibold tracking-wider outline outline-2 rounded-full text-2xs bg-transparent overflow-hidden flex";
+  "group  tracking-wider outline outline-2 rounded-full text-xs bg-transparent overflow-hidden";
+const DEFAULT_HOVER_STYLES =
+  "transition-[color,background-color,border-color,text-decoration-color,outline-color] h-full";
+const DEFAULT_HASH = `${spacing} ${DEFAULT_HOVER_STYLES} text-[--background]`;
 
 const TagStyles = {
   [colorsArr[0]]: {
-    bgColor: "bg-tomatoFrog",
-    color: "text-tomatoFrog-100 outline-tomatoFrog-300",
-    hover: "hover:text-tomatoFrog-100 hover:outline-tomatoFrog-300",
+    color: "text-tomatoFrog-300 outline-tomatoFrog-300",
+    hash: "bg-tomatoFrog-300 group-hover:bg-tomatoFrog-100",
+    hover: "hover:text-tomatoFrog-100 hover:outline-tomatoFrog-100",
   },
   [colorsArr[1]]: {
-    bgColor: "bg-persimmonOrange",
-    color: "text-persimmonOrange-200 outline-persimmonOrange-300",
-    hover: "hover:text-persimmonOrange-100 hover:outline-persimmonOrange-200",
+    color: "text-persimmonOrange-300 outline-persimmonOrange-300",
+    hash: "bg-persimmonOrange-300 group-hover:bg-persimmonOrange-100",
+    hover: "hover:text-persimmonOrange-100 hover:outline-persimmonOrange-100",
   },
   [colorsArr[2]]: {
-    bgColor: "bg-miamiMarmalade",
-    color: "text-miamiMarmalade-200 outline-miamiMarmalade-300",
-    hover: "hover:text-miamiMarmalade-50 hover:outline-miamiMarmalade-100",
+    color: "text-miamiMarmalade-300 outline-miamiMarmalade-300",
+    hash: "bg-miamiMarmalade-300 group-hover:bg-miamiMarmalade-100",
+    hover: "hover:text-miamiMarmalade-100 hover:outline-miamiMarmalade-100",
   },
   [colorsArr[3]]: {
-    bgColor: "bg-seLeiOrange",
-    color: "text-seLeiOrange-200 outline-seLeiOrange-300",
+    color: "text-seLeiOrange-300 outline-seLeiOrange-300",
+    hash: "bg-seLeiOrange-300 group-hover:bg-seLeiOrange-100",
     hover: "hover:text-seLeiOrange-100 hover:outline-seLeiOrange-100",
   },
   [colorsArr[4]]: {
-    bgColor: "bg-goBananas-600",
-    color: "text-goBananas-200 outline-goBananas-300",
-    hover: "hover:text-goBananas-50 hover:outline-goBananas-100",
+    color: "text-goBananas-300 outline-goBananas-300",
+    hash: "bg-goBananas-300 group-hover:bg-goBananas-100",
+    hover: "hover:text-goBananas-100 hover:outline-goBananas-100",
   },
   [colorsArr[5]]: {
-    bgColor: "bg-laudableLime-600",
-    color: "text-laudableLime-100 outline-laudableLime-300",
-    hover: "hover:text-laudableLime-50 hover:outline-laudableLime-100",
+    color: "text-laudableLime-300 outline-laudableLime-300",
+    hash: "bg-laudableLime-300 group-hover:bg-laudableLime-100",
+    hover: "hover:text-laudableLime-100 hover:outline-laudableLime-100",
   },
   [colorsArr[6]]: {
-    bgColor: "bg-marineGreen-600",
-    color: "text-marineGreen-200 outline-marineGreen-300",
+    color: "text-marineGreen-300 outline-marineGreen-300",
+    hash: "bg-marineGreen-300 group-hover:bg-marineGreen-100",
     hover: "hover:text-marineGreen-100 hover:outline-marineGreen-100",
   },
   [colorsArr[7]]: {
-    bgColor: "bg-mirageLake-600",
-    color: "text-mirageLake-200 outline-mirageLake-300",
-    hover: "hover:text-mirageLake-100 hover:outline-mirageLake-200",
+    color: "text-mirageLake-300 outline-mirageLake-300",
+    hash: "bg-mirageLake-300 group-hover:bg-mirageLake-100",
+    hover: "hover:text-mirageLake-100 hover:outline-mirageLake-100",
   },
   [colorsArr[8]]: {
-    bgColor: "bg-copenBlue",
-    color: "text-copenBlue-200 outline-copenBlue-300",
-    hover: "hover:text-copenBlue-100 hover:outline-copenBlue-200",
+    color: "text-copenBlue-300 outline-copenBlue-300",
+    hash: "bg-copenBlue-300 group-hover:bg-copenBlue-100",
+    hover: "hover:text-copenBlue-100 hover:outline-copenBlue-100",
   },
   [colorsArr[9]]: {
-    bgColor: "bg-prominentBlue",
-    color: "text-prominentBlue-200 outline-prominentBlue-400",
-    hover: "hover:text-prominentBlue-100 hover:outline-prominentBlue-200",
+    color: "text-prominentBlue-300 outline-prominentBlue-300",
+    hash: "bg-prominentBlue-300 group-hover:bg-prominentBlue-100",
+    hover: "hover:text-prominentBlue-100 hover:outline-prominentBlue-100",
   },
-} as Record<TagClassesType, { bgColor: string; color: string; hover: string }>;
+} as Record<TagClassesType, { hash: string; color: string; hover: string }>;
 
 const HashStyles = {
   [colorsArr[0]]: "text-tomatoFrog-600 bg-tomatoFrog-300",
@@ -68,14 +71,16 @@ const HashStyles = {
   [colorsArr[6]]: "text-marineGreen-600 bg-marineGreen-300",
   [colorsArr[7]]: "text-mirageLake-600 bg-mirageLake-300",
   [colorsArr[8]]: "text-copenBlue-600 bg-copenBlue-300",
-  [colorsArr[9]]: "text-prominentBlue-500 bg-prominentBlue-300",
+  [colorsArr[9]]: "",
 };
 
 const styles = {
   spacing,
-  DEFAULT_STYLES,
   TagStyles,
   HashStyles,
+  DEFAULT_HASH,
+  DEFAULT_STYLES,
+  DEFAULT_HOVER_STYLES,
 };
 
 export default styles;

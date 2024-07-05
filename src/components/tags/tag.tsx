@@ -1,30 +1,26 @@
 import { cn } from "@/lib/utils";
+import type { ElementType } from "react";
 import Link, { LinkProps } from "next/link";
 import type { TagClassesType } from "~/colors";
 import type { Tag as TagType } from "@/types/generics.types";
 
 import styles from "./styles";
 
-const Tag = ({ text, href, dashed, variant }: Omit<TagType, "type">) => {
-  const Component = href ? Link : "span";
+const Tag = ({ text, href, variant }: Omit<TagType, "type">) => {
+  const Component = href ? Link : ("span" as ElementType);
   const url = href ? `/tags/${href as string}` : "";
+
+  const tagStyles = styles.TagStyles[variant as TagClassesType];
 
   const props = {
     ...(url && { href: url || "" }),
     "data-testid": "Tag",
-    className: cn([
+    className: cn("px-0", [
       styles.DEFAULT_STYLES,
+      tagStyles.color,
       url
-        ? "transition-colors transition-[color,background-color,border-color,text-decoration-color,outline-color]"
+        ? [styles.DEFAULT_HOVER_STYLES, tagStyles.hover]
         : "hover:cursor-default",
-      {
-        ["outline-dashed"]: dashed,
-      },
-      Object.entries(styles.TagStyles[variant as TagClassesType] || {}).filter(
-        ([key, style]) => {
-          return url ? style : key === "hover" ? "" : style;
-        },
-      ),
     ]),
   } as LinkProps;
 
@@ -32,12 +28,13 @@ const Tag = ({ text, href, dashed, variant }: Omit<TagType, "type">) => {
     <Component {...props}>
       {url ? (
         <span
-          className={`pr-1.5 pl-1.5 flex h-full items-center text-xs ${styles.HashStyles[variant as TagClassesType]}`}
+          data-state="url"
+          className={cn(styles.DEFAULT_HASH, tagStyles.hash, "font-semibold")}
         >
           #
         </span>
       ) : null}
-      <span className={styles.spacing}>{text.toLowerCase()}</span>
+      <span className={cn(styles.spacing)}>{text.toLowerCase()}</span>
     </Component>
   );
 };
