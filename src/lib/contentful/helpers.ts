@@ -8,8 +8,6 @@ import type {
 const API_KEY = process.env.CONTENTFUL_API_KEY as string;
 
 const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
-  "use server";
-
   return fetch(url, {
     headers: new Headers({
       Authorization: `Bearer ${API_KEY}`,

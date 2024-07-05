@@ -31,6 +31,7 @@
     "eslint-config-prettier": "9.1.0",
     "fast-sort": "3.4.0",
     "framer-motion": "11.2.12",
+    "jimp": "^0.22.12",
     "lucide-react": "0.394.0",
     "next": "14.2.3",
     "object.omit": "3.0.0",
@@ -40,6 +41,7 @@
     "react": "18",
     "react-dom": "18",
     "react-icons": "5.2.1",
+    "sharp": "^0.33.4",
     "tailwind-merge": "2.3.0",
     "tailwind-scrollbar-hide": "1.1.7",
     "tailwindcss-animate": "1.0.7"

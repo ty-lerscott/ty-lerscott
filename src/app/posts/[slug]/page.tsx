@@ -1,16 +1,17 @@
 import dayjs from "dayjs";
 import { cache } from "react";
 import dynamic from "next/dynamic";
+import Image from "@/components/image";
 import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
 import { cn, setMetadata } from "@/lib/utils";
 import { FaRegCalendar } from "react-icons/fa6";
+import { querify } from "@/lib/contentful/helpers";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import { PageParams, Header as HeaderType } from "@/types/generics.types";
 
-const Image = dynamic(() => import("next/image"));
 const Tags = dynamic(() => import("@/components/tags"));
 
 import styles from "./styles.module.css";
@@ -35,16 +36,36 @@ const BREADCRUMBS = [
   },
 ] as Breadcrumb[];
 
-export const generateMetadata = async ({ params: { slug } }: PageParams) => {
-  const resp = await getData(slug);
+export const generateMetadata = async ({
+  params: { slug: pageSlug },
+}: PageParams) => {
+  const { title, description, keywords, image, ...rest } =
+    await getData(pageSlug);
 
   return setMetadata({
     alternates: {
-      canonical: `/posts/${resp.slug}`,
+      canonical: `/posts/${pageSlug}`,
     },
-    title: resp.title,
-    keywords: resp.keywords,
-    description: resp.description,
+    title,
+    keywords,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/posts/${pageSlug}`,
+      images: image && [
+        {
+          width: image.details.image.width,
+          height: image.details.image.height,
+          url: `/api/blur?${querify({
+            title,
+            w: image.details.image.width,
+            h: image.details.image.height,
+            url: image.url.replace(/^\/+/, ""),
+          })}`,
+        },
+      ],
+    },
   });
 };
 
@@ -71,11 +92,10 @@ const Post = async ({ params: { slug } }: PageParams) => {
       {image ? (
         <div className={styles.Image}>
           <Image
-            fill
-            priority
-            src={`https:${image.url}`}
+            url={`${image.url}`}
+            width={image.details.image.width}
+            height={image.details.image.height}
             alt={image.description || image.title}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       ) : null}

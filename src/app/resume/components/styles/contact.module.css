@@ -3,5 +3,6 @@
 }
 
 .ContactRow {
+    @apply text-[--ghost];
     @apply text-xs tracking-widest text-center leading-none even:my-4;
 }
