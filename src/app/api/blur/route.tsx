@@ -48,6 +48,8 @@ export async function GET(request: Request) {
               color: "white",
               fontSize: "6rem",
               textAlign: "center",
+              paddingLeft: "1rem",
+              paddingRight: "1rem",
               display: title ? "block" : "none",
             }}
           >

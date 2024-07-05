@@ -25,7 +25,7 @@ const setMetadata = (metadata: Metadata): Metadata => {
         type: "website",
         locale: "en_US",
         logo: "/favicon.ico",
-        siteName: pkg.metadata.title,
+        siteName: pkg.metadata.title.replace(/^\|/, ""),
         url: "https://ty.lerscott.com",
       },
     },
