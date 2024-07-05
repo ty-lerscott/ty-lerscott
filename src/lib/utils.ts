@@ -1,20 +1,34 @@
-import merge from "deepmerge";
 import pkg from "~/package.json";
+import merge from "lodash.mergewith";
 import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 
+const isLocal = process.env.NODE_ENV === "development";
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+const META_TITLE = pkg.author.name;
+
+function customMerge(objValue: any, srcValue: any, key: string) {
+  // Check if we're dealing with the specific keys we want to merge
+  if (key === "title") {
+    // If both values are strings, concatenate them
+    if (typeof objValue === "string" && typeof srcValue === "string") {
+      return `${isLocal ? "✴️ " : ""}${srcValue} | ${objValue}`;
+    }
+  }
+  return undefined;
+}
 
 const setMetadata = (metadata: Metadata): Metadata => {
   return merge(
+    {},
     {
-      title: "",
+      title: META_TITLE,
       keywords: "",
       description: "",
       creator: pkg.author.name,
       authors: [{ name: pkg.author.name }],
-      metadataBase: "https://ty.lerscott.com",
+      metadataBase: pkg.author.website,
       alternates: {
         canonical: "/",
       },
@@ -25,11 +39,12 @@ const setMetadata = (metadata: Metadata): Metadata => {
         type: "website",
         locale: "en_US",
         logo: "/favicon.ico",
-        siteName: pkg.metadata.title.replace(/^\|/, ""),
-        url: "https://ty.lerscott.com",
+        siteName: META_TITLE,
+        url: pkg.author.website,
       },
     },
     metadata,
+    customMerge,
   );
 };
 

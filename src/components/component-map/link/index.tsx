@@ -1,7 +1,7 @@
-import merge from "deepmerge";
 import omit from "object.omit";
 import { cn } from "@/lib/utils";
 import NextLink from "next/link";
+import merge from "lodash.mergewith";
 import type { Link as LinkType } from "@/types/generics.types";
 
 import styles from "./styles.module.css";

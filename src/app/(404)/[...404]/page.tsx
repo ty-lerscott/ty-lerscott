@@ -1,15 +1,14 @@
 import Path from "./path";
-import pkg from "~/package.json";
 import type { Metadata } from "next";
+import { setMetadata } from "@/lib/utils";
 import getFact from "@/lib/externals/fact";
 import { FaInfinity } from "react-icons/fa";
-import { setMetadata } from "@/lib/utils";
 
 export const metadata: Metadata = setMetadata({
   alternates: {
     canonical: "/oops",
   },
-  title: `Not Found ${pkg.metadata.title}`,
+  title: `Not Found`,
 });
 
 const NotFoundPage = async () => {

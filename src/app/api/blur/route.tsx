@@ -4,6 +4,8 @@ import { ImageResponse } from "next/og";
 
 export const dynamic = "force-dynamic";
 
+const SUBTITLE = `${pkg.author.name} | ${pkg.author.profession}`;
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title");
@@ -64,7 +66,7 @@ export async function GET(request: Request) {
               display: title ? "block" : "none",
             }}
           >
-            {pkg.metadata.title.replace(/^\|/, "").trim()}
+            {SUBTITLE}
           </p>
         </div>
       ),

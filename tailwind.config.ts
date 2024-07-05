@@ -1,4 +1,4 @@
-import merge from "deepmerge";
+import merge from "lodash.mergewith";
 import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 import { keyMap, colors as newColors } from "./colors";
@@ -134,15 +134,12 @@ const config = {
           "@apply transition-colors hover:text-[--primary-action]": "",
         },
         ul: {
-          "@apply space-y-1 list-disc list-inside": "",
-          "@apply [&:not([class])]:list-none": "",
-          "@apply [&>:not([hidden])~:not([hidden])]:my-[inherit]": "",
-          "@apply [&:not([class])~li:first-child]:-ml-2": "",
+          "@apply list-disc list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":
+            "",
         },
         ol: {
-          "@apply space-y-1 list-decimal list-inside": "",
-          "@apply [&:not([class])]:list-none": "",
-          "@apply [&:not([class])>li:first-child]:ml-1": "",
+          "@apply list-decimal list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":
+            "",
         },
       });
     }),

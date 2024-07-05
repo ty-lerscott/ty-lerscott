@@ -1,10 +1,10 @@
-import merge from "deepmerge";
+import merge from "lodash.mergewith";
 import type { Image } from "@/types/generics.types";
 import { fetcher, extract, setQueryParams, normalize } from "./helpers";
 import { Entry, SearchParams, ResponseBody } from "@/types/contentful.types";
 
 const API_URI = "https://cdn.contentful.com";
-const IS_PROD = process.env.ENVIRONMENT === "production";
+const IS_PROD = process.env.NODE_ENV !== "development";
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID as string;
 const ENVIRONMENT_ID = IS_PROD ? "master" : "dev";
 
