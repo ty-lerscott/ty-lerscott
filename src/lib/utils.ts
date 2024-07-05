@@ -1,4 +1,5 @@
 import merge from "deepmerge";
+import pkg from "~/package.json";
 import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
@@ -9,10 +10,10 @@ const setMetadata = (metadata: Metadata): Metadata => {
   return merge(
     {
       title: "",
-      keywords: [],
+      keywords: "",
       description: "",
-      creator: "Tyler Scott",
-      authors: [{ name: "Tyler Scott" }],
+      creator: pkg.author.name,
+      authors: [{ name: pkg.author.name }],
       metadataBase: "https://ty.lerscott.com",
       alternates: {
         canonical: "/",
@@ -24,8 +25,8 @@ const setMetadata = (metadata: Metadata): Metadata => {
         type: "website",
         locale: "en_US",
         logo: "/favicon.ico",
+        siteName: pkg.metadata.title,
         url: "https://ty.lerscott.com",
-        siteName: "Tyler Scott | Senior Software Engineer",
       },
     },
     metadata,

@@ -38,11 +38,7 @@ export const generateMetadata = async () => {
     },
     title: resp.title,
     description: resp.description,
-    keywords: [resp.keywords]
-      .concat(
-        (resp.resumeSkills.filter(Boolean) || []).map((item) => item.name),
-      )
-      .join(", "),
+    keywords: `${resp.keywords}${(resp.resumeSkills.filter(Boolean) || []).map((item) => item.name).join(",")}`,
   });
 };
 

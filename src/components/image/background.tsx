@@ -1,9 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { querify } from "@/lib/contentful/helpers";
-import NextImage, { type ImageProps } from "next/image";
 
 const setBlurImageUrl = ({
   url,
@@ -20,18 +18,15 @@ const setBlurImageUrl = ({
     url: url.replace(/^\/+/, ""),
   })}`;
 
-const BlurImage = ({
+const BlurImageBackground = ({
   url,
-  alt,
   width,
   height,
-  ...props
-}: Omit<ImageProps, "src" | "width" | "height"> & {
+}: {
   url: string;
   width: number;
   height: number;
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [currentSrc, setCurrentSrc] = useState(
     setBlurImageUrl({
       url,
@@ -40,36 +35,34 @@ const BlurImage = ({
     }),
   );
 
+  let timer: NodeJS.Timeout;
+  const imageUrl = `https:${url}`;
+  const setTimer = () => {
+    timer = setTimeout(() => {
+      setCurrentSrc(imageUrl);
+    }, 1500);
+  };
+
   useEffect(() => {
     const highQuality = new Image();
-    const imageUrl = `https:${url}`;
     highQuality.src = imageUrl;
-
-    highQuality.onload = () => {
-      setCurrentSrc(imageUrl);
-      setIsLoading(false);
-    };
+    highQuality.onload = setTimer;
 
     return () => {
       highQuality.onload = null;
+      clearTimeout(timer);
     };
   }, [url]);
 
   return (
-    <NextImage
-      {...props}
-      alt={alt || ""}
-      src={currentSrc}
-      className={cn("transition-all", isLoading ? "opacity-75" : "opacity-1")}
-      {...(props.fill
-        ? null
-        : {
-            height,
-            width,
-          })}
+    <div
+      className={"transition-all h-full w-full bg-cover bg-no-repeat bg-center"}
+      style={{
+        backgroundImage: `url(${currentSrc})`,
+      }}
     />
   );
 };
-BlurImage.displayName = "BlurImage";
+BlurImageBackground.displayName = "BlurImageBackground";
 
-export default BlurImage;
+export default BlurImageBackground;

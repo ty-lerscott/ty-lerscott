@@ -1,11 +1,9 @@
-"use server";
-
 import jimp from "jimp";
+import pkg from "~/package.json";
 import { ImageResponse } from "next/og";
 
-/**
- *
- */
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title");
@@ -64,7 +62,7 @@ export async function GET(request: Request) {
               display: title ? "block" : "none",
             }}
           >
-            Tyler Scott | Senior Software Engineer
+            {pkg.metadata.title.replace(/^\|/, "").trim()}
           </p>
         </div>
       ),

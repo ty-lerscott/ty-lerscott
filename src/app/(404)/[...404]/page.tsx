@@ -1,4 +1,5 @@
 import Path from "./path";
+import pkg from "~/package.json";
 import type { Metadata } from "next";
 import getFact from "@/lib/externals/fact";
 import { FaInfinity } from "react-icons/fa";
@@ -8,7 +9,7 @@ export const metadata: Metadata = setMetadata({
   alternates: {
     canonical: "/oops",
   },
-  title: "Not Found | Tyler Scott | Senior Software Engineer",
+  title: `Not Found ${pkg.metadata.title}`,
 });
 
 const NotFoundPage = async () => {

@@ -8,10 +8,9 @@
 }
 
 .Image {
-    @apply relative w-full h-[24rem] flex justify-center;
+    @apply relative w-full h-[36.5rem] flex justify-center;
 
     &>img {
-        @apply !w-auto;
-        position: inherit !important;
+        @apply w-[initial];
     }
 }

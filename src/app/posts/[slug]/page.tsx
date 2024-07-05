@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { cache } from "react";
+import pkg from "~/package.json";
 import dynamic from "next/dynamic";
-import Image from "@/components/image";
 import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
 import { cn, setMetadata } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { FaRegCalendar } from "react-icons/fa6";
 import { querify } from "@/lib/contentful/helpers";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
+import ImageBackground from "@/components/image/background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import { PageParams, Header as HeaderType } from "@/types/generics.types";
 
@@ -50,7 +51,7 @@ export const generateMetadata = async ({
     keywords,
     description,
     openGraph: {
-      title,
+      title: `${title} ${pkg.metadata.title}`,
       description,
       url: `/posts/${pageSlug}`,
       images: image && [
@@ -91,11 +92,10 @@ const Post = async ({ params: { slug } }: PageParams) => {
 
       {image ? (
         <div className={styles.Image}>
-          <Image
+          <ImageBackground
             url={`${image.url}`}
             width={image.details.image.width}
             height={image.details.image.height}
-            alt={image.description || image.title}
           />
         </div>
       ) : null}
