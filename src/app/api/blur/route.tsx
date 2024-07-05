@@ -3,6 +3,9 @@
 import jimp from "jimp";
 import { ImageResponse } from "next/og";
 
+/**
+ *
+ */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title");
@@ -17,7 +20,7 @@ export async function GET(request: Request) {
   }
 
   const imageUrl = `https://${url}?fm=png&w=${width}&h=${height}&q=5`;
-  console.log({ imageUrl });
+
   try {
     // // Resize the image to a smaller size for faster processing
     const image = await jimp.read(imageUrl);
@@ -25,6 +28,7 @@ export async function GET(request: Request) {
     image.blur(10);
 
     const bufferedImage = await image.getBufferAsync(jimp.MIME_PNG);
+    const encodedImage = Buffer.from(bufferedImage).toString("base64");
 
     // Return the blurred image as an ImageResponse
     return new ImageResponse(
@@ -37,7 +41,7 @@ export async function GET(request: Request) {
             alignItems: "center",
             flexDirection: "column",
             justifyContent: "center",
-            background: `url("data:image/png;base64,${Buffer.from(bufferedImage).toString("base64")}")`,
+            background: `url("data:image/png;base64,${encodedImage}")`,
           }}
         >
           <h1

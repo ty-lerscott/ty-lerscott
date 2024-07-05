@@ -23,6 +23,7 @@ const setMetadata = (metadata: Metadata): Metadata => {
         description: "",
         type: "website",
         locale: "en_US",
+        logo: "/favicon.ico",
         url: "https://ty.lerscott.com",
         siteName: "Tyler Scott | Senior Software Engineer",
       },

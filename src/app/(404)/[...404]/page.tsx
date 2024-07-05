@@ -16,7 +16,7 @@ const NotFoundPage = async () => {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <FaInfinity className="w-48 h-40 text-[--ghost]" />
+      <FaInfinity className="w-48 h-40 text-[--background-secondary]" />
 
       <Path />
 
