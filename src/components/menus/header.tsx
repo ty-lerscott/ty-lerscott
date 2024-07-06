@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getMenu } from "@/lib/contentful";
-import Separator from "@/components/ui/separator";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -17,23 +16,20 @@ const HeaderMenu = async () => {
   if (!menuItems) return null;
 
   return (
-    <div data-testid="Header">
-      <header className={styles.Header}>
-        <Link href="/">Tyler Scott</Link>
-        <NavigationMenu>
-          <NavigationMenuList className={styles.MenuList}>
-            {menuItems.map(({ text, href }) => (
-              <NavigationMenuItem key={`menuItem-${text}`}>
-                <Link href={href} legacyBehavior passHref>
-                  <NavigationMenuLink>{text}</NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-      </header>
-      <Separator />
-    </div>
+    <header className={styles.Header}>
+      <Link href="/">Tyler Scott</Link>
+      <NavigationMenu>
+        <NavigationMenuList className={styles.MenuList}>
+          {menuItems.map(({ text, href }) => (
+            <NavigationMenuItem key={`menuItem-${text}`}>
+              <Link href={href} legacyBehavior passHref>
+                <NavigationMenuLink>{text}</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+    </header>
   );
 };
 

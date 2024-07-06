@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import SectionHeader from "@/app/resume/components/section-header";
+import SectionHeader from "@/app/(root)/resume/components/section-header";
 import type { WorkExperience, Header, Text } from "@/types/generics.types";
 
 import styles from "./styles/experiences.module.css";

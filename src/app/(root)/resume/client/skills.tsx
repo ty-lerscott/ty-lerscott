@@ -1,9 +1,9 @@
 "use client";
 
 import dayjs from "dayjs";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../../lib/utils";
 import { sort } from "fast-sort";
-import Index from "@/components/rating";
+import Rating from "@/components/rating";
 import { MdFavorite } from "react-icons/md";
 import { yearsOfExperience } from "../utils";
 import { Switch } from "@/components/ui/switch";
@@ -75,7 +75,7 @@ const Skill = ({ name, years, favorite, comfortLevel }: ModifiedSkill) => {
       </p>
       <SkillRow
         title="Comfort Level"
-        value={<Index rating={comfortLevel / 2} />}
+        value={<Rating rating={comfortLevel / 2} />}
       />
       <Separator className="h-[1px] my-1" data-testid="separator" />
       <SkillRow

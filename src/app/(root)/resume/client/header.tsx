@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import type { Body, Text } from "@/types/generics.types";
+import type { Body, Text } from "../../../../types/generics.types";
 
 import styles from "./styles/header.module.css";
 

@@ -9,7 +9,6 @@ const HeaderStyles = (
   letterSpacing: "0.05em",
   fontFamily: "var(--font-zilla-slab)",
   fontWeight: theme("fontWeight.medium"),
-  color: theme("colors.secondary.DEFAULT"),
 });
 
 const DEFAULT_SCREEN_SIZE = "1024px";
@@ -94,14 +93,10 @@ const config = {
           display: "grid",
           gridTemplateRows: "auto 1fr auto",
           minHeight: theme("minHeight.screen"),
-          color: theme("colors.primary.DEFAULT"),
-          backgroundColor: theme("colors.background.DEFAULT"),
           "@apply selection:text-[--background] selection:bg-[--primary]": "",
         },
         main: {
-          "@apply container": "",
           padding: theme("spacing.4"),
-          paddingBottom: theme("spacing.8"),
           minHeight: theme("minHeight.full"),
           "@apply [&>div]:flex [&>div]:flex-col [&>div]:gap-4": "",
         },
@@ -144,7 +139,7 @@ const config = {
         },
       });
     }),
-    plugin(function ({ addBase, theme }) {
+    plugin(function ({ addBase, theme, addComponents }) {
       const extractColorVars = (
         colorObj: Record<string, any>,
         colorGroup = "",
@@ -164,7 +159,6 @@ const config = {
           return { ...vars, ...newVars };
         }, {});
       };
-
       addBase({
         ":root": extractColorVars(theme("colors")),
       });

@@ -8,7 +8,7 @@ import { FaRegCalendar } from "react-icons/fa6";
 import { querify } from "@/lib/contentful/helpers";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import AspectRatio from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image/background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import { PageParams, Header as HeaderType } from "@/types/generics.types";

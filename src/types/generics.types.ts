@@ -170,10 +170,10 @@ export type WorkExperience = {
 };
 
 export type Resume = Page & {
+  resumeBio: string;
+  education: Header[];
   resumeSkills: ResumeSkill[];
   workExperience: WorkExperience[];
-  education: Header[];
-  resumeBio: string;
 };
 
 export type Post = {

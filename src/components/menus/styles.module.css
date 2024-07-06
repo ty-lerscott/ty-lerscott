@@ -1,5 +1,5 @@
 .Header {
-  @apply container flex items-center justify-between p-4;
+  @apply container flex items-center justify-between py-4;
 }
 
 .MenuList {

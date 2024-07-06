@@ -1,0 +1,67 @@
+.Name {
+    @apply uppercase text-6xl font-semibold;
+}
+
+.Profession {
+    @apply text-[--primary] text-3xl font-semibold;
+}
+
+.Contact {
+    @apply grid grid-cols-3 gap-2;
+}
+
+.ContactItem {
+    @apply flex items-center gap-2;
+}
+
+.Icon {
+    @apply size-4 text-[--primary];
+}
+
+.Body {
+    @apply grid grid-cols-3 gap-4;
+}
+
+.Header {
+    @apply border-b-4 border-[--primary] pb-2 mb-4 uppercase font-bold;
+}
+
+.WorkExperiences {
+    @apply col-span-2;
+
+    .Experience {
+        @apply [&:not(:first-of-type)]:mt-4;
+    }
+
+    .ExperienceCompanyLocation {
+        @apply text-[--primary] mb-2 mt-1 leading-none;
+    }
+
+    .ExperienceDate {
+        @apply flex gap-2 items-center text-xs font-bold leading-none;
+    }
+
+    .ExperienceCalendar {
+        @apply size-2.5;
+    }
+
+    .ExperienceBody {
+        @apply text-sm leading-4 mt-2;
+    }
+}
+
+.Sidebar {
+    @apply col-span-1;
+}
+
+.Education {
+    @apply [&:not(:first-of-type)]:my-4;
+}
+
+.EducationDuration {
+    @apply text-sm text-[--primary];
+}
+
+.Skill {
+    @apply flex items-center justify-between even:my-1;
+}

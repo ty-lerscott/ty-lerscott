@@ -2,11 +2,13 @@ import type { Viewport } from "next";
 import type { ReactNode } from "react";
 import Header from "@/components/menus/header";
 import Footer from "@/components/footer/footer";
+import Separator from "@/components/ui/separator";
 import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import "./tailwind.css";
+import "./global.css";
+import "../tailwind.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,10 +38,14 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${zillaSlab.variable}`}>
+      <body
+        className={`${inter.className} ${zillaSlab.variable} bg-[--background] text-[--primary]`}
+      >
         <Header />
 
-        <main>{children}</main>
+        <Separator />
+
+        <main className="container pb-8">{children}</main>
 
         <Footer />
         <Analytics />

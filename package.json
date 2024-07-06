@@ -16,9 +16,12 @@
   "cms": "Contentful",
   "author": {
     "name": "Tyler Scott",
+    "phone": "607 882 0531",
+    "address": "Hampton, VA",
     "email": "ty@lerscott.com",
     "website": "https://ty.lerscott.com",
-    "profession": "Senior Software Engineer"
+    "profession": "Senior Software Engineer",
+    "linkedin": "linkedin.com/in/tylerscottwilliams"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.0",

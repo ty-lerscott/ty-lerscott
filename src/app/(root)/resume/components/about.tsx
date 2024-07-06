@@ -1,6 +1,6 @@
 import SectionHeader from "./section-header";
 import type { Resume } from "@/types/generics.types";
-import { yearsOfExperience } from "@/app/resume/utils";
+import { yearsOfExperience } from "@/app/(root)/resume/utils";
 
 import styles from "./styles/about.module.css";
 

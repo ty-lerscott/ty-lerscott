@@ -2,7 +2,13 @@ import { cn } from "@/lib/utils";
 
 import styles from "./styles.module.css";
 
-const Star = ({ percent = 0 }: { percent: number }) => {
+const Star = ({
+  invert,
+  percent = 0,
+}: {
+  percent: number;
+  invert?: boolean;
+}) => {
   const offset = `${percent}%`;
 
   return (
@@ -24,14 +30,14 @@ const Star = ({ percent = 0 }: { percent: number }) => {
             offset={offset}
             style={{
               stopOpacity: 1,
-              stopColor: "var(--secondary)",
+              stopColor: `var(${invert ? "--ghost" : "--secondary"})`,
             }}
           />
           <stop
             offset={offset}
             style={{
               stopOpacity: 1,
-              stopColor: "var(--ghost)",
+              stopColor: `var(${invert ? "--secondary" : "--ghost"})`,
             }}
           />
         </linearGradient>
@@ -46,9 +52,11 @@ const Star = ({ percent = 0 }: { percent: number }) => {
 
 const Rating = ({
   rating,
+  invert,
   className,
 }: {
   rating: number;
+  invert?: boolean;
   className?: string;
 }) => {
   const safeRating = Math.min(Math.max(rating, 0), 5);
@@ -60,7 +68,7 @@ const Rating = ({
         const percent =
           Math.min(Math.max(safeRating - (starNumber - 1), 0), 1) * 100;
 
-        return <Star key={`Star-${ind}`} percent={percent} />;
+        return <Star key={`Star-${ind}`} percent={percent} invert={invert} />;
       })}
     </div>
   );

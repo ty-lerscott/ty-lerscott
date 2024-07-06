@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import Separator from "@/components/ui/separator";
 import Header from "@/components/component-map/header";
-import SectionHeader from "@/app/resume/components/section-header";
 import type { Header as HeaderProps } from "@/types/generics.types";
+import SectionHeader from "@/app/(root)/resume/components/section-header";
 
 import styles from "./styles/education.module.css";
 
