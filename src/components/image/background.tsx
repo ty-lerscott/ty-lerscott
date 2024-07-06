@@ -1,6 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { querify } from "@/lib/contentful/helpers";
 
 const setBlurImageUrl = ({
@@ -18,6 +20,9 @@ const setBlurImageUrl = ({
     url: url.replace(/^\/+/, ""),
   })}`;
 
+const FULL = "w-full h-full rounded";
+const POSITION = "absolute top-0 left-0 right-0 bottom-0";
+
 const BlurImageBackground = ({
   url,
   width,
@@ -27,39 +32,54 @@ const BlurImageBackground = ({
   width: number;
   height: number;
 }) => {
-  const [currentSrc, setCurrentSrc] = useState(
-    setBlurImageUrl({
-      url,
-      width,
-      height,
-    }),
-  );
+  const [loading, setLoading] = useState(true);
+  const [src, setSrc] = useState(setBlurImageUrl({ url, height, width }));
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    const imageUrl = `https:${url}`;
-    const highQuality = new Image();
+    const imageBlur = new Image();
+    const imageHighRes = new Image();
 
-    highQuality.src = imageUrl;
-    highQuality.onload = () => {
-      timer = setTimeout(() => {
-        setCurrentSrc(imageUrl);
+    imageBlur.src = src;
+    imageHighRes.src = `https:${url}`;
+
+    let blurTimer: NodeJS.Timeout;
+    imageBlur.onload = () => {
+      blurTimer = setTimeout(() => {
+        setLoading(false);
+      }, 100);
+    };
+
+    let highResTimer: NodeJS.Timeout;
+    imageHighRes.onload = () => {
+      highResTimer = setTimeout(() => {
+        setSrc(imageHighRes.src);
       }, 1500);
     };
 
     return () => {
-      highQuality.onload = null;
-      clearTimeout(timer);
+      imageBlur.onload = null;
+      imageHighRes.onload = null;
+
+      clearTimeout(blurTimer);
+      clearTimeout(highResTimer);
     };
-  }, [url]);
+  }, [url, height, width]);
 
   return (
-    <div
-      className={"transition-all h-full w-full bg-cover bg-no-repeat bg-center"}
-      style={{
-        backgroundImage: `url(${currentSrc})`,
-      }}
-    />
+    <div className={cn(FULL, "overflow-hidden")}>
+      <div
+        className={cn(
+          FULL,
+          POSITION,
+          loading ? "opacity-0" : "opacity-100",
+          "transition-all bg-cover bg-no-repeat bg-center z-10",
+        )}
+        style={{
+          backgroundImage: `url(${src})`,
+        }}
+      />
+      <Skeleton className={cn(FULL, POSITION, "z-0")} />
+    </div>
   );
 };
 BlurImageBackground.displayName = "BlurImageBackground";
