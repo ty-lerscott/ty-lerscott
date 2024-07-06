@@ -1,7 +1,5 @@
-import merge from "lodash.mergewith";
-import type { Image } from "@/types/generics.types";
-import { fetcher, extract, setQueryParams, normalize } from "./helpers";
-import { Entry, SearchParams, ResponseBody } from "@/types/contentful.types";
+import { fetcher, setQueryParams, normalize } from "./helpers";
+import { SearchParams, ResponseBody } from "@/types/contentful.types";
 
 const API_URI = "https://cdn.contentful.com";
 const IS_PROD = process.env.NODE_ENV !== "development";
@@ -21,26 +19,6 @@ const PATHS = Object.entries(PATHS_OBJ).reduce(
   },
   {} as Record<string, any>,
 ) as Record<keyof typeof PATHS_OBJ, string>;
-
-const getAssetById = async <GenericType>(id: string) => {
-  try {
-    const resp = await fetcher<Entry>(
-      `${PATHS.assets}/${id}/?${setQueryParams({
-        contentType: "",
-      })}`,
-    );
-
-    return extract(resp) as GenericType;
-  } catch (err) {
-    console.log(
-      err instanceof Error
-        ? `getEntryById error: ${err.message}`
-        : "Unknown Error",
-    );
-  }
-
-  return {} as GenericType;
-};
 
 const getEntriesByType = async <GenericType extends Record<string, any>>(
   searchParams: SearchParams,
@@ -68,15 +46,9 @@ const getEntriesByType = async <GenericType extends Record<string, any>>(
       skip: resp.skip,
     };
 
-    let image;
-    const data = normalize<GenericType>(resp);
+    response.data = normalize<GenericType>(resp);
 
-    if (data?.image?.sys.id) {
-      image = await getAssetById<Image>(data.image.sys.id);
-      response.data = merge(data, { image }) as GenericType;
-    } else {
-      response.data = data;
-    }
+    return response;
   } catch (err) {
     console.log(
       err instanceof Error

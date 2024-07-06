@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { cache } from "react";
 import pkg from "~/package.json";
 import dynamic from "next/dynamic";
-import { getPost } from "@/lib/contentful";
+import { getPage, getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
 import { cn, setMetadata } from "@/lib/utils";
 import { FaRegCalendar } from "react-icons/fa6";

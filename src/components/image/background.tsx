@@ -35,18 +35,17 @@ const BlurImageBackground = ({
     }),
   );
 
-  let timer: NodeJS.Timeout;
-  const imageUrl = `https:${url}`;
-  const setTimer = () => {
-    timer = setTimeout(() => {
-      setCurrentSrc(imageUrl);
-    }, 1500);
-  };
-
   useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const imageUrl = `https:${url}`;
     const highQuality = new Image();
+
     highQuality.src = imageUrl;
-    highQuality.onload = setTimer;
+    highQuality.onload = () => {
+      timer = setTimeout(() => {
+        setCurrentSrc(imageUrl);
+      }, 1500);
+    };
 
     return () => {
       highQuality.onload = null;

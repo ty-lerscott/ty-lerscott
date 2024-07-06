@@ -1,3 +1,6 @@
+import omit from "object.omit";
+import merge from "lodash.mergewith";
+
 import type {
   Entry,
   BaseType,
@@ -52,15 +55,68 @@ const setQueryParams = ({
   });
 };
 
-const extract = ({ sys, fields: { file, ...fields } }: Entry) => {
-  return {
-    ...fields,
-    ...file,
-    type: sys?.contentType?.sys?.id || file?.contentType,
-  };
+const extract = ({
+  sys,
+  fields: { file, ...fields },
+}: Entry): { type: string; [key: string]: any } =>
+  merge(fields, file, { type: sys?.contentType?.sys?.id || file?.contentType });
+
+const find = (item: BaseType, obj: Record<string, any>) => {
+  return item?.sys?.id ? obj[item.sys.id] : undefined;
 };
 
-const find = (obj: Record<string, any>) => (item: BaseType) => obj[item.sys.id];
+const handlePrimitives = (item: BaseType | BaseType[]) => {
+  if (["string", "number", "boolean"].includes(typeof item)) {
+    return item;
+  }
+
+  return undefined;
+};
+
+const handleArrays = (
+  items: BaseType | BaseType[],
+  cb: (i: BaseType) => void,
+) => (Array.isArray(items) ? items.map(cb) : undefined);
+
+const handleObjects = ({
+  cb,
+  item,
+  base,
+}: {
+  item: BaseType;
+  base: Record<string, any>;
+  cb: (val: any) => Record<string, any>;
+}) => {
+  const found = find(item, base) || item;
+
+  if (found?.body) {
+    found.body = cb(found.body);
+    return found;
+  }
+
+  if (found?.fields) {
+    return Object.entries(found.fields).reduce(
+      (newObj, [fieldName, fieldValue]) => {
+        newObj[fieldName] = cb(fieldValue);
+        return newObj;
+      },
+      {} as Record<string, any>,
+    );
+  }
+
+  return found || item;
+};
+
+const recurser =
+  (included: Record<string, any>) =>
+  (item: BaseType | BaseType[]): Record<string, any> =>
+    handlePrimitives(item) ||
+    handleArrays(item as BaseType[], recurser(included)) ||
+    handleObjects({
+      base: included,
+      cb: recurser(included),
+      item: item as BaseType,
+    });
 
 const normalize = <Generic>(resp: ContentfulResponse) => {
   const { items, includes } = resp;
@@ -73,52 +129,13 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
       acc[item.sys.id] = extract(item);
       return acc;
     },
-    {} as Record<string, any>,
+    {} as Record<string, Omit<Entry, "metadata" | "sys" | "fields">>,
   );
 
-  // i'm not a huge fan of all this looping, I'd like the data to come back in a more structured way
-  // TODO: lookup up Directus as an alternative
-  const normalizedItems = items.map((item) => {
-    return {
-      ...item.fields,
-      ...(Array.isArray(item?.fields?.body) && {
-        body: (item.fields.body || []).map((bodyItem) => {
-          const item = find(included)(bodyItem);
-
-          // this only accounts for one deep,
-          // TODO: write function to recursive find and replace
-          if (Array.isArray(item?.body)) {
-            item.body = item.body.map(find(included));
-          }
-
-          return item;
-        }),
-      }),
-      ...(item.fields.tags && {
-        tags: item.fields.tags.map(find(included)),
-      }),
-      ...(item.fields.education && {
-        education: item.fields.education.map(find(included)),
-      }),
-      ...(item.fields.resumeSkills && {
-        resumeSkills: item.fields.resumeSkills.map(find(included)),
-      }),
-      ...(Array.isArray(item?.fields?.workExperience) && {
-        workExperience: item.fields.workExperience.map((item) => {
-          const experience = find(included)(item);
-
-          if (Array.isArray(experience.body) && experience.body.length) {
-            experience.body = experience?.body.map(find(included));
-          }
-
-          return experience;
-        }),
-      }),
-    };
-  });
+  const normalizedData = recurser(included)(items);
 
   return (
-    normalizedItems.length > 1 ? normalizedItems : normalizedItems[0]
+    normalizedData.length > 1 ? normalizedData : normalizedData[0]
   ) as Generic;
 };
 

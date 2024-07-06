@@ -1,30 +1,24 @@
-import { Image } from "@/types/generics.types";
-
 export type PageType = "home" | "about" | "posts" | "resume";
+
+export type BaseType = {
+  sys: {
+    id: string;
+    type: string;
+    linkType: string;
+  };
+};
 
 export type Entry = {
   metadata: {
     tags: string[];
   };
   sys: {
-    space: {
-      sys: {
-        type: string;
-        linkType: string;
-        id: string;
-      };
-    };
+    space: BaseType["sys"];
     id: string;
     type: string;
     createdAt: string;
     updatedAt: string;
-    environment: {
-      sys: {
-        id: string;
-        type: string;
-        linkType: string;
-      };
-    };
+    environment: BaseType["sys"];
     revision: number;
     contentType?: {
       sys: {
@@ -41,7 +35,6 @@ export type Entry = {
     };
     [key: string]: any;
   };
-  // [key: string]: any;
 };
 
 export type Pagination = {
@@ -62,34 +55,15 @@ export type SearchParams = {
   sort?: "asc" | "desc";
 };
 
-export type BaseType = {
-  sys: {
-    id: string;
-  };
-};
-
-export type ContentfulResponseItem = {
-  fields: {
-    body?: any[];
-    image?: Image;
-    tags?: BaseType[];
-    workExperience?: BaseType[];
-    resumeSkills?: BaseType[];
-    education?: BaseType[];
-    [key: string]: any;
-  };
-};
-
 export type ContentfulResponse = {
-  sys: {
-    type: string;
+  sys: BaseType["sys"] & {
     createdAt: string;
     updatedAt: string;
   };
   total: Pagination["total"];
   skip: Pagination["skip"];
   limit: number;
-  items: ContentfulResponseItem[];
+  items: (BaseType & { fields: Record<string, any> })[];
   includes: {
     Entry: Entry[];
     Asset: Entry[];
