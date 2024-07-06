@@ -44,9 +44,9 @@ const setQueryParams = ({
   return querify({
     order: sortOrder,
     limit: limit?.toString() || "10",
-    include: include ? String(include) : "5",
-    ...(name && { "fields.name[in]": name }),
     ...(skip && { skip: skip.toString() }),
+    ...(name && { "fields.name[in]": name }),
+    include: include ? String(include) : "5",
     select: select?.join(",") || "",
     ...(pageType && { "fields.type[in]": pageType }),
     ...(contentType && { content_type: contentType }),
@@ -124,7 +124,7 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
       });
       return acc;
     },
-    {} as Record<string, Omit<Entry, "metadata" | "sys" | "fields">>,
+    {} as Record<string, Entry>,
   );
 
   const normalizedData = recurser(included)(items);
