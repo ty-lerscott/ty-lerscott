@@ -24,7 +24,7 @@ const fetcher = async <GenericType = ContentfulResponse>(url: string) => {
 
 const querify = (obj: Record<string, any>) =>
   Object.entries(obj)
-    .map(([key, value]) => `${key}=${value}`)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
     .join("&");
 
 const setQueryParams = ({
@@ -53,12 +53,6 @@ const setQueryParams = ({
     ...(slug && { "fields.slug[in]": slug.replace(/^\//, "") }),
   });
 };
-
-const extract = ({
-  sys,
-  fields: { file, ...fields },
-}: Entry): { type: string; [key: string]: any } =>
-  merge(fields, file, { type: sys?.contentType?.sys?.id || file?.contentType });
 
 const find = (item: BaseType, obj: Record<string, any>) => {
   return item?.sys?.id ? obj[item.sys.id] : undefined;
@@ -125,7 +119,9 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
     ...(includes?.Asset ? includes.Asset : []),
   ].reduce(
     (acc, item) => {
-      acc[item.sys.id] = extract(item);
+      acc[item.sys.id] = merge(item.fields, item.fields?.file, {
+        type: item.sys?.contentType?.sys?.id || item.fields?.file?.contentType,
+      });
       return acc;
     },
     {} as Record<string, Omit<Entry, "metadata" | "sys" | "fields">>,
@@ -138,4 +134,4 @@ const normalize = <Generic>(resp: ContentfulResponse) => {
   ) as Generic;
 };
 
-export { querify, setQueryParams, extract, find, normalize, fetcher };
+export { querify, setQueryParams, find, normalize, fetcher };
