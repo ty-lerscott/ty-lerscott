@@ -16,7 +16,7 @@
 
 .AnimatedTextWrapper {
     @apply absolute bg-[--background];
-    @apply bottom-5 xs:bottom-3.5;
+    @apply bottom-5 xs:bottom-4;
 }
 
 .AnimatedText {
