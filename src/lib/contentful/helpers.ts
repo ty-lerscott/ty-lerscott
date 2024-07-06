@@ -68,29 +68,29 @@ const handlePrimitives = (item: BaseType | BaseType[]) => {
 
 const handleArrays = (
   items: BaseType | BaseType[],
-  cb: (i: BaseType) => void,
-) => (Array.isArray(items) ? items.map(cb) : undefined);
+  callback: (i: BaseType) => void,
+) => (Array.isArray(items) ? items.map(callback) : undefined);
 
 const handleObjects = ({
-  cb,
   item,
   base,
+  callback,
 }: {
   item: BaseType;
   base: Record<string, any>;
-  cb: (val: any) => Record<string, any>;
+  callback: (val: any) => Record<string, any>;
 }) => {
   const found = find(item, base) || item;
 
   if (found?.body) {
-    found.body = cb(found.body);
+    found.body = callback(found.body);
     return found;
   }
 
   if (found?.fields) {
     return Object.entries(found.fields).reduce(
       (newObj, [fieldName, fieldValue]) => {
-        newObj[fieldName] = cb(fieldValue);
+        newObj[fieldName] = callback(fieldValue);
         return newObj;
       },
       {} as Record<string, any>,
@@ -100,34 +100,36 @@ const handleObjects = ({
   return found || item;
 };
 
-const recurser =
-  (included: Record<string, any>) =>
-  (item: BaseType | BaseType[]): Record<string, any> =>
+const traverse =
+  (included: Record<string, any>) => (item: BaseType | BaseType[]) =>
     handlePrimitives(item) ||
-    handleArrays(item as BaseType[], recurser(included)) ||
+    handleArrays(item as BaseType[], traverse(included)) ||
     handleObjects({
       base: included,
-      cb: recurser(included),
       item: item as BaseType,
+      callback: traverse(included),
     });
 
 const normalize = <Generic>(resp: ContentfulResponse) => {
   const { items, includes } = resp;
 
-  const included = [
-    ...(includes?.Entry ? includes.Entry : []),
-    ...(includes?.Asset ? includes.Asset : []),
-  ].reduce(
-    (acc, item) => {
-      acc[item.sys.id] = merge(item.fields, item.fields?.file, {
-        type: item.sys?.contentType?.sys?.id || item.fields?.file?.contentType,
-      });
-      return acc;
-    },
-    {} as Record<string, Entry>,
+  const preppedTraverser = traverse(
+    [
+      ...(includes?.Entry ? includes.Entry : []),
+      ...(includes?.Asset ? includes.Asset : []),
+    ].reduce(
+      (acc, item) => {
+        acc[item.sys.id] = merge(item.fields, item.fields?.file, {
+          type:
+            item.sys?.contentType?.sys?.id || item.fields?.file?.contentType,
+        });
+        return acc;
+      },
+      {} as Record<string, Entry>,
+    ),
   );
 
-  const normalizedData = recurser(included)(items);
+  const normalizedData = preppedTraverser(items);
 
   return (
     normalizedData.length > 1 ? normalizedData : normalizedData[0]
