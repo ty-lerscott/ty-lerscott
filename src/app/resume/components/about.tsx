@@ -12,7 +12,7 @@ const About = ({ about }: { about: Resume["resumeBio"] }) => {
 
   return (
     <>
-      <SectionHeader header="About" />
+      <SectionHeader header="About" className={styles.Header} />
       <p className={styles.About}>
         {about.replace(/{{(.*?)}}/, String(professionalExperience))}
       </p>

@@ -36,21 +36,23 @@ const BlurImageBackground = ({
   const [src, setSrc] = useState(setBlurImageUrl({ url, height, width }));
 
   useEffect(() => {
+    let blurTimer: NodeJS.Timeout;
+    let highResTimer: NodeJS.Timeout;
+
     const imageBlur = new Image();
     const imageHighRes = new Image();
 
     imageBlur.src = src;
     imageHighRes.src = `https:${url}`;
 
-    let blurTimer: NodeJS.Timeout;
     imageBlur.onload = () => {
       blurTimer = setTimeout(() => {
         setLoading(false);
       }, 100);
     };
 
-    let highResTimer: NodeJS.Timeout;
     imageHighRes.onload = () => {
+      setLoading(false);
       highResTimer = setTimeout(() => {
         setSrc(imageHighRes.src);
       }, 1500);
@@ -59,11 +61,11 @@ const BlurImageBackground = ({
     return () => {
       imageBlur.onload = null;
       imageHighRes.onload = null;
-
       clearTimeout(blurTimer);
       clearTimeout(highResTimer);
     };
-  }, [url, height, width]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={cn(FULL, "overflow-hidden")}>

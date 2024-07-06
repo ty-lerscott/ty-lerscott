@@ -7,9 +7,9 @@ const HeaderStyles = (
   theme: (theme: string) => string,
 ): Record<string, string> => ({
   letterSpacing: "0.05em",
-  color: "var(--secondary)",
   fontFamily: "var(--font-zilla-slab)",
   fontWeight: theme("fontWeight.medium"),
+  color: theme("colors.secondary.DEFAULT"),
 });
 
 const DEFAULT_SCREEN_SIZE = "1024px";
@@ -55,16 +55,17 @@ const config = {
       ...newColors,
       ...keyMap,
     },
-    container: {
-      center: true,
-      padding: "2rem",
-      // screens: {
-      //   sm: "640px",
-      //   md: "768px",
-      //   DEFAULT: DEFAULT_SCREEN_SIZE,
-      // },
-    },
     extend: {
+      container: {
+        center: true,
+        padding: "2rem",
+        screens: {
+          xs: "100vw",
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+        },
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -91,10 +92,10 @@ const config = {
         },
         body: {
           display: "grid",
-          color: "var(--primary)",
           gridTemplateRows: "auto 1fr auto",
-          backgroundColor: "var(--background)",
           minHeight: theme("minHeight.screen"),
+          color: theme("colors.primary.DEFAULT"),
+          backgroundColor: theme("colors.background.DEFAULT"),
           "@apply selection:text-[--background] selection:bg-[--primary]": "",
         },
         main: {

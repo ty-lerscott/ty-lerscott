@@ -1,23 +1,27 @@
 .Header {
-    @apply border-[--ghost];
-    @apply border-2 border-b-0 p-4 text-center;
+    @apply text-center;
+}
 
-    .Wrapper {
-        @apply relative;
-        @apply flex flex-col items-center p-4 pb-7;
-    }
+.Wrapper {
+    @apply relative;
+    @apply flex flex-col items-center p-4 pb-7;
+}
 
-    .Name {
-        @apply uppercase border-2 border-[--ghost] w-max py-6 px-10;
-    }
+.Name {
+    @apply uppercase w-max px-10;
+    @apply xs:border-2 border-[--ghost] rounded;
+    @apply text-[6vw] xs:text-2xl sm:text-3xl;
+    @apply pt-2 pb-5 xs:py-6;
+}
 
-    .AnimatedTextWrapper {
-        @apply absolute bottom-3.5 bg-[--background];
-    }
+.AnimatedTextWrapper {
+    @apply absolute bg-[--background];
+    @apply bottom-5 xs:bottom-3.5;
+}
 
-    .AnimatedText {
-        @apply absolute bottom-0;
-        @apply bg-[--background] text-[--ghost];
-        @apply text-lg font-semibold px-4 tracking-widest relative;
-    }
+.AnimatedText {
+    @apply absolute bottom-0;
+    @apply bg-[--background] text-[--ghost];
+    @apply font-semibold px-4 tracking-widest relative;
+    @apply text-base sm:text-lg;
 }

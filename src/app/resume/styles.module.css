@@ -1,17 +1,20 @@
+.Page {
+    @apply border-[--ghost] border-2 rounded;
+}
+
 .ResumeBody, .Experiences {
-    @apply border-[--ghost];
+
 }
 
 .ResumeBody {
-    @apply grid grid-cols-8;
-    @apply border-2 border-t-0;
+    @apply grid sm:grid-cols-8;
 }
 
 .Sidebar {
-    @apply order-1 col-span-3;
+    @apply order-1 sm:col-span-3;
 }
 
 .Experiences {
-    @apply border-l-2;
-    @apply order-2 col-span-5;
+    @apply order-2 sm:col-span-5;
+    @apply sm:border-l-2 border-[--ghost];
 }

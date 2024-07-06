@@ -21,6 +21,7 @@
     "profession": "Senior Software Engineer"
   },
   "dependencies": {
+    "@radix-ui/react-aspect-ratio": "^1.1.0",
     "@radix-ui/react-navigation-menu": "1.1.4",
     "@radix-ui/react-select": "2.1.1",
     "@radix-ui/react-separator": "1.0.3",

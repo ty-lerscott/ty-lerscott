@@ -1,3 +1,7 @@
+.Header, .About {
+    @apply hidden xs:block;
+}
+
 .About {
-    @apply p-4 text-xs tracking-widest text-center leading-4;
+    @apply p-4 tracking-widest text-center leading-4 text-xs;
 }

@@ -1,5 +1,6 @@
 .ExperienceList {
-    @apply h-[102.7rem] scrollbar-hide overflow-y-scroll;
+    @apply sm:h-[108rem] md:h-[102.7rem];
+    @apply xs:scrollbar-hide sm:overflow-y-scroll;
 }
 
 .Experience {

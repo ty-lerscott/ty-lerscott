@@ -51,7 +51,7 @@ export default async function Resume() {
     <div data-testid="Page-Resume">
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
-      <div>
+      <div className={styles.Page}>
         <Header body={body} />
 
         <div data-testid="ResumeBody" className={styles.ResumeBody}>

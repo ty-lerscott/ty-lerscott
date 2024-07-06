@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 import { cache } from "react";
-import pkg from "~/package.json";
 import dynamic from "next/dynamic";
-import { getPage, getPost } from "@/lib/contentful";
+import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
 import { cn, setMetadata } from "@/lib/utils";
 import { FaRegCalendar } from "react-icons/fa6";
 import { querify } from "@/lib/contentful/helpers";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image/background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import { PageParams, Header as HeaderType } from "@/types/generics.types";
@@ -91,13 +91,13 @@ const Post = async ({ params: { slug } }: PageParams) => {
       {tags.length ? <Tags tags={tags} /> : null}
 
       {image ? (
-        <div className={styles.Image}>
+        <AspectRatio ratio={16 / 9}>
           <ImageBackground
             url={`${image.url}`}
             width={image.details.image.width}
             height={image.details.image.height}
           />
-        </div>
+        </AspectRatio>
       ) : null}
 
       <ComponentMap components={body} />

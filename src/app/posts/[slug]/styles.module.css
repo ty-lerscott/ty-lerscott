@@ -6,11 +6,3 @@
     @apply text-[--ghost];
     @apply flex items-center gap-2 mt-2;
 }
-
-.Image {
-    @apply relative w-full h-[36.5rem] flex justify-center;
-
-    &>img {
-        @apply w-[initial];
-    }
-}

@@ -116,7 +116,7 @@ const Skills = ({ skills }: { skills: ResumeSkill[] }) => {
 
   return (
     <>
-      <SectionHeader header="Skills" />
+      <SectionHeader header="Skills" className={styles.Header} />
       <div className={styles.SelectWrapper}>
         <Select onValueChange={handleSort}>
           <SelectPlaceholder className={styles.Select} placeholder="Default" />

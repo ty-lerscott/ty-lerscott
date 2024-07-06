@@ -1,8 +1,9 @@
 .Contact {
     @apply text-center;
+    @apply hidden xs:block;
 }
 
 .ContactRow {
     @apply text-[--ghost];
-    @apply text-xs tracking-widest text-center leading-none even:my-4;
+    @apply text-xs tracking-widest text-center leading-none even:my-2;
 }

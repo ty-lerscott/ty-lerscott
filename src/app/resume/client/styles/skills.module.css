@@ -1,6 +1,11 @@
+.Header {
+    @apply sm:block hidden;
+}
+
 .SelectWrapper {
     @apply border-b-2 border-[--ghost];
-    @apply grid grid-cols-[5fr_4fr];
+    @apply md:grid-cols-[5fr_4fr] grid-cols-2;
+    @apply sm:grid hidden;
 }
 
 .Select {
@@ -17,7 +22,8 @@
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply h-[74rem] md:h-[76.4rem];
+    @apply sm:h-[77.5rem];
+    @apply sm:block hidden;
 }
 
 .Skill {
