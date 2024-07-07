@@ -1,6 +1,7 @@
 import { cache } from "react";
 import dynamic from "next/dynamic";
 import Header from "./client/header";
+import Download from "./client/download";
 import { setMetadata } from "@/lib/utils";
 import Contact from "./components/contact";
 import { getPage } from "@/lib/contentful";
@@ -25,7 +26,7 @@ const BREADCRUMBS = [
   },
   {
     title: "Resume",
-    href: "/resume",
+    href: "/download",
   },
 ] as Breadcrumb[];
 
@@ -48,7 +49,10 @@ export default async function Resume() {
 
   return (
     <div data-testid="Page-Resume">
-      <Breadcrumbs breadcrumbs={BREADCRUMBS} />
+      <div className={styles.BreadcrumbRow}>
+        <Breadcrumbs breadcrumbs={BREADCRUMBS} />
+        <Download />
+      </div>
 
       <div className={styles.Page}>
         <Header body={body} />

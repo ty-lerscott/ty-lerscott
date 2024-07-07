@@ -1,10 +1,12 @@
+.BreadcrumbRow {
+    @apply flex gap-2 items-center justify-between;
+}
+
 .Page {
     @apply border-[--ghost] border-2 rounded;
 }
 
-.ResumeBody, .Experiences {
-
-}
+.ResumeBody, .Experiences {}
 
 .ResumeBody {
     @apply grid sm:grid-cols-8;

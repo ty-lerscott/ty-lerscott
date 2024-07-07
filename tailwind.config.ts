@@ -159,6 +159,42 @@ const config = {
           return { ...vars, ...newVars };
         }, {});
       };
+      addComponents({
+        ".Button": {
+          display: "inline-flex",
+          whiteSpace: "nowrap",
+          color: "var(--ghost)",
+          justifyContent: "center",
+          fontSize: theme("fontSize.sm"),
+          "@apply ring-offset-[--primary]": "",
+          "@apply disabled:pointer-events-none": "",
+          fontWeight: theme("fontWeight.bold"),
+          "@apply px-4 py-2 gap-2 relative items-center rounded transition-colors ring-2 ring-[--ghost]":
+            "",
+          "@apply focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2":
+            "",
+        },
+        ".Button-Pending": {
+          "@apply pointer-events-none": "",
+        },
+        ".Button-Primary": {
+          color: "var(--background)",
+          backgroundColor: "var(--primary)",
+          "@apply disabled:bg-[--background-secondary] disabled:text-[--ghost]":
+            "",
+          "@apply hover:text-[--background] hover:bg-[--ghost] focus-visible:ring-[--primary]":
+            "",
+        },
+        ".Button-Secondary": {
+          "@apply hover:text-[--primary] hover:ring-[--primary] focus-visible:ring-[--primary]":
+            "",
+          "@apply disabled:bg-[--background-secondary] disabled:text-[--ghost]":
+            "",
+        },
+        ".Button-Ghost": {
+          "@apply ring-[transparent] hover:text-[--primary]": "",
+        },
+      });
       addBase({
         ":root": extractColorVars(theme("colors")),
       });

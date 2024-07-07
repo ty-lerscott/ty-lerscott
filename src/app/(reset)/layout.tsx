@@ -35,9 +35,9 @@ const RootLayout = async ({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${zillaSlab.variable} bg-[white] text-gray-900 block`}
+        className={`${inter.className} ${zillaSlab.variable} bg-[white] block`}
       >
-        <main className="container">{children}</main>
+        {children}
 
         <Analytics />
         <SpeedInsights />

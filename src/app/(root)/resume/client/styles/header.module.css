@@ -4,7 +4,7 @@
 
 .Wrapper {
     @apply relative;
-    @apply flex flex-col items-center p-4 pb-7;
+    @apply flex flex-col items-center p-8;
 }
 
 .Name {
@@ -16,7 +16,7 @@
 
 .AnimatedTextWrapper {
     @apply absolute bg-[--background];
-    @apply bottom-5 xs:bottom-4;
+    @apply bottom-5 xs:bottom-5;
 }
 
 .AnimatedText {

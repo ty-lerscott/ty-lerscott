@@ -53,7 +53,7 @@ const Page = async () => {
   const experience = (workExperience || []).reverse();
 
   return (
-    <div className="mb-6">
+    <div className={styles.Page}>
       <div>
         <h1 className={styles.Name}>{pkg.author.name}</h1>
         <h2 className={styles.Profession}>{pkg.author.profession}</h2>
