@@ -91,7 +91,7 @@ const config = {
         },
         body: {
           display: "grid",
-          gridTemplateRows: "auto 1fr auto",
+          gridTemplateRows: "auto auto 1fr auto",
           minHeight: theme("minHeight.screen"),
           "@apply selection:text-[--background] selection:bg-[--primary]": "",
         },
