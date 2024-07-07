@@ -12,7 +12,9 @@ const Download = () => {
       setIsLoading(true);
 
       try {
-        const resp = await fetch("/api/download/resume");
+        const resp = await fetch("/api/download/resume", {
+          next: { revalidate: 0 },
+        });
         const blob = await resp.blob();
         const file = window.URL.createObjectURL(blob);
         const resumeWindow = window.open(file, "_blank");
