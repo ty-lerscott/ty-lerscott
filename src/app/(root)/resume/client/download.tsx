@@ -12,7 +12,7 @@ const Download = () => {
       setIsLoading(true);
 
       try {
-        const resp = await fetch("/api/download/resume", {
+        const resp = await fetch(`/api/download/resume`, {
           next: { revalidate: 0 },
         });
         const blob = await resp.blob();
