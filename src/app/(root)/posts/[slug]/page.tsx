@@ -47,7 +47,7 @@ export const generateMetadata = async ({
     alternates: {
       canonical: `/posts/${pageSlug}`,
     },
-    title: `${title} | Post`,
+    title,
     keywords,
     description,
     openGraph: {

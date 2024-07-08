@@ -1,8 +1,8 @@
 import { fetcher, setQueryParams, normalize } from "./helpers";
 import { SearchParams, ResponseBody } from "@/types/contentful.types";
 
+const IS_PROD = process.env.APP_ENV !== "development";
 const API_URI = "https://cdn.contentful.com";
-const IS_PROD = process.env.NODE_ENV !== "development";
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID as string;
 const ENVIRONMENT_ID = IS_PROD ? "master" : "dev";
 

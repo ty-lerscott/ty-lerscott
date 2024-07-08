@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 
-const isLocal = process.env.NODE_ENV === "development";
+const isLocal = process.env.APP_ENV === "development";
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
-const META_TITLE = pkg.author.name;
+const META_TITLE = `${pkg.author.name} | ${pkg.author.profession}`;
 
 function customMerge(objValue: any, srcValue: any, key: string) {
   // Check if we're dealing with the specific keys we want to merge
