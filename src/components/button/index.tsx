@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import { ImSpinner } from "react-icons/im";
 import type { ButtonProps } from "./types";
 import { Slot } from "@radix-ui/react-slot";
+import { PiSealWarningBold } from "react-icons/pi";
 
 export const ButtonName = {
   ghost: "Button-Ghost",
@@ -13,8 +14,10 @@ export const ButtonName = {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
+      error,
       children,
       asChild = false,
+      errorText,
       loading,
       className,
       loadingText,
@@ -24,6 +27,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const Comp = asChild ? Slot : "button";
+    const buttonText = loading
+      ? loadingText || children
+      : error
+        ? errorText || children
+        : children;
 
     return (
       <Comp
@@ -36,14 +44,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {loading ? (
-          <>
-            <ImSpinner className="animate-spin" />
-            {loadingText || children}
-          </>
-        ) : (
-          children
-        )}
+        {loading && !error ? <ImSpinner className="animate-spin" /> : null}
+        {error && !loading ? <PiSealWarningBold /> : null}
+        {buttonText}
       </Comp>
     );
   },

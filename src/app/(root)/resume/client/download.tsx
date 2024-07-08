@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@/components/button";
 
 const Download = () => {
+  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  let errorTimer: NodeJS.Timeout;
 
   const handleDownload = async () => {
     // only allow downloading if not already clicked
@@ -16,10 +19,19 @@ const Download = () => {
           next: { revalidate: 0 },
         });
         const blob = await resp.blob();
-        const file = window.URL.createObjectURL(blob);
-        const resumeWindow = window.open(file, "_blank");
-        if (resumeWindow) {
-          resumeWindow.document.title = "Tyler Scott Williams Resume.pdf";
+
+        if (!blob.type) {
+          setError(true);
+
+          errorTimer = setTimeout(() => {
+            setError(false);
+          }, 3000);
+        } else {
+          const file = window.URL.createObjectURL(blob);
+          const resumeWindow = window.open(file, "_blank");
+          if (resumeWindow) {
+            resumeWindow.document.title = "Tyler Scott Williams Resume.pdf";
+          }
         }
       } catch (err) {
         console.log("Error Downloading Resume", (err as Error).message);
@@ -28,12 +40,21 @@ const Download = () => {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      if (errorTimer) {
+        clearTimeout(errorTimer);
+      }
+    };
+  });
   return (
     <Button
+      error={error}
       variant="secondary"
       loading={isLoading}
       onClick={handleDownload}
       loadingText="Downloading"
+      errorText="Error Downloading"
     >
       Download
     </Button>

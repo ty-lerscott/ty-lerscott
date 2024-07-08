@@ -22,7 +22,7 @@
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply sm:h-[77.5rem];
+    @apply sm:h-[77.45rem];
     @apply sm:block hidden;
 }
 
