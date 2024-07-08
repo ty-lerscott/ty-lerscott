@@ -10,7 +10,7 @@ const META_TITLE = `${pkg.author.name} | ${pkg.author.profession}`;
 
 function customMerge(objValue: any, srcValue: any, key: string) {
   // Check if we're dealing with the specific keys we want to merge
-  if (key === "title") {
+  if (["title", "siteName"].includes(key)) {
     // If both values are strings, concatenate them
     if (typeof objValue === "string" && typeof srcValue === "string") {
       return `${isLocal ? "✴️ " : ""}${srcValue} | ${objValue}`;

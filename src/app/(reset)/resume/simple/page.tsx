@@ -22,6 +22,9 @@ export const generateMetadata = async () => {
     alternates: {
       canonical: resp.slug,
     },
+    openGraph: {
+      siteName: resp.title,
+    },
     title: resp.title,
     description: resp.description,
     keywords: `${resp.keywords}${(resp.resumeSkills.filter(Boolean) || []).map((item) => item.name).join(",")}`,
