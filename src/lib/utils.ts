@@ -10,7 +10,7 @@ const LOCAL_API = process.env.LOCAL_API === "true";
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 const META_TITLE = `${pkg.author.name} | ${pkg.author.profession}`;
 
-const LOCAL_PREFIX = isLocal ? `✴️ ${LOCAL_API ? "🌑" : "🌕"} ` : null;
+const LOCAL_PREFIX = isLocal ? `✴️ ${LOCAL_API ? "🌑" : "🌕"} ` : "";
 
 function customMerge(objValue: any, srcValue: any, key: string) {
   // Check if we're dealing with the specific keys we want to merge
