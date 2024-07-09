@@ -5,15 +5,19 @@ import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 
 const isLocal = process.env.APP_ENV === "development";
+const LOCAL_API = process.env.LOCAL_API === "true";
+
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 const META_TITLE = `${pkg.author.name} | ${pkg.author.profession}`;
+
+const LOCAL_PREFIX = isLocal ? `✴️ ${LOCAL_API ? "🌑" : "🌕"} ` : null;
 
 function customMerge(objValue: any, srcValue: any, key: string) {
   // Check if we're dealing with the specific keys we want to merge
   if (["title", "siteName"].includes(key)) {
     // If both values are strings, concatenate them
     if (typeof objValue === "string" && typeof srcValue === "string") {
-      return `${isLocal ? "✴️ " : ""}${srcValue} | ${objValue}`;
+      return `${LOCAL_PREFIX}${srcValue} | ${objValue}`;
     }
   }
   return undefined;

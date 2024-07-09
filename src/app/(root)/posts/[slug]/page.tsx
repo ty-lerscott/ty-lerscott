@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { cache } from "react";
+import pkg from "~/package.json";
 import dynamic from "next/dynamic";
 import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
@@ -58,11 +59,12 @@ export const generateMetadata = async ({
         {
           width: image.details.image.width,
           height: image.details.image.height,
-          url: `/api/blur?${querify({
-            title,
-            w: image.details.image.width,
-            h: image.details.image.height,
-            url: image.url.replace(/^\/+/, ""),
+          url: `/api/img/og?${querify({
+            title: encodeURIComponent(title),
+            subtitle: encodeURIComponent(
+              `${pkg.author.name} | ${pkg.author.profession}`,
+            ),
+            url: encodeURIComponent(`https://${image.url.replace(/^\/+/, "")}`),
           })}`,
         },
       ],
@@ -92,11 +94,7 @@ const Post = async ({ params: { slug } }: PageParams) => {
 
       {image ? (
         <AspectRatio ratio={16 / 9}>
-          <ImageBackground
-            url={`${image.url}`}
-            width={image.details.image.width}
-            height={image.details.image.height}
-          />
+          <ImageBackground url={`${image.url}`} />
         </AspectRatio>
       ) : null}
 

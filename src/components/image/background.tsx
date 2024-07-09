@@ -5,35 +5,17 @@ import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { querify } from "@/lib/contentful/helpers";
 
-const setBlurImageUrl = ({
-  url,
-  width,
-  height,
-}: {
-  url: string;
-  width: number;
-  height: number;
-}) =>
-  `/api/blur?${querify({
-    w: width,
-    h: height,
-    url: url.replace(/^\/+/, ""),
+const setBlurImageUrl = (url: string) =>
+  `/api/image/blur?${querify({
+    url: encodeURIComponent(url.replace(/^\/+/, "")),
   })}`;
 
 const FULL = "w-full h-full rounded";
 const POSITION = "absolute top-0 left-0 right-0 bottom-0";
 
-const BlurImageBackground = ({
-  url,
-  width,
-  height,
-}: {
-  url: string;
-  width: number;
-  height: number;
-}) => {
+const BlurImageBackground = ({ url }: { url: string }) => {
   const [loading, setLoading] = useState(true);
-  const [src, setSrc] = useState(setBlurImageUrl({ url, height, width }));
+  const [src, setSrc] = useState(setBlurImageUrl(`https:${url}`));
 
   useEffect(() => {
     let blurTimer: NodeJS.Timeout;

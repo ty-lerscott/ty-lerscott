@@ -6,7 +6,7 @@ const nextConfig = {
         return [
             {
                 source: '/api/:path*',
-                destination: IS_LOCAL ? "http://canopy.lerscott.local:3100/api/:path*": "https://canopy.lerscott.com/api/:path*"
+                destination: IS_LOCAL ? "http://canopy.lerscott.local:3100/:path*": "https://canopy.lerscott.com/:path*"
             },
         ]
     },
