@@ -1,4 +1,4 @@
-const IS_LOCAL = process.env.LOCAL_API === 'true' || process.env.LOCAL_API === true;
+const IS_LOCAL = process.env.LOCAL_API === 'true';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

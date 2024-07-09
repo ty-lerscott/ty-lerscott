@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 
-const isLocal = process.env.APP_ENV === "development";
+const isLocal =
+  process.env.APP_ENV === "development" ||
+  process.env.NODE_ENV === "development";
 const LOCAL_API = process.env.LOCAL_API === "true";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
