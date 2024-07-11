@@ -12,7 +12,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
   return (sitemapItems || []).map(
     ({ slug: url, updatedAt: lastModified, type }) => {
-      const cleanUrl = url.replace(/^\//, "");
+      const cleanUrl = url?.replace(/^\//, "");
       const isPage = type === "page";
       const updatedDate = dayjs(lastModified);
       const isBaby = A_WEEK_AGO.isBefore(updatedDate);
