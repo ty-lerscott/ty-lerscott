@@ -1,8 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, querify } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import { querify } from "@/lib/contentful/helpers";
 import NextImage, { type ImageProps } from "next/image";
 
 const setBlurImageUrl = ({

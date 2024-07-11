@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 import type { LinkProps } from "next/link";
 
+export type SitemapItem = {
+  slug: string;
+  updatedAt: string;
+  type: "page" | "post";
+};
+
 export type Link = LinkProps & {
   text: string;
   type: "link";
@@ -18,7 +24,7 @@ export type Space = {
 export type SocialLink = {
   href: string;
   type: "socialLink";
-  brand: "Instagram" | "Github" | "LinkedIn";
+  brand: "Instagram" | "Github" | "LinkedIn" | "Buy Me A Coffee";
 };
 
 type HeaderTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
@@ -30,11 +36,14 @@ export type Header = {
   subheader?: string | ReactNode | JSX.Element;
 };
 
+type TagCategory = "Programming Language" | "Javascript" | "CSS";
+
 export type Tag = {
   type: "tag";
   text: string;
   href?: string;
   variant: string;
+  category: TagCategory | TagCategory[];
 };
 
 export type Menu = {
@@ -139,14 +148,6 @@ export type Body =
   | Space
   | Separator;
 
-export type Page = {
-  slug: string;
-  title: string;
-  keywords: string[];
-  description: string;
-  body: Body[];
-};
-
 export type ResumeSkill = {
   name: string;
   type: "resumeSkill";
@@ -167,6 +168,15 @@ export type WorkExperience = {
   startDate: string;
   endDate?: string;
   body: (Header | Text)[];
+};
+
+export type Page = {
+  slug: string;
+  title: string;
+  updatedAt: string;
+  keywords: string[];
+  description: string;
+  body: Body[];
 };
 
 export type Resume = Page & {

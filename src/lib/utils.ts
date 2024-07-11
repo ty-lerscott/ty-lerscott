@@ -3,18 +3,54 @@ import merge from "lodash.mergewith";
 import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
+import type { SearchParams } from "@/types/contentful.types";
 
-const isLocal =
-  process.env.APP_ENV === "development" ||
-  process.env.NODE_ENV === "development";
-const LOCAL_API = process.env.LOCAL_API === "true";
+const LOCAL_APP = process.env.APP_ENV === "development";
+const LOCAL_DEV = process.env.NODE_ENV === "development";
+const LOCAL_API = process.env.API_ENV === "development";
+const PREVIEW_MODE = process.env.PREVIEW_MODE === "true";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 const META_TITLE = `${pkg.author.name} | ${pkg.author.profession}`;
 
-const LOCAL_PREFIX = isLocal ? `✴️ ${LOCAL_API ? "🌑" : "🌕"} ` : "";
+const LOCAL_PREFIX = LOCAL_DEV
+  ? `${LOCAL_APP ? "🌑" : "🌕"}${LOCAL_API ? "⚪" : "🟢"}${PREVIEW_MODE ? "<👀" : ""} `
+  : "";
 
-function customMerge(objValue: any, srcValue: any, key: string) {
+const querify = (obj: Record<string, any>) =>
+  Object.entries(obj)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join("&");
+
+const setQueryParams = ({
+  slug,
+  skip,
+  sort,
+  name,
+  limit,
+  order,
+  select,
+  include,
+  pageType,
+  contentType,
+}: SearchParams) => {
+  const sortOrder = order ? `${sort === "asc" ? "-" : ""}${order}` : "";
+  const hasSelect = Array.isArray(select) && select.length;
+
+  return querify({
+    order: sortOrder,
+    limit: limit?.toString() || "10",
+    ...(skip && { skip: skip.toString() }),
+    ...(name && { "fields.name[in]": name }),
+    include: include ? String(include) : "5",
+    ...(pageType && { "fields.type[in]": pageType }),
+    ...(contentType && { content_type: contentType }),
+    select: `sys.updatedAt${hasSelect ? `,${select.join(",")}` : ""}`,
+    ...(slug && { "fields.slug[in]": slug.replace(/^\//, "") }),
+  });
+};
+
+const customMerge = (objValue: any, srcValue: any, key: string) => {
   // Check if we're dealing with the specific keys we want to merge
   if (["title", "siteName"].includes(key)) {
     // If both values are strings, concatenate them
@@ -23,7 +59,7 @@ function customMerge(objValue: any, srcValue: any, key: string) {
     }
   }
   return undefined;
-}
+};
 
 const setMetadata = (metadata: Metadata): Metadata => {
   return merge(
@@ -54,4 +90,4 @@ const setMetadata = (metadata: Metadata): Metadata => {
   );
 };
 
-export { cn, setMetadata };
+export { cn, setMetadata, setQueryParams, querify };

@@ -2,11 +2,11 @@ import dayjs from "dayjs";
 import { cache } from "react";
 import pkg from "~/package.json";
 import dynamic from "next/dynamic";
+import { querify } from "@/lib/utils";
 import { getPost } from "@/lib/contentful";
 import { Fira_Code } from "next/font/google";
 import { cn, setMetadata } from "@/lib/utils";
 import { FaRegCalendar } from "react-icons/fa6";
-import { querify } from "@/lib/contentful/helpers";
 import ComponentMap from "@/components/component-map";
 import Header from "@/components/component-map/header";
 import AspectRatio from "@/components/ui/aspect-ratio";
@@ -90,11 +90,11 @@ const Post = async ({ params: { slug } }: PageParams) => {
         }
       />
 
-      {tags.length ? <Tags tags={tags} /> : null}
+      {tags?.length ? <Tags tags={tags} /> : null}
 
       {image ? (
         <AspectRatio ratio={16 / 9}>
-          <ImageBackground url={`${image.url}`} />
+          <ImageBackground url={`${image.url}`} alt={image.description} />
         </AspectRatio>
       ) : null}
 

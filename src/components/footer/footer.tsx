@@ -8,6 +8,9 @@ import type { SocialLink } from "@/types/generics.types";
 import styles from "./styles.module.css";
 
 const SOCIALS = {
+  "buy-me-a-coffee": dynamic(() =>
+    import("react-icons/bi").then((module) => module.BiCoffeeTogo),
+  ),
   github: dynamic(() =>
     import("react-icons/ai").then((module) => module.AiFillGithub),
   ),
@@ -24,6 +27,7 @@ const SOCIALS = {
 
 const Footer = async () => {
   const menuItems = await getMenu<SocialLink>("Footer");
+
   const year = new Date().getFullYear();
   const pkgs = [
     `Next.js v${pkg.dependencies.next}`,
@@ -47,7 +51,11 @@ const Footer = async () => {
         <ul className={styles.List}>
           {(menuItems || []).map((item) => {
             const Icon =
-              SOCIALS[item.brand.toLowerCase() as keyof typeof SOCIALS];
+              SOCIALS[
+                item.brand
+                  .replace(/\s/g, "-")
+                  .toLowerCase() as keyof typeof SOCIALS
+              ];
 
             return (
               <li key={item.brand}>

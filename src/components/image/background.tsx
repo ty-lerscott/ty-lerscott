@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, querify } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import { HiSparkles } from "react-icons/hi2";
 import { Skeleton } from "@/components/ui/skeleton";
-import { querify } from "@/lib/contentful/helpers";
 
 const setBlurImageUrl = (url: string) =>
   `/api/image/blur?${querify({
@@ -13,9 +13,10 @@ const setBlurImageUrl = (url: string) =>
 const FULL = "w-full h-full rounded";
 const POSITION = "absolute top-0 left-0 right-0 bottom-0";
 
-const BlurImageBackground = ({ url }: { url: string }) => {
+const BlurImageBackground = ({ url, alt }: { url: string; alt: string }) => {
   const [loading, setLoading] = useState(true);
   const [src, setSrc] = useState(setBlurImageUrl(`https:${url}`));
+  const isAIGenerated = alt.toLowerCase().includes("ai generated");
 
   useEffect(() => {
     let blurTimer: NodeJS.Timeout;
@@ -51,6 +52,9 @@ const BlurImageBackground = ({ url }: { url: string }) => {
 
   return (
     <div className={cn(FULL, "overflow-hidden")}>
+      {isAIGenerated && !loading ? (
+        <HiSparkles className="absolute bottom-2 right-2 text-[--ghost] size-6 z-20" />
+      ) : null}
       <div
         className={cn(
           FULL,
@@ -62,6 +66,7 @@ const BlurImageBackground = ({ url }: { url: string }) => {
           backgroundImage: `url(${src})`,
         }}
       />
+
       <Skeleton className={cn(FULL, POSITION, "z-0")} />
     </div>
   );

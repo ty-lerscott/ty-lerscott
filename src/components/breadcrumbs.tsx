@@ -13,12 +13,15 @@ export type Breadcrumb = {
   title: string;
 };
 
+const MAX_LENGTH = 15;
+
 const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) => {
   return (
     <div data-testid="Breadcrumbs">
       <Breadcrumb>
         <BreadcrumbList>
-          {breadcrumbs.map(({ href, title }, index) => {
+          {breadcrumbs.map(({ href, ...props }, index) => {
+            const title = props.title.substring(0, MAX_LENGTH);
             return (
               <Fragment key={title}>
                 <BreadcrumbItem>
@@ -27,7 +30,7 @@ const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) => {
                       href={href}
                       className="text-[color:inherit] hover:text-[--ghost-action]"
                     >
-                      {title}
+                      {`${title}${props.title.length > MAX_LENGTH ? "..." : ""}`}
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>

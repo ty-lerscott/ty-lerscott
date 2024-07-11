@@ -1,5 +1,5 @@
 import { PageType } from "@/types/contentful.types";
-import { getEntriesByType } from "@/lib/contentful/api";
+import { getEntriesByType } from "@/lib/contentful/helpers";
 import type {
   Page,
   Menu,
@@ -7,6 +7,7 @@ import type {
   Link,
   Resume,
   Header,
+  SitemapItem,
   ResumeSkill,
   WorkExperience,
 } from "@/types/generics.types";
@@ -19,6 +20,7 @@ const getMenu = async <Generic = Link>(name: string = "Header") => {
       data: { body },
     } = await getEntriesByType<Menu>({
       name,
+      select: ["fields.body"],
       contentType: "menu",
     });
 
@@ -82,7 +84,6 @@ const getPage = async <Type extends Record<string, any> = Page>(
   const { data } = await getEntriesByType<Type>({
     contentType: "page",
     pageType: type,
-
     select: [
       "fields.body",
       "fields.slug",
@@ -124,4 +125,31 @@ const getPage = async <Type extends Record<string, any> = Page>(
   return data as Type;
 };
 
-export { getMenu, getPage, getPosts, getPost };
+const getSitemapData = async () => {
+  const { data: postsData } = await getEntriesByType<SitemapItem[]>({
+    sort: "asc",
+    contentType: "post",
+    order: "fields.publishDate",
+    select: ["fields.slug"],
+  });
+
+  const { data: pagesData } = await getEntriesByType<SitemapItem[]>({
+    sort: "asc",
+    contentType: "page",
+    select: ["fields.slug"],
+  });
+
+  return (Array.isArray(pagesData) ? pagesData : [pagesData])
+    .map((item) => {
+      item.type = "page";
+      return item;
+    })
+    .concat(
+      (Array.isArray(postsData) ? postsData : [postsData]).map((item) => {
+        item.type = "post";
+        return item;
+      }),
+    );
+};
+
+export { getMenu, getPage, getPosts, getPost, getSitemapData };
