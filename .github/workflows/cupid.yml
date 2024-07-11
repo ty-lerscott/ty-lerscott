@@ -1,0 +1,16 @@
+name: Monitor Commit Comments
+
+on:
+  repository_dispatch:
+    types: [commit_comment]
+
+jobs:
+  process-commit-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check commit comment
+        run: |
+          echo "New commit comment detected"
+          echo "Comment author: ${{ github.event.client_payload.comment.user.login }}"
+          echo "Comment body: ${{ github.event.client_payload.comment.body }}"
+          echo "Commit SHA: ${{ github.event.client_payload.comment.commit_id }}"
