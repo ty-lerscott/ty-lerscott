@@ -1,6 +1,6 @@
 import {join, resolve, dirname} from 'path';
-import webpack from 'webpack'
 import {fileURLToPath} from "node:url";
+import webpack from 'webpack'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
