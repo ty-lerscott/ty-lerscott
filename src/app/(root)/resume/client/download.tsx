@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Button from "@/components/button";
 
+const IS_LOCAL = process.env.API_ENV !== "production";
+
 const Download = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,9 +17,12 @@ const Download = () => {
       setIsLoading(true);
 
       try {
-        const resp = await fetch("/api/download/resume", {
-          next: { revalidate: 0 },
-        });
+        const resp = await fetch(
+          `//canopy.lerscott.${IS_LOCAL ? "local" : "com"}/download/resume/dngfvnotulyy8h4oww3a9sgj`,
+          {
+            next: { revalidate: 0 },
+          },
+        );
         const blob = await resp.blob();
 
         if (!blob.type) {
