@@ -1,4 +1,4 @@
-const IS_LOCAL = process.env.APP_ENV === "development";
+const IS_LOCAL = process.env.NEXT_PUBLIC_APP_ENV === "development";
 
 type VoidFunc = () => void;
 type ConsoleVoidFunc = (...data: any[]) => void;

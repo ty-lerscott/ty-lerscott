@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 import type { SearchParams } from "@/types/contentful.types";
 
-const LOCAL_APP = process.env.APP_ENV === "development";
+const LOCAL_APP = process.env.NEXT_PUBLIC_APP_ENV === "development";
 const LOCAL_DEV = process.env.NODE_ENV === "development";
 const LOCAL_API = process.env.API_ENV === "development";
 const PREVIEW_MODE = process.env.PREVIEW_MODE === "true";

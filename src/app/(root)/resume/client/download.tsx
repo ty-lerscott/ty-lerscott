@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Button from "@/components/button";
 
-const IS_LOCAL = process.env.API_ENV !== "production";
+const IS_LOCAL = process.env.API_ENV === "development";
 
 const Download = () => {
   const [error, setError] = useState(false);

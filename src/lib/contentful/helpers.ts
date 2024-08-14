@@ -8,11 +8,11 @@ import type {
   ContentfulResponse,
 } from "@/types/contentful.types";
 
-const IS_PROD = process.env.APP_ENV !== "development";
 const PREVIEW_MODE = process.env.PREVIEW_MODE === "true";
 const API_KEY = process.env.CONTENTFUL_API_KEY as string;
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID as string;
 const PREVIEW_KEY = process.env.CONTENTFUL_PREVIEW_KEY as string;
+const IS_PROD = process.env.NEXT_PUBLIC_APP_ENV !== "development";
 const API_URI = `https://${PREVIEW_MODE ? "preview" : "cdn"}.contentful.com`;
 const ENVIRONMENT_ID = IS_PROD ? "master" : "dev";
 
