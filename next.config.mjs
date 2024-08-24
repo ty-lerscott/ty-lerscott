@@ -24,14 +24,6 @@ const nextConfig = {
             }
         ]
     },
-    webpack: (config, { webpack }) => {
-        config.plugins.push(
-            new webpack.ProvidePlugin({
-                sc: resolve(join(__dirname, 'src/plugins/safe-console.ts'))
-            })
-        );
-        return config;
-    },
 };
 
 export default nextConfig;

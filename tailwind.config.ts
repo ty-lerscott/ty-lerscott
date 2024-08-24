@@ -130,8 +130,11 @@ const config = {
           "@apply transition-colors hover:text-[--primary-action]": "",
         },
         ul: {
-          "@apply list-disc list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":
+          "@apply list-disc list-outside [&:not([class])>li:not(:first-of-type)]:mt-2":
             "",
+        },
+        li: {
+          "@apply leading-6": "",
         },
         ol: {
           "@apply list-decimal list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":

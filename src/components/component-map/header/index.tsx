@@ -35,7 +35,7 @@ const Header = ({
       {!subheader ? null : isValidElement(subheader) ? (
         subheader
       ) : (
-        <span className={cn("text-sm text-[--secondary] mt-1", subClassName)}>
+        <span className={cn("text-sm", header && "mt-2", subClassName)}>
           {subheader}
         </span>
       )}
