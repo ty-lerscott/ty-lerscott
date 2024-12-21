@@ -1,14 +1,11 @@
 import { resolve } from "node:path";
-import {generateConfig} from "./utils";
+import { generateConfig } from "./utils";
 
-const cmsPath = resolve(process.cwd(), "..", '..', 'cms');
-const uiPath = resolve(process.cwd(), "..", '..', 'ui');
+const cmsPath = resolve(process.cwd(), "..", "..", "cms");
+const appPath = resolve(process.cwd(), "..", "..", "app");
 
 const config = {
-	apps: [
-        generateConfig(cmsPath),
-        generateConfig(uiPath),
-    ],
+	apps: [generateConfig(cmsPath), generateConfig(appPath)],
 };
 
 module.exports = config;

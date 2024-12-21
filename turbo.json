@@ -5,7 +5,7 @@
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$"],
 			"cache": false,
-			"outputs": ["$TURBO_WORKDIR/ui/dist", "$TURBO_WORKDIR/config/dist"]
+			"outputs": ["$TURBO_WORKDIR/app/dist", "$TURBO_WORKDIR/config/dist"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"]

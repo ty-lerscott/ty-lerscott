@@ -1,4 +1,4 @@
 packages:
   - "cms"
-  - "ui"
+  - "app"
   - "config"
