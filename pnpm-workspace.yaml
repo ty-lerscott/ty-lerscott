@@ -1,0 +1,4 @@
+packages:
+  - "cms"
+  - "ui"
+  - "config"

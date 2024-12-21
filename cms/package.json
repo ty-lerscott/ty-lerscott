@@ -1,0 +1,17 @@
+{
+  "name": "@repo/cms",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "directus start",
+    "start:cms": "npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "packageManager": "pnpm@9.15.1",
+  "dependencies": {
+    "directus": "11.3.5",
+    "sqlite3": "5.1.7"
+  }
+}

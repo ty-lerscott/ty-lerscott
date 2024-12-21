@@ -1,0 +1,33 @@
+{
+    "name": "lerscott.com",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+		"https:all": "caddy run",
+		"dev": "turbo https start:cms dev",
+		"build": "turbo build build:server",
+		"start": "turbo start",
+		"start:pm2": "turbo start:pm2",
+		"stop:pm2": "turbo stop:pm2",
+		"restart:pm2": "turbo restart:pm2",
+		"delete:pm2": "turbo delete:pm2",
+		"clean": "find .. -type d \\( -name 'dist' -o -name 'logs' -o -name '.turbo' -o -name '.idea' -o -name 'node_modules' \\) -print -exec rm -rf {} +\\n"
+	},
+	"details": {
+		"hostname": "lerscott",
+		"author": {
+			"name": "Tyler Scott",
+			"email": "ty@lerscott.com"
+		}
+	},
+	"packageManager": "pnpm@9.15.1",
+    "dependencies": {
+        "@repo/cms": "workspace:*",
+        "@repo/config": "workspace:*"
+    },
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
+		"turbo": "2.0.14",
+		"typescript": "5"
+	}
+}
