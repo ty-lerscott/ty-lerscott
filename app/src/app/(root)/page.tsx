@@ -3,6 +3,8 @@ import { getPage } from "@/lib/cms";
 import { setMetadata } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 
+import { Separator } from "@/components/ui/separator";
+
 const getData = cache(async () => {
 	const page = await getPage("/", ["body"]);
 	return page;
@@ -20,9 +22,13 @@ const RootPage = async () => {
 	const page = await getData();
 
 	return (
-		<div className="flex flex-col gap-4 mt-2">
-			{page?.body ? <ReactMarkdown>{page.body}</ReactMarkdown> : null}
-		</div>
+		<>
+			<div className="flex flex-col gap-4 mt-2">
+				{page?.body ? <ReactMarkdown>{page.body}</ReactMarkdown> : null}
+			</div>
+
+			<Separator className="my-8" />
+		</>
 	);
 };
 
