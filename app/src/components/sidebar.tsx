@@ -62,11 +62,11 @@ const Sidebar = () => {
 						</SidebarGroupContent>
 					</SidebarGroup>
 				</SidebarContent>
-			</ShadCNSidebar>
 
-			<div className="self-end bottom-6 absolute left-full">
-				<SidebarTrigger className="bg-sidebar rounded-none rounded-r-md" />
-			</div>
+				<div className="self-end bottom-6 absolute left-full">
+					<SidebarTrigger className="rounded-none rounded-r-md" />
+				</div>
+			</ShadCNSidebar>
 		</div>
 	);
 };

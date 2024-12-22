@@ -39,12 +39,12 @@ export default function RootLayout({
 		<ThemeProvider>
 			<html lang="en" className="opacity-0 transition-opacity duration-300">
 				<body
-					className={`${inter.className} ${zillaSlab.variable} relative h-screen`}
+					className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 				>
 					<SidebarProvider>
 						<Sidebar />
 
-						<main className="m-2">{children}</main>
+						<main className="m-2 w-full">{children}</main>
 
 						<ThemeToggle />
 						<Analytics />

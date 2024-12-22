@@ -11,7 +11,7 @@ const ThemeToggle = () => {
 	const { toggleTheme, isDarkTheme } = useTheme();
 
 	return (
-		<div className="absolute bottom-0 right-0 m-2">
+		<div className="fixed bottom-0 right-0 m-2">
 			<Button variant="ghost" className="group" onClick={toggleTheme}>
 				{isDarkTheme ? (
 					<Sun className={iconStyles} />

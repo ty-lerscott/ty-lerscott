@@ -1,4 +1,14 @@
+import merge from "lodash.mergewith";
+import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
+
+const HeaderStyles = (
+	theme: (theme: string) => string,
+): Record<string, string> => ({
+	letterSpacing: "0.05em",
+	fontFamily: "var(--font-zilla-slab)",
+	fontWeight: theme("fontWeight.medium"),
+});
 
 export default {
 	darkMode: ["class"],
@@ -64,5 +74,55 @@ export default {
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("tailwind-scrollbar-hide"),
+		plugin(({ addBase, theme }) => {
+			addBase({
+				"*": {
+					lineHeight: "1",
+				},
+				h1: merge(HeaderStyles(theme), {
+					fontSize: theme("fontSize.3xl"),
+				}),
+				h2: merge(HeaderStyles(theme), {
+					fontSize: theme("fontSize.2xl"),
+				}),
+				h3: merge(HeaderStyles(theme), {
+					fontSize: theme("fontSize.xl"),
+				}),
+				h4: merge(HeaderStyles(theme), {
+					fontSize: theme("fontSize.lg"),
+				}),
+				h5: HeaderStyles(theme),
+				h6: merge(HeaderStyles(theme), {
+					fontSize: theme("fontSize.sm"),
+				}),
+				p: {
+					lineHeight: theme("lineHeight.normal"),
+				},
+				code: {
+					fontSize: theme("fontSize.sm"),
+					fontFamily: theme("font.firaCode"),
+				},
+				small: {
+					fontSize: theme("fontSize.sm"),
+				},
+				a: {
+					"@apply transition-colors hover:text-[--primary-action]": "",
+				},
+				ul: {
+					"@apply list-disc list-outside [&:not([class])>li:not(:first-of-type)]:mt-2":
+						"",
+				},
+				li: {
+					"@apply leading-6": "",
+				},
+				ol: {
+					"@apply list-decimal list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":
+						"",
+				},
+			});
+		}),
+	],
 } satisfies Config;

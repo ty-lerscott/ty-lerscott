@@ -32,7 +32,7 @@ import {
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = "14rem";
+const SIDEBAR_WIDTH = "12rem";
 const SIDEBAR_WIDTH_MOBILE = "14rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
@@ -281,9 +281,9 @@ const SidebarTrigger = forwardRef<
 			ref={ref}
 			data-sidebar="trigger"
 			variant="ghost"
-			size="icon"
+			size="sidebar"
 			className={cn(
-				"h-7 w-7 mt-2 bg-[teal]",
+				"p-3 bg-sidebar",
 				open ? "ml-0 md:-ml-2" : "ml-0",
 				className,
 			)}
@@ -293,7 +293,7 @@ const SidebarTrigger = forwardRef<
 			}}
 			{...props}
 		>
-			<PanelLeft />
+			<PanelLeft className="size-2" />
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);
