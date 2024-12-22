@@ -45,7 +45,7 @@ export default function RootLayout({
 					<SidebarProvider>
 						<Sidebar />
 
-						<main className="my-2 ml-4 mr-6 w-full">{children}</main>
+						<main className="my-2 mx-6 w-full">{children}</main>
 
 						<ThemeToggle />
 						<Analytics />

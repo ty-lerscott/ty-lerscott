@@ -251,7 +251,7 @@ const Sidebar = forwardRef<
 							: "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
 						// Adjust the padding for floating and inset variants.
 						variant === "floating" || variant === "inset"
-							? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
+							? "py-2 pl-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
 							: "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
 						className,
 					)}
@@ -274,7 +274,7 @@ const SidebarTrigger = forwardRef<
 	ComponentRef<typeof Button>,
 	ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
-	const { toggleSidebar, open } = useSidebar();
+	const { toggleSidebar } = useSidebar();
 
 	return (
 		<Button
@@ -282,11 +282,7 @@ const SidebarTrigger = forwardRef<
 			data-sidebar="trigger"
 			variant="ghost"
 			size="sidebar"
-			className={cn(
-				"p-3 bg-sidebar",
-				open ? "ml-0 md:-ml-2" : "ml-0",
-				className,
-			)}
+			className={cn("p-3 bg-sidebar", className)}
 			onClick={(event) => {
 				onClick?.(event);
 				toggleSidebar();
