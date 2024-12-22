@@ -17,7 +17,12 @@
 		"hostname": "lerscott",
 		"author": {
 			"name": "Tyler Scott",
-			"email": "ty@lerscott.com"
+			"phone": "607 882 0531",
+			"address": "Hampton, VA",
+			"email": "ty@lerscott.com",
+			"website": "https://ty.lerscott.com",
+			"profession": "Senior Software Engineer",
+			"linkedin": "linkedin.com/in/ty"
 		}
 	},
 	"packageManager": "pnpm@9.15.1",

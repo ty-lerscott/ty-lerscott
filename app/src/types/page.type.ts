@@ -1,6 +1,9 @@
+export type Metadata = {
+	slug: string;
+	title: string;
+};
+
 export type Page = {
-	metadata: {
-		slug: string;
-		title: string;
-	};
+	metadata: Metadata;
+	body: string | null;
 };
