@@ -1,6 +1,5 @@
 import { client, readItems } from "@/lib/directus";
-import type { Menu, MenuItem } from "@/types/menu.type";
-import type { Page } from "@/types/page.type";
+import type { Menu, MenuItem, Page, Post } from "@/types";
 
 const normalizeMenuItems = (menu: Menu): MenuItem[] =>
 	menu.items.map(({ item }) => item);
@@ -55,4 +54,40 @@ const getPage = async (
 	return null;
 };
 
-export { getMenu, getPage };
+type GetPostsArgs =
+	| {
+			limit?: number;
+			page?: number;
+	  }
+	| number;
+
+const getPosts = async (
+	args?: GetPostsArgs,
+): Promise<Partial<Post>[] | null> => {
+	const { limit = 10, page = 1 } =
+		typeof args === "number" ? { limit: args } : args || {};
+
+	try {
+		const resp = await client.request(
+			readItems("Posts", {
+				page,
+				limit,
+				sort: "-publish_date",
+				fields: [
+					"id",
+					"publish_date",
+					"metadata.slug",
+					"metadata.title",
+					"metadata.description",
+				],
+			}),
+		);
+
+		return resp as Partial<Post>[];
+	} catch (err) {
+		console.error(err);
+	}
+	return null;
+};
+
+export { getMenu, getPage, getPosts };

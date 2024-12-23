@@ -104,7 +104,10 @@ const Sidebar = async () => {
 				) : null}
 
 				<div className="self-end bottom-6 absolute left-full">
-					<SidebarTrigger className="rounded-none rounded-r-md" />
+					<SidebarTrigger
+						variant="ghost"
+						className="rounded-none rounded-r-md"
+					/>
 				</div>
 			</ShadCNSidebar>
 		</div>

@@ -1,11 +1,11 @@
 "use client";
 
 import { useTheme } from "@/contexts/theme";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 
 const iconStyles =
-	"fill-transparent group-hover:fill-[--foreground] transition-all duration-300";
+	"size-4 fill-transparent group-hover:fill-foreground transition-all duration-300";
 
 const ThemeToggle = () => {
 	const { toggleTheme, isDarkTheme } = useTheme();

@@ -1,6 +1,7 @@
 import type { Metadata } from "./metadata.type";
 
-export type Page = {
+export type Post = {
+	id: string;
 	metadata: Metadata;
-	body: string | null;
+	publish_date: string;
 };

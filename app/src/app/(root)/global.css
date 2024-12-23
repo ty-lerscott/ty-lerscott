@@ -44,8 +44,10 @@
     .dark {
         --background: #1D2A13;
         --foreground: #F4F9F1;
+        --ghost: #72A64A;
         --border: #385124;
-  
+        --hover: #BCD8A7;
+
         --sidebar-background: #263b16;
         --sidebar-border: #385124;
 
@@ -85,6 +87,6 @@
     }
 
     body {
-      @apply bg-[--background] text-[--foreground] transition-colors duration-300;
+      @apply bg-background text-foreground transition-colors duration-300;
     }
 }

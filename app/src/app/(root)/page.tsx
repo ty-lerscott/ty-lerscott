@@ -3,6 +3,7 @@ import { getPage } from "@/lib/cms";
 import { setMetadata } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 
+import RecentPosts from "@/components/recent-posts";
 import { Separator } from "@/components/ui/separator";
 
 const getData = cache(async () => {
@@ -28,6 +29,8 @@ const RootPage = async () => {
 			</div>
 
 			<Separator className="my-8" />
+
+			<RecentPosts />
 		</>
 	);
 };

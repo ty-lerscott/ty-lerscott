@@ -1,9 +1,6 @@
 "use client";
 
 import {
-	type CSSProperties,
-	type ComponentRef,
-	type ComponentProps,
 	useState,
 	useMemo,
 	useEffect,
@@ -11,6 +8,9 @@ import {
 	useContext,
 	forwardRef,
 	useCallback,
+	type CSSProperties,
+	type ComponentRef,
+	type ComponentProps,
 } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { type VariantProps, cva } from "class-variance-authority";
@@ -18,7 +18,7 @@ import { PanelLeft } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -273,23 +273,22 @@ Sidebar.displayName = "Sidebar";
 const SidebarTrigger = forwardRef<
 	ComponentRef<typeof Button>,
 	ComponentProps<typeof Button>
->(({ className, onClick, ...props }, ref) => {
+>(({ className, onClick, variant, ...props }, ref) => {
 	const { toggleSidebar } = useSidebar();
 
 	return (
 		<Button
 			ref={ref}
+			variant={variant || "ghost"}
 			data-sidebar="trigger"
-			variant="ghost"
-			size="sidebar"
-			className={cn("p-3 bg-sidebar", className)}
+			className={cn("p-1 bg-sidebar", className)}
 			onClick={(event) => {
 				onClick?.(event);
 				toggleSidebar();
 			}}
 			{...props}
 		>
-			<PanelLeft className="size-2" />
+			<PanelLeft className="size-3" />
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);
@@ -520,7 +519,7 @@ const sidebarMenuButtonVariants = cva(
 			variant: {
 				default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
 				outline:
-					"bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
+					"bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_var(--sidebar-accent)]",
 			},
 			size: {
 				default: "h-8 text-sm",

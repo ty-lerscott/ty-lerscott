@@ -16,8 +16,10 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				background: "hsl(var(--background))",
-				foreground: "hsl(var(--foreground))",
+				background: "var(--background)",
+				foreground: "var(--foreground)",
+				ghost: "var(--ghost)",
+				hover: "var(--hover)",
 				card: {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
@@ -109,7 +111,7 @@ export default {
 					fontSize: theme("fontSize.sm"),
 				},
 				a: {
-					"@apply transition-colors hover:text-[--primary-action]": "",
+					"@apply transition-colors hover:text-hover": "",
 				},
 				ul: {
 					"@apply list-disc list-outside [&:not([class])>li:not(:first-of-type)]:mt-2":
