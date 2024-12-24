@@ -25,8 +25,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
 		setIsDarkTheme(_isDarkTheme);
 		html?.classList.toggle("dark", _isDarkTheme);
-		html?.classList.add("opacity-100");
-		html?.classList.remove("opacity-0");
 	});
 
 	const toggleTheme = () => {

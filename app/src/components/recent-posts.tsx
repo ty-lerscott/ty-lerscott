@@ -20,12 +20,12 @@ const Post = ({ metadata, publish_date }: Partial<PostType>) => {
 				</Link>
 			</h4>
 
-			<div className="text-ghost flex items-center gap-2 text-sm mt-2">
+			<div className="text-[--ghost] flex items-center gap-2 text-sm mt-2">
 				<FaRegCalendar className="size-2.5" />
 				<span>{dayjs(publish_date).format("MMMM D, YYYY | h:mm a")}</span>
 			</div>
 
-			<p className="text-sm mt-2 text-ghost">
+			<p className="text-sm mt-2 text-[--ghost]">
 				{blurb}
 				{isLong ? "..." : ""}
 			</p>

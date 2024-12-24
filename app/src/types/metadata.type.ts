@@ -1,5 +1,8 @@
 export type Metadata = {
-	slug: string;
+	id: number;
 	title: string;
 	description: string;
+	keywords: string[];
+	status: "draft" | "archived" | "published";
+	slug: string;
 };

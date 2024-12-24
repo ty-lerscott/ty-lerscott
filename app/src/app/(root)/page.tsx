@@ -1,34 +1,29 @@
 import { cache } from "react";
-import { getPage } from "@/lib/cms";
-import { setMetadata } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 
+import { getPage } from "@/lib/cms";
+import { setMetadata } from "@/lib/utils";
 import RecentPosts from "@/components/recent-posts";
 import { Separator } from "@/components/ui/separator";
 
-const getData = cache(async () => {
-	const page = await getPage("/", ["body"]);
-	return page;
-});
+const getData = cache(async () => getPage("/", ["body"]));
 
 export const generateMetadata = async () => {
 	const page = await getData();
 
-	if (!page) return null;
-
-	return setMetadata(page.metadata);
+	return page ? setMetadata(page.metadata) : null;
 };
 
 const RootPage = async () => {
 	const page = await getData();
 
+	if (!page) return null;
+
 	return (
 		<>
-			<div className="flex flex-col gap-4 mt-2">
-				{page?.body ? <ReactMarkdown>{page.body}</ReactMarkdown> : null}
-			</div>
+			<ReactMarkdown>{page.body}</ReactMarkdown>
 
-			<Separator className="my-8" />
+			<Separator />
 
 			<RecentPosts />
 		</>

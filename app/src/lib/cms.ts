@@ -1,12 +1,12 @@
-import { client, readItems } from "@/lib/directus";
-import type { Menu, MenuItem, Page, Post } from "@/types";
+import { client, readItems, readFile } from "@/lib/directus";
+import type { Menu, MenuItem, Page, Post, Image } from "@/types";
 
 const normalizeMenuItems = (menu: Menu): MenuItem[] =>
 	menu.items.map(({ item }) => item);
 
 const getMenu = async (name: string): Promise<MenuItem[] | null> => {
 	try {
-		const resp = await client.request(
+		const resp = await client.request<Menu[]>(
 			readItems("Menu", {
 				filter: {
 					name: {
@@ -21,7 +21,7 @@ const getMenu = async (name: string): Promise<MenuItem[] | null> => {
 			}),
 		);
 
-		return normalizeMenuItems(resp[0] as Menu);
+		return resp.length ? normalizeMenuItems(resp[0]) : null;
 	} catch (err) {
 		console.error(err);
 	}
@@ -34,7 +34,7 @@ const getPage = async (
 	fields?: string[],
 ): Promise<Page | null> => {
 	try {
-		const resp = await client.request(
+		const resp = await client.request<Page[]>(
 			readItems("Pages", {
 				filter: {
 					metadata: {
@@ -47,7 +47,7 @@ const getPage = async (
 			}),
 		);
 
-		return resp[0] as Page;
+		return resp.length ? resp[0] : null;
 	} catch (err) {
 		console.error(err);
 	}
@@ -61,14 +61,12 @@ type GetPostsArgs =
 	  }
 	| number;
 
-const getPosts = async (
-	args?: GetPostsArgs,
-): Promise<Partial<Post>[] | null> => {
+const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
 	const { limit = 10, page = 1 } =
 		typeof args === "number" ? { limit: args } : args || {};
 
 	try {
-		const resp = await client.request(
+		const resp = await client.request<Post[]>(
 			readItems("Posts", {
 				page,
 				limit,
@@ -83,11 +81,52 @@ const getPosts = async (
 			}),
 		);
 
-		return resp as Partial<Post>[];
+		return resp;
 	} catch (err) {
 		console.error(err);
 	}
 	return null;
 };
 
-export { getMenu, getPage, getPosts };
+const getPost = async (slug: string): Promise<Post | null> => {
+	try {
+		const resp = await client.request<Post[]>(
+			readItems("Posts", {
+				filter: {
+					metadata: {
+						slug,
+					},
+				},
+				fields: [
+					"tags",
+					"body",
+					"image",
+					"publish_date",
+					{
+						metadata: ["title", "description", "keywords", "slug"],
+					},
+				],
+			}),
+		);
+
+		if (resp.length === 0) return null;
+
+		const post = resp[0];
+
+		const image = await client.request<Image>(
+			readFile(post.image as string, {
+				fields: ["id", "title", "description"],
+			}),
+		);
+
+		post.image = image;
+
+		return post;
+	} catch (err) {
+		console.error(err);
+	}
+
+	return null;
+};
+
+export { getMenu, getPage, getPosts, getPost };

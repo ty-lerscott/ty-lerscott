@@ -7,7 +7,6 @@ import { ThemeProvider } from "@/contexts/theme";
 import ThemeToggle from "@/components/theme-toggle";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 
-import "./global.css";
 import "./tailwind.css";
 
 const inter = Inter({
@@ -38,14 +37,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<ThemeProvider>
-			<html lang="en" className="opacity-0 transition-opacity duration-300">
+			<html lang="en" className="dark">
 				<body
 					className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 				>
 					<SidebarProvider>
 						<Sidebar />
 
-						<main className="my-2 mx-6 w-full">{children}</main>
+						<main className="mt-4 mx-6 mb-8 w-full flex flex-col gap-4">
+							{children}
+						</main>
 
 						<ThemeToggle />
 						<Analytics />

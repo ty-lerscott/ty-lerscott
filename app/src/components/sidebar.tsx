@@ -55,7 +55,7 @@ const Sidebar = async () => {
 		<div className="relative flex">
 			<ShadCNSidebar variant="floating">
 				<SidebarHeader className="text-center pb-0">
-					<h1 className="text-xl font-bold">Tyler Scott</h1>
+					<p className="text-xl font-bold">Tyler Scott</p>
 				</SidebarHeader>
 				<SidebarContent>
 					<SidebarGroup>
