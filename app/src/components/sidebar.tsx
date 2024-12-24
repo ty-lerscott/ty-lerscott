@@ -1,23 +1,30 @@
 import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { icons } from "lucide-react";
+import { icons, ChevronRight } from "lucide-react";
 
 import {
 	SidebarMenu,
 	SidebarGroup,
 	SidebarFooter,
 	SidebarHeader,
+	SidebarMenuSub,
 	SidebarContent,
-	SidebarTrigger,
 	SidebarMenuItem,
 	SidebarGroupLabel,
 	SidebarMenuButton,
+	SidebarMenuSubItem,
 	SidebarGroupContent,
+	SidebarMenuSubButton,
 	Sidebar as ShadCNSidebar,
 } from "@/components/ui/sidebar";
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { getMenu } from "@/lib/cms";
-import type { Page } from "@/types/page.type";
+import type { Page, Menu, MenuItem } from "@/types";
 
 const getIcon = (icon: string) => {
 	const LucideIcon = icons[icon as keyof typeof icons];
@@ -44,9 +51,9 @@ const SOCIALS = {
 };
 
 const Sidebar = async () => {
-	const [navigation, socials] = await Promise.all([
+	const [navigation, socials = []] = await Promise.all([
 		getMenu("sidebar"),
-		getMenu("socials"),
+		// getMenu("socials")
 	]);
 
 	if (!navigation) return null;
@@ -62,16 +69,59 @@ const Sidebar = async () => {
 						<SidebarGroupLabel>App</SidebarGroupLabel>
 						<SidebarGroupContent>
 							<SidebarMenu>
-								{navigation.map((item) => {
-									const { metadata } = item.page as Page;
+								{navigation.items.map(({ item }) => {
+									if ((item as Menu).items) {
+										const _item = item as Menu;
+										const items = _item.items as { item: MenuItem }[];
+
+										return (
+											<Collapsible
+												asChild
+												defaultOpen
+												key={item.id}
+												className="group/collapsible"
+											>
+												<SidebarMenuItem>
+													<CollapsibleTrigger asChild>
+														<SidebarMenuButton>
+															{_item.icon ? getIcon(_item.icon) : null}
+															{_item.name ? <span>{_item.name}</span> : null}
+															<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+														</SidebarMenuButton>
+													</CollapsibleTrigger>
+													<CollapsibleContent>
+														<SidebarMenuSub>
+															{items.map(({ item }) => {
+																const href =
+																	item.href || item?.page?.metadata.slug || "";
+																const title =
+																	item?.page?.metadata?.title || item.text;
+
+																return (
+																	<SidebarMenuSubItem key={item.id}>
+																		<SidebarMenuSubButton asChild size="sm">
+																			<Link href={href}>{title}</Link>
+																		</SidebarMenuSubButton>
+																	</SidebarMenuSubItem>
+																);
+															})}
+														</SidebarMenuSub>
+													</CollapsibleContent>
+												</SidebarMenuItem>
+											</Collapsible>
+										);
+									}
+
+									const _item = item as MenuItem;
+									const { metadata } = _item.page as Page;
 
 									return (
 										<SidebarMenuItem key={metadata.title}>
 											<SidebarMenuButton asChild>
-												<a href={metadata.slug}>
+												<Link href={metadata.slug}>
 													{getIcon(item.icon as string)}
 													<span>{metadata.title}</span>
-												</a>
+												</Link>
 											</SidebarMenuButton>
 										</SidebarMenuItem>
 									);
@@ -103,12 +153,12 @@ const Sidebar = async () => {
 					</SidebarFooter>
 				) : null}
 
-				<div className="self-end bottom-6 absolute left-full">
+				{/* <div className="self-end bottom-6 absolute left-full">
 					<SidebarTrigger
 						variant="ghost"
 						className="rounded-none rounded-r-md"
-					/>
-				</div>
+					/> 
+				</div>*/}
 			</ShadCNSidebar>
 		</div>
 	);

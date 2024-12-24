@@ -154,11 +154,12 @@ export const RANGE = [
 // TODO:
 //  this is unnecessary, just use a nested array, and change the range to an object with keys that are the aliases
 const ALIASES = {
-	white: ["heading"],
+	white: ["heading", "hover-secondary"],
 	"medium-light": ["hover", "strong"],
 	medium: ["foreground"],
 	dark: ["ghost"],
-	darkest: ["border", "sidebar-background", "skeleton"],
+	darker: ["border"],
+	darkest: ["sidebar-background", "skeleton"],
 	black: ["background"],
 } as Record<(typeof RANGE)[number], string[]>;
 

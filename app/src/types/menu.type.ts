@@ -11,7 +11,10 @@ export type MenuItem = {
 };
 
 export type Menu = {
+	id: string;
+	icon: string | null;
+	name: string | null;
 	items: {
-		item: MenuItem;
+		item: Menu | MenuItem;
 	}[];
 };

@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@directus/sdk": "18.0.3",
 		"@radix-ui/react-aspect-ratio": "1.1.1",
+		"@radix-ui/react-collapsible": "^1.1.2",
 		"@radix-ui/react-dialog": "1.1.4",
 		"@radix-ui/react-separator": "1.1.1",
 		"@radix-ui/react-slot": "1.1.1",

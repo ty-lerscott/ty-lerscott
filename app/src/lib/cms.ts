@@ -1,27 +1,27 @@
-import { client, readItems, readFile } from "@/lib/directus";
+import { client, readItems, readFile, readItem } from "@/lib/directus";
 import type { Menu, MenuItem, Page, Post, Image } from "@/types";
 
-const normalizeMenuItems = (menu: Menu): MenuItem[] =>
-	menu.items.map(({ item }) => item);
-
-const getMenu = async (name: string): Promise<MenuItem[] | null> => {
+const getMenu = async (name: string): Promise<Menu | null> => {
 	try {
-		const resp = await client.request<Menu[]>(
-			readItems("Menu", {
-				filter: {
-					name: {
-						_eq: name,
+		return client
+			.request<Menu[]>(
+				readItems("Menu", {
+					filter: {
+						name: {
+							_eq: name,
+						},
 					},
-				},
-				fields: [
-					"items.item.*",
-					"items.item.page.metadata.slug",
-					"items.item.page.metadata.title",
-				],
-			}),
-		);
-
-		return resp.length ? normalizeMenuItems(resp[0]) : null;
+					fields: [
+						"items.item.*",
+						"items.item.page.metadata.slug",
+						"items.item.page.metadata.title",
+						"items.item.items.item.*",
+						"items.item.items.item.page.metadata.title",
+						"items.item.items.item.page.metadata.slug",
+					],
+				}),
+			)
+			.then(([resp]) => resp ?? null);
 	} catch (err) {
 		console.error(err);
 	}
