@@ -158,7 +158,7 @@ const ALIASES = {
 	"medium-light": ["hover", "strong"],
 	medium: ["foreground"],
 	dark: ["ghost"],
-	darker: ["border"],
+	darker: ["border", "subtle"],
 	darkest: ["sidebar-background", "skeleton"],
 	black: ["background"],
 } as Record<(typeof RANGE)[number], string[]>;

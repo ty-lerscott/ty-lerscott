@@ -4,9 +4,12 @@ import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
 
+import type { Image } from "@/types";
+
 const LOCAL_APP = process.env.NEXT_PUBLIC_APP_ENV === "development";
 const LOCAL_DEV = process.env.NODE_ENV === "development";
 const LOCAL_API = process.env.API_ENV === "development";
+const HOSTNAME = process.env.NEXT_PUBLIC_HOSTNAME;
 const PREVIEW_MODE = process.env.PREVIEW_MODE === "true";
 const META_TITLE = `${pkg.details.author.name} | ${pkg.details.author.profession}`;
 
@@ -64,4 +67,7 @@ const kebabToTitleCase = (str: string): string => {
 		.join(" ");
 };
 
-export { cn, setMetadata, kebabToTitleCase };
+const setImageUrl = (id: string) =>
+	`https://${HOSTNAME}.${LOCAL_DEV ? "local" : "com"}/assets/${id}`;
+
+export { cn, setMetadata, kebabToTitleCase, setImageUrl };

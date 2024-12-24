@@ -3,23 +3,17 @@
 import { useState, useEffect } from "react";
 import { HiSparkles } from "react-icons/hi2";
 
-import { cn } from "@/lib/utils";
 import type { Image } from "@/types";
+import { cn, setImageUrl } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const hostname = process.env.NEXT_PUBLIC_HOSTNAME;
-const isLocal = process.env.NODE_ENV === "development";
-
-const setUrl = ({ id }: Image) =>
-	`https://${hostname}.${isLocal ? "local" : "com"}/assets/${id}`;
-
-const setBlurImageUrl = (image: Image) => {
-	return `${setUrl(image)}?transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
+const setBlurImageUrl = (id: string) => {
+	return `${setImageUrl(id)}?transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
 };
 
-const ImageBackground = (image: Image) => {
+const ImageBackground = (image: Partial<Image>) => {
 	const [loading, setLoading] = useState(true);
-	const [src, setSrc] = useState(setBlurImageUrl(image));
+	const [src, setSrc] = useState(setBlurImageUrl((image as Image).id));
 	const isAIGenerated = image.description
 		?.toLowerCase()
 		.includes("ai generated");
@@ -31,8 +25,8 @@ const ImageBackground = (image: Image) => {
 		const imageBlur = new Image();
 		const imageHighRes = new Image();
 
-		imageHighRes.src = setUrl(image);
-		imageBlur.src = setBlurImageUrl(image);
+		imageHighRes.src = setImageUrl((image as Image).id);
+		imageBlur.src = setBlurImageUrl((image as Image).id);
 
 		imageBlur.onload = () => {
 			blurTimer = setTimeout(() => {

@@ -21,7 +21,7 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 					],
 				}),
 			)
-			.then(([resp]) => resp ?? null);
+			.then((resp) => (resp.length ? resp[0] : null));
 	} catch (err) {
 		console.error(err);
 	}
@@ -73,6 +73,8 @@ const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
 				sort: "-publish_date",
 				fields: [
 					"id",
+					"body",
+					"image",
 					"publish_date",
 					"metadata.slug",
 					"metadata.title",

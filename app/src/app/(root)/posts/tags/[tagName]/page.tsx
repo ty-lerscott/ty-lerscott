@@ -18,18 +18,21 @@ const BREADCRUMBS = [
 
 const TagPage = async ({ params }: { params: { tagName: string } }) => {
 	const { tagName } = await params;
+	const title = kebabToTitleCase(tagName);
 
 	// const posts = await getData(tagName);
 
 	return (
-		<div>
+		<>
 			<Breadcrumbs
 				breadcrumbs={BREADCRUMBS.concat({
-					title: kebabToTitleCase(tagName),
+					title,
 					href: `/posts/tags/${tagName}`,
 				})}
 			/>
-		</div>
+
+			<h1>Tag: {title}</h1>
+		</>
 	);
 };
 

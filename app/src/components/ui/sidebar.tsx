@@ -259,7 +259,7 @@ const Sidebar = forwardRef<
 				>
 					<div
 						data-sidebar="sidebar"
-						className="flex h-full w-full flex-col bg-[--sidebar-background] group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border-[--border] group-data-[variant=floating]:shadow"
+						className="flex h-full w-full flex-col bg-[--sidebar-background] group-data-[variant=floating]:rounded-md group-data-[variant=floating]:border-[--border] group-data-[variant=floating]:shadow"
 					>
 						{children}
 					</div>
