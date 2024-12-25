@@ -24,12 +24,12 @@ import {
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { getMenu } from "@/lib/cms";
-import type { Page, Menu, MenuItem } from "@/types";
+import type { Page, Menu } from "@/types";
 
 const getIcon = (icon: string) => {
 	const LucideIcon = icons[icon as keyof typeof icons];
 
-	return LucideIcon ? <LucideIcon /> : <span>{icon} not found</span>;
+	return LucideIcon ? <LucideIcon /> : null;
 };
 
 const SOCIALS = {
@@ -56,7 +56,9 @@ const Sidebar = async () => {
 		// getMenu("socials")
 	]);
 
-	if (!navigation) return null;
+	if (!navigation?.items) return null;
+
+	// console.dir(navigation, { depth: null });
 
 	return (
 		<div className="relative flex">
@@ -71,36 +73,35 @@ const Sidebar = async () => {
 							<SidebarMenu>
 								{navigation.items.map(({ item }) => {
 									if ((item as Menu).items) {
-										const _item = item as Menu;
-										const items = _item.items as { item: MenuItem }[];
+										const { id, items, icon, name } = item as Menu;
 
 										return (
 											<Collapsible
 												asChild
+												key={id}
 												defaultOpen
-												key={item.id}
 												className="group/collapsible"
 											>
 												<SidebarMenuItem>
 													<CollapsibleTrigger asChild>
 														<SidebarMenuButton>
-															{_item.icon ? getIcon(_item.icon) : null}
-															{_item.name ? <span>{_item.name}</span> : null}
+															{icon ? getIcon(icon) : null}
+															{name ? <span>{name}</span> : null}
 															<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
 														</SidebarMenuButton>
 													</CollapsibleTrigger>
 													<CollapsibleContent>
 														<SidebarMenuSub>
 															{items.map(({ item }) => {
-																const href =
-																	item.href || item?.page?.metadata.slug || "";
-																const title =
-																	item?.page?.metadata?.title || item.text;
+																const {
+																	id,
+																	metadata: { slug, title },
+																} = item as Page;
 
 																return (
-																	<SidebarMenuSubItem key={item.id}>
+																	<SidebarMenuSubItem key={id}>
 																		<SidebarMenuSubButton asChild size="sm">
-																			<Link href={href}>{title}</Link>
+																			<Link href={slug}>{title}</Link>
 																		</SidebarMenuSubButton>
 																	</SidebarMenuSubItem>
 																);
@@ -112,14 +113,13 @@ const Sidebar = async () => {
 										);
 									}
 
-									const _item = item as MenuItem;
-									const { metadata } = _item.page as Page;
+									const { metadata, icon } = item as Page;
 
 									return (
 										<SidebarMenuItem key={metadata.title}>
 											<SidebarMenuButton asChild>
 												<Link href={metadata.slug}>
-													{getIcon(item.icon as string)}
+													{getIcon(icon as string)}
 													<span>{metadata.title}</span>
 												</Link>
 											</SidebarMenuButton>

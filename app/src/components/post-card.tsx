@@ -32,7 +32,7 @@ const PostCard = ({
 				</AspectRatio>
 
 				<CardTitle className="text-[--heading]">
-					<Link href={`/posts/${metadata?.slug}`}>{metadata?.title}</Link>
+					<Link href={metadata?.slug || ""}>{metadata?.title}</Link>
 				</CardTitle>
 				<CardDescription>
 					{blurb}

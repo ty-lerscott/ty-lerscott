@@ -1,4 +1,5 @@
 import { kebabToTitleCase } from "@/lib/utils";
+import { getTagDefinition } from "@/lib/cms";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 const BREADCRUMBS = [
@@ -7,18 +8,20 @@ const BREADCRUMBS = [
 		href: "/",
 	},
 	{
-		title: "Posts",
-		href: "/posts",
+		title: "Blog",
+		href: "/blog",
 	},
 	{
 		title: "Tags",
-		href: "/posts/tags",
+		href: "/blog/tags",
 	},
 ] as Breadcrumb[];
 
 const TagPage = async ({ params }: { params: { tagName: string } }) => {
 	const { tagName } = await params;
 	const title = kebabToTitleCase(tagName);
+
+	// const tagDefinition = await getTagDefinition(tagName);
 
 	// const posts = await getData(tagName);
 
@@ -27,7 +30,7 @@ const TagPage = async ({ params }: { params: { tagName: string } }) => {
 			<Breadcrumbs
 				breadcrumbs={BREADCRUMBS.concat({
 					title,
-					href: `/posts/tags/${tagName}`,
+					href: `/blog/tags/${tagName}`,
 				})}
 			/>
 

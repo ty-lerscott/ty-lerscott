@@ -1,5 +1,6 @@
-import { client, readItems, readFile, readItem } from "@/lib/directus";
-import type { Menu, MenuItem, Page, Post, Image } from "@/types";
+import { client, readItems, readFile, readSingleton } from "@/lib/directus";
+
+import type { Menu, Page, Post, Image, Tag } from "@/types";
 
 const getMenu = async (name: string): Promise<Menu | null> => {
 	try {
@@ -12,12 +13,14 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 						},
 					},
 					fields: [
-						"items.item.*",
-						"items.item.page.metadata.slug",
-						"items.item.page.metadata.title",
-						"items.item.items.item.*",
-						"items.item.items.item.page.metadata.title",
-						"items.item.items.item.page.metadata.slug",
+						"items.item.name",
+						"items.item.id",
+						"items.item.metadata.slug",
+						"items.item.metadata.title",
+						"items.item.icon",
+						"items.item.items.item.id",
+						"items.item.items.item.metadata.slug",
+						"items.item.items.item.metadata.title",
 					],
 				}),
 			)
@@ -67,7 +70,7 @@ const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
 
 	try {
 		const resp = await client.request<Post[]>(
-			readItems("Posts", {
+			readItems("Post", {
 				page,
 				limit,
 				sort: "-publish_date",
@@ -93,7 +96,7 @@ const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
 const getPost = async (slug: string): Promise<Post | null> => {
 	try {
 		const resp = await client.request<Post[]>(
-			readItems("Posts", {
+			readItems("Post", {
 				filter: {
 					metadata: {
 						slug,
@@ -131,4 +134,27 @@ const getPost = async (slug: string): Promise<Post | null> => {
 	return null;
 };
 
-export { getMenu, getPage, getPosts, getPost };
+const getTagDefinition = async (tagName: string): Promise<Tag | null> => {
+	try {
+		const resp = await client.request<Tag[]>(
+			readSingleton("Tag_Dictionary", {
+				// filter: {
+				// 	Tag: {
+				// 		_eq: tagName,
+				// 	},
+				// },
+				fields: ["*"],
+			}),
+		);
+
+		console.log(resp);
+
+		return resp.length ? resp[0] : null;
+	} catch (err) {
+		console.error(err);
+	}
+
+	return null;
+};
+
+export { getMenu, getPage, getPosts, getPost, getTagDefinition };

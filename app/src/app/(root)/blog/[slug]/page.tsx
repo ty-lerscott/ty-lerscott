@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import { cache } from "react";
 import readingTime from "reading-time";
+import { headers } from "next/headers";
 import ReactMarkdown from "react-markdown";
 import { FaRegCalendar } from "react-icons/fa6";
 
@@ -11,7 +12,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
-const getData = cache(async (slug: string) => getPost(slug));
+const getData = cache(async (slug: string) => getPost(`/blog/${slug}`));
 
 const BREADCRUMBS = [
 	{
@@ -19,8 +20,8 @@ const BREADCRUMBS = [
 		href: "/",
 	},
 	{
-		title: "Posts",
-		href: "/posts",
+		title: "Blog",
+		href: "/blog",
 	},
 ] as Breadcrumb[];
 
@@ -40,9 +41,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
 	return (
 		<>
-			<Breadcrumbs
-				breadcrumbs={BREADCRUMBS.concat({ title, href: `/posts/${slug}` })}
-			/>
+			<Breadcrumbs breadcrumbs={BREADCRUMBS.concat({ title, href: slug })} />
 
 			<h1>{title}</h1>
 
@@ -67,7 +66,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 					<ul className="flex flex-wrap gap-4 list-none">
 						{tags.map((tag) => (
 							<li key={tag}>
-								<Link href={`/posts/tags/${tag}`} className="underline">
+								<Link href={`/blog/tags/${tag}`} className="underline">
 									{tag}
 								</Link>
 							</li>

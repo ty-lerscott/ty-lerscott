@@ -9,4 +9,4 @@ export const client = createDirectus(
 	.with(rest())
 	.with(graphql());
 
-export { readItems, readItem, readFile } from "@directus/sdk";
+export { readItems, readItem, readFile, readSingleton } from "@directus/sdk";
