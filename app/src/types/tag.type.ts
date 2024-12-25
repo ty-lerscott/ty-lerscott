@@ -1,4 +1,6 @@
 export type Tag = {
+	id: string;
 	name: string;
-	definition: string;
+	slug: string;
+	color: string | null;
 };

@@ -27,9 +27,11 @@ const PostCard = ({
 	return (
 		<Card className="min-w-[20rem]">
 			<CardHeader>
-				<AspectRatio ratio={16 / 9}>
-					<ImageBackground id={image as string} />
-				</AspectRatio>
+				<Link href={metadata?.slug || ""}>
+					<AspectRatio ratio={16 / 9}>
+						<ImageBackground id={image as string} />
+					</AspectRatio>
+				</Link>
 
 				<CardTitle className="text-[--heading]">
 					<Link href={metadata?.slug || ""}>{metadata?.title}</Link>

@@ -64,6 +64,16 @@ type GetPostsArgs =
 	  }
 	| number;
 
+const PostFields = [
+	"id",
+	"body",
+	"image",
+	"publish_date",
+	"metadata.slug",
+	"metadata.title",
+	"metadata.description",
+];
+
 const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
 	const { limit = 10, page = 1 } =
 		typeof args === "number" ? { limit: args } : args || {};
@@ -74,17 +84,39 @@ const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
 				page,
 				limit,
 				sort: "-publish_date",
-				fields: [
-					"id",
-					"body",
-					"image",
-					"publish_date",
-					"metadata.slug",
-					"metadata.title",
-					"metadata.description",
-				],
+				fields: PostFields,
 			}),
 		);
+
+		return resp;
+	} catch (err) {
+		console.error(err);
+	}
+	return null;
+};
+
+const getPostsByTagSlug = async (tagName: string): Promise<Post[] | null> => {
+	try {
+		const resp = await client.request<Post[]>(
+			readItems("Post", {
+				filter: {
+					tags: {
+						Tag_id: {
+							slug: {
+								_eq: tagName,
+							},
+						},
+					},
+					status: {
+						_eq: "published",
+					},
+				},
+				sort: "-publish_date",
+				fields: PostFields,
+			}),
+		);
+
+		if (resp.length === 0) return null;
 
 		return resp;
 	} catch (err) {
@@ -103,7 +135,7 @@ const getPost = async (slug: string): Promise<Post | null> => {
 					},
 				},
 				fields: [
-					"tags",
+					"tags.Tag_id.*",
 					"body",
 					"image",
 					"publish_date",
@@ -117,6 +149,14 @@ const getPost = async (slug: string): Promise<Post | null> => {
 		if (resp.length === 0) return null;
 
 		const post = resp[0];
+
+		post.tags = post.tags
+			? post?.tags?.map((tag) => {
+					const { Tag_id } = tag as unknown as { Tag_id: Tag };
+
+					return Tag_id;
+				})
+			: null;
 
 		const image = await client.request<Image>(
 			readFile(post.image as string, {
@@ -157,4 +197,11 @@ const getTagDefinition = async (tagName: string): Promise<Tag | null> => {
 	return null;
 };
 
-export { getMenu, getPage, getPosts, getPost, getTagDefinition };
+export {
+	getMenu,
+	getPage,
+	getPost,
+	getPosts,
+	getTagDefinition,
+	getPostsByTagSlug,
+};

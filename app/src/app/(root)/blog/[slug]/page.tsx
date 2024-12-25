@@ -5,8 +5,10 @@ import readingTime from "reading-time";
 import ReactMarkdown from "react-markdown";
 import { FaRegCalendar } from "react-icons/fa6";
 
+import { cn } from "@/lib/utils";
 import { getPost } from "@/lib/cms";
 import type { Post, Image } from "@/types";
+import { badgeVariants } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
@@ -63,10 +65,18 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 					<h3>Tags</h3>
 
 					<ul className="flex flex-wrap gap-4 list-none">
-						{tags.map((tag) => (
-							<li key={tag}>
-								<Link href={`/blog/tags/${tag}`} className="underline">
-									{tag}
+						{tags.map(({ id, slug, name, color }) => (
+							<li key={id}>
+								<Link
+									href={`/blog/tags/${slug}`}
+									className={cn(badgeVariants(), color ? "text-[--white]" : "")}
+									style={{
+										...(color && {
+											backgroundColor: color,
+										}),
+									}}
+								>
+									{name}
 								</Link>
 							</li>
 						))}
