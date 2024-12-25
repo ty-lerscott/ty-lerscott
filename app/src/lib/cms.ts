@@ -42,12 +42,12 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 	return null;
 };
 
-const getPage = async (
+const getPage = async <PageType>(
 	slug: string,
 	fields?: string[],
-): Promise<Page | null> => {
+): Promise<Page<PageType> | null> => {
 	try {
-		const resp = await client.request<Page[]>(
+		const resp = await client.request<Page<PageType>[]>(
 			readItems("Pages", {
 				filter: {
 					metadata: {
