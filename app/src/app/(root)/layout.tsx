@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
@@ -37,7 +38,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<ThemeProvider>
-			<html lang="en" className="dark">
+			<html lang="en" className="dark" suppressHydrationWarning>
 				<body
 					className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 				>
