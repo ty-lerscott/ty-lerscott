@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
