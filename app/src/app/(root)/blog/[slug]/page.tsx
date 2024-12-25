@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import { cache } from "react";
 import readingTime from "reading-time";
-import { headers } from "next/headers";
 import ReactMarkdown from "react-markdown";
 import { FaRegCalendar } from "react-icons/fa6";
 
