@@ -1,8 +1,7 @@
 import { cache } from "react";
 
 import PostCard from "@/components/post-card";
-import { getPostsByTagSlug } from "@/lib/cms";
-import { kebabToTitleCase } from "@/lib/utils";
+import { getTag, getPostsByTagSlug } from "@/lib/cms";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 const getData = cache(async (tagName: string) => getPostsByTagSlug(tagName));
@@ -24,27 +23,30 @@ const BREADCRUMBS = [
 
 const TagPage = async ({ params }: { params: { tagName: string } }) => {
 	const { tagName } = await params;
-	const posts = await getData(tagName);
-	const title = kebabToTitleCase(tagName);
+	const [posts, tag] = await Promise.all([getData(tagName), getTag(tagName)]);
 
-	if (!posts) return null;
+	if (!tag) return null;
+
+	const { name } = tag;
 
 	return (
 		<>
 			<Breadcrumbs
 				breadcrumbs={BREADCRUMBS.concat({
-					title,
+					title: name,
 					href: `/blog/tags/${tagName}`,
 				})}
 			/>
 
-			<h1>Tag: {title}</h1>
+			<h1>Tag: {name}</h1>
 
-			<div className="grid gap-4 grid-cols-3">
-				{posts.map((post) => {
-					return <PostCard key={post.id} {...post} />;
-				})}
-			</div>
+			{posts?.length ? (
+				<div className="grid gap-4 grid-cols-3">
+					{posts.map((post) => {
+						return <PostCard key={post.id} {...post} />;
+					})}
+				</div>
+			) : null}
 		</>
 	);
 };

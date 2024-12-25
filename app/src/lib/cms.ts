@@ -2,6 +2,16 @@ import { client, readItems, readFile, readSingleton } from "@/lib/directus";
 
 import type { Menu, Page, Post, Image, Tag } from "@/types";
 
+const PostFields = [
+	"id",
+	"body",
+	"image",
+	"publish_date",
+	"metadata.slug",
+	"metadata.title",
+	"metadata.description",
+];
+
 const getMenu = async (name: string): Promise<Menu | null> => {
 	try {
 		return client
@@ -57,24 +67,14 @@ const getPage = async (
 	return null;
 };
 
-type GetPostsArgs =
-	| {
-			limit?: number;
-			page?: number;
-	  }
-	| number;
-
-const PostFields = [
-	"id",
-	"body",
-	"image",
-	"publish_date",
-	"metadata.slug",
-	"metadata.title",
-	"metadata.description",
-];
-
-const getPosts = async (args?: GetPostsArgs): Promise<Post[] | null> => {
+const getPosts = async (
+	args?:
+		| {
+				limit?: number;
+				page?: number;
+		  }
+		| number,
+): Promise<Post[] | null> => {
 	const { limit = 10, page = 1 } =
 		typeof args === "number" ? { limit: args } : args || {};
 
@@ -197,7 +197,39 @@ const getTagDefinition = async (tagName: string): Promise<Tag | null> => {
 	return null;
 };
 
+const getTags = async (): Promise<Tag[] | null> => {
+	try {
+		const resp = await client.request<Tag[]>(
+			readItems("Tag", { fields: ["*"] }),
+		);
+
+		if (resp.length === 0) return null;
+
+		return resp;
+	} catch (err) {
+		console.error(err);
+	}
+	return null;
+};
+
+const getTag = async (slug: string): Promise<Tag | null> => {
+	try {
+		const resp = await client.request<Tag[]>(
+			readItems("Tag", { filter: { slug } }),
+		);
+
+		if (resp.length === 0) return null;
+
+		return resp[0];
+	} catch (err) {
+		console.error(err);
+	}
+	return null;
+};
+
 export {
+	getTag,
+	getTags,
 	getMenu,
 	getPage,
 	getPost,

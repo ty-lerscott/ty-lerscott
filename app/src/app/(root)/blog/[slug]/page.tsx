@@ -52,6 +52,26 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 				<span>{readingTime(body).text}</span>
 			</div>
 
+			{tags ? (
+				<ul className="flex flex-wrap gap-4 list-none">
+					{tags.map(({ id, slug, name, color }) => (
+						<li key={id}>
+							<Link
+								href={`/blog/tags/${slug}`}
+								className={cn(badgeVariants(), color ? "text-[--white]" : "")}
+								style={{
+									...(color && {
+										backgroundColor: color,
+									}),
+								}}
+							>
+								{name}
+							</Link>
+						</li>
+					))}
+				</ul>
+			) : null}
+
 			{image ? (
 				<AspectRatio ratio={16 / 9}>
 					<ImageBackground {...image} />
@@ -59,30 +79,6 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 			) : null}
 
 			<ReactMarkdown>{body}</ReactMarkdown>
-
-			{tags ? (
-				<div className="flex flex-col gap-2">
-					<h3>Tags</h3>
-
-					<ul className="flex flex-wrap gap-4 list-none">
-						{tags.map(({ id, slug, name, color }) => (
-							<li key={id}>
-								<Link
-									href={`/blog/tags/${slug}`}
-									className={cn(badgeVariants(), color ? "text-[--white]" : "")}
-									style={{
-										...(color && {
-											backgroundColor: color,
-										}),
-									}}
-								>
-									{name}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</div>
-			) : null}
 		</>
 	);
 };
