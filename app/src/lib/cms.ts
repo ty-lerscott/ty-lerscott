@@ -14,6 +14,7 @@ const PostFields = [
 	"id",
 	"body",
 	"image",
+	"status",
 	"publish_date",
 	"metadata.slug",
 	"metadata.title",
@@ -98,6 +99,11 @@ const getPosts = async (
 				limit,
 				sort: "-publish_date",
 				fields: PostFields,
+				filter: {
+					status: {
+						_eq: "published",
+					},
+				},
 			}),
 		);
 
@@ -187,29 +193,6 @@ const getPost = async (slug: string): Promise<Post | null> => {
 	return null;
 };
 
-const getTagDefinition = async (tagName: string): Promise<Tag | null> => {
-	try {
-		const resp = await client.request<Tag[]>(
-			readSingleton("Tag_Dictionary", {
-				// filter: {
-				// 	Tag: {
-				// 		_eq: tagName,
-				// 	},
-				// },
-				fields: ["*"],
-			}),
-		);
-
-		console.log(resp);
-
-		return resp.length ? resp[0] : null;
-	} catch (err) {
-		console.error(err);
-	}
-
-	return null;
-};
-
 type APIContactDetails = Omit<ContactDetails, "socials"> & {
 	socials: {
 		Link_id: Link;
@@ -273,7 +256,6 @@ export {
 	getPage,
 	getPost,
 	getPosts,
-	getTagDefinition,
 	getPostsByTagSlug,
 	getContactDetails,
 };
