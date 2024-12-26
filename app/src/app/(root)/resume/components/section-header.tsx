@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import type { PropsWithChildren } from "react";
 
-export const SectionHeader = ({
+const SectionHeader = ({
 	children,
 	className,
 }: PropsWithChildren & { className?: string }) => {

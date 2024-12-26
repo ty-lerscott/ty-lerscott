@@ -12,7 +12,7 @@ export type Page = {
 
 export type ResumePage = Omit<Page, "body"> & {
 	resume_bio: string | null;
-	education: string | null;
+	education: string[][] | null;
 	experiences: Experience[] | null;
 	skills: Skill[] | null;
 	body: string[] | null;

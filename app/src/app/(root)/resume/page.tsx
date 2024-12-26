@@ -2,10 +2,12 @@ import Link from "next/link";
 import { cache } from "react";
 
 import { yearsAgo } from "@/lib/utils";
+import Education from "./components/education";
 import SocialMap from "@/components/social-map";
+import Experiences from "./components/experiences";
 import { getPage, getContactDetails } from "@/lib/cms";
+import SectionHeader from "./components/section-header";
 import { ResumeHeader, Skills } from "./components/client";
-import { SectionHeader } from "./components/section-header";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
 
@@ -28,6 +30,35 @@ type APIResumePage = Omit<ResumePageType, "experiences" | "skills" | "body"> & {
 		Resume_Skill_id: Skill;
 	}[];
 	body: string;
+	education: string;
+};
+
+const normalizePageData = (pageData: APIResumePage) => {
+	const _pageData = pageData as APIResumePage;
+	return _pageData
+		? ({
+				...pageData,
+				skills: _pageData.skills?.map(({ Resume_Skill_id }) => Resume_Skill_id),
+				body: _pageData.body?.split(/\n/g).reduce((acc, item) => {
+					const next = item.replace(/^\-\s?/, "").trim();
+
+					if (next) {
+						acc.push(next);
+					}
+
+					return acc;
+				}, [] as string[]),
+				experiences: _pageData.experiences?.map(
+					({ Work_Experience_id }) => Work_Experience_id,
+				),
+				education: _pageData.education?.split("---").reduce((acc, item) => {
+					const next = item.split("\n").filter(Boolean);
+					acc.push(next);
+
+					return acc;
+				}, [] as string[][]),
+			} as ResumePageType)
+		: null;
 };
 
 const getResume = cache(async () =>
@@ -37,29 +68,7 @@ const getResume = cache(async () =>
 		"body",
 		"experiences.Work_Experience_id.*",
 		"skills.Resume_Skill_id.*",
-	]).then((pageData) => {
-		const _pageData = pageData as APIResumePage;
-		return _pageData
-			? ({
-					...pageData,
-					skills: _pageData.skills?.map(
-						({ Resume_Skill_id }) => Resume_Skill_id,
-					),
-					body: _pageData.body?.split(/\n/g).reduce((acc, item) => {
-						const next = item.replace(/^\-\s?/, "").trim();
-
-						if (next) {
-							acc.push(next);
-						}
-
-						return acc;
-					}, [] as string[]),
-					experiences: _pageData.experiences?.map(
-						({ Work_Experience_id }) => Work_Experience_id,
-					),
-				} as ResumePageType)
-			: null;
-	}),
+	]).then((data) => normalizePageData(data as APIResumePage)),
 );
 
 const ResumeBio = ({ bio }: { bio: string }) => {
@@ -117,13 +126,13 @@ const ResumePage = async () => {
 
 	if (!resume) return null;
 
-	const { body, skills, experiences, resume_bio } = resume;
+	const { body, skills, experiences, resume_bio, education } = resume;
 
 	return (
 		<>
 			<Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
-			<div className="border-[--ghost] border-2 rounded">
+			<div className="border-[--ghost] border-2 rounded max-w-[85rem] mx-auto">
 				<ResumeHeader roles={body as string[]} />
 
 				<div data-testid="ResumeBody" className="grid grid-cols-9">
@@ -135,13 +144,16 @@ const ResumePage = async () => {
 						{skills?.length ? <Skills skills={skills} /> : null}
 					</div>
 
-					{/* <div data-testid="Experiences" className={styles.Experiences}> */}
-					{/* {workExperience.length ? (
-						<Experiences experiences={workExperience} />
+					<div
+						data-testid="Experiences"
+						className="col-span-6 border-l-2 border-[--ghost]"
+					>
+						{experiences?.length ? (
+							<Experiences experiences={experiences} />
 						) : null}
 
-						{education.length ? <Education education={education} /> : null} */}
-					{/* </div> */}
+						{education?.length ? <Education education={education} /> : null}
+					</div>
 				</div>
 			</div>
 		</>
