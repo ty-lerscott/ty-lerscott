@@ -1,6 +1,14 @@
 import { client, readItems, readFile, readSingleton } from "@/lib/directus";
 
-import type { Menu, Page, Post, Image, Tag } from "@/types";
+import type {
+	Menu,
+	Page,
+	Link,
+	Post,
+	Image,
+	Tag,
+	ContactDetails,
+} from "@/types";
 
 const PostFields = [
 	"id",
@@ -13,6 +21,20 @@ const PostFields = [
 ];
 
 const getMenu = async (name: string): Promise<Menu | null> => {
+	const fields = [
+		...(name === "socials"
+			? ["items.item.*"]
+			: [
+					"items.item.name",
+					"items.item.metadata.slug",
+					"items.item.metadata.title",
+					"items.item.icon",
+					"items.item.items.item.id",
+					"items.item.items.item.metadata.slug",
+					"items.item.items.item.metadata.title",
+				]),
+	];
+
 	try {
 		return client
 			.request<Menu[]>(
@@ -22,16 +44,7 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 							_eq: name,
 						},
 					},
-					fields: [
-						"items.item.name",
-						"items.item.id",
-						"items.item.metadata.slug",
-						"items.item.metadata.title",
-						"items.item.icon",
-						"items.item.items.item.id",
-						"items.item.items.item.metadata.slug",
-						"items.item.items.item.metadata.title",
-					],
+					fields: ["items.item.id"].concat(fields),
 				}),
 			)
 			.then((resp) => (resp.length ? resp[0] : null));
@@ -197,6 +210,32 @@ const getTagDefinition = async (tagName: string): Promise<Tag | null> => {
 	return null;
 };
 
+type APIContactDetails = Omit<ContactDetails, "socials"> & {
+	socials: {
+		Link_id: Link;
+	}[];
+};
+
+const getContactDetails = async (): Promise<ContactDetails | null> => {
+	try {
+		const resp = await client.request<APIContactDetails>(
+			readSingleton("Contact", {
+				fields: ["phone", "email", "socials.Link_id.*"],
+			}),
+		);
+
+		return resp
+			? {
+					...resp,
+					socials: resp.socials.map((item) => item.Link_id) as Link[],
+				}
+			: null;
+	} catch (err) {
+		console.error(err);
+	}
+	return null;
+};
+
 const getTags = async (): Promise<Tag[] | null> => {
 	try {
 		const resp = await client.request<Tag[]>(
@@ -236,4 +275,5 @@ export {
 	getPosts,
 	getTagDefinition,
 	getPostsByTagSlug,
+	getContactDetails,
 };

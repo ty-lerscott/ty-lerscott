@@ -70,4 +70,7 @@ const kebabToTitleCase = (str: string): string => {
 const setImageUrl = (id: string) =>
 	`https://${HOSTNAME}.${LOCAL_DEV ? "local" : "com"}/assets/${id}`;
 
-export { cn, setMetadata, kebabToTitleCase, setImageUrl };
+const yearsAgo = (date: string): number =>
+	Number(new Date().getFullYear()) - Number(date);
+
+export { cn, setMetadata, kebabToTitleCase, setImageUrl, yearsAgo };

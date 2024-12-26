@@ -1,7 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { icons, ChevronRight } from "lucide-react";
+
+import SOCIALS from "./social-map";
+import { getMenu } from "@/lib/cms";
+import type { Page, Menu, Link as LinkType } from "@/types";
 
 import {
 	SidebarMenu,
@@ -23,8 +26,6 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { getMenu } from "@/lib/cms";
-import type { Page, Menu } from "@/types";
 
 const getIcon = (icon: string) => {
 	const LucideIcon = icons[icon as keyof typeof icons];
@@ -32,33 +33,13 @@ const getIcon = (icon: string) => {
 	return LucideIcon ? <LucideIcon /> : null;
 };
 
-const SOCIALS = {
-	bmac: dynamic(() =>
-		import("react-icons/bi").then((module) => module.BiCoffeeTogo),
-	),
-	github: dynamic(() =>
-		import("react-icons/ai").then((module) => module.AiFillGithub),
-	),
-	linkedin: dynamic(() =>
-		import("react-icons/ai").then((module) => module.AiFillLinkedin),
-	),
-	instagram: dynamic(() =>
-		import("react-icons/ai").then((module) => module.AiFillInstagram),
-	),
-	twitter: dynamic(() =>
-		import("react-icons/ai").then((module) => module.AiFillTwitterSquare),
-	),
-};
-
 const Sidebar = async () => {
-	const [navigation, socials = []] = await Promise.all([
+	const [navigation, socials] = await Promise.all([
 		getMenu("sidebar"),
-		// getMenu("socials")
+		getMenu("socials"),
 	]);
 
 	if (!navigation?.items) return null;
-
-	// console.dir(navigation, { depth: null });
 
 	return (
 		<div className="relative flex">
@@ -133,7 +114,8 @@ const Sidebar = async () => {
 				{socials ? (
 					<SidebarFooter className="mb-2">
 						<ul className="flex justify-center gap-2 list-none">
-							{socials.map(({ brand, href }) => {
+							{(socials.items || []).map(({ item }) => {
+								const { brand, href } = item as LinkType;
 								const Icon = SOCIALS[brand as keyof typeof SOCIALS];
 
 								return (

@@ -1,3 +1,4 @@
+import type { Link } from "@/types/link.type";
 import type { Page } from "@/types/page.type";
 
 export type Menu = {
@@ -5,6 +6,6 @@ export type Menu = {
 	icon: string | null;
 	name: string | null;
 	items: {
-		item: Menu | Page;
+		item: Menu | Page | Link;
 	}[];
 };

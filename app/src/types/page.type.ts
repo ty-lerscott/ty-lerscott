@@ -15,4 +15,5 @@ export type ResumePageExtension = {
 	education: string | null;
 	experiences: Experience[] | null;
 	skills: Skill[] | null;
+	body: string[] | null;
 };
