@@ -5,10 +5,11 @@ import readingTime from "reading-time";
 import ReactMarkdown from "react-markdown";
 import { FaRegCalendar } from "react-icons/fa6";
 
-import { cn } from "@/lib/utils";
+import pkg from "~/package.json";
 import { getPost } from "@/lib/cms";
 import type { Post, Image } from "@/types";
 import { badgeVariants } from "@/components/ui/badge";
+import { cn, setMetadata, SITE_URL } from "@/lib/utils";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
@@ -25,6 +26,41 @@ const BREADCRUMBS = [
 		href: "/blog",
 	},
 ] as Breadcrumb[];
+
+export const generateMetadata = async ({
+	params,
+}: { params: { slug: string } }) => {
+	const { slug } = await params;
+	const post = await getData(slug);
+
+	if (!post) return null;
+
+	console;
+
+	const urlParams = new URLSearchParams();
+	urlParams.set("title", post.metadata.title);
+	urlParams.set("id", (post.image as Image).id);
+	urlParams.set(
+		"subtitle",
+		`${pkg.details.author.name} | ${pkg.details.author.profession}`,
+	);
+
+	return setMetadata({
+		...post.metadata,
+		openGraph: {
+			title: post.metadata.title,
+			description: post.metadata.description,
+			url: `${SITE_URL()}/blog/${slug}`,
+			images: post.image
+				? [
+						{
+							url: `${SITE_URL()}/api/og?${urlParams.toString()}`,
+						},
+					]
+				: [],
+		},
+	});
+};
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
 	const { slug } = await params;

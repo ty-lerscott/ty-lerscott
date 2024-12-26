@@ -8,7 +8,7 @@ import { cn, setImageUrl } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const setBlurImageUrl = (id: string) => {
-	return `${setImageUrl(id)}?transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
+	return `${setImageUrl(id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
 };
 
 const ImageBackground = (image: Partial<Image>) => {

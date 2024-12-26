@@ -1,3 +1,4 @@
+import { setMetadata } from "@/lib/utils";
 import RecentPosts from "@/components/recent-posts";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
@@ -11,6 +12,12 @@ const BREADCRUMBS = [
 		href: "/blog",
 	},
 ] as Breadcrumb[];
+
+export const generateMetadata = () =>
+	setMetadata({
+		title: "Blog",
+		slug: "/blog",
+	});
 
 const PostsPage = () => {
 	return (

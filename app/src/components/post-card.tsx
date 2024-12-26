@@ -25,7 +25,7 @@ const PostCard = ({
 	const isLong = metadata && metadata?.description?.length > 256;
 
 	return (
-		<Card className="min-w-[20rem]">
+		<Card className="w-full">
 			<CardHeader>
 				<Link href={metadata?.slug || ""}>
 					<AspectRatio ratio={16 / 9}>

@@ -1,11 +1,8 @@
 import { createDirectus, rest, graphql } from "@directus/sdk";
 
-const isLocal = process.env.NODE_ENV === "development";
-const hostname = process.env.NEXT_PUBLIC_HOSTNAME;
+import { SITE_URL } from "@/lib/utils";
 
-export const client = createDirectus(
-	`https://${hostname}.${isLocal ? "local" : "com"}`,
-)
+export const client = createDirectus(SITE_URL({ isCMS: true }))
 	.with(rest())
 	.with(graphql());
 

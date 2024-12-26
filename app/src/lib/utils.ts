@@ -4,12 +4,9 @@ import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
 
-import type { Image } from "@/types";
-
 const LOCAL_APP = process.env.NEXT_PUBLIC_APP_ENV === "development";
 const LOCAL_DEV = process.env.NODE_ENV === "development";
 const LOCAL_API = process.env.API_ENV === "development";
-const HOSTNAME = process.env.NEXT_PUBLIC_HOSTNAME;
 const PREVIEW_MODE = process.env.PREVIEW_MODE === "true";
 const META_TITLE = `${pkg.details.author.name} | ${pkg.details.author.profession}`;
 
@@ -19,19 +16,30 @@ const LOCAL_PREFIX = LOCAL_DEV
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
+const SITE_URL = (args?: { isAPI?: boolean; isCMS?: boolean }) => {
+	const isAPI = args?.isAPI ?? false;
+	const isCMS = args?.isCMS ?? false;
+
+	return `https://${isAPI ? process.env.NEXT_PUBLIC_API_HOSTNAME : isCMS ? process.env.NEXT_PUBLIC_CMS_HOSTNAME : process.env.NEXT_PUBLIC_HOSTNAME}.${LOCAL_DEV ? "local" : "com"}`;
+};
+
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const customMerge = (objValue: any, srcValue: any, key: string) => {
 	// Check if we're dealing with the specific keys we want to merge
 	if (["title", "siteName"].includes(key)) {
 		// If both values are strings, concatenate them
 		if (typeof objValue === "string" && typeof srcValue === "string") {
-			return `${LOCAL_PREFIX}${srcValue} | ${objValue}`;
+			return `${LOCAL_PREFIX}${srcValue}${objValue ? ` | ${objValue}` : ""}`;
 		}
 	}
 	return undefined;
 };
 
-const setMetadata = (metadata: Metadata): Metadata => {
+const setMetadata = (metadata: Metadata & { slug: string }): Metadata => {
+	metadata.alternates = metadata.slug
+		? { canonical: `${SITE_URL()}${metadata.slug}` }
+		: {};
+
 	return merge(
 		{},
 		{
@@ -67,10 +75,9 @@ const kebabToTitleCase = (str: string): string => {
 		.join(" ");
 };
 
-const setImageUrl = (id: string) =>
-	`https://${HOSTNAME}.${LOCAL_DEV ? "local" : "com"}/assets/${id}`;
+const setImageUrl = (id: string) => `${SITE_URL({ isCMS: true })}/assets/${id}`;
 
 const yearsAgo = (date: string): number =>
 	Number(new Date().getFullYear()) - Number(date);
 
-export { cn, setMetadata, kebabToTitleCase, setImageUrl, yearsAgo };
+export { cn, SITE_URL, setMetadata, kebabToTitleCase, setImageUrl, yearsAgo };

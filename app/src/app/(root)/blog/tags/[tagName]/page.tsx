@@ -1,9 +1,11 @@
 import { cache } from "react";
 
+import { setMetadata } from "@/lib/utils";
 import PostCard from "@/components/post-card";
 import { getTag, getPostsByTagSlug } from "@/lib/cms";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
+const getTagData = cache(async (tagName: string) => getTag(tagName));
 const getData = cache(async (tagName: string) => getPostsByTagSlug(tagName));
 
 const BREADCRUMBS = [
@@ -21,9 +23,26 @@ const BREADCRUMBS = [
 	},
 ] as Breadcrumb[];
 
+export const generateMetadata = async ({
+	params,
+}: { params: { tagName: string } }) => {
+	const { tagName } = await params;
+	const tag = await getTagData(tagName);
+
+	return tag
+		? setMetadata({
+				title: `Tag: ${tag.name}`,
+				slug: `/blog/tags/${tag.slug}`,
+			})
+		: null;
+};
+
 const TagPage = async ({ params }: { params: { tagName: string } }) => {
 	const { tagName } = await params;
-	const [posts, tag] = await Promise.all([getData(tagName), getTag(tagName)]);
+	const [posts, tag] = await Promise.all([
+		getData(tagName),
+		getTagData(tagName),
+	]);
 
 	if (!tag) return null;
 

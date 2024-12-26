@@ -1,12 +1,12 @@
 import { client, readItems, readFile, readSingleton } from "@/lib/directus";
 
 import type {
+	Tag,
 	Menu,
 	Page,
 	Link,
 	Post,
 	Image,
-	Tag,
 	ContactDetails,
 } from "@/types";
 
@@ -56,7 +56,7 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 	return null;
 };
 
-const getPage = async <PageType>(
+const getPage = async <PageType = Page>(
 	slug: string,
 	fields?: string[],
 ): Promise<Page | PageType | null> => {

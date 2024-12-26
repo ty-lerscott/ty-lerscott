@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { cache } from "react";
 
-import { yearsAgo } from "@/lib/utils";
 import Education from "./components/education";
 import SocialMap from "@/components/social-map";
 import Experiences from "./components/experiences";
+import { yearsAgo, setMetadata } from "@/lib/utils";
 import { getPage, getContactDetails } from "@/lib/cms";
 import SectionHeader from "./components/section-header";
 import { ResumeHeader, Skills } from "./components/client";
@@ -70,6 +70,12 @@ const getResume = cache(async () =>
 		"skills.Resume_Skill_id.*",
 	]).then((data) => normalizePageData(data as APIResumePage)),
 );
+
+export const generateMetadata = async () => {
+	const page = await getResume();
+
+	return page ? setMetadata(page.metadata) : null;
+};
 
 const ResumeBio = ({ bio }: { bio: string }) => {
 	const matches = bio.match(/{{(.*?)}}/);

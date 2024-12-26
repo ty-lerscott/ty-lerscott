@@ -1,10 +1,8 @@
 import type { Viewport } from "next";
-import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { ThemeProvider } from "@/contexts/theme";
-import ThemeToggle from "@/components/theme-toggle";
+// import ThemeToggle from "@/components/theme-toggle";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 
 import "./tailwind.css";
@@ -48,9 +46,7 @@ export default function RootLayout({
 							{children}
 						</main>
 
-						<ThemeToggle />
-						<Analytics />
-						<SpeedInsights />
+						{/* <ThemeToggle /> */}
 					</SidebarProvider>
 				</body>
 			</html>

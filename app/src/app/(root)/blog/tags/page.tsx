@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { cache } from "react";
 
-import { cn } from "@/lib/utils";
 import { getTags } from "@/lib/cms";
+import { cn, setMetadata } from "@/lib/utils";
 import { badgeVariants } from "@/components/ui/badge";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
@@ -22,6 +22,18 @@ const BREADCRUMBS = [
 		href: "/blog/tags",
 	},
 ] as Breadcrumb[];
+
+export const generateMetadata = async () => {
+	const tags = await getData();
+
+	return tags
+		? setMetadata({
+				title: "Blog Tags",
+				slug: "/blog/tags",
+				keywords: tags.map(({ name }) => name).join(", "),
+			})
+		: null;
+};
 
 const TagsPage = async () => {
 	const tags = await getData();
