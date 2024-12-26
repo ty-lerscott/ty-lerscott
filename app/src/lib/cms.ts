@@ -58,9 +58,9 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 const getPage = async <PageType>(
 	slug: string,
 	fields?: string[],
-): Promise<Page<PageType> | null> => {
+): Promise<Page | PageType | null> => {
 	try {
-		const resp = await client.request<Page<PageType>[]>(
+		const resp = await client.request<(Page | PageType)[]>(
 			readItems("Pages", {
 				filter: {
 					metadata: {

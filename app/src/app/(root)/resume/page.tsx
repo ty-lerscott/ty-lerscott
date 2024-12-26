@@ -1,11 +1,13 @@
-import { cache, type PropsWithChildren } from "react";
+import Link from "next/link";
+import { cache } from "react";
 
 import { yearsAgo } from "@/lib/utils";
-import { ResumeHeader } from "./client";
 import SocialMap from "@/components/social-map";
 import { getPage, getContactDetails } from "@/lib/cms";
+import { ResumeHeader, Skills } from "./components/client";
+import { SectionHeader } from "./components/section-header";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
-import type { ResumePageExtension, Page, Skill, Experience } from "@/types";
+import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
 
 const BREADCRUMBS = [
 	{
@@ -18,13 +20,14 @@ const BREADCRUMBS = [
 	},
 ] as Breadcrumb[];
 
-type APIResumePage = {
+type APIResumePage = Omit<ResumePageType, "experiences" | "skills" | "body"> & {
 	experiences: {
 		Work_Experience_id: Experience;
 	}[];
 	skills: {
 		Resume_Skill_id: Skill;
 	}[];
+	body: string;
 };
 
 const getResume = cache(async () =>
@@ -35,13 +38,14 @@ const getResume = cache(async () =>
 		"experiences.Work_Experience_id.*",
 		"skills.Resume_Skill_id.*",
 	]).then((pageData) => {
-		return pageData
+		const _pageData = pageData as APIResumePage;
+		return _pageData
 			? ({
 					...pageData,
-					skills: pageData.skills?.map(
+					skills: _pageData.skills?.map(
 						({ Resume_Skill_id }) => Resume_Skill_id,
 					),
-					body: pageData.body?.split(/\n/g).reduce((acc, item) => {
+					body: _pageData.body?.split(/\n/g).reduce((acc, item) => {
 						const next = item.replace(/^\-\s?/, "").trim();
 
 						if (next) {
@@ -50,23 +54,13 @@ const getResume = cache(async () =>
 
 						return acc;
 					}, [] as string[]),
-					experiences: pageData.experiences?.map(
+					experiences: _pageData.experiences?.map(
 						({ Work_Experience_id }) => Work_Experience_id,
 					),
-				} as Page<ResumePageExtension>)
+				} as ResumePageType)
 			: null;
 	}),
 );
-
-const SectionHeader = ({ children }: PropsWithChildren) => {
-	return (
-		<div className="flex flex-col">
-			<h3 className="p-4 border-y-2 border-[--ghost] text-center uppercase tracking-widest">
-				{children}
-			</h3>
-		</div>
-	);
-};
 
 const ResumeBio = ({ bio }: { bio: string }) => {
 	const matches = bio.match(/{{(.*?)}}/);
@@ -92,24 +86,29 @@ const ContactDetails = async () => {
 	const { email, phone, socials } = contactDetails;
 
 	return (
-		<div>
+		<>
 			<SectionHeader>Contact</SectionHeader>
 
 			<div className="flex flex-col gap-2 text-center my-4">
 				<p>{email}</p>
 				<p>{phone}</p>
-				{(socials || []).map(({ id, brand, text }) => {
+				{(socials || []).map(({ id, brand, text, href }) => {
 					const Icon = SocialMap[brand as keyof typeof SocialMap];
 
 					return (
-						<div key={id} className="flex gap-2 items-center justify-center">
+						<Link
+							key={id}
+							target="_blank"
+							href={href as string}
+							className="flex gap-2 items-center justify-center"
+						>
 							<Icon />
 							<p>{text}</p>
-						</div>
+						</Link>
 					);
 				})}
 			</div>
-		</div>
+		</>
 	);
 };
 
@@ -125,15 +124,15 @@ const ResumePage = async () => {
 			<Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
 			<div className="border-[--ghost] border-2 rounded">
-				<ResumeHeader roles={body} />
+				<ResumeHeader roles={body as string[]} />
 
-				<div data-testid="ResumeBody" className="grid grid-cols-8">
+				<div data-testid="ResumeBody" className="grid grid-cols-9">
 					<div data-testid="Sidebar" className="col-span-3">
 						{resume_bio ? <ResumeBio bio={resume_bio} /> : null}
 
 						<ContactDetails />
 
-						{/* {resumeSkills.length ? <Skills skills={resumeSkills} /> : null} */}
+						{skills?.length ? <Skills skills={skills} /> : null}
 					</div>
 
 					{/* <div data-testid="Experiences" className={styles.Experiences}> */}

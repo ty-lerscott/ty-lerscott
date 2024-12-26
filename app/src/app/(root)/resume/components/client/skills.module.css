@@ -1,0 +1,58 @@
+.Header {
+    @apply sm:block hidden;
+}
+
+.SelectWrapper {
+    @apply border-b-2 border-[--ghost];
+    @apply md:grid-cols-[5fr_4fr] grid-cols-2;
+    @apply sm:grid hidden;
+}
+
+.Select {
+    @apply border-0 border-r-2;
+}
+
+.SortOrder {
+    @apply flex justify-between items-center p-4;
+}
+
+.OrderName {
+    @apply text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--primary];
+}
+
+.SkillsList {
+    @apply flex flex-col scrollbar-hide overflow-y-scroll;
+    @apply sm:h-[77.45rem];
+    @apply sm:block hidden;
+}
+
+.Skill {
+    @apply even:bg-[--sidebar-background] p-4;
+    .SkillName, .Svg {
+        @apply text-[--white];
+    }
+
+    .SkillRow {
+        @apply text-[--foreground];
+    }
+
+    .SkillHeader {
+        @apply flex items-center gap-1 mb-2;
+    }
+
+    .SkillName {
+        @apply text-xs tracking-widest;
+    }
+
+    .Svg {
+        @apply size-2.5;
+    }
+
+    .SkillRow {
+        @apply flex justify-between text-2xs font-semibold;
+    }
+
+    .SkillTitle {
+        @apply uppercase tracking-widest self-end;
+    }
+}

@@ -2,7 +2,7 @@ import type { Skill } from "./skill.type";
 import type { Metadata } from "./metadata.type";
 import type { Experience } from "./experience.type";
 
-export type Page<Extensions = Record<string, unknown>> = Extensions & {
+export type Page = {
 	id: string;
 	metadata: Metadata;
 	body: string | null;
@@ -10,7 +10,7 @@ export type Page<Extensions = Record<string, unknown>> = Extensions & {
 	status: "draft" | "archived" | "published";
 };
 
-export type ResumePageExtension = {
+export type ResumePage = Omit<Page, "body"> & {
 	resume_bio: string | null;
 	education: string | null;
 	experiences: Experience[] | null;
