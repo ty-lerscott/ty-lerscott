@@ -27,8 +27,10 @@
 	},
 	"packageManager": "pnpm@9.15.1",
 	"dependencies": {
-		"@repo/cms": "workspace:*",
-		"@repo/config": "workspace:*"
+		"@repo/app": "workspace:app",
+		"@repo/cms": "workspace:cms",
+		"@repo/api": "workspace:api",
+		"@repo/config": "workspace:config"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
