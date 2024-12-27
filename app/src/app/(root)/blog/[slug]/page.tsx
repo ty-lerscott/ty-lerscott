@@ -64,7 +64,7 @@ export const generateMetadata = async ({
 	});
 };
 
-const PostPage = async ({ params }: { params: { slug: string } }) => {
+const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 	const { slug } = await params;
 	const post = await getData(slug);
 

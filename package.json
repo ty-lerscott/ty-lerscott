@@ -5,7 +5,7 @@
 	"scripts": {
 		"https:all": "caddy run",
 		"dev": "turbo https start:cms dev",
-		"build": "turbo build build:server",
+		"build": "turbo build",
 		"start": "turbo start",
 		"start:pm2": "turbo start:pm2",
 		"stop:pm2": "turbo stop:pm2",

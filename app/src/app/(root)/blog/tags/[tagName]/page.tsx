@@ -25,7 +25,7 @@ const BREADCRUMBS = [
 
 export const generateMetadata = async ({
 	params,
-}: { params: { tagName: string } }) => {
+}: { params: Promise<{ tagName: string }> }) => {
 	const { tagName } = await params;
 	const tag = await getTagData(tagName);
 
