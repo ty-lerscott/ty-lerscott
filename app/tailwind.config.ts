@@ -162,6 +162,10 @@ export default {
 					// "--background": ,
 				},
 				"html.dark": toCssVars(aliasMap),
+
+				"section ol li": {
+					"@apply list-none": "",
+				},
 			});
 		}),
 		plugin(({ addBase, theme }) => {
@@ -194,6 +198,9 @@ export default {
 				}),
 				strong: {
 					"@apply text-[--strong]": "",
+				},
+				sup: {
+					"@apply text-[--heading]": "",
 				},
 				p: {
 					lineHeight: theme("lineHeight.normal"),

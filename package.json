@@ -29,7 +29,6 @@
 	"dependencies": {
 		"@repo/app": "workspace:app",
 		"@repo/cms": "workspace:cms",
-		"@repo/api": "workspace:api",
 		"@repo/config": "workspace:config"
 	},
 	"devDependencies": {

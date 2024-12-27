@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { cache } from "react";
+import remarkGfm from "remark-gfm";
 import readingTime from "reading-time";
 import ReactMarkdown from "react-markdown";
 import { FaRegCalendar } from "react-icons/fa6";
@@ -38,7 +39,7 @@ export const generateMetadata = async ({
 	urlParams.set("title", post.metadata.title);
 	urlParams.set(
 		"url",
-		`${SITE_URL({ isCMS: true })}/assets/${(post.image as Image).id}?quality=50&format=png&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`,
+		`${SITE_URL({ isCMS: true })}/assets/${(post.image as Image).id}?quality=50&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`,
 	);
 	urlParams.set(
 		"subtitle",
@@ -105,7 +106,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 				</AspectRatio>
 			) : null}
 
-			<ReactMarkdown>{body}</ReactMarkdown>
+			<ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
 		</>
 	);
 };
