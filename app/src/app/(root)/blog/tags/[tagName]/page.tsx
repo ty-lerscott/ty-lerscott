@@ -37,7 +37,9 @@ export const generateMetadata = async ({
 		: null;
 };
 
-const TagPage = async ({ params }: { params: { tagName: string } }) => {
+const TagPage = async ({
+	params,
+}: { params: Promise<{ tagName: string }> }) => {
 	const { tagName } = await params;
 	const [posts, tag] = await Promise.all([
 		getData(tagName),

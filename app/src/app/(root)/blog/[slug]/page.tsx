@@ -29,7 +29,7 @@ const BREADCRUMBS = [
 
 export const generateMetadata = async ({
 	params,
-}: { params: { slug: string } }) => {
+}: { params: Promise<{ slug: string }> }) => {
 	const { slug } = await params;
 	const post = await getData(slug);
 

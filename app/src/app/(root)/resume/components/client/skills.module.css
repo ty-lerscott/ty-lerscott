@@ -28,31 +28,32 @@
 
 .Skill {
     @apply even:bg-[--sidebar-background] p-4;
-    .SkillName, .Svg {
-        @apply text-[--white];
-    }
+}
 
-    .SkillRow {
-        @apply text-[--foreground];
-    }
+.SkillName, .Svg {
+    @apply text-[--white];
+}
 
-    .SkillHeader {
-        @apply flex items-center gap-1 mb-2;
-    }
+.SkillRow {
+    @apply text-[--foreground];
+}
 
-    .SkillName {
-        @apply text-xs tracking-widest;
-    }
+.SkillHeader {
+    @apply flex items-center gap-1 mb-2;
+}
 
-    .Svg {
-        @apply size-2.5;
-    }
+.SkillName {
+    @apply text-xs tracking-widest;
+}
 
-    .SkillRow {
-        @apply flex justify-between text-2xs font-semibold;
-    }
+.Svg {
+    @apply size-2.5;
+}
 
-    .SkillTitle {
-        @apply uppercase tracking-widest self-end;
-    }
+.SkillRow {
+    @apply flex justify-between text-2xs font-semibold;
+}
+
+.SkillTitle {
+    @apply uppercase tracking-widest self-end;
 }
