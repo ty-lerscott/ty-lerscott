@@ -28,8 +28,11 @@ const PostCard = ({
 		<Card className="w-full">
 			<CardHeader>
 				<Link href={metadata?.slug || ""}>
-					<AspectRatio ratio={16 / 9}>
-						<ImageBackground id={image as string} />
+					<AspectRatio ratio={16 / 9} className="overflow-hidden group">
+						<ImageBackground
+							id={image as string}
+							className="group-hover:scale-105 transition-all duration-200"
+						/>
 					</AspectRatio>
 				</Link>
 

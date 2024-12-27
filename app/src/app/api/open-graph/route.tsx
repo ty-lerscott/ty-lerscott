@@ -27,8 +27,6 @@ export async function GET(request: NextRequest) {
 					right: 0,
 					bottom: 0,
 					display: "flex",
-					transform: "translateY(-25%)",
-					zIndex: 10,
 				}}
 			>
 				<img src={query.url} alt={query.title} style={{ width: "100vw" }} />
@@ -37,39 +35,51 @@ export async function GET(request: NextRequest) {
 			<div
 				style={{
 					display: "flex",
-					flexDirection: "column",
 					justifyContent: "center",
 					alignItems: "center",
 					textAlign: "center",
-					zIndex: 20,
-					position: "absolute",
-					top: 0,
+					position: "relative",
 					left: 0,
 					right: 0,
-					bottom: 0,
-					margin: "0 2rem",
+					flexDirection: "column-reverse",
 				}}
 			>
-				<h1
-					style={{
-						color: "white",
-						marginBottom: "8px",
-						fontSize: "4rem",
-						lineHeight: 1,
-					}}
-				>
-					{query.title}
-				</h1>
 				{query.subtitle && (
 					<p
 						style={{
 							fontSize: "2.5rem",
-							color: "#c8c8c8",
+							color: "rgba(0,0,0,0.75)",
+							backgroundColor: "rgba(255, 255, 255, 0.5)",
+							width: "100%",
+							display: "flex",
+							justifyContent: "center",
+							marginTop: "0px",
+							paddingTop: "1rem",
+							position: "relative",
+							paddingBottom: "1.5rem",
+							paddingLeft: "2rem",
+							paddingRight: "2rem",
 						}}
 					>
 						{query.subtitle}
 					</p>
 				)}
+
+				<h1
+					style={{
+						color: "black",
+						marginBottom: "0",
+						fontSize: "4rem",
+						lineHeight: 1,
+						position: "relative",
+						paddingTop: "1.5rem",
+						paddingLeft: "2rem",
+						paddingRight: "2rem",
+						backgroundColor: "rgba(255, 255, 255, 0.5)",
+					}}
+				>
+					{query.title}
+				</h1>
 			</div>
 		</div>,
 		{

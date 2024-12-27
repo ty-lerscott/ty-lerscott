@@ -38,7 +38,7 @@ export const generateMetadata = async ({
 	urlParams.set("title", post.metadata.title);
 	urlParams.set(
 		"url",
-		`${SITE_URL({ isCMS: true })}/assets/${(post.image as Image).id}?quality=50&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`,
+		`${SITE_URL({ isCMS: true })}/assets/${(post.image as Image).id}?quality=50&format=png&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`,
 	);
 	urlParams.set(
 		"subtitle",

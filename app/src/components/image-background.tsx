@@ -11,7 +11,10 @@ const setBlurImageUrl = (id: string) => {
 	return `${setImageUrl(id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
 };
 
-const ImageBackground = (image: Partial<Image>) => {
+const ImageBackground = ({
+	className,
+	...image
+}: Partial<Image> & { className?: string }) => {
 	const [loading, setLoading] = useState(true);
 	const [src, setSrc] = useState(setBlurImageUrl((image as Image).id));
 	const isAIGenerated = image.description
@@ -47,10 +50,11 @@ const ImageBackground = (image: Partial<Image>) => {
 			clearTimeout(blurTimer);
 			clearTimeout(highResTimer);
 		};
+		// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	}, [image]);
 
 	return (
-		<div className="w-full h-full rounded overflow-hidden">
+		<div className={cn("w-full h-full rounded overflow-hidden", className)}>
 			{isAIGenerated && !loading ? (
 				<HiSparkles className="absolute bottom-2 right-2 text-[--ghost] size-6 z-20" />
 			) : null}
