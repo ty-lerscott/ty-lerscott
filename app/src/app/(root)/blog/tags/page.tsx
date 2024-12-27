@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { cache } from "react";
 
 import { getTags } from "@/lib/cms";
-import { cn, setMetadata } from "@/lib/utils";
-import { badgeVariants } from "@/components/ui/badge";
+import Tag from "@/components/ui/tag";
+import { setMetadata } from "@/lib/utils";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 const getData = cache(async () => getTags());
@@ -47,19 +46,9 @@ const TagsPage = async () => {
 			<h1>Tags</h1>
 
 			<ul className="flex flex-wrap gap-4 list-none">
-				{tags.map(({ id, slug, name, color }) => (
-					<li key={id}>
-						<Link
-							href={`/blog/tags/${slug}`}
-							className={cn(badgeVariants(), color ? "text-[--white]" : "")}
-							style={{
-								...(color && {
-									backgroundColor: color,
-								}),
-							}}
-						>
-							{name}
-						</Link>
+				{tags.map(({ name, ...tag }) => (
+					<li key={tag.id}>
+						<Tag {...tag}>{name}</Tag>
 					</li>
 				))}
 			</ul>

@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import Link from "next/link";
 import { cache } from "react";
 import readingTime from "reading-time";
 import ReactMarkdown from "react-markdown";
@@ -7,9 +6,9 @@ import { FaRegCalendar } from "react-icons/fa6";
 
 import pkg from "~/package.json";
 import { getPost } from "@/lib/cms";
+import Tag from "@/components/ui/tag";
 import type { Post, Image } from "@/types";
-import { badgeVariants } from "@/components/ui/badge";
-import { cn, setMetadata, SITE_URL } from "@/lib/utils";
+import { setMetadata, SITE_URL } from "@/lib/utils";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
@@ -49,6 +48,7 @@ export const generateMetadata = async ({
 	return setMetadata({
 		...post.metadata,
 		openGraph: {
+			type: "article",
 			title: post.metadata.title,
 			description: post.metadata.description,
 			url: `${SITE_URL()}/blog/${slug}`,
@@ -85,25 +85,15 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
 			<div className="flex items-center gap-2 text-[--ghost]">
 				<FaRegCalendar className="size-4" />
-				<span>{dayjs(publish_date).format("MMMM D, YYYY | h:mm a | ")}</span>
+				<span>{dayjs(publish_date).format("MMMM D, YYYY | ")}</span>
 				<span>{readingTime(body).text}</span>
 			</div>
 
 			{tags ? (
 				<ul className="flex flex-wrap gap-4 list-none">
-					{tags.map(({ id, slug, name, color }) => (
-						<li key={id}>
-							<Link
-								href={`/blog/tags/${slug}`}
-								className={cn(badgeVariants(), color ? "text-[--white]" : "")}
-								style={{
-									...(color && {
-										backgroundColor: color,
-									}),
-								}}
-							>
-								{name}
-							</Link>
+					{tags.map(({ name, ...tag }) => (
+						<li key={tag.id}>
+							<Tag {...tag}>{name}</Tag>
 						</li>
 					))}
 				</ul>
