@@ -35,11 +35,12 @@ export const generateMetadata = async ({
 
 	if (!post) return null;
 
-	console;
-
 	const urlParams = new URLSearchParams();
 	urlParams.set("title", post.metadata.title);
-	urlParams.set("id", (post.image as Image).id);
+	urlParams.set(
+		"url",
+		`${SITE_URL({ isCMS: true })}/assets/${(post.image as Image).id}?quality=50&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`,
+	);
 	urlParams.set(
 		"subtitle",
 		`${pkg.details.author.name} | ${pkg.details.author.profession}`,
@@ -54,7 +55,7 @@ export const generateMetadata = async ({
 			images: post.image
 				? [
 						{
-							url: `${SITE_URL()}/api/og?${urlParams.toString()}`,
+							url: `${SITE_URL()}/api/open-graph?${urlParams.toString()}`,
 						},
 					]
 				: [],

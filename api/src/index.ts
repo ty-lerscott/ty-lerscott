@@ -1,11 +1,11 @@
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import APIConductor from "./conductors";
 import { config } from "@dotenvx/dotenvx";
-// import LoggerController from "@/utils/logger";
 import express, { type RequestHandler } from "express";
-// import ImagesMiddleware from "./utils/middleware/images";
+
+import APIConductor from "./conductors";
+import { LoggerController } from "@/utils";
 
 const env = config().parsed as Record<string, string>;
 const server = express();
@@ -16,12 +16,24 @@ const urlEncoded = bodyParser.urlencoded({
 
 const start = async () => {
 	server.use(cors());
-	server.use(helmet());
+	server.use(
+		helmet({
+			contentSecurityPolicy: {
+				directives: {
+					"img-src": [
+						"'self'",
+						"data:",
+						`https://cms.lerscott.${IS_LOCAL ? "local" : "com"}`,
+					],
+					"script-src": ["'self'", "https://cdn.tailwindcss.com"],
+				},
+			},
+		}),
+	);
 	server.use(bodyParser.json());
 	server.use(urlEncoded);
-	// server.use(LoggerController);
-	// server.use(ImagesMiddleware as RequestHandler);
-	server.use(APIConductor as unknown as RequestHandler);
+	server.use(LoggerController);
+	server.use(APIConductor as RequestHandler);
 
 	server.listen(env.PORT, (err?: Error) => {
 		if (err) throw err;

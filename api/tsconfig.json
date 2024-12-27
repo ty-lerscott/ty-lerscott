@@ -9,5 +9,9 @@
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["./src/**/*.ts", "./src/**/*.mjs"]
+	"include": [
+		"./src/**/*.ts",
+		"./src/**/*.mjs",
+		"src/conductors/open-graph/open-graph.tsx"
+	]
 }

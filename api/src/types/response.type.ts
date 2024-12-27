@@ -1,6 +1,6 @@
 import type { Data } from "./data.type";
 
-export type GetResponse<T = Data> = {
+export type Response<T = Data> = {
 	data?: T;
 	error?: string;
 	status: number;
