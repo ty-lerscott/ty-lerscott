@@ -111,4 +111,5 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 	);
 };
 
+export const dynamic = "force-dynamic";
 export default PostPage;

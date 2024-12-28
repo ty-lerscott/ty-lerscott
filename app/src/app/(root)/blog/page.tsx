@@ -29,4 +29,5 @@ const PostsPage = () => {
 	);
 };
 
+export const dynamic = "force-dynamic";
 export default PostsPage;
