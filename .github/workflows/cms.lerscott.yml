@@ -19,7 +19,7 @@ jobs:
                 node-version: "18.20.5"
 
             - name: Install dependencies
-              run: npm ci
+              run: npm i
 
             - name: Deploy w/ rsync w/ node_modules
               uses: burnett01/rsync-deployments@5.2.1
