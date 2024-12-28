@@ -22,7 +22,7 @@ const generateConfig = (appDir: string) => {
 		script: "pnpm",
 		instances: "1",
 		exec_mode: "fork",
-		name: `${rootPkg.name}/${name.split("/")[1]}`,
+		name: `${name.split("/")[1]}.${rootPkg.name}`,
 		ignore_watch: ["node_modules", "logs", "src"],
 	};
 
