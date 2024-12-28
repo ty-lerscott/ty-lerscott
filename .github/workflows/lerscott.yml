@@ -1,4 +1,4 @@
-name: Config
+name: Config & CMS
 
 on:
     push:
@@ -20,19 +20,19 @@ jobs:
 
             - name: Install dependencies
               run: |
+                rm -rf app;
                 npm i -g pnpm;
                 pnpm i;
 
-            - name: Transpile config
+            - name: Build config
               run: |
-                cd config;
                 pnpm build;       
 
             - name: Deploy w/ rsync w/ node_modules
               uses: burnett01/rsync-deployments@5.2.1
               with:
                 switches: -azc --exclude=".git" --exclude="biome.json"
-                path: ./config
+                path: ./
                 remote_path: ${{ secrets.TARGET_DIR }}
                 remote_host: ${{ secrets.HOST }}
                 remote_user: ${{ secrets.USER }}
