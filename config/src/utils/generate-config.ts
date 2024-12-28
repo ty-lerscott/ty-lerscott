@@ -9,11 +9,12 @@ const generateConfig = (appDir: string) => {
 		return {};
 	}
 
-	const root = resolve(process.cwd(), "..");
+	const root = resolve(process.cwd(), "..", "..");
 	const rootPkg = getPackageJson(root);
 	const serverDir = resolve(root, appDir);
 	const serverPkg = getPackageJson(serverDir);
 	const env = getEnv(resolve(root, appDir));
+	console.log({ root, rootPkg, serverDir, serverPkg, env });
 
 	const config = {
 		env,
