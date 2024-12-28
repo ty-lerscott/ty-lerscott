@@ -17,12 +17,11 @@
 }
 
 .OrderName {
-    @apply text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--primary];
+    @apply text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground];
 }
 
 .SkillsList {
     @apply flex flex-col scrollbar-hide overflow-y-scroll;
-    @apply sm:max-h-[80.75rem];
     @apply sm:block hidden;
 }
 

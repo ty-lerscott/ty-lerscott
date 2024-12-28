@@ -27,7 +27,7 @@ const PostCard = ({
 	return (
 		<Card className="w-full">
 			<CardHeader>
-				<Link href={metadata?.slug || ""}>
+				<Link href={metadata?.slug || ""} tabIndex={-1}>
 					<AspectRatio ratio={16 / 9} className="overflow-hidden group">
 						<ImageBackground
 							id={image as string}

@@ -150,7 +150,7 @@ const Skills = ({ skills }: { skills: SkillType[] }) => {
 					</span>
 				</div>
 			</div>
-			<div className={styles.SkillsList}>
+			<div className={cn(styles.SkillsList, "max-h-[83rem]")}>
 				{sortedSkills.map((props) => {
 					return <Skill {...props} key={props.name} />;
 				})}
