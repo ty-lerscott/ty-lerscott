@@ -19,24 +19,21 @@ jobs:
                 node-version: "18.20.5"
 
             - name: Install dependencies
-              run: npm i -g pnpm
-
-            - name: Install pnpm
               run: |
                 cd config;
-                pnpm i
+                npm i;
 
             - name: Transpile config
               run: |
-                pnpm run build;
-                cd ../;             
+                cd config;
+                npm run build;       
 
             - name: Deploy w/ rsync w/ node_modules
               uses: burnett01/rsync-deployments@5.2.1
               with:
                 switches: -azc --exclude=".git" --exclude="biome.json"
                 path: ./config
-                remote_path: ${{ secrets.TARGET_CONFIG_DIR }}
+                remote_path: ${{ secrets.TARGET_DIR }}
                 remote_host: ${{ secrets.HOST }}
                 remote_user: ${{ secrets.USER }}
                 remote_key: ${{ secrets.SSH_KEY }}
