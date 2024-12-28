@@ -1,5 +1,7 @@
 import type { Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 
@@ -42,6 +44,9 @@ export default function RootLayout({
 					<main className="mt-4 mx-6 mb-8 w-full flex flex-col gap-4">
 						{children}
 					</main>
+
+					<Analytics />
+					<SpeedInsights />
 				</SidebarProvider>
 			</body>
 		</html>
