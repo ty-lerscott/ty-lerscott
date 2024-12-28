@@ -22,12 +22,14 @@ jobs:
               run: npm i -g pnpm
 
             - name: Install pnpm
-              run: pnpm i
+              run: |
+                cd config;
+                pnpm i
 
             - name: Transpile config
               run: |
-                cd config;
                 pnpm run build;
+                cd ../;             
 
             - name: Deploy w/ rsync w/ node_modules
               uses: burnett01/rsync-deployments@5.2.1
