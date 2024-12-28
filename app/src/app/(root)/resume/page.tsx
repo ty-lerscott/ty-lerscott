@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { cache } from "react";
+import { TfiEmail } from "react-icons/tfi";
+import { SlScreenSmartphone } from "react-icons/sl";
 
 import Education from "./components/education";
 import SocialMap from "@/components/social-map";
@@ -104,21 +106,22 @@ const ContactDetails = async () => {
 		<>
 			<SectionHeader>Contact</SectionHeader>
 
-			<div className="flex flex-col gap-2 text-center my-4">
-				<p>{email}</p>
-				<p>{phone}</p>
+			<div className="flex flex-col gap-2 my-4 text-xs items-center">
+				<p className="flex gap-2">
+					<TfiEmail />
+					<span>{email}</span>
+				</p>
+				<p className="flex gap-2">
+					<SlScreenSmartphone />
+					<span>{phone}</span>
+				</p>
 				{(socials || []).map(({ id, brand, text, href }) => {
 					const Icon = SocialMap[brand as keyof typeof SocialMap];
 
 					return (
-						<Link
-							key={id}
-							target="_blank"
-							href={href as string}
-							className="flex gap-2 items-center justify-center"
-						>
-							<Icon />
-							<p>{text}</p>
+						<Link key={id} target="_blank" href={href as string}>
+							<Icon className="inline-block" />
+							<span className="ml-2">{text}</span>
 						</Link>
 					);
 				})}
@@ -141,7 +144,7 @@ const ResumePage = async () => {
 			<div className="border-[--ghost] border-2 rounded max-w-[85rem] mx-auto">
 				<ResumeHeader roles={body as string[]} />
 
-				<div data-testid="ResumeBody" className="grid grid-cols-9">
+				<div data-testid="ResumeBody" className="grid grid-cols-10">
 					<div data-testid="Sidebar" className="col-span-3">
 						{resume_bio ? <ResumeBio bio={resume_bio} /> : null}
 
@@ -152,7 +155,7 @@ const ResumePage = async () => {
 
 					<div
 						data-testid="Experiences"
-						className="col-span-6 border-l-2 border-[--ghost]"
+						className="col-span-7 border-l-2 border-[--ghost]"
 					>
 						{experiences?.length ? (
 							<Experiences experiences={experiences} />

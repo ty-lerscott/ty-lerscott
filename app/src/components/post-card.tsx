@@ -31,7 +31,7 @@ const PostCard = ({
 					<AspectRatio ratio={16 / 9} className="overflow-hidden group">
 						<ImageBackground
 							id={image as string}
-							className="group-hover:scale-105 transition-all duration-200"
+							className="group-hover:scale-110 transition-all duration-200"
 						/>
 					</AspectRatio>
 				</Link>
