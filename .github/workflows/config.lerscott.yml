@@ -20,13 +20,13 @@ jobs:
 
             - name: Install dependencies
               run: |
-                cd config;
-                npm i;
+                npm i -g pnpm;
+                pnpm i;
 
             - name: Transpile config
               run: |
                 cd config;
-                npm run build;       
+                pnpm build;       
 
             - name: Deploy w/ rsync w/ node_modules
               uses: burnett01/rsync-deployments@5.2.1
