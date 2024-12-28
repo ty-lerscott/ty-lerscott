@@ -40,7 +40,7 @@ export default function RootLayout({
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
 				<SidebarProvider>
-					{/* <Sidebar /> */}
+					<Sidebar />
 
 					<main className="my-4 mx-6 w-full flex flex-col gap-4">
 						{children}
