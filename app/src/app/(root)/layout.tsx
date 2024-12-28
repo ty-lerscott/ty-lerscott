@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import Footer from "@/components/footer";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 
 import "./tailwind.css";
@@ -41,8 +42,9 @@ export default function RootLayout({
 				<SidebarProvider>
 					<Sidebar />
 
-					<main className="mt-4 mx-6 mb-8 w-full flex flex-col gap-4">
+					<main className="my-4 mx-6 w-full flex flex-col gap-4">
 						{children}
+						<Footer />
 					</main>
 
 					<Analytics />
