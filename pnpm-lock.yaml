@@ -75,9 +75,6 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
-      cookies-next:
-        specifier: 5.0.2
-        version: 5.0.2(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       dayjs:
         specifier: 1.11.13
         version: 1.11.13
@@ -99,9 +96,6 @@ importers:
       object.omit:
         specifier: 3.0.0
         version: 3.0.0
-      prismjs:
-        specifier: 1.29.0
-        version: 1.29.0
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -118,7 +112,7 @@ importers:
         specifier: 1.5.0
         version: 1.5.0
       remark-gfm:
-        specifier: ^4.0.0
+        specifier: 4.0.0
         version: 4.0.0
       tailwind-merge:
         specifier: 2.5.5
@@ -3278,15 +3272,6 @@ packages:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
 
-  cookie@1.0.2:
-    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
-    engines: {node: '>=18'}
-
-  cookies-next@5.0.2:
-    resolution: {integrity: sha512-Ft5yXMbN6wMfgLiL5TMyPnxsjkW6UEjZw0YMoDMiF3F6iYdFPjiJEMugx/sivUr8G+0xPG80lBYqI2b+VquSuw==}
-    peerDependencies:
-      next: '>=15.0.0'
-
   core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
 
@@ -5466,10 +5451,6 @@ packages:
     resolution: {integrity: sha512-973driJZvxiGOQ5ONsFhOF/DtzPMOMtgC11kCpUrPGMTgqp2q/1gwzCquocrN33is0VZ5GFHXZYMM9l6h67v2Q==}
     engines: {node: '>=10'}
 
-  prismjs@1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-
   process-nextick-args@1.0.7:
     resolution: {integrity: sha512-yN0WQmuCX63LP/TMvAg31nvT6m4vDqJEiiv2CAZqWOGNWutc9DfDk1NPYYmKUFmaVM2UwDowH4u5AHWYP/jxKw==}
 
@@ -7328,9 +7309,9 @@ snapshots:
       '@directus/constants': 12.0.1
       '@directus/env': 4.1.0(vue@3.5.11(typescript@5.7.2))
       '@directus/errors': 1.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
-      '@directus/extensions-registry': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
-      '@directus/extensions-sdk': 12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions-registry': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions-sdk': 12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)
       '@directus/format-title': 11.0.0
       '@directus/memory': 2.0.6(vue@3.5.11(typescript@5.7.2))
       '@directus/pressure': 2.0.5(vue@3.5.11(typescript@5.7.2))
@@ -7550,10 +7531,10 @@ snapshots:
       '@directus/storage': 11.0.1
       ms: 2.1.3
 
-  '@directus/extensions-registry@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/extensions-registry@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/errors': 1.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       ky: 1.7.2
       lodash-es: 4.17.21
@@ -7575,13 +7556,13 @@ snapshots:
       - vue
       - vue-router
 
-  '@directus/extensions-sdk@12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)':
+  '@directus/extensions-sdk@12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)':
     dependencies:
       '@directus/composables': 11.1.5(vue@3.5.11(typescript@5.7.2))
       '@directus/constants': 12.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/themes': 1.0.5(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(vue@3.5.11(typescript@5.7.2))
-      '@directus/types': 12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/types': 12.2.2(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       '@rollup/plugin-commonjs': 25.0.8(rollup@3.29.4)
       '@rollup/plugin-json': 6.1.0(rollup@3.29.4)
@@ -7626,11 +7607,11 @@ snapshots:
       - typescript
       - vue-router
 
-  '@directus/extensions@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/extensions@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/constants': 12.0.1
       '@directus/themes': 1.0.5(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(vue@3.5.11(typescript@5.7.2))
-      '@directus/types': 12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/types': 12.2.2(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       '@types/express': 4.17.21
       fs-extra: 11.2.0
@@ -7763,7 +7744,7 @@ snapshots:
       pinia: 2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
       vue: 3.5.11(typescript@5.7.2)
 
-  '@directus/types@12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/types@12.2.2(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/constants': 12.0.1
       '@directus/schema': 12.1.1(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
@@ -10106,13 +10087,6 @@ snapshots:
   cookie@0.6.0: {}
 
   cookie@0.7.2: {}
-
-  cookie@1.0.2: {}
-
-  cookies-next@5.0.2(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
-    dependencies:
-      cookie: 1.0.2
-      next: 15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   core-util-is@1.0.2: {}
 
@@ -12808,8 +12782,6 @@ snapshots:
   pretty-ms@7.0.1:
     dependencies:
       parse-ms: 2.1.0
-
-  prismjs@1.29.0: {}
 
   process-nextick-args@1.0.7: {}
 
