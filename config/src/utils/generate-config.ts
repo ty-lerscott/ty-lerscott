@@ -12,9 +12,8 @@ const generateConfig = (appDir: string) => {
 	const root = resolve(process.cwd(), "..");
 	const rootPkg = getPackageJson(root);
 	const serverDir = resolve(root, appDir);
-	const serverPkg = getPackageJson(serverDir);
 	const env = getEnv(resolve(root, appDir));
-	console.log({ root, rootPkg, serverDir, serverPkg, env });
+	const { name } = getPackageJson(serverDir);
 
 	const config = {
 		env,
@@ -23,7 +22,7 @@ const generateConfig = (appDir: string) => {
 		script: "pnpm",
 		instances: "1",
 		exec_mode: "fork",
-		name: `@${rootPkg.name}/${serverPkg.name}`,
+		name: `${rootPkg.name}/${name.split("/")[1]}`,
 		ignore_watch: ["node_modules", "logs", "src"],
 	};
 
