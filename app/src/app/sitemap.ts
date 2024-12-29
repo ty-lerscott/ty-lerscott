@@ -1,6 +1,6 @@
+import dayjs from "dayjs";
 import type { MetadataRoute } from "next";
 
-import dayjs from "dayjs";
 import { SITE_URL } from "@/lib/utils";
 import { getSitemap, type GetSitemapData } from "@/lib/cms";
 
@@ -121,8 +121,6 @@ const normalizeSitemapData = (
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 	const sitemapData = await getSitemap();
-
-	console.dir(sitemapData, { depth: null });
 
 	return normalizeSitemapData(sitemapData);
 };
