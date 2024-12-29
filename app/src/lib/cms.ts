@@ -1,4 +1,12 @@
-import { client, readItems, readFile, readSingleton } from "@/lib/directus";
+import {
+	rest,
+	readFile,
+	readItems,
+	readSingleton,
+	createDirectus,
+} from "@directus/sdk";
+
+import { SITE_URL } from "@/lib/utils";
 
 import type {
 	Tag,
@@ -9,6 +17,20 @@ import type {
 	Image,
 	ContactDetails,
 } from "@/types";
+
+type APIContactDetails = Omit<ContactDetails, "socials"> & {
+	socials: {
+		Link_id: Link;
+	}[];
+};
+
+type GetSitemapData = {
+	pages: Page[];
+	posts: Post[];
+	tags: Tag[];
+};
+
+const client = createDirectus(SITE_URL({ isCMS: true })).with(rest());
 
 const PostFields = [
 	"id",
@@ -59,9 +81,9 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 const getPage = async <PageType = Page>(
 	slug: string,
 	fields?: string[],
-): Promise<Page | PageType | null> => {
+): Promise<PageType | null> => {
 	try {
-		const resp = await client.request<(Page | PageType)[]>(
+		const resp = await client.request<PageType[]>(
 			readItems("Pages", {
 				filter: {
 					metadata: {
@@ -107,7 +129,7 @@ const getPosts = async (
 			}),
 		);
 
-		return resp;
+		return resp.length ? resp : null;
 	} catch (err) {
 		console.error(err);
 	}
@@ -135,9 +157,7 @@ const getPostsByTagSlug = async (tagName: string): Promise<Post[] | null> => {
 			}),
 		);
 
-		if (resp.length === 0) return null;
-
-		return resp;
+		return resp.length ? resp : null;
 	} catch (err) {
 		console.error(err);
 	}
@@ -193,12 +213,6 @@ const getPost = async (slug: string): Promise<Post | null> => {
 	return null;
 };
 
-type APIContactDetails = Omit<ContactDetails, "socials"> & {
-	socials: {
-		Link_id: Link;
-	}[];
-};
-
 const getContactDetails = async (): Promise<ContactDetails | null> => {
 	try {
 		const resp = await client.request<APIContactDetails>(
@@ -225,9 +239,7 @@ const getTags = async (): Promise<Tag[] | null> => {
 			readItems("Tag", { fields: ["*"] }),
 		);
 
-		if (resp.length === 0) return null;
-
-		return resp;
+		return resp.length ? resp : null;
 	} catch (err) {
 		console.error(err);
 	}
@@ -240,13 +252,55 @@ const getTag = async (slug: string): Promise<Tag | null> => {
 			readItems("Tag", { filter: { slug } }),
 		);
 
-		if (resp.length === 0) return null;
-
-		return resp[0];
+		return resp.length ? resp[0] : null;
 	} catch (err) {
 		console.error(err);
 	}
 	return null;
+};
+
+const getSitemap = async (): Promise<GetSitemapData> => {
+	try {
+		const [pages, posts, tags] = await Promise.all([
+			client.request<Page[]>(
+				readItems("Pages", {
+					fields: ["metadata.slug", "date_updated"],
+					filter: {
+						status: {
+							_eq: "published",
+						},
+					},
+				}),
+			),
+			client.request<Post[]>(
+				readItems("Post", {
+					fields: ["metadata.slug", "date_updated", "image"],
+					sort: "-date_updated",
+					filter: {
+						status: {
+							_eq: "published",
+						},
+					},
+				}),
+			),
+			client.request<Tag[]>(
+				readItems("Tag", {
+					fields: ["slug", "date_updated"],
+					sort: "-date_updated",
+				}),
+			),
+		]);
+
+		return { pages, posts, tags };
+	} catch (err) {
+		console.error(err);
+
+		return {
+			pages: [],
+			posts: [],
+			tags: [],
+		};
+	}
 };
 
 export {
@@ -256,6 +310,8 @@ export {
 	getPage,
 	getPost,
 	getPosts,
+	getSitemap,
+	type GetSitemapData,
 	getPostsByTagSlug,
 	getContactDetails,
 };

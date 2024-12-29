@@ -11,7 +11,7 @@ const LOCAL_PREFIX = LOCAL_DEV ? "🌕 " : "";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-const SITE_URL = (args?: { isAPI?: boolean; isCMS?: boolean }) => {
+const SITE_URL = (args?: { isCMS?: boolean }) => {
 	const isCMS = args?.isCMS ?? false;
 
 	return `https://${isCMS ? "cms" : "ty"}.lerscott.${LOCAL_DEV ? "local" : "com"}`;

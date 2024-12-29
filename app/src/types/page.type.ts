@@ -7,6 +7,7 @@ export type Page = {
 	metadata: Metadata;
 	body: string | null;
 	icon: string | null;
+	date_updated: string;
 	status: "draft" | "archived" | "published";
 };
 
