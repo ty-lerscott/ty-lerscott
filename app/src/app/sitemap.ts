@@ -122,6 +122,8 @@ const normalizeSitemapData = (
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 	const sitemapData = await getSitemap();
 
+	console.dir(sitemapData, { depth: null });
+
 	return normalizeSitemapData(sitemapData);
 };
 
