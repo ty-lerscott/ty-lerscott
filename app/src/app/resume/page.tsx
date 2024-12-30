@@ -141,24 +141,35 @@ const ResumePage = async () => {
 		<>
 			<Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
-			<div className="border-[--ghost] border-2 rounded max-w-[85rem] mx-auto">
+			<div className="border-[--ghost] border-2 rounded w-full mx-auto">
 				<ResumeHeader roles={body as string[]} />
 
-				<div data-testid="ResumeBody" className="grid grid-cols-10">
+				<div
+					data-testid="ResumeBody"
+					className="flex flex-col md:grid md:grid-cols-10"
+				>
 					<div data-testid="Sidebar" className="col-span-3">
 						{resume_bio ? <ResumeBio bio={resume_bio} /> : null}
 
 						<ContactDetails />
 
-						{skills?.length ? <Skills skills={skills} /> : null}
+						{skills?.length ? (
+							<Skills
+								skills={skills}
+								className="max-h-[50vh] md:max-h-[110rem] lg:max-h-[83rem] xl:max-h-[130vh] 2xl:max-h-[55rem]"
+							/>
+						) : null}
 					</div>
 
 					<div
 						data-testid="Experiences"
-						className="col-span-7 border-l-2 border-[--ghost]"
+						className="col-span-7 border-l-2 border-[--ghost] relative"
 					>
 						{experiences?.length ? (
-							<Experiences experiences={experiences} />
+							<Experiences
+								experiences={experiences}
+								className="h-[195vh] lg:h-[320vh] xl:h-[185vh] 2xl:h-[100vh] pb-[8.5rem] 2xl:pb-[0]"
+							/>
 						) : null}
 
 						{education?.length ? <Education education={education} /> : null}

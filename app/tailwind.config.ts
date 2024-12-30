@@ -3,6 +3,7 @@ import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
 
 import makeFavicon from "./src/favicon";
+import SCREENS from "./tailwind.screens.config";
 import { aliasMap, colors as newColors } from "./src/colors";
 
 makeFavicon();
@@ -14,15 +15,6 @@ const HeaderStyles = (
 	fontFamily: "var(--font-zilla-slab)",
 	fontWeight: theme("fontWeight.medium"),
 });
-
-const DEFAULT_SCREEN_SIZE = "1024px";
-
-const SCREENS = {
-	xs: "480px",
-	sm: "768px",
-	md: DEFAULT_SCREEN_SIZE,
-	DEFAULT: DEFAULT_SCREEN_SIZE,
-};
 
 export default {
 	darkMode: ["class"],

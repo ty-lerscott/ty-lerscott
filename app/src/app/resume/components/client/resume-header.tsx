@@ -20,7 +20,7 @@ const Header = ({ roles }: { roles: string[] }) => {
 	return (
 		<div data-testid="ResumeHeader" className="text-center">
 			<div className="relative flex flex-col items-center p-8">
-				<h1 className="uppercase w-max px-10 border-2 border-[--ghost] rounded text-5xl py-8">
+				<h1 className="uppercase w-max border-2 border-[--ghost] rounded text-3xl md:text-5xl px-10 py-8">
 					Tyler Scott Williams
 				</h1>
 				<div className="absolute bg-[--background] bottom-5" key={position}>

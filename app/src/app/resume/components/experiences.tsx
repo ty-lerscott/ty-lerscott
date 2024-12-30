@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import ReactMarkdown from "react-markdown";
 
+import { cn } from "@/lib/utils";
 import SectionHeader from "./section-header";
 import type { Experience as ExperienceType } from "@/types";
 
@@ -33,7 +34,10 @@ const Experience = ({
 	);
 };
 
-const Experiences = ({ experiences }: { experiences: ExperienceType[] }) => {
+const Experiences = ({
+	experiences,
+	className,
+}: { experiences: ExperienceType[]; className: string }) => {
 	/**
 	 * NOTE:
 	 *      I would prefer Array.prototype.toReversed(), but that's not part of the standard yet
@@ -46,7 +50,7 @@ const Experiences = ({ experiences }: { experiences: ExperienceType[] }) => {
 		<>
 			<SectionHeader>Experience</SectionHeader>
 
-			<div className="xs:scrollbar-hide sm:overflow-y-scroll max-h-[110rem]">
+			<div className={cn("xs:scrollbar-hide overflow-y-scroll", className)}>
 				{ordered.map((exp) => {
 					return <Experience key={exp.id} {...exp} />;
 				})}

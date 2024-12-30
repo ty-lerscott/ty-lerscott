@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const MOBILE_BREAKPOINT = 768;
+import SCREENS from "~/app/tailwind.screens.config";
+
+const MOBILE_BREAKPOINT = Number(SCREENS.lg.replace("px", ""));
 
 export function useIsMobile() {
 	const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);

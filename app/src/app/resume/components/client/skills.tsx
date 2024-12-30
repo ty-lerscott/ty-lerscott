@@ -18,8 +18,6 @@ import {
 	SelectPlaceholder,
 } from "@/components/ui/select";
 
-import styles from "./skills.module.css";
-
 type SortBy = "name" | "comfort_level" | "years" | "favorite" | "default";
 
 type ModifiedSkill = SkillType & { years: number };
@@ -60,8 +58,13 @@ const SkillRow = ({
 	value: number | ReactNode;
 }) => {
 	return (
-		<div className={cn(styles.SkillRow, className)}>
-			<span className={styles.SkillTitle}>{title}</span>
+		<div
+			className={cn(
+				"text-[--foreground] flex justify-between text-2xs font-semibold",
+				className,
+			)}
+		>
+			<span className="uppercase tracking-widest self-end">{title}</span>
 			{isValidElement(value) ? value : <span>{value}</span>}
 		</div>
 	);
@@ -69,10 +72,10 @@ const SkillRow = ({
 
 const Skill = ({ name, years, favorite, comfort_level }: ModifiedSkill) => {
 	return (
-		<div className={styles.Skill}>
-			<p className={styles.SkillHeader}>
-				<span className={styles.SkillName}>{name}</span>
-				{favorite && <MdFavorite className={styles.Svg} />}
+		<div className="even:bg-[--sidebar-background] p-4">
+			<p className="flex items-center gap-1 mb-2">
+				<span className="text-[--white] text-xs tracking-widest">{name}</span>
+				{favorite && <MdFavorite className="size-2.5 text-[--white]" />}
 			</p>
 			<SkillRow
 				title="Comfort Level"
@@ -88,7 +91,10 @@ const Skill = ({ name, years, favorite, comfort_level }: ModifiedSkill) => {
 	);
 };
 
-const Skills = ({ skills }: { skills: SkillType[] }) => {
+const Skills = ({
+	skills,
+	className,
+}: { skills: SkillType[]; className: string }) => {
 	const [sortBy, setSortBy] = useState<SortBy>("default");
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(setSkill(skills));
@@ -117,10 +123,13 @@ const Skills = ({ skills }: { skills: SkillType[] }) => {
 
 	return (
 		<>
-			<SectionHeader className={styles.Header}>Skills</SectionHeader>
-			<div className={styles.SelectWrapper}>
+			<SectionHeader>Skills</SectionHeader>
+			<div className="border-b-2 border-[--ghost] md:grid-cols-[5fr_4fr] grid-cols-2 sm:grid">
 				<Select onValueChange={handleSort}>
-					<SelectPlaceholder className={styles.Select} placeholder="Default" />
+					<SelectPlaceholder
+						className="border-0 border-r-2"
+						placeholder="Default"
+					/>
 
 					<SelectContent>
 						<SelectItem value="default">Default</SelectItem>
@@ -130,9 +139,9 @@ const Skills = ({ skills }: { skills: SkillType[] }) => {
 						<SelectItem value="years">Years of Experience</SelectItem>
 					</SelectContent>
 				</Select>
-				<div className={styles.SortOrder}>
+				<div className="flex justify-between items-center p-4">
 					<span
-						className={styles.OrderName}
+						className="text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground]"
 						data-state={sortBy === "default" ? "disabled" : "enabled"}
 					>
 						desc
@@ -143,14 +152,19 @@ const Skills = ({ skills }: { skills: SkillType[] }) => {
 						disabled={sortBy === "default"}
 					/>
 					<span
-						className={styles.OrderName}
+						className="text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground]"
 						data-state={sortBy === "default" ? "disabled" : "enabled"}
 					>
 						asc
 					</span>
 				</div>
 			</div>
-			<div className={cn(styles.SkillsList, "max-h-[83rem]")}>
+			<div
+				className={cn(
+					"flex flex-col scrollbar-hide overflow-y-scroll sm:block",
+					className,
+				)}
+			>
 				{sortedSkills.map((props) => {
 					return <Skill {...props} key={props.name} />;
 				})}
