@@ -103,24 +103,14 @@ const getPage = async <PageType = Page>(
 	}
 };
 
-const getPosts = async (
-	args?:
-		| {
-				limit?: number;
-				page?: number;
-		  }
-		| number,
-): Promise<Post[]> => {
-	const { limit = 10, page = 1 } =
-		typeof args === "number" ? { limit: args } : args || {};
-
+const getPosts = async (fields?: string[]): Promise<Post[]> => {
 	try {
 		const resp = await client.request<Post[]>(
 			readItems("Post", {
-				page,
-				limit,
+				// page,
+				// limit
 				sort: "-publish_date",
-				fields: PostFields,
+				fields: PostFields.concat(fields || []),
 				filter: {
 					status: {
 						_eq: "published",
@@ -260,6 +250,48 @@ const getTag = async (slug: string): Promise<Tag | null> => {
 	return null;
 };
 
+const getRssFeed = async (): Promise<[Page, Post[]]> => {
+	try {
+		return Promise.all([
+			getPage("/blog"),
+			client.request<Post[]>(
+				readItems("Post", {
+					// page,
+					// limit
+					sort: "-publish_date",
+					fields: [
+						"image",
+						"publish_date",
+						"metadata.slug",
+						"metadata.title",
+						"tags.Tag_id.name",
+						"metadata.keywords",
+						"metadata.description",
+					],
+					filter: {
+						status: {
+							_eq: "published",
+						},
+					},
+				}),
+			),
+		]).then(([page, posts]) => [
+			page,
+			posts.map((post) => {
+				const _postTags = post.tags as unknown as { Tag_id: Tag }[];
+
+				const newPost = post;
+				newPost.tags = _postTags.map((tag) => tag.Tag_id) as Tag[];
+
+				return newPost;
+			}),
+		]);
+	} catch (err) {
+		console.error(err);
+		return [{} as Page, []];
+	}
+};
+
 const getSitemap = async (): Promise<GetSitemapData> => {
 	try {
 		const [pages, posts, tags] = await Promise.all([
@@ -312,6 +344,7 @@ export {
 	getPost,
 	getPosts,
 	getSitemap,
+	getRssFeed,
 	type GetSitemapData,
 	getPostsByTagSlug,
 	getContactDetails,

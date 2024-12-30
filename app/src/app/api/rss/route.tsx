@@ -1,14 +1,13 @@
 import RSS from "rss";
-import type { NextRequest } from "next/server";
-
-import pkg from "~/package.json";
-import { getPosts, getPage } from "@/lib/cms";
-import { SITE_URL, META_TITLE } from "@/lib/utils";
 import dayjs from "dayjs";
 
-export async function GET(request: NextRequest) {
+import pkg from "~/package.json";
+import { getRssFeed } from "@/lib/cms";
+import { SITE_URL, META_TITLE } from "@/lib/utils";
+
+export async function GET() {
 	const siteUrl = SITE_URL();
-	const [page, posts] = await Promise.all([getPage("/blog"), getPosts()]);
+	const [page, posts] = await getRssFeed();
 
 	const feed = new RSS({
 		language: "en",
@@ -28,6 +27,10 @@ export async function GET(request: NextRequest) {
 			description: post.metadata.description,
 			url: `${siteUrl}${post.metadata.slug}`,
 			date: dayjs(post.publish_date).format("YYYY-MM-DD HH:mm:ss"),
+			author: pkg.details.author.name,
+			categories: (post.tags || [])
+				.map((tag) => tag.name)
+				.concat(post.metadata.keywords || []),
 		});
 	}
 
