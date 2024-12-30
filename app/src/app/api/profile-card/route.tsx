@@ -36,15 +36,13 @@ const itemStyles = {
 };
 
 const document = {
-	width: 1000,
+	width: 800,
 	height: 450,
 };
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const slug = searchParams.get("slug");
-
-	console.log({ slug });
 
 	const contactDetails = await getContactDetails(true);
 
@@ -64,7 +62,7 @@ export async function GET(request: Request) {
 				style={{
 					gap: "1vw",
 					margin: "1vw",
-					width: "27vw",
+					width: "30vw",
 					padding: "1vw",
 					borderRadius: "1vw",
 					display: "flex",
@@ -93,7 +91,7 @@ export async function GET(request: Request) {
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						gap: "4px",
+						gap: "8px",
 						marginTop: "4vh",
 						alignItems: "center",
 						justifyContent: "space-between",
@@ -115,7 +113,8 @@ export async function GET(request: Request) {
 							fontWeight: 900,
 							color: aliasMap.foreground,
 							margin: 0,
-							marginTop: "4px",
+							textAlign: "center",
+							lineHeight: 1,
 						}}
 					>
 						{contactDetails.current_role.title}
@@ -123,7 +122,6 @@ export async function GET(request: Request) {
 					<span
 						style={{
 							fontSize: "16px",
-							marginTop: "-4px",
 							color: aliasMap.foreground,
 						}}
 					>
@@ -134,7 +132,7 @@ export async function GET(request: Request) {
 
 			<div
 				style={{
-					width: "70vw",
+					width: "67vw",
 					height: "100%",
 					display: "flex",
 					flexDirection: "column",
