@@ -42,7 +42,7 @@ export default function RootLayout({
 				<SidebarProvider>
 					<Sidebar />
 
-					<main className="my-4 mx-6 w-full flex flex-col gap-4">
+					<main className="p-4 md:px-6 md:py-4 w-full flex flex-col gap-4">
 						{children}
 						<Footer />
 					</main>

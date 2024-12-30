@@ -220,7 +220,7 @@ export default {
 						"",
 				},
 				li: {
-					"@apply leading-6": "",
+					"@apply leading-6 break-words": "",
 				},
 				ol: {
 					"@apply list-decimal list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":

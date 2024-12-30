@@ -11,7 +11,7 @@ const RecentPosts = async () => {
 			<div className="flex flex-col gap-4">
 				<h2>Recent Posts</h2>
 
-				<div className="grid gap-4 grid-cols-3">
+				<div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
 					{posts.map((post) => {
 						return <PostCard key={post?.id} {...post} />;
 					})}
