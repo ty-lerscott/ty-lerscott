@@ -12,11 +12,13 @@ export async function GET(request: NextRequest) {
 		subtitle: searchParams.get("subtitle"),
 	} as Record<string, string>;
 
+	const imgSrc = `${setImageUrl(query.id)}?quality=50&width=1200&height=630&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
+
 	return new ImageResponse(
 		<div
 			style={{
-				width: "100vw",
-				height: "100vh",
+				width: "1200px",
+				height: "630px",
 				display: "flex",
 				position: "relative",
 			}}
@@ -33,8 +35,10 @@ export async function GET(request: NextRequest) {
 			>
 				<img
 					alt={query.title}
-					style={{ width: "100vw" }}
-					src={`${setImageUrl(query.id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`}
+					style={{ width: "100vw", height: "100vh" }}
+					height={630}
+					width={1200}
+					src={imgSrc}
 				/>
 			</div>
 
@@ -46,6 +50,7 @@ export async function GET(request: NextRequest) {
 					textAlign: "center",
 					position: "relative",
 					left: 0,
+					width: "100%",
 					right: 0,
 					flexDirection: "column-reverse",
 				}}
@@ -78,10 +83,12 @@ export async function GET(request: NextRequest) {
 						marginBottom: "0",
 						fontSize: "4rem",
 						lineHeight: 1,
+						width: "100%",
 						position: "relative",
 						paddingTop: "1.5rem",
 						paddingLeft: "2rem",
 						paddingRight: "2rem",
+						justifyContent: "center",
 						backgroundColor: "rgba(255, 255, 255, 0.5)",
 						borderTop: "4px solid rgba(255, 255, 255, 1)",
 					}}

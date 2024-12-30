@@ -1,7 +1,6 @@
 import pkg from "~/app/package.json";
 
 const Footer = () => {
-	const year = new Date().getFullYear();
 	const pkgs = [
 		`Next.js v${pkg.dependencies.next}`,
 		`Typescript v${pkg.devDependencies.typescript}`,
@@ -11,7 +10,7 @@ const Footer = () => {
 
 	return (
 		<footer className="text-xs mt-8 text-right text-[--subtle]">
-			<p>Copyright &copy; {year} | All rights reserved.</p>
+			<p>Copyright &copy; {new Date().getFullYear()} | All rights reserved.</p>
 			<p>Built with: {pkgs.join(", ")}</p>
 		</footer>
 	);

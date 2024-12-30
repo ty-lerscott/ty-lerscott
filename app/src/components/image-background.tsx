@@ -8,7 +8,7 @@ import { cn, setImageUrl } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const setBlurImageUrl = (id: string): string =>
-	`${setImageUrl(id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
+	`${setImageUrl(id)}?quality=75&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
 
 const ImageBackground = ({
 	className,
@@ -21,20 +21,11 @@ const ImageBackground = ({
 		.includes("ai generated");
 
 	useEffect(() => {
-		let blurTimer: NodeJS.Timeout;
 		let highResTimer: NodeJS.Timeout;
 
-		const imageBlur = new Image();
 		const imageHighRes = new Image();
 
 		imageHighRes.src = setImageUrl((image as Image).id);
-		imageBlur.src = setBlurImageUrl((image as Image).id);
-
-		imageBlur.onload = () => {
-			blurTimer = setTimeout(() => {
-				setLoading(false);
-			}, 100);
-		};
 
 		imageHighRes.onload = () => {
 			setLoading(false);
@@ -44,9 +35,7 @@ const ImageBackground = ({
 		};
 
 		return () => {
-			imageBlur.onload = null;
 			imageHighRes.onload = null;
-			clearTimeout(blurTimer);
 			clearTimeout(highResTimer);
 		};
 		// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
@@ -60,7 +49,6 @@ const ImageBackground = ({
 			<div
 				className={cn(
 					"w-full h-full rounded",
-					loading ? "opacity-0" : "opacity-100",
 					"absolute top-0 left-0 right-0 bottom-0",
 					"transition-all bg-cover bg-no-repeat bg-center z-10",
 				)}
