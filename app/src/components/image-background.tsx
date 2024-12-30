@@ -7,9 +7,8 @@ import type { Image } from "@/types";
 import { cn, setImageUrl } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const setBlurImageUrl = (id: string) => {
-	return `${setImageUrl(id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
-};
+const setBlurImageUrl = (id: string): string =>
+	`${setImageUrl(id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`;
 
 const ImageBackground = ({
 	className,

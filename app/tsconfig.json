@@ -28,7 +28,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/app/api/open-graph/route.tsx.bak"
+		"src/app/api/open-graph/route.tsx"
 	],
 	"exclude": ["node_modules"]
 }

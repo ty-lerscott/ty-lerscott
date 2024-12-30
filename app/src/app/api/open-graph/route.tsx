@@ -1,12 +1,14 @@
 import { ImageResponse } from "@vercel/og";
 import type { NextRequest } from "next/server";
 
+import { setImageUrl } from "@/lib/utils";
+
 export async function GET(request: NextRequest) {
 	const { searchParams } = request.nextUrl;
 
 	const query = {
+		id: searchParams.get("id"),
 		title: searchParams.get("title"),
-		url: searchParams.get("url"),
 		subtitle: searchParams.get("subtitle"),
 	} as Record<string, string>;
 
@@ -29,7 +31,11 @@ export async function GET(request: NextRequest) {
 					display: "flex",
 				}}
 			>
-				<img src={query.url} alt={query.title} style={{ width: "100vw" }} />
+				<img
+					alt={query.title}
+					style={{ width: "100vw" }}
+					src={`${setImageUrl(query.id)}?quality=25&transforms=${encodeURIComponent(JSON.stringify([["blur", 10]]))}`}
+				/>
 			</div>
 
 			<div
@@ -59,6 +65,7 @@ export async function GET(request: NextRequest) {
 							paddingBottom: "1.5rem",
 							paddingLeft: "2rem",
 							paddingRight: "2rem",
+							borderBottom: "4px solid rgba(255, 255, 255, 1)",
 						}}
 					>
 						{query.subtitle}
@@ -76,6 +83,7 @@ export async function GET(request: NextRequest) {
 						paddingLeft: "2rem",
 						paddingRight: "2rem",
 						backgroundColor: "rgba(255, 255, 255, 0.5)",
+						borderTop: "4px solid rgba(255, 255, 255, 1)",
 					}}
 				>
 					{query.title}

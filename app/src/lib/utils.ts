@@ -74,4 +74,12 @@ const setImageUrl = (id: string) => `${SITE_URL({ isCMS: true })}/assets/${id}`;
 const yearsAgo = (date: string): number =>
 	Number(new Date().getFullYear()) - Number(date);
 
-export { cn, SITE_URL, setMetadata, kebabToTitleCase, setImageUrl, yearsAgo };
+export {
+	cn,
+	SITE_URL,
+	setMetadata,
+	kebabToTitleCase,
+	setImageUrl,
+	yearsAgo,
+	META_TITLE,
+};

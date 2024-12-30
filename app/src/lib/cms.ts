@@ -81,7 +81,7 @@ const getMenu = async (name: string): Promise<Menu | null> => {
 const getPage = async <PageType = Page>(
 	slug: string,
 	fields?: string[],
-): Promise<PageType | null> => {
+): Promise<PageType> => {
 	try {
 		const resp = await client.request<PageType[]>(
 			readItems("Pages", {
@@ -96,11 +96,11 @@ const getPage = async <PageType = Page>(
 			}),
 		);
 
-		return resp.length ? resp[0] : null;
+		return resp.length ? resp[0] : ({} as PageType);
 	} catch (err) {
 		console.error(err);
+		return {} as PageType;
 	}
-	return null;
 };
 
 const getPosts = async (
@@ -110,7 +110,7 @@ const getPosts = async (
 				page?: number;
 		  }
 		| number,
-): Promise<Post[] | null> => {
+): Promise<Post[]> => {
 	const { limit = 10, page = 1 } =
 		typeof args === "number" ? { limit: args } : args || {};
 
@@ -129,11 +129,12 @@ const getPosts = async (
 			}),
 		);
 
-		return resp.length ? resp : null;
+		return resp.length ? resp : [];
 	} catch (err) {
 		console.error(err);
+
+		return [];
 	}
-	return null;
 };
 
 const getPostsByTagSlug = async (tagName: string): Promise<Post[] | null> => {
