@@ -163,6 +163,9 @@ const getPost = async (slug: string): Promise<Post | null> => {
 					metadata: {
 						slug,
 					},
+					status: {
+						_eq: "published",
+					},
 				},
 				fields: [
 					"tags.Tag_id.*",

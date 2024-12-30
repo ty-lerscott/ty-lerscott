@@ -3,6 +3,7 @@ import { cache } from "react";
 import remarkGfm from "remark-gfm";
 import readingTime from "reading-time";
 import ReactMarkdown from "react-markdown";
+import { notFound } from "next/navigation";
 import { FaRegCalendar } from "react-icons/fa6";
 
 import pkg from "~/package.json";
@@ -65,7 +66,9 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 	const { slug } = await params;
 	const post = await getData(slug);
 
-	if (!post) return null;
+	if (!post) {
+		notFound();
+	}
 
 	const {
 		tags,
