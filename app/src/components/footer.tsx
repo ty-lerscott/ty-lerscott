@@ -10,7 +10,7 @@ const Footer = () => {
 	];
 
 	return (
-		<footer className="text-xs text-right text-[--subtle]">
+		<footer className="text-xs mt-8 text-right text-[--subtle]">
 			<p>Copyright &copy; {year} | All rights reserved.</p>
 			<p>Built with: {pkgs.join(", ")}</p>
 		</footer>
