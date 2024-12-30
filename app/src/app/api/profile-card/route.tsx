@@ -36,8 +36,8 @@ const itemStyles = {
 };
 
 const document = {
-	width: 800,
-	height: 450,
+	width: 1200,
+	height: 630,
 };
 
 export async function GET(request: Request) {
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
 				style={{
 					gap: "1vw",
 					margin: "1vw",
-					width: "30vw",
+					width: "26vw",
 					padding: "1vw",
 					borderRadius: "1vw",
 					display: "flex",
@@ -132,7 +132,7 @@ export async function GET(request: Request) {
 
 			<div
 				style={{
-					width: "67vw",
+					width: "71vw",
 					height: "100%",
 					display: "flex",
 					flexDirection: "column",
