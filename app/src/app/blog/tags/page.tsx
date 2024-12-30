@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { getTags } from "@/lib/cms";
 import Tag from "@/components/ui/tag";
-import { setMetadata } from "@/lib/utils";
+import { setMetadata, SITE_URL } from "@/lib/utils";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 const getData = cache(async () => getTags());
@@ -24,12 +24,22 @@ const BREADCRUMBS = [
 
 export const generateMetadata = async () => {
 	const tags = await getData();
+	const siteUrl = SITE_URL();
 
 	return tags
 		? setMetadata({
 				title: "Blog Tags",
 				slug: "/blog/tags",
 				keywords: tags.map(({ name }) => name).join(", "),
+				openGraph: {
+					title: "Blog Tags",
+					url: `${siteUrl}/blog/tags`,
+					images: [
+						{
+							url: `${siteUrl}/profile-card.png?slug=/blog/tags`,
+						},
+					],
+				},
 			})
 		: null;
 };

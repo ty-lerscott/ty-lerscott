@@ -207,24 +207,35 @@ const getPost = async (slug: string): Promise<Post | null> => {
 	return null;
 };
 
-const getContactDetails = async (): Promise<ContactDetails | null> => {
+const getContactDetails = async (
+	extended?: boolean,
+): Promise<ContactDetails> => {
 	try {
 		const resp = await client.request<APIContactDetails>(
 			readSingleton("Contact", {
-				fields: ["phone", "email", "socials.Link_id.*"],
+				fields: ["phone", "email", "socials.Link_id.*"].concat(
+					extended
+						? [
+								"image",
+								"current_role.title",
+								"current_role.company",
+								"current_role.location",
+							]
+						: [],
+				),
 			}),
 		);
 
-		return resp
-			? {
-					...resp,
-					socials: resp.socials.map((item) => item.Link_id) as Link[],
-				}
-			: null;
+		return {
+			...(resp && {
+				...resp,
+				socials: resp.socials.map((item) => item.Link_id) as Link[],
+			}),
+		};
 	} catch (err) {
 		console.error(err);
+		return {} as ContactDetails;
 	}
-	return null;
 };
 
 const getTags = async (): Promise<Tag[] | null> => {

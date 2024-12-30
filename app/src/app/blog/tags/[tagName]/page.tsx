@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-import { setMetadata } from "@/lib/utils";
+import { setMetadata, SITE_URL } from "@/lib/utils";
 import PostCard from "@/components/post-card";
 import { getTag, getPostsByTagSlug } from "@/lib/cms";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
@@ -29,10 +29,23 @@ export const generateMetadata = async ({
 	const { tagName } = await params;
 	const tag = await getTagData(tagName);
 
+	const siteUrl = SITE_URL();
+	const title = `Tag: ${tag?.name}`;
+	const slug = tag ? `/blog/tags/${tag.slug}` : "";
+
 	return tag
 		? setMetadata({
-				title: `Tag: ${tag.name}`,
-				slug: `/blog/tags/${tag.slug}`,
+				title,
+				slug,
+				openGraph: {
+					title,
+					url: `${siteUrl}${slug}`,
+					images: [
+						{
+							url: `${siteUrl}/profile-card.png?slug=${slug}`,
+						},
+					],
+				},
 			})
 		: null;
 };

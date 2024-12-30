@@ -6,7 +6,7 @@ import { SlScreenSmartphone } from "react-icons/sl";
 import Education from "./components/education";
 import SocialMap from "@/components/social-map";
 import Experiences from "./components/experiences";
-import { yearsAgo, setMetadata } from "@/lib/utils";
+import { yearsAgo, setMetadata, SITE_URL } from "@/lib/utils";
 import { getPage, getContactDetails } from "@/lib/cms";
 import SectionHeader from "./components/section-header";
 import { ResumeHeader, Skills } from "./components/client";
@@ -75,8 +75,23 @@ const getResume = cache(async () =>
 
 export const generateMetadata = async () => {
 	const page = await getResume();
+	const siteUrl = SITE_URL();
 
-	return page ? setMetadata(page.metadata) : null;
+	return page
+		? setMetadata({
+				...page.metadata,
+				openGraph: {
+					title: page.metadata.title,
+					description: page.metadata.description,
+					url: `${siteUrl}${page.metadata.slug}`,
+					images: [
+						{
+							url: `${siteUrl}/profile-card.png?slug=${page.metadata.slug}`,
+						},
+					],
+				},
+			})
+		: null;
 };
 
 const ResumeBio = ({ bio }: { bio: string }) => {

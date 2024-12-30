@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
 				source: "/rss.xml",
 				destination: "/api/rss",
 			},
+			{
+				source: "/profile-card.png",
+				destination: "/api/profile-card",
+			},
 		];
 	},
 };
