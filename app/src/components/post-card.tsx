@@ -7,14 +7,6 @@ import type { Post as PostType } from "@/types";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 
-import {
-	Card,
-	CardTitle,
-	CardHeader,
-	CardFooter,
-	CardDescription,
-} from "@/components/ui/card";
-
 const PostCard = ({
 	metadata,
 	body,
@@ -25,34 +17,36 @@ const PostCard = ({
 	const isLong = metadata && metadata?.description?.length > 256;
 
 	return (
-		<Card className="w-full">
-			<CardHeader>
-				<Link href={metadata?.slug || ""} tabIndex={-1}>
-					<AspectRatio ratio={16 / 9} className="overflow-hidden group">
-						<ImageBackground
-							id={image as string}
-							className="group-hover:scale-110 transition-all duration-200"
-						/>
-					</AspectRatio>
-				</Link>
+		<div className="rounded-xl border border-[--border] w-full p-4 flex flex-col gap-4 justify-between">
+			<Link href={metadata?.slug || ""} tabIndex={-1}>
+				<AspectRatio ratio={16 / 9} className="rounded overflow-hidden group">
+					<ImageBackground
+						id={image as string}
+						className="group-hover:scale-110 transition-all duration-200"
+					/>
+				</AspectRatio>
+			</Link>
 
-				<CardTitle className="text-[--heading]">
-					<Link href={metadata?.slug || ""}>{metadata?.title}</Link>
-				</CardTitle>
-				<CardDescription>
-					{blurb}
-					{isLong ? "..." : ""}
-				</CardDescription>
-			</CardHeader>
-			<CardFooter className="flex items-center justify-between gap-2 text-xs text-[--ghost]">
+			<div>
+				<Link
+					href={metadata?.slug || ""}
+					className="font-semibold leading-tight tracking-tight text-[--heading]"
+				>
+					{metadata?.title}
+				</Link>
+			</div>
+
+			<p>{`${blurb}${isLong ? "..." : ""}`}</p>
+
+			<div className="flex items-center justify-between gap-2 text-xs text-[--ghost]">
 				<div className="flex items-center gap-2">
 					<FaRegCalendar className="size-2.5" />
 					<span>{dayjs(publish_date).format("MMMM D, YYYY")}</span>
 				</div>
 
 				<span>{readingTime(body as string).text}</span>
-			</CardFooter>
-		</Card>
+			</div>
+		</div>
 	);
 };
 
