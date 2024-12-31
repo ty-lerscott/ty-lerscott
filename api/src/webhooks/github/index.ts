@@ -15,24 +15,30 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
+	console.group("GithubController");
+	console.log({ action: body.action });
 	switch (body.action) {
 		case "created": {
+			console.log("CREATED", body);
 			await CreatedController(body);
 			break;
 		}
 		case "in_progress": {
+			console.log("IN_PROGRESS", body);
 			await InProgressController(body);
 			break;
 		}
 		case "completed": {
-			console.log("CompletedController", body);
+			console.log("COMPLETED", body);
 			await CompletedController(body);
 			break;
 		}
 		case "workflow_run": {
+			console.log("WORKFLOW_RUN", body);
 			break;
 		}
 		case "queued": {
+			console.log("QUEUED", body);
 			break;
 		}
 		default: {
@@ -40,6 +46,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 			break;
 		}
 	}
+	console.groupEnd();
 
 	res.status(StatusCodes.OK).end();
 };
