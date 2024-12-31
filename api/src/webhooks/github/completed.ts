@@ -7,7 +7,7 @@ import type { GHCompletedAction } from "@/types";
 
 const IS_LOCAL = env.NODE_ENV !== "production";
 
-console.log({ env });
+console.log(env);
 
 const CompletedController = async (body: GHCompletedAction): Promise<void> => {
 	if (body.workflow_job) {
@@ -66,7 +66,6 @@ const CompletedController = async (body: GHCompletedAction): Promise<void> => {
 
 	console.group("UNHANDLED COMPLETED ACTION");
 	console.log(body);
-
 	console.groupEnd();
 
 	return new Promise<void>((resolve) => {
