@@ -12,11 +12,6 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
-	if (!body?.action) {
-		res.status(StatusCodes.CONTINUE).end();
-		return;
-	}
-
 	switch (body.action) {
 		case "created": {
 			console.log("CREATED", JSON.stringify(body));

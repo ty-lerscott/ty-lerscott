@@ -5,8 +5,6 @@ import StatusCodes from "@/lib/status-codes";
 const WebhooksConductor = async ({ req, res, next }: Conductor) => {
 	const [domain] = req.extendedPath;
 
-	console.log({ domain });
-
 	switch (domain) {
 		case "github":
 			await GithubController({ req, res, next });

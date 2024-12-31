@@ -62,13 +62,7 @@ const CompletedController = async (body: GHCompletedAction): Promise<void> => {
 		return;
 	}
 
-	console.group("UNHANDLED COMPLETED ACTION");
-	console.log(body);
-	console.groupEnd();
-
-	return new Promise<void>((resolve) => {
-		resolve();
-	});
+	return Promise.resolve();
 };
 
 export default CompletedController;

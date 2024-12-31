@@ -31,13 +31,7 @@ const CreatedController = async (body: Record<string, any>): Promise<void> => {
 		return;
 	}
 
-	console.group("UNHANDLED CREATE ACTION");
-	console.log(body);
-	console.groupEnd();
-
-	return new Promise<void>((resolve) => {
-		resolve();
-	});
+	return Promise.resolve();
 };
 
 export default CreatedController;

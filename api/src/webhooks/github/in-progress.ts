@@ -40,13 +40,7 @@ const InProgressController = async ({
 		}
 	}
 
-	console.group("UNHANDLED PROGRESS ACTION");
-	console.log(body);
-	console.groupEnd();
-
-	return new Promise<void>((resolve) => {
-		resolve();
-	});
+	return Promise.resolve();
 };
 
 export default InProgressController;
