@@ -25,6 +25,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 			break;
 		}
 		case "completed": {
+			console.log("CompletedController", body);
 			await CompletedController(body);
 			break;
 		}
