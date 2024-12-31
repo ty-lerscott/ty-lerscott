@@ -175,7 +175,7 @@ export async function GET(request: Request) {
 						margin: 0,
 					}}
 				>
-					{`${SITE_URL()}${slug}`}
+					{`${SITE_URL()}${slug ?? ""}`}
 				</p>
 			</div>
 		</div>,
