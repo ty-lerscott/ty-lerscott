@@ -31,49 +31,31 @@ importers:
   api:
     dependencies:
       '@dotenvx/dotenvx':
-        specifier: ^1.32.0
+        specifier: 1.32.0
         version: 1.32.0
       '@paralleldrive/cuid2':
         specifier: 2.2.2
         version: 2.2.2
-      '@types/body-parser':
-        specifier: ^1.19.5
-        version: 1.19.5
-      '@types/cors':
-        specifier: ^2.8.17
-        version: 2.8.17
-      '@types/express':
-        specifier: ^5.0.0
-        version: 5.0.0
-      '@types/lodash.mergewith':
-        specifier: 4.6.9
-        version: 4.6.9
-      '@types/node':
-        specifier: ^22.10.2
-        version: 22.10.2
-      '@types/object.omit':
-        specifier: 3.0.3
-        version: 3.0.3
       body-parser:
-        specifier: ^1.20.3
+        specifier: 1.20.3
         version: 1.20.3
       clsx:
         specifier: 2.1.1
         version: 2.1.1
       cors:
-        specifier: ^2.8.5
+        specifier: 2.8.5
         version: 2.8.5
       dayjs:
         specifier: 1.11.13
         version: 1.11.13
       discord-webhook-node:
-        specifier: ^1.1.8
+        specifier: 1.1.8
         version: 1.1.8(encoding@0.1.13)
       express:
-        specifier: ^4.21.2
+        specifier: 4.21.2
         version: 4.21.2
       helmet:
-        specifier: ^8.0.0
+        specifier: 8.0.0
         version: 8.0.0
       lodash.mergewith:
         specifier: 4.6.2
@@ -85,14 +67,33 @@ importers:
         specifier: 8.1.0
         version: 8.1.0(postcss@8.4.49)(typescript@5.7.2)
       tsx:
-        specifier: ^4.19.2
+        specifier: 4.19.2
         version: 4.19.2
       typescript:
         specifier: '5'
         version: 5.7.2
       winston:
-        specifier: ^3.17.0
+        specifier: 3.17.0
         version: 3.17.0
+    devDependencies:
+      '@types/body-parser':
+        specifier: 1.19.5
+        version: 1.19.5
+      '@types/cors':
+        specifier: 2.8.17
+        version: 2.8.17
+      '@types/express':
+        specifier: 5.0.0
+        version: 5.0.0
+      '@types/lodash.mergewith':
+        specifier: 4.6.9
+        version: 4.6.9
+      '@types/node':
+        specifier: 22.10.2
+        version: 22.10.2
+      '@types/object.omit':
+        specifier: 3.0.3
+        version: 3.0.3
 
   app:
     dependencies:
@@ -9795,19 +9796,19 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.10.2
+      '@types/node': 20.17.10
 
   '@types/caseless@0.12.5': {}
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 20.17.10
 
   '@types/cookie@0.6.0': {}
 
   '@types/cors@2.8.17':
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 20.17.10
 
   '@types/cssnano@5.1.3(postcss@8.4.49)':
     dependencies:
@@ -9836,7 +9837,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.2':
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 20.17.10
       '@types/qs': 6.9.17
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -9923,12 +9924,12 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.10.2
+      '@types/node': 20.17.10
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.10.2
+      '@types/node': 20.17.10
       '@types/send': 0.17.4
 
   '@types/tough-cookie@4.0.5': {}
