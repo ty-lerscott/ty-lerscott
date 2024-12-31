@@ -17,6 +17,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 
 	console.group("GithubController");
 	console.log({ action: body.action });
+
 	switch (body.action) {
 		case "created": {
 			console.log("CREATED", body);
