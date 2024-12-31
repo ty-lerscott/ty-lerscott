@@ -5,14 +5,12 @@ import CompletedController from "./completed";
 import InProgressController from "./in-progress";
 
 const GithubController = async ({ req: { body, method }, res }: Conductor) => {
-	console.log("GITHUB CONTROLLER", method);
+	console.group("GITHUB CONTROLLER");
 
 	if (method !== "POST") {
 		res.status(StatusCodes.METHOD_NOT_ALLOWED).end();
 		return;
 	}
-
-	console.log(JSON.stringify(body));
 
 	if (!body?.action) {
 		res.status(StatusCodes.CONTINUE).end();
