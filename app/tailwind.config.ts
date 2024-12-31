@@ -2,11 +2,8 @@ import merge from "lodash.mergewith";
 import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
 
-import makeFavicon from "./src/favicon";
 import SCREENS from "./tailwind.screens.config";
 import { aliasMap, colors as newColors } from "./src/colors";
-
-makeFavicon();
 
 const HeaderStyles = (
 	theme: (theme: string) => string,
