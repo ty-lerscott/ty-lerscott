@@ -21,30 +21,30 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 
 	switch (body.action) {
 		case "created": {
-			console.log("CREATED", body);
+			console.log("CREATED", JSON.stringify(body));
 			await CreatedController(body);
 			break;
 		}
 		case "in_progress": {
-			console.log("IN_PROGRESS", body);
+			console.log("IN_PROGRESS", JSON.stringify(body));
 			await InProgressController(body);
 			break;
 		}
 		case "completed": {
-			console.log("COMPLETED", body);
+			console.log("COMPLETED", JSON.stringify(body));
 			await CompletedController(body);
 			break;
 		}
 		case "workflow_run": {
-			console.log("WORKFLOW_RUN", body);
+			console.log("WORKFLOW_RUN", JSON.stringify(body));
 			break;
 		}
 		case "queued": {
-			console.log("QUEUED", body);
+			console.log("QUEUED", JSON.stringify(body));
 			break;
 		}
 		default: {
-			console.log("UNHANDLED GITHUB ACTION:", body);
+			console.log("UNHANDLED GITHUB ACTION:", JSON.stringify(body));
 			break;
 		}
 	}
