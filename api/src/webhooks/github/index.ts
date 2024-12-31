@@ -12,6 +12,12 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
+	switch (body.status) {
+		default: {
+			break;
+		}
+	}
+
 	switch (body.action) {
 		case "created": {
 			console.log("CREATED", JSON.stringify(body));
