@@ -66,6 +66,7 @@ const CompletedController = async (body: GHCompletedAction): Promise<void> => {
 
 	console.group("UNHANDLED COMPLETED ACTION");
 	console.log(body);
+
 	console.groupEnd();
 
 	return new Promise<void>((resolve) => {
