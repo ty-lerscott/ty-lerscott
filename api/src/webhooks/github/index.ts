@@ -12,7 +12,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
-	console.log({ action: body.action });
+	console.log(JSON.stringify(body));
 
 	if (!body?.action) {
 		res.status(StatusCodes.CONTINUE).end();
