@@ -171,7 +171,7 @@ const ResumePage = async () => {
 						{skills?.length ? (
 							<Skills
 								skills={skills}
-								className="max-h-[50vh] md:max-h-[110rem] lg:max-h-[83rem] xl:max-h-[130vh] 2xl:max-h-[55rem]"
+								className="max-h-[50vh] md:max-h-[110rem] lg:max-h-[83rem] xl:max-h-[136vh] 2xl:max-h-[55rem]"
 							/>
 						) : null}
 					</div>
@@ -183,7 +183,7 @@ const ResumePage = async () => {
 						{experiences?.length ? (
 							<Experiences
 								experiences={experiences}
-								className="h-[195vh] lg:h-[320vh] xl:h-[185vh] 2xl:h-[100vh] pb-[8.5rem] 2xl:pb-[0]"
+								className="h-[195vh] lg:h-[320vh] xl:h-[185vh] 2xl:h-[100vh]"
 							/>
 						) : null}
 
