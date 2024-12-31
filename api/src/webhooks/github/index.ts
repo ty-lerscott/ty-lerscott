@@ -12,7 +12,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
-	if (body.status) {
+	if (body.state || body.pusher) {
 		return;
 	}
 
