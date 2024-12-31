@@ -36,7 +36,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 			break;
 		}
 		default: {
-			console.log("UNHANDLED GITHUB ACTION:", body.action);
+			console.log("UNHANDLED GITHUB ACTION:", body);
 			break;
 		}
 	}
