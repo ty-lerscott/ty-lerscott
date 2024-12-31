@@ -33,10 +33,10 @@ const InProgressController = async ({
 					},
 				});
 
-				break;
+				return;
 			}
 			default: {
-				break;
+				return;
 			}
 		}
 	}

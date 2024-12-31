@@ -1,7 +1,7 @@
 import type { NextFunction, Response } from "express";
 
-import type { Conductor, Request } from "@/types";
 import WebhooksConductor from "@/webhooks";
+import type { Conductor, Request } from "@/types";
 
 const Conductors = async (req: Request, res: Response, next: NextFunction) => {
 	const [basePath, ...extendedPath] = req.originalUrl

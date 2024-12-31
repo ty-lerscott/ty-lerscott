@@ -1,6 +1,8 @@
 import type { Conductor } from "@/types";
+import CreatedController from "./created";
 import StatusCodes from "@/lib/status-codes";
-import { Created, Completed, InProgress } from "./hooks";
+import CompletedController from "./completed";
+import InProgressController from "./in-progress";
 
 const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 	if (method !== "POST") {
@@ -15,15 +17,15 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 
 	switch (body.action) {
 		case "created": {
-			await Created(body);
+			await CreatedController(body);
 			break;
 		}
 		case "in_progress": {
-			await InProgress(body);
+			await InProgressController(body);
 			break;
 		}
 		case "completed": {
-			await Completed(body);
+			await CompletedController(body);
 			break;
 		}
 		case "workflow_run": {
