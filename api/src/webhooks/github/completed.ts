@@ -57,9 +57,9 @@ const CompletedController = async (body: GHCompletedAction): Promise<void> => {
 			},
 		});
 
-		// if (!IS_LOCAL) {
-		// 	execSync("pm2 restart all");
-		// }
+		if (!IS_LOCAL) {
+			execSync("pm2 restart all");
+		}
 
 		return;
 	}
