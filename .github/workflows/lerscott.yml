@@ -1,4 +1,4 @@
-name: Config & CMS
+name: Config / CMS / API
 
 on:
     push:
@@ -24,11 +24,14 @@ jobs:
                 npm i -g pnpm;
                 pnpm i;
 
+            - name: Create .env files
+              run: |
+                echo "# .env file created by GitHub Actions >> ./api/.env" > ./api/.env
+                echo "NODE_ENV=production" >> ./api/.env
+                echo "API_PORT=${{ secrets.API_PORT }}" >> ./api/.env
+                echo "DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}" >> ./api/.env
+
             - name: Build config
-              env:
-                NODE_ENV: production
-                API_PORT: ${{ secrets.API_PORT }}
-                DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
               run: |
                 pnpm build;       
 

@@ -21,7 +21,7 @@ const start = () => {
 	server.use(LoggerController);
 	server.use(APIConductor as RequestHandler);
 
-	server.listen(env.PORT, (err?: Error) => {
+	server.listen(env.API_PORT, (err?: Error) => {
 		if (err) throw err;
 		console.log(
 			`> Ready on https://api.lerscott.${IS_LOCAL ? "local" : "com"}`,
