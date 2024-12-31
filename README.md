@@ -1,4 +1,4 @@
-![image](https://ty.lerscott.com/profile-card.png)
+![image](https://ty.lerscott.com/profile-card.png?12345)
 
 ## Technologies Used
 
