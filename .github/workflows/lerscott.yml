@@ -24,7 +24,7 @@ jobs:
                 npm i -g pnpm;
                 pnpm i;
 
-            - name: Create .env files
+            - name: Create ./api/.env file
               run: |
                 echo "# .env file created by GitHub Actions >> ./api/.env" > ./api/.env
                 echo "NODE_ENV=production" >> ./api/.env
