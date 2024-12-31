@@ -12,7 +12,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
-	switch (body.status) {
+	switch (body.state) {
 		default: {
 			break;
 		}
