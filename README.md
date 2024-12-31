@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://ty.lerscott.com/favicon.ico?size=120&radius=100" alt="favicon">
+    <img src="https://ty.lerscott.com/favicon.ico?size=120&radius=110" alt="favicon">
 </p>
 
 <h1 align="center">
