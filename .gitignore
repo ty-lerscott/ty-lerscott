@@ -5,6 +5,10 @@ node_modules
 .pnp
 .pnp.js
 
+# CMS Uploads
+cms/uploads
+./cms/uploads/*
+
 *.db
 
 # Local env files
