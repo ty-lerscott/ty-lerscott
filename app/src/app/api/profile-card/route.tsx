@@ -56,6 +56,7 @@ export async function GET(request: Request) {
 				display: "flex",
 				position: "relative",
 				backgroundColor: aliasMap.background,
+				borderRadius: "1vw",
 			}}
 		>
 			<div
