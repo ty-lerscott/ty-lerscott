@@ -1,3 +1,11 @@
+<p align="center">
+    <img src="https://ty.lerscott.com/favicon.ico?size=120&radius=100" alt="favicon">
+</p>
+
+<h1 align="center">
+ty.lerscott.com
+</h1>
+
 ![image](https://ty.lerscott.com/profile-card.png?12345)
 
 ## Technologies Used

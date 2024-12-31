@@ -2,7 +2,19 @@ import { ImageResponse } from "@vercel/og";
 
 import { aliasMap } from "@/colors";
 
-export async function GET() {
+export async function GET(request: Request) {
+	const url = new URL(request.url);
+	const size = url.searchParams.get("size");
+	const radius = url.searchParams.get("radius");
+
+	const _size = size ? Number(size) : 24;
+	const _radius = radius ? Number(radius) : 4;
+
+	const dimensions = {
+		height: _size,
+		width: _size,
+	};
+
 	return new ImageResponse(
 		<div
 			style={{
@@ -11,16 +23,16 @@ export async function GET() {
 				alignItems: "center",
 				width: "100%",
 				height: "100%",
-
-				borderRadius: "4px",
+				borderRadius: `${_radius}px`,
 				backgroundColor: aliasMap.background,
 			}}
 		>
 			<svg
 				fill={aliasMap.foreground}
 				viewBox="0 0 24 24"
+				{...dimensions}
 				style={{
-					transform: "scale(0.9)",
+					transform: "scale(0.75)",
 				}}
 				xmlns="http://www.w3.org/2000/svg"
 			>
@@ -28,9 +40,6 @@ export async function GET() {
 				<title> </title>
 			</svg>
 		</div>,
-		{
-			width: 24,
-			height: 24,
-		},
+		dimensions,
 	);
 }
