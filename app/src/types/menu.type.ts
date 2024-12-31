@@ -1,5 +1,5 @@
-import type { Link } from "@/types/link.type";
-import type { Page } from "@/types/page.type";
+import type { Link } from "./link.type";
+import type { Page } from "./page.type";
 
 export type Menu = {
 	id: string;

@@ -2,3 +2,4 @@ packages:
   - "cms"
   - "app"
   - "config"
+  - "api"
