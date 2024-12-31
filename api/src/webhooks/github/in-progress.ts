@@ -1,5 +1,4 @@
 import discord from "@/lib/discord";
-import { logger } from "@/lib/logger";
 import type { GHInProgressAction, GHWorkflowJob } from "@/types";
 
 const InProgressController = async ({

@@ -25,6 +25,10 @@ jobs:
                 pnpm i;
 
             - name: Build config
+              env:
+                NODE_ENV: production
+                API_PORT: ${{ secrets.API_PORT }}
+                DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
               run: |
                 pnpm build;       
 
