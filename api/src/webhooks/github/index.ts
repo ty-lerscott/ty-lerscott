@@ -5,18 +5,19 @@ import CompletedController from "./completed";
 import InProgressController from "./in-progress";
 
 const GithubController = async ({ req: { body, method }, res }: Conductor) => {
+	console.log("GITHUB CONTROLLER", method);
+
 	if (method !== "POST") {
 		res.status(StatusCodes.METHOD_NOT_ALLOWED).end();
 		return;
 	}
 
+	console.log({ action: body.action });
+
 	if (!body?.action) {
 		res.status(StatusCodes.CONTINUE).end();
 		return;
 	}
-
-	console.group("GithubController");
-	console.log({ action: body.action });
 
 	switch (body.action) {
 		case "created": {

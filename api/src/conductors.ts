@@ -20,6 +20,7 @@ const Conductors = async (req: Request, res: Response, next: NextFunction) => {
 
 	switch (basePath) {
 		case "webhooks":
+			console.log("WEBHOOKS CONDUCTOR");
 			await WebhooksConductor(props);
 			break;
 		default:
