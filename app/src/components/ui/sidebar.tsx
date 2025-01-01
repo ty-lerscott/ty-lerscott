@@ -1,33 +1,38 @@
 "use client";
 
 import {
-	useState,
 	useMemo,
+	useState,
 	useEffect,
-	createContext,
 	useContext,
 	forwardRef,
 	useCallback,
-	type CSSProperties,
+	createContext,
 	type ComponentRef,
+	type CSSProperties,
 	type ComponentProps,
 } from "react";
+import { PanelLeft } from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
 import { type VariantProps, cva } from "class-variance-authority";
-import { PanelLeft } from "lucide-react";
 
-import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+	Sheet,
+	SheetTitle,
+	SheetContent,
+	SheetDescription,
+} from "@/components/ui/sheet";
 import {
 	Tooltip,
 	TooltipContent,
-	TooltipProvider,
 	TooltipTrigger,
+	TooltipProvider,
 } from "@/components/ui/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
@@ -192,7 +197,7 @@ const Sidebar = forwardRef<
 			return (
 				<div
 					className={cn(
-						"flex h-full w-[--sidebar-width] flex-col bg-[tomato] text-[--ghost]",
+						"flex h-full w-[--sidebar-width] flex-col text-[--ghost] bg-[--sidebar-background]",
 						className,
 					)}
 					ref={ref}
@@ -206,10 +211,14 @@ const Sidebar = forwardRef<
 		if (isMobile) {
 			return (
 				<Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+					<div className="hidden">
+						<SheetTitle>Menu</SheetTitle>
+						<SheetDescription>Menu Description</SheetDescription>
+					</div>
 					<SheetContent
 						data-sidebar="sidebar"
 						data-mobile="true"
-						className="w-[--sidebar-width] bg-sidebar p-0 text-[tomato] [&>button]:hidden"
+						className="w-[--sidebar-width] bg-[--sidebar-background] p-0 [&>button]:hidden"
 						style={
 							{
 								"--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -288,7 +297,7 @@ const SidebarTrigger = forwardRef<
 			}}
 			{...props}
 		>
-			<PanelLeft className="size-3" />
+			<PanelLeft className="size-4" />
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);
@@ -364,7 +373,10 @@ const SidebarHeader = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 			<div
 				ref={ref}
 				data-sidebar="header"
-				className={cn("flex flex-col gap-2 p-2", className)}
+				className={cn(
+					"flex flex-col gap-2 p-2 bg-[--sidebar-background]",
+					className,
+				)}
 				{...props}
 			/>
 		);
@@ -378,7 +390,10 @@ const SidebarFooter = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 			<div
 				ref={ref}
 				data-sidebar="footer"
-				className={cn("flex flex-col gap-2 p-2", className)}
+				className={cn(
+					"flex flex-col gap-2 p-2 bg-[--sidebar-background]",
+					className,
+				)}
 				{...props}
 			/>
 		);
@@ -408,7 +423,7 @@ const SidebarContent = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 				ref={ref}
 				data-sidebar="content"
 				className={cn(
-					"flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+					"flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden bg-[--sidebar-background]",
 					className,
 				)}
 				{...props}
@@ -464,7 +479,7 @@ const SidebarGroupAction = forwardRef<
 			ref={ref}
 			data-sidebar="group-action"
 			className={cn(
-				"absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-[tomato] outline-none ring-sidebar-ring transition-transform hover:bg-[tomato] hover:text-[tomato] focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+				"absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-none ring-sidebar-ring transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
 				// Increases the hit area of the button on mobile.
 				"after:absolute after:-inset-2 after:md:hidden",
 				"group-data-[collapsible=icon]:hidden",
@@ -513,13 +528,13 @@ const SidebarMenuItem = forwardRef<HTMLLIElement, ComponentProps<"li">>(
 SidebarMenuItem.displayName = "SidebarMenuItem";
 
 const sidebarMenuButtonVariants = cva(
-	"peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:text-[tomato] focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-[tomato] data-[state=open]:hover:text-[--hover-secondary] group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+	"peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[state=open]:hover:text-[--hover-secondary] group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				default: "hover:text-[--hover-secondary]",
 				outline:
-					"shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:text-[tomato] hover:shadow-[0_0_0_1px_var(--sidebar-accent)]",
+					"shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:shadow-[0_0_0_1px_var(--sidebar-accent)]",
 			},
 			size: {
 				default: "h-8 text-sm",
@@ -607,7 +622,7 @@ const SidebarMenuAction = forwardRef<
 			ref={ref}
 			data-sidebar="menu-action"
 			className={cn(
-				"absolute right-1 top-1.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-[tomato] focus-visible:ring-2 peer-hover/menu-button:text-[tomato] [&>svg]:size-4 [&>svg]:shrink-0",
+				"absolute right-1 top-1.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
 				// Increases the hit area of the button on mobile.
 				"after:absolute after:-inset-2 after:md:hidden",
 				"peer-data-[size=sm]/menu-button:top-1",
@@ -631,7 +646,7 @@ const SidebarMenuBadge = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 			data-sidebar="menu-badge"
 			className={cn(
 				"absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums text-sidebar-foreground select-none pointer-events-none",
-				"peer-hover/menu-button:text-[tomato]",
+				// "peer-hover/menu-button:text-[tomato]",
 				"peer-data-[size=sm]/menu-button:top-1",
 				"peer-data-[size=default]/menu-button:top-1.5",
 				"peer-data-[size=lg]/menu-button:top-2.5",
@@ -722,7 +737,7 @@ const SidebarMenuSubButton = forwardRef<
 			data-size={size}
 			data-active={isActive}
 			className={cn(
-				"flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-[--hover-secondary] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-[tomato]",
+				"flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-[--hover-secondary] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
 				size === "sm" && "text-xs",
 				size === "md" && "text-sm",
 				"group-data-[collapsible=icon]:hidden",

@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { getColorMap, PRIMARY_INDEX, colorsArr } from "@/colors";
 
-const DURATION = 10000;
+const DURATION = 20 * 1000;
 
 // Function to set color on :root
 const setRootVar = (varName: string, hexValue: string) => {
@@ -21,7 +21,7 @@ const getRandomIndexExcept = (length: number, except: number) => {
 	return randomIndex;
 };
 
-const VariableTransition = () => {
+const VariableTransition = ({ pause }: { pause?: boolean }) => {
 	const startTime = useRef<number | null>(null);
 	const animationFrame = useRef<number | null>(null);
 	const [activeColorIndex, setActiveColorIndex] = useState(PRIMARY_INDEX);
@@ -30,12 +30,13 @@ const VariableTransition = () => {
 	);
 
 	useEffect(() => {
+		if (pause) return;
+
 		const animate = (timestamp: number) => {
 			if (!startTime.current) {
 				startTime.current = timestamp;
 			}
-			const elapsed = timestamp - startTime.current;
-			const ratio = Math.min(elapsed / DURATION, 1);
+			const ratio = Math.min((timestamp - startTime.current) / DURATION, 1);
 
 			// Get old & new color maps
 			const oldColors = getColorMap(activeColorIndex);
@@ -65,11 +66,9 @@ const VariableTransition = () => {
 				setActiveColorIndex(nextColorIndex);
 
 				// Choose a new random color as the next "to" color
-				const newRandom = getRandomIndexExcept(
-					colorsArr.length,
-					nextColorIndex,
+				setNextColorIndex(
+					getRandomIndexExcept(colorsArr.length, nextColorIndex),
 				);
-				setNextColorIndex(newRandom);
 			}
 		};
 
@@ -82,7 +81,7 @@ const VariableTransition = () => {
 				cancelAnimationFrame(animationFrame.current);
 			}
 		};
-	}, [activeColorIndex, nextColorIndex]);
+	}, [activeColorIndex, nextColorIndex, pause]);
 
 	return null;
 };

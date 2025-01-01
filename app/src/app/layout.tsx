@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import ScreenSizes from "~/app/tailwind.screens.config";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 import VariableTransition from "@/components/variable-transition";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 import "./tailwind.css";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
 				<VariableTransition />
+
 				<SidebarProvider>
 					<Sidebar />
 
@@ -51,6 +53,9 @@ export default function RootLayout({
 						}}
 						className="p-4 md:px-6 md:py-4 w-full flex flex-col gap-4 mx-auto 2xl:mx-0"
 					>
+						<div className="relative lg:hidden z-0">
+							<SidebarTrigger variant="ghost" />
+						</div>
 						{children}
 						<Footer />
 					</main>

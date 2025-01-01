@@ -9,6 +9,7 @@ const colorsArr = [
 	"mirageLake",
 	"copenBlue",
 	"prominentBlue",
+	"royalPurple",
 ];
 
 type TagClassesType = (typeof colorsArr)[number];
@@ -134,6 +135,18 @@ const colors = {
 		800: "#103342",
 		900: "#081921",
 	},
+	[colorsArr[10]]: {
+		50: "#F3EEFB",
+		100: "#E2D4F4",
+		200: "#CAB1EC",
+		300: "#B28EE3",
+		400: "#9A6BDB",
+		500: "#7851A9", // Royal Purple
+		600: "#563D7E",
+		700: "#3C2956",
+		800: "#24152D",
+		900: "#14091B",
+	},
 } as Record<TagClassesType, Record<string | number, string>>;
 
 const RANGE = [
@@ -151,6 +164,7 @@ const RANGE = [
 
 const ALIASES = {
 	white: ["heading", "hover-secondary", "white"],
+	lighter: ["code"],
 	"medium-light": ["hover", "strong"],
 	medium: ["foreground"],
 	dark: ["ghost"],

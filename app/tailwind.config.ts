@@ -150,8 +150,9 @@ export default {
 					lineHeight: theme("lineHeight.normal"),
 				},
 				code: {
+					display: "block",
+					whiteSpace: "pre-wrap",
 					fontSize: theme("fontSize.sm"),
-					fontFamily: theme("font.firaCode"),
 				},
 				small: {
 					fontSize: theme("fontSize.sm"),

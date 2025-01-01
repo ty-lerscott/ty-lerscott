@@ -1,16 +1,16 @@
 import dayjs from "dayjs";
 import { cache } from "react";
-import remarkGfm from "remark-gfm";
+
 import readingTime from "reading-time";
-import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 import { FaRegCalendar } from "react-icons/fa6";
 
 import pkg from "~/package.json";
 import { getPost } from "@/lib/cms";
 import Tag from "@/components/ui/tag";
+import { setMetadata } from "@/lib/utils";
 import type { Post, Image } from "@/types";
-import { setMetadata, SITE_URL } from "@/lib/utils";
+import Markdown from "@/components/markdown";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
@@ -108,7 +108,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 				</AspectRatio>
 			) : null}
 
-			<ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+			<Markdown>{body}</Markdown>
 		</>
 	);
 };
