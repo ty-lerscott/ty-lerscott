@@ -4,6 +4,7 @@ import { Zilla_Slab, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Footer from "@/components/footer";
+import ScreenSizes from "~/app/tailwind.screens.config";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 
 import "./tailwind.css";
@@ -42,7 +43,12 @@ export default function RootLayout({
 				<SidebarProvider>
 					<Sidebar />
 
-					<main className="p-4 md:px-6 md:py-4 w-full flex flex-col gap-4 container mx-auto xl:mx-0">
+					<main
+						style={{
+							maxWidth: ScreenSizes["2xl"],
+						}}
+						className="p-4 md:px-6 md:py-4 w-full flex flex-col gap-4 mx-auto 2xl:mx-0"
+					>
 						{children}
 						<Footer />
 					</main>
