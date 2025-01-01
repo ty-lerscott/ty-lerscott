@@ -25,7 +25,7 @@ export async function GET() {
 		feed.item({
 			title: post.metadata.title,
 			description: post.metadata.description,
-			url: `${siteUrl}${post.metadata.slug}`,
+			url: `${siteUrl}/blog${post.metadata.slug}`,
 			date: dayjs(post.publish_date).format("YYYY-MM-DD HH:mm:ss"),
 			author: pkg.details.author.name,
 			categories: (post.tags || [])

@@ -44,17 +44,19 @@ export const generateMetadata = async ({
 		`${pkg.details.author.name} | ${pkg.details.author.profession}`,
 	);
 
+	post.metadata.slug = `/blog/${slug}`;
+
 	return setMetadata({
 		...post.metadata,
 		openGraph: {
 			type: "article",
 			title: post.metadata.title,
 			description: post.metadata.description,
-			url: `${SITE_URL()}/blog/${slug}`,
+			url: post.metadata.slug,
 			images: post.image
 				? [
 						{
-							url: `${SITE_URL()}/api/open-graph?${urlParams.toString()}`,
+							url: `/api/open-graph?${urlParams.toString()}`,
 						},
 					]
 				: [],

@@ -95,8 +95,9 @@ const normalizeSitemapData = (
 	}
 
 	for (const post of sitemapData.posts) {
+		console.log("POST", post);
 		sitemapArray.push({
-			url: `${siteUrl}${post.metadata.slug}`,
+			url: `${siteUrl}/blog${post.metadata.slug}`,
 			priority: setPostAndTagPriority(post.date_updated),
 			changeFrequency: setChangeFrequency(post.metadata.slug),
 			lastModified: setLastModified(post.metadata.slug, sitemapData, "posts"),
