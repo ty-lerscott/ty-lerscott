@@ -5,12 +5,16 @@ import CompletedController from "./completed";
 import InProgressController from "./in-progress";
 
 const Handlers = {
-	created: CreatedController,
 	completed: CompletedController,
 	in_progress: InProgressController,
 };
 
 const GithubController = async ({ req: { body, method }, res }: Conductor) => {
+	console.log({
+		action: body.action,
+		state: body.state,
+	});
+
 	if (method !== "POST" || body.pusher) {
 		res.status(StatusCodes.NOT_FOUND).end();
 		return;
@@ -18,7 +22,7 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 
 	if (body.state === "success") {
 		console.log("COMPLETED", JSON.stringify(body));
-		await Handlers.created(body);
+		await CreatedController(body);
 	}
 
 	if (body.action in Handlers) {
