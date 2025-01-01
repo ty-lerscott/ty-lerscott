@@ -1,11 +1,9 @@
 import type { Conductor } from "@/types";
 import CreatedController from "./created";
 import StatusCodes from "@/lib/status-codes";
-import CompletedController from "./completed";
 import InProgressController from "./in-progress";
 
 const Handlers = {
-	completed: CompletedController,
 	in_progress: InProgressController,
 };
 
@@ -13,6 +11,8 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 	console.log({
 		action: body.action,
 		state: body.state,
+		pusher: !!body.pusher,
+		task: body.deployment?.task,
 	});
 
 	if (method !== "POST" || body.pusher) {
