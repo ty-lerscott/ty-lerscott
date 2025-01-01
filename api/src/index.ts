@@ -1,10 +1,11 @@
 import cors from "cors";
 import helmet from "helmet";
-import env from "./lib/dotenv";
 import bodyParser from "body-parser";
+import express, { type RequestHandler } from "express";
+
+import env from "./lib/dotenv";
 import APIConductor from "./conductors";
 import LoggerController from "./lib/logger";
-import express, { type RequestHandler } from "express";
 
 const server = express();
 
