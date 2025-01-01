@@ -4,52 +4,26 @@ import StatusCodes from "@/lib/status-codes";
 import CompletedController from "./completed";
 import InProgressController from "./in-progress";
 
+const Handlers = {
+	created: CreatedController,
+	completed: CompletedController,
+	in_progress: InProgressController,
+};
+
 const GithubController = async ({ req: { body, method }, res }: Conductor) => {
-	console.group("GITHUB CONTROLLER");
-
-	if (method !== "POST") {
-		res.status(StatusCodes.METHOD_NOT_ALLOWED).end();
+	if (method !== "POST" || body.pusher) {
+		res.status(StatusCodes.NOT_FOUND).end();
 		return;
 	}
 
-	if (body.state || body.pusher) {
-		console.log("UNHANDLED GITHUB ACTION:", {
-			state: body.state,
-			pusher: body.pusher,
-		});
-		return;
+	if (body.state === "success") {
+		console.log("COMPLETED", JSON.stringify(body));
+		await Handlers.created(body);
 	}
 
-	switch (body.action) {
-		case "created": {
-			console.log("CREATED", JSON.stringify(body));
-			await CreatedController(body);
-			break;
-		}
-		case "in_progress": {
-			console.log("IN_PROGRESS", JSON.stringify(body));
-			await InProgressController(body);
-			break;
-		}
-		case "completed": {
-			console.log("COMPLETED", JSON.stringify(body));
-			await CompletedController(body);
-			break;
-		}
-		case "workflow_run": {
-			console.log("WORKFLOW_RUN", JSON.stringify(body));
-			break;
-		}
-		case "queued": {
-			console.log("QUEUED", JSON.stringify(body));
-			break;
-		}
-		default: {
-			console.log("UNHANDLED GITHUB ACTION:", JSON.stringify(body));
-			break;
-		}
+	if (body.action in Handlers) {
+		await Handlers[body.action as keyof typeof Handlers](body);
 	}
-	console.groupEnd();
 
 	res.status(StatusCodes.OK).end();
 };

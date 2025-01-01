@@ -12,25 +12,22 @@ const CreatedController = async (body: Record<string, any>): Promise<void> => {
 
 		const level = task === "deploy" ? "success" : "critical";
 
-		await discord(
-			{
-				level,
-				url: repository.url,
-				title: `${repository.name}${description ? ` ${description}` : ""}`,
-				author: {
-					url: creator.url,
-					name: creator.login,
-					avatar: creator.avatar_url,
-				},
-				fields: [
-					{
-						name: "Deployed At",
-						value: dayjs(created_at).format("MMMM DD, YYYY hh:mm:ss A"),
-					},
-				],
+		await discord({
+			level,
+			url: repository.url,
+			title: `${repository.name}${description ? ` ${description}` : ""}`,
+			author: {
+				url: creator.url,
+				name: creator.login,
+				avatar: creator.avatar_url,
 			},
-			{ debug: true },
-		);
+			fields: [
+				{
+					name: "Deployed At",
+					value: dayjs(created_at).format("MMMM DD, YYYY hh:mm:ss A"),
+				},
+			],
+		});
 
 		return;
 	}

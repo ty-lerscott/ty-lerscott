@@ -15,7 +15,7 @@ const CompletedController = async (body: GHCompletedAction): Promise<void> => {
 			workflow_job: { status, head_sha, started_at, head_branch, completed_at },
 		} = body as GHCompletedAction;
 
-		const wasSuccessful = status === "completed";
+		const wasSuccessful = status === "success";
 		const level = wasSuccessful ? "success" : "critical";
 		const duration = dayjs.duration(
 			dayjs(completed_at).diff(dayjs(started_at)),
