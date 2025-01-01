@@ -10,7 +10,7 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 		state,
 		sender,
 		repository,
-		created_at,
+		updated_at,
 		description,
 		commit: {
 			author,
@@ -32,7 +32,7 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 		fields: [
 			{
 				name: "Deployed At",
-				value: dayjs(created_at).format("MMMM DD YYYY hh:mm:ss A"),
+				value: dayjs(updated_at).format("MMMM DD YYYY hh:mm:ss A"),
 			},
 		],
 	});
