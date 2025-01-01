@@ -1,22 +1,37 @@
-import merge from "lodash.mergewith";
 import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
 
 import SCREENS from "./tailwind.screens.config";
 import { getColorMap, colors, PRIMARY_INDEX } from "./src/colors";
 
+const toCssVars = (
+	colorObj: Record<string, string>,
+): Record<string, string> => {
+	return Object.entries(colorObj).reduce(
+		(vars, [key, value]) => {
+			vars[`--${key}`] = value;
+
+			return vars;
+		},
+		{} as Record<string, string>,
+	);
+};
+
 const HeaderStyles = (
 	theme: (theme: string) => string,
+	extension?: Record<string, string>,
 ): Record<string, string> => ({
 	letterSpacing: "0.05em",
 	fontFamily: "var(--font-zilla-slab)",
 	fontWeight: theme("fontWeight.medium"),
+	...extension,
 });
 
 export default {
 	darkMode: ["class"],
 	content: ["./src/**/*.{js,ts,jsx,tsx,ts,mdx}"],
 	theme: {
+		colors,
 		screens: SCREENS,
 		fontFamily: {
 			inter: ["var(--font-inner)", "sans-serif"],
@@ -39,11 +54,10 @@ export default {
 			"8xl": "6rem",
 			"9xl": "8rem",
 		},
-		colors: {
-			...colors,
-			transparent: "transparent",
-		},
 		extend: {
+			colors: {
+				transparent: "transparent",
+			},
 			borderRadius: {
 				lg: "0.5rem",
 				md: "0.125rem",
@@ -54,29 +68,15 @@ export default {
 	plugins: [
 		require("tailwindcss-animate"),
 		require("tailwind-scrollbar-hide"),
-		plugin(({ addBase, theme, addComponents }) => {
-			const toCssVars = (
-				colorObj: Record<string, string>,
-			): Record<string, string> => {
-				return Object.entries(colorObj).reduce(
-					(vars, [key, value]) => {
-						vars[`--${key}`] = value;
-
-						return vars;
-					},
-					{} as Record<string, string>,
-				);
-			};
+		plugin(({ addBase, addComponents }) => {
 			addComponents({
 				".Button": {
 					display: "inline-flex",
 					whiteSpace: "nowrap",
-					color: "var(--ghost)",
 					justifyContent: "center",
-					fontSize: theme("fontSize.sm"),
 					"@apply ring-offset-[--primary]": "",
 					"@apply disabled:pointer-events-none": "",
-					fontWeight: theme("fontWeight.bold"),
+					"@apply font-bold text-sm text-[--ghost]": "",
 					"@apply px-4 py-2 gap-2 relative items-center rounded transition-colors ring-2 ring-[--ghost]":
 						"",
 					"@apply focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2":
@@ -86,8 +86,7 @@ export default {
 					"@apply pointer-events-none": "",
 				},
 				".Button-Primary": {
-					color: "var(--background)",
-					backgroundColor: "var(--primary)",
+					"@apply text-[--background] bg-[--foreground]": "",
 					"@apply disabled:bg-[--background-secondary] disabled:text-[--ghost]":
 						"",
 					"@apply hover:text-[--background] hover:bg-[--ghost] focus-visible:ring-[--primary]":
@@ -120,26 +119,25 @@ export default {
 					lineHeight: "1",
 				},
 				body: {
-					"@apply bg-[--background] text-[--foreground] transition-colors duration-300":
-						"",
+					"@apply bg-[--background] text-[--foreground]": "",
 				},
 				"h1, h2, h3, h4, h5, h6": {
 					"@apply text-[--heading]": "",
 				},
-				h1: merge(HeaderStyles(theme), {
+				h1: HeaderStyles(theme, {
 					fontSize: theme("fontSize.3xl"),
 				}),
-				h2: merge(HeaderStyles(theme), {
+				h2: HeaderStyles(theme, {
 					fontSize: theme("fontSize.2xl"),
 				}),
-				h3: merge(HeaderStyles(theme), {
+				h3: HeaderStyles(theme, {
 					fontSize: theme("fontSize.xl"),
 				}),
-				h4: merge(HeaderStyles(theme), {
+				h4: HeaderStyles(theme, {
 					fontSize: theme("fontSize.lg"),
 				}),
 				h5: HeaderStyles(theme),
-				h6: merge(HeaderStyles(theme), {
+				h6: HeaderStyles(theme, {
 					fontSize: theme("fontSize.sm"),
 				}),
 				strong: {
@@ -159,7 +157,8 @@ export default {
 					fontSize: theme("fontSize.sm"),
 				},
 				a: {
-					"@apply transition-colors hover:text-[--hover]": "",
+					"@apply text-[--foreground] hover:text-[--hover] transition-colors duration-300":
+						"",
 				},
 				ul: {
 					"@apply list-disc list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":

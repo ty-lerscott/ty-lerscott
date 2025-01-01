@@ -149,7 +149,6 @@ const RANGE = [
 	"black",
 ] as const;
 
-// TODO: this is unnecessary, just use a nested array, and change the range to an object with keys that are the aliases
 const ALIASES = {
 	white: ["heading", "hover-secondary", "white"],
 	"medium-light": ["hover", "strong"],
@@ -162,7 +161,7 @@ const ALIASES = {
 
 // Extract the keys of ALIASES
 type AliasKeys = keyof typeof ALIASES;
-const ALIAS_KEYS = Object.keys(ALIASES) as AliasKeys[];
+const ALIAS_KEYS: AliasKeys[] = Object.keys(ALIASES) as AliasKeys[];
 
 // Extract the values of ALIASES and create a union type
 type AliasValues = (typeof ALIASES)[AliasKeys][number];

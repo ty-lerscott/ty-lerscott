@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/footer";
 import ScreenSizes from "~/app/tailwind.screens.config";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
+import VariableTransition from "@/components/variable-transition";
 
 import "./tailwind.css";
 
@@ -40,6 +41,7 @@ export default function RootLayout({
 			<body
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
+				<VariableTransition />
 				<SidebarProvider>
 					<Sidebar />
 

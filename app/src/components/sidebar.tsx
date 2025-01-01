@@ -113,7 +113,7 @@ const Sidebar = async () => {
 				</SidebarContent>
 				{socials ? (
 					<SidebarFooter className="mb-2">
-						<ul className="flex justify-center gap-2 list-none">
+						<ul className="flex justify-center gap-1 list-none">
 							{(socials.items || []).map(({ item }) => {
 								const { brand, href } = item as LinkType;
 								const Icon = SOCIALS[brand as keyof typeof SOCIALS];
@@ -126,7 +126,7 @@ const Sidebar = async () => {
 											href={href as string}
 											rel="noopener noreferrer"
 										>
-											<Icon className="size-4" />
+											<Icon className="size-5" />
 										</Link>
 									</li>
 								);
