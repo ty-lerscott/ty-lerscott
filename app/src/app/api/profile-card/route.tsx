@@ -3,9 +3,11 @@ import { TfiEmail } from "react-icons/tfi";
 import { SlScreenSmartphone } from "react-icons/sl";
 
 import pkg from "~/package.json";
-import { aliasMap } from "@/colors";
 import { getContactDetails } from "@/lib/cms";
 import { setImageUrl, SITE_URL } from "@/lib/utils";
+import { getColorMap, PRIMARY_INDEX } from "@/colors";
+
+const primaryColor = getColorMap(PRIMARY_INDEX);
 
 import {
 	AiFillGithub,
@@ -24,8 +26,8 @@ const SOCIALS = {
 const itemStyles = {
 	fontSize: "18px",
 	width: "100%",
-	color: aliasMap.foreground,
-	borderColor: aliasMap.border,
+	color: primaryColor.foreground,
+	borderColor: primaryColor.border,
 	borderWidth: "1px",
 	borderStyle: "solid",
 	padding: "1vw",
@@ -55,7 +57,7 @@ export async function GET(request: Request) {
 				height: `${document.height}px`,
 				display: "flex",
 				position: "relative",
-				backgroundColor: aliasMap.background,
+				backgroundColor: primaryColor.background,
 				borderRadius: "1vw",
 			}}
 		>
@@ -70,20 +72,20 @@ export async function GET(request: Request) {
 					alignItems: "center",
 					flexDirection: "column",
 					justifyContent: "center",
-					backgroundColor: aliasMap["sidebar-background"],
+					backgroundColor: primaryColor["sidebar-background"],
 				}}
 			>
 				<img
 					style={{
 						borderRadius: "100%",
 						borderWidth: "4px",
-						borderColor: aliasMap.white,
+						borderColor: primaryColor.white,
 						display: "flex",
 						justifyContent: "center",
 						overflow: "hidden",
 						height: "175px",
 						width: "175px",
-						boxShadow: `0 10px 10px 4px ${aliasMap.background}`,
+						boxShadow: `0 10px 10px 4px ${primaryColor.background}`,
 					}}
 					src={imgSrc}
 					alt={pkg.details.author.name}
@@ -102,7 +104,7 @@ export async function GET(request: Request) {
 						style={{
 							fontSize: "24px",
 							fontWeight: 900,
-							color: aliasMap.heading,
+							color: primaryColor.heading,
 							margin: 0,
 						}}
 					>
@@ -112,7 +114,7 @@ export async function GET(request: Request) {
 						style={{
 							fontSize: "20px",
 							fontWeight: 900,
-							color: aliasMap.foreground,
+							color: primaryColor.foreground,
 							margin: 0,
 							textAlign: "center",
 							lineHeight: 1,
@@ -123,7 +125,7 @@ export async function GET(request: Request) {
 					<span
 						style={{
 							fontSize: "16px",
-							color: aliasMap.foreground,
+							color: primaryColor.foreground,
 						}}
 					>
 						{contactDetails.current_role.location}
@@ -171,7 +173,7 @@ export async function GET(request: Request) {
 				</ul>
 				<p
 					style={{
-						color: aliasMap.subtle,
+						color: primaryColor.subtle,
 						alignSelf: "flex-end",
 						margin: 0,
 					}}

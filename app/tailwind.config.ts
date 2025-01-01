@@ -3,7 +3,7 @@ import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
 
 import SCREENS from "./tailwind.screens.config";
-import { aliasMap, colors as newColors } from "./src/colors";
+import { getColorMap, colors, PRIMARY_INDEX } from "./src/colors";
 
 const HeaderStyles = (
 	theme: (theme: string) => string,
@@ -39,53 +39,11 @@ export default {
 			"8xl": "6rem",
 			"9xl": "8rem",
 		},
+		colors: {
+			...colors,
+			transparent: "transparent",
+		},
 		extend: {
-			colors: {
-				...newColors,
-				popover: {
-					DEFAULT: "hsl(var(--popover))",
-					foreground: "hsl(var(--popover-foreground))",
-				},
-				primary: {
-					DEFAULT: "hsl(var(--primary))",
-					foreground: "hsl(var(--primary-foreground))",
-				},
-				secondary: {
-					DEFAULT: "hsl(var(--secondary))",
-					foreground: "hsl(var(--secondary-foreground))",
-				},
-				muted: {
-					DEFAULT: "hsl(var(--muted))",
-					foreground: "hsl(var(--muted-foreground))",
-				},
-				accent: {
-					DEFAULT: "hsl(var(--accent))",
-					foreground: "hsl(var(--accent-foreground))",
-				},
-				destructive: {
-					DEFAULT: "hsl(var(--destructive))",
-					foreground: "hsl(var(--destructive-foreground))",
-				},
-				input: "hsl(var(--input))",
-				ring: "hsl(var(--ring))",
-				chart: {
-					"1": "hsl(var(--chart-1))",
-					"2": "hsl(var(--chart-2))",
-					"3": "hsl(var(--chart-3))",
-					"4": "hsl(var(--chart-4))",
-					"5": "hsl(var(--chart-5))",
-				},
-				sidebar: {
-					// DEFAULT: "var(--sidebar-background)",
-					// foreground: "hsl(var(--sidebar-foreground))",
-					// primary: "hsl(var(--sidebar-primary))",
-					// "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-					// accent: "hsl(var(--sidebar-accent))",
-					// "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-					// border: "var(--sidebar-border)",
-					// ring: "hsl(var(--sidebar-ring))",
-				},
-			},
 			borderRadius: {
 				lg: "0.5rem",
 				md: "0.125rem",
@@ -150,8 +108,7 @@ export default {
 				":root": {
 					// "--background": ,
 				},
-				"html.dark": toCssVars(aliasMap),
-
+				"html.dark": toCssVars(getColorMap(PRIMARY_INDEX)),
 				"section ol li": {
 					"@apply list-none": "",
 				},

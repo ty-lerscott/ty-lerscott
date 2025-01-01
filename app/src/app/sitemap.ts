@@ -18,6 +18,7 @@ const setPostAndTagPriority = (dateUpdated: string): number => {
 	if (diffInDays <= 30) {
 		return 0.9; // High priority for posts updated in the last 30 days
 	}
+
 	if (diffInDays <= 90) {
 		return 0.7; // Medium priority for posts updated in the last 3 months
 	}
@@ -25,6 +26,7 @@ const setPostAndTagPriority = (dateUpdated: string): number => {
 	if (diffInDays <= 365) {
 		return 0.5; // Lower priority for posts updated in the last year
 	}
+
 	return 0.3; // Lowest priority for older posts
 };
 
@@ -95,7 +97,6 @@ const normalizeSitemapData = (
 	}
 
 	for (const post of sitemapData.posts) {
-		console.log("POST", post);
 		sitemapArray.push({
 			url: `${siteUrl}/blog${post.metadata.slug}`,
 			priority: setPostAndTagPriority(post.date_updated),
@@ -120,11 +121,8 @@ const normalizeSitemapData = (
 	return sitemapArray;
 };
 
-const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-	const sitemapData = await getSitemap();
-
-	return normalizeSitemapData(sitemapData);
-};
+const sitemap = async (): Promise<MetadataRoute.Sitemap> =>
+	getSitemap().then(normalizeSitemapData);
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;

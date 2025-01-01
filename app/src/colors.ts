@@ -1,4 +1,4 @@
-export const colorsArr = [
+const colorsArr = [
 	"tomatoFrog",
 	"persimmonOrange",
 	"miamiMarmalade",
@@ -11,11 +11,9 @@ export const colorsArr = [
 	"prominentBlue",
 ];
 
-const PRIMARY_INDEX = 6;
+type TagClassesType = (typeof colorsArr)[number];
 
-export type TagClassesType = (typeof colorsArr)[number];
-
-export const colors = {
+const colors = {
 	[colorsArr[0]]: {
 		50: "#FEEBEC",
 		100: "#FED7D8",
@@ -138,7 +136,7 @@ export const colors = {
 	},
 } as Record<TagClassesType, Record<string | number, string>>;
 
-export const RANGE = [
+const RANGE = [
 	"white",
 	"lighter",
 	"light",
@@ -169,18 +167,31 @@ const ALIAS_KEYS = Object.keys(ALIASES) as AliasKeys[];
 // Extract the values of ALIASES and create a union type
 type AliasValues = (typeof ALIASES)[AliasKeys][number];
 
-const PRIMARY_COLOR_NAME = colorsArr[
-	PRIMARY_INDEX
-] as (typeof colorsArr)[number];
-const primaryColor = Object.values(colors[PRIMARY_COLOR_NAME]);
+const getColorNameByIndex = (index: number) =>
+	colorsArr[index] as (typeof colorsArr)[number];
 
-export const aliasMap = ALIAS_KEYS.reduce(
-	(acc, alias) => {
-		for (const subAlias of ALIASES[alias]) {
-			acc[subAlias] = primaryColor[RANGE.findIndex((i) => i === alias)];
-		}
+const getColorMap = (index: number) => {
+	const hexRange = Object.values(colors[getColorNameByIndex(index)]);
 
-		return acc;
-	},
-	{} as Record<AliasValues, string>,
-);
+	return ALIAS_KEYS.reduce(
+		(acc, alias) => {
+			for (const subAlias of ALIASES[alias]) {
+				acc[subAlias] = hexRange[RANGE.findIndex((i) => i === alias)];
+			}
+
+			return acc;
+		},
+		{} as Record<AliasValues, string>,
+	);
+};
+
+const PRIMARY_INDEX = 6;
+
+export {
+	colors,
+	colorsArr,
+	type RANGE,
+	getColorMap,
+	PRIMARY_INDEX,
+	type TagClassesType,
+};

@@ -1,6 +1,8 @@
 import { ImageResponse } from "@vercel/og";
 
-import { aliasMap } from "@/colors";
+import { getColorMap, PRIMARY_INDEX } from "@/colors";
+
+const primaryColor = getColorMap(PRIMARY_INDEX);
 
 export async function GET(request: Request) {
 	const url = new URL(request.url);
@@ -24,11 +26,11 @@ export async function GET(request: Request) {
 				width: "100%",
 				height: "100%",
 				borderRadius: `${_radius}px`,
-				backgroundColor: aliasMap.background,
+				backgroundColor: primaryColor.background,
 			}}
 		>
 			<svg
-				fill={aliasMap.foreground}
+				fill={primaryColor.foreground}
 				viewBox="0 0 24 24"
 				{...dimensions}
 				style={{

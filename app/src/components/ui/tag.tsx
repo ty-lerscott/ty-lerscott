@@ -17,7 +17,7 @@ const Tag = ({
 			style={{
 				...(color && {
 					backgroundColor: color,
-					color: `var(${text_color})`,
+					color: text_color?.includes("#") ? text_color : `var(${text_color})`,
 				}),
 			}}
 		>
