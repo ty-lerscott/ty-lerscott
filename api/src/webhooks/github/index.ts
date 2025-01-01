@@ -13,6 +13,10 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 	}
 
 	if (body.state || body.pusher) {
+		console.log("UNHANDLED GITHUB ACTION:", {
+			state: body.state,
+			pusher: body.pusher,
+		});
 		return;
 	}
 

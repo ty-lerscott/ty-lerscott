@@ -4,12 +4,13 @@ import type { GHDeploymentAction } from "@/types";
 
 // biome-ignore lint/suspicious/noExplicitAny: For any action with "created" the request body can be anything
 const CreatedController = async (body: Record<string, any>): Promise<void> => {
-	if (body.deployment_status) {
+	if (body.deployment) {
 		const {
 			repository,
-			deployment_status: { state, creator, description, created_at },
+			deployment: { task, creator, description, created_at },
 		} = body as GHDeploymentAction;
-		const level = state === "success" ? "success" : "critical";
+
+		const level = task === "deploy" ? "success" : "critical";
 
 		await discord({
 			level,

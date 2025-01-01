@@ -284,25 +284,25 @@ export type GHWorkflow = {
 };
 
 export type GHDeployment = {
-	url: string;
+	created_at: string;
+	creator: GHUser;
+	description: null;
+	environment: string;
 	id: number;
 	node_id: string;
-	task: string;
 	original_environment: string;
-	environment: string;
-	description: null;
-	created_at: string;
-	updated_at: string;
-	statuses_url: string;
-	repository_url: string;
-	creator: GHUser;
-	sha: string;
-	ref: string;
-	transient_environment: boolean;
-	production_environment: boolean;
-	performed_via_github_app: boolean | null;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	payload: Record<any, any>;
+	performed_via_github_app: boolean | null;
+	production_environment: boolean;
+	ref: string;
+	repository_url: string;
+	sha: string;
+	statuses_url: string;
+	task: string;
+	transient_environment: boolean;
+	updated_at: string;
+	url: string;
 };
 
 export type GHDeploymentStatus = {
@@ -341,13 +341,11 @@ export type GHInProgressAction = {
 
 export type GHDeploymentAction = {
 	action: "created";
-	deployment_status: GHDeploymentStatus;
 	deployment: GHDeployment;
-	check_run: string | null;
-	workflow: string | null;
-	workflow_run: string | null;
 	repository: GHRepository;
 	sender: GHUser;
+	workflow: string | null;
+	workflow_run: string | null;
 };
 
 export type GHCompletedAction = {
