@@ -4,7 +4,7 @@ import StatusCodes from "@/lib/status-codes";
 import DeploymentSuccessController from "./deployment-success";
 
 const GithubController = async ({ req: { body, method }, res }: Conductor) => {
-	if (method !== "POST" || body.pusher) {
+	if (method !== "POST" || body.pusher || body.state === "pending") {
 		res.status(StatusCodes.NOT_FOUND).end();
 		return;
 	}
@@ -15,13 +15,13 @@ const GithubController = async ({ req: { body, method }, res }: Conductor) => {
 		return;
 	}
 
-	console.log("UNHANDLED GITHUB ACTION:", JSON.stringify(body));
-
 	// if (body.action === "in_progress") {
 	// 	await InProgressController(body);
 	// 	res.status(StatusCodes.OK).end();
 	// 	return;
 	// }
+
+	// console.log("UNHANDLED GITHUB ACTION:", JSON.stringify(body));
 
 	res.status(StatusCodes.OK).end();
 };

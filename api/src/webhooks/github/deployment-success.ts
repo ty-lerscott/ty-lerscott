@@ -1,6 +1,11 @@
+import { execSync } from "node:child_process";
+
+import env from "@/lib/dotenv";
 import dayjs from "@/lib/dayjs";
 import discord from "@/lib/discord";
 import type { GHCompletedAction } from "@/types";
+
+const IS_LOCAL = env.NODE_ENV !== "production";
 
 const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 	const {
@@ -33,6 +38,10 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 			},
 		],
 	});
+
+	if (!IS_LOCAL) {
+		execSync("pm2 restart all");
+	}
 
 	return Promise.resolve();
 };

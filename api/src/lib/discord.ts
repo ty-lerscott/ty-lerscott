@@ -83,7 +83,7 @@ const Bot = async (
 
 	if (options?.debug) {
 		console.log(message);
-		// return Promise.resolve();
+		return Promise.resolve();
 	}
 
 	try {
