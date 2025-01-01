@@ -1,6 +1,7 @@
 import type { NextFunction, Response } from "express";
 
 import WebhooksConductor from "@/webhooks";
+import StatusCodes from "@/lib/status-codes";
 import type { Conductor, Request } from "@/types";
 
 const Conductors = async (req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +24,7 @@ const Conductors = async (req: Request, res: Response, next: NextFunction) => {
 			await WebhooksConductor(props);
 			break;
 		default:
-			res.send("HELLO WORLD");
+			res.status(StatusCodes.NOT_FOUND).end();
 			break;
 	}
 
