@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { cache } from "react";
-
+import orderBy from "lodash.orderby";
 import readingTime from "reading-time";
 import { notFound } from "next/navigation";
 import { FaRegCalendar } from "react-icons/fa6";
@@ -94,7 +94,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
 			{tags ? (
 				<ul className="flex flex-wrap gap-4 list-none">
-					{tags.map(({ name, ...tag }) => (
+					{orderBy(tags, "name").map(({ name, ...tag }) => (
 						<li key={tag.id}>
 							<Tag {...tag}>{name}</Tag>
 						</li>

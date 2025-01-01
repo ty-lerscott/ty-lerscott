@@ -127,24 +127,6 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: 1.1.6
         version: 1.1.6(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@types/chroma-js':
-        specifier: ^2.4.5
-        version: 2.4.5
-      '@types/lodash.mergewith':
-        specifier: 4.6.9
-        version: 4.6.9
-      '@types/object.omit':
-        specifier: 3.0.3
-        version: 3.0.3
-      '@types/prismjs':
-        specifier: 1.26.5
-        version: 1.26.5
-      '@types/react-syntax-highlighter':
-        specifier: ^15.5.13
-        version: 15.5.13
-      '@types/rss':
-        specifier: 0.0.32
-        version: 0.0.32
       '@vercel/analytics':
         specifier: 1.4.1
         version: 1.4.1(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(vue@3.5.11(typescript@5.7.2))
@@ -155,7 +137,7 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(vue@3.5.11(typescript@5.7.2))
       chroma-js:
-        specifier: ^3.1.2
+        specifier: 3.1.2
         version: 3.1.2
       class-variance-authority:
         specifier: 0.7.1
@@ -175,6 +157,9 @@ importers:
       lodash.mergewith:
         specifier: 4.6.2
         version: 4.6.2
+      lodash.orderby:
+        specifier: 4.6.0
+        version: 4.6.0
       lucide-react:
         specifier: 0.469.0
         version: 0.469.0(react@19.0.0)
@@ -185,7 +170,7 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       prismjs:
-        specifier: ^1.29.0
+        specifier: 1.29.0
         version: 1.29.0
       react:
         specifier: 19.0.0
@@ -200,7 +185,7 @@ importers:
         specifier: 9.0.1
         version: 9.0.1(@types/react@19.0.2)(react@19.0.0)
       react-syntax-highlighter:
-        specifier: ^15.6.1
+        specifier: 15.6.1
         version: 15.6.1(react@19.0.0)
       reading-time:
         specifier: 1.5.0
@@ -221,15 +206,36 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.4.1)
     devDependencies:
+      '@types/chroma-js':
+        specifier: 2.4.5
+        version: 2.4.5
+      '@types/lodash.mergewith':
+        specifier: 4.6.9
+        version: 4.6.9
+      '@types/lodash.orderby':
+        specifier: 4.6.9
+        version: 4.6.9
       '@types/node':
         specifier: 20.17.10
         version: 20.17.10
+      '@types/object.omit':
+        specifier: 3.0.3
+        version: 3.0.3
+      '@types/prismjs':
+        specifier: 1.26.5
+        version: 1.26.5
       '@types/react':
         specifier: '19'
         version: 19.0.2
       '@types/react-dom':
         specifier: '19'
         version: 19.0.2(@types/react@19.0.2)
+      '@types/react-syntax-highlighter':
+        specifier: 15.5.13
+        version: 15.5.13
+      '@types/rss':
+        specifier: 0.0.32
+        version: 0.0.32
       postcss:
         specifier: '8'
         version: 8.4.49
@@ -2667,6 +2673,9 @@ packages:
   '@types/lodash.mergewith@4.6.9':
     resolution: {integrity: sha512-fgkoCAOF47K7sxrQ7Mlud2TH023itugZs2bUg8h/KzT+BnZNrR2jAOmaokbLunHNnobXVWOezAeNn/lZqwxkcw==}
 
+  '@types/lodash.orderby@4.6.9':
+    resolution: {integrity: sha512-T9o2wkIJOmxXwVTPTmwJ59W6eTi2FseiLR369fxszG649Po/xe9vqFNhf/MtnvT5jrbDiyWKxPFPZbpSVK0SVQ==}
+
   '@types/lodash@4.17.13':
     resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
@@ -4745,6 +4754,9 @@ packages:
 
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
+
+  lodash.orderby@4.6.0:
+    resolution: {integrity: sha512-T0rZxKmghOOf5YPnn8EY5iLYeWCpZq8G41FfqoVHH5QDTAFaghJRmAdLiadEDq+ztgM2q5PjA+Z1fOwGrLgmtg==}
 
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
@@ -9983,6 +9995,10 @@ snapshots:
     dependencies:
       '@types/lodash': 4.17.13
 
+  '@types/lodash.orderby@4.6.9':
+    dependencies:
+      '@types/lodash': 4.17.13
+
   '@types/lodash@4.17.13': {}
 
   '@types/mdast@4.0.4':
@@ -12142,6 +12158,8 @@ snapshots:
   lodash.mergewith@4.6.2: {}
 
   lodash.once@4.1.1: {}
+
+  lodash.orderby@4.6.0: {}
 
   lodash.sortby@4.7.0: {}
 

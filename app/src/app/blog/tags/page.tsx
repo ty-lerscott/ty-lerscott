@@ -1,5 +1,5 @@
 import { cache } from "react";
-
+import orderBy from "lodash.orderby";
 import { getTags } from "@/lib/cms";
 import Tag from "@/components/ui/tag";
 import { setMetadata, SITE_URL } from "@/lib/utils";
@@ -56,7 +56,7 @@ const TagsPage = async () => {
 			<h1>Tags</h1>
 
 			<ul className="flex flex-wrap gap-4 list-none">
-				{tags.map(({ name, ...tag }) => (
+				{orderBy(tags, "name").map(({ name, ...tag }) => (
 					<li key={tag.id}>
 						<Tag {...tag}>{name}</Tag>
 					</li>
