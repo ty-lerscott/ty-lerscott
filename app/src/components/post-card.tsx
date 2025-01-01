@@ -30,13 +30,13 @@ const PostCard = ({
 			<div>
 				<Link
 					href={metadata?.slug || ""}
-					className="font-semibold leading-tight tracking-tight text-[--heading]"
+					className="font-semibold leading-tight text-[--heading]"
 				>
 					{metadata?.title}
 				</Link>
 			</div>
 
-			<p>{`${blurb}${isLong ? "..." : ""}`}</p>
+			<p className="text-sm leading-tight">{`${blurb}${isLong ? "..." : ""}`}</p>
 
 			<div className="flex items-center justify-between gap-2 text-xs text-[--ghost]">
 				<div className="flex items-center gap-2">
