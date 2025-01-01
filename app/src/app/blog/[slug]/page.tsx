@@ -15,7 +15,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ImageBackground from "@/components/image-background";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
-const getData = cache(async (slug: string) => getPost(`/blog/${slug}`));
+const getData = cache(async (slug: string) => getPost(`/${slug}`));
 
 const BREADCRUMBS = [
 	{

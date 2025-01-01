@@ -16,9 +16,11 @@ const PostCard = ({
 	const blurb = metadata?.description?.substring(0, 256);
 	const isLong = metadata && metadata?.description?.length > 256;
 
+	const slug = metadata?.slug ? `/blog${metadata?.slug}` : "";
+
 	return (
 		<div className="rounded-xl border border-[--border] w-full p-4 flex flex-col gap-4 justify-between">
-			<Link href={metadata?.slug || ""} tabIndex={-1}>
+			<Link href={slug} tabIndex={-1}>
 				<AspectRatio ratio={16 / 9} className="rounded overflow-hidden group">
 					<ImageBackground
 						id={image as string}
@@ -29,7 +31,7 @@ const PostCard = ({
 
 			<div>
 				<Link
-					href={metadata?.slug || ""}
+					href={slug}
 					className="font-semibold leading-tight text-[--heading]"
 				>
 					{metadata?.title}
