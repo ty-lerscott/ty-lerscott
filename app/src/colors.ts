@@ -1,21 +1,5 @@
-const colorsArr = [
-	"tomatoFrog",
-	"persimmonOrange",
-	"miamiMarmalade",
-	"seLeiOrange",
-	"goBananas",
-	"laudableLime",
-	"marineGreen",
-	"mirageLake",
-	"copenBlue",
-	"prominentBlue",
-	"royalPurple",
-];
-
-type TagClassesType = (typeof colorsArr)[number];
-
 const colors = {
-	[colorsArr[0]]: {
+	tomatoFrog: {
 		50: "#FEEBEC",
 		100: "#FED7D8",
 		200: "#FDB5B6",
@@ -27,7 +11,7 @@ const colors = {
 		800: "#7C0406",
 		900: "#3B0203",
 	},
-	[colorsArr[1]]: {
+	persimmonOrange: {
 		50: "#FEF2EC",
 		100: "#FDE2D4",
 		200: "#FAC8AD",
@@ -39,7 +23,7 @@ const colors = {
 		800: "#6F2B06",
 		900: "#351503",
 	},
-	[colorsArr[2]]: {
+	miamiMarmalade: {
 		50: "#FEF3E6",
 		100: "#FEEAD2",
 		200: "#FCD5A6",
@@ -51,7 +35,7 @@ const colors = {
 		800: "#6D3D03",
 		900: "#361F02",
 	},
-	[colorsArr[3]]: {
+	seLeiOrange: {
 		50: "#FEF2EB",
 		100: "#FEE8DC",
 		200: "#FDCDB5",
@@ -63,7 +47,7 @@ const colors = {
 		800: "#7B2C04",
 		900: "#401702",
 	},
-	[colorsArr[4]]: {
+	goBananas: {
 		50: "#FEF9EB",
 		100: "#FEF4DC",
 		200: "#FDE9BA",
@@ -75,7 +59,7 @@ const colors = {
 		800: "#805B04",
 		900: "#402E02",
 	},
-	[colorsArr[5]]: {
+	laudableLime: {
 		50: "#F4F9F1",
 		100: "#EAF2E3",
 		200: "#D1E4C3",
@@ -87,7 +71,7 @@ const colors = {
 		800: "#385124",
 		900: "#1D2A13",
 	},
-	[colorsArr[6]]: {
+	marineGreen: {
 		50: "#EDF8F4",
 		100: "#D7EFE8",
 		200: "#B2E1D3",
@@ -99,7 +83,7 @@ const colors = {
 		800: "#263b16",
 		900: "#1D2A13",
 	},
-	[colorsArr[7]]: {
+	mirageLake: {
 		50: "#EBF4F4",
 		100: "#DAEBEB",
 		200: "#B3D6D5",
@@ -111,7 +95,7 @@ const colors = {
 		800: "#1E3838",
 		900: "#101E1D",
 	},
-	[colorsArr[8]]: {
+	copenBlue: {
 		50: "#EFF2F5",
 		100: "#DCE3EA",
 		200: "#B9C8D5",
@@ -123,7 +107,7 @@ const colors = {
 		800: "#232F39",
 		900: "#11171D",
 	},
-	[colorsArr[9]]: {
+	prominentBlue: {
 		50: "#E6F3F9",
 		100: "#CEE8F3",
 		200: "#9CD1E7",
@@ -135,21 +119,21 @@ const colors = {
 		800: "#103342",
 		900: "#081921",
 	},
-	[colorsArr[10]]: {
+	royalPurple: {
 		50: "#F3EEFB",
 		100: "#E2D4F4",
 		200: "#CAB1EC",
 		300: "#B28EE3",
 		400: "#9A6BDB",
-		500: "#7851A9", // Royal Purple
+		500: "#7851A9",
 		600: "#563D7E",
 		700: "#3C2956",
 		800: "#24152D",
 		900: "#14091B",
 	},
-} as Record<TagClassesType, Record<string | number, string>>;
+} as Record<string, Record<string | number, string>>;
 
-const RANGE = [
+const degreeArray = [
 	"white",
 	"lighter",
 	"light",
@@ -162,7 +146,16 @@ const RANGE = [
 	"black",
 ] as const;
 
-const ALIASES = {
+const aliasMapLight = {
+	white: ["background"],
+	lighter: ["sidebar-background", "skeleton"],
+	medium: ["border", "subtle", "ghost", "hover"],
+	dark: ["foreground", "code"],
+	darker: ["heading", "hover-secondary", "strong"],
+	black: ["white"],
+} as Record<(typeof degreeArray)[number], string[]>;
+
+const aliasMapDark = {
 	white: ["heading", "hover-secondary", "white"],
 	lighter: ["code"],
 	"medium-light": ["hover", "strong"],
@@ -171,40 +164,27 @@ const ALIASES = {
 	darker: ["border", "subtle"],
 	darkest: ["sidebar-background", "skeleton"],
 	black: ["background"],
-} as Record<(typeof RANGE)[number], string[]>;
+} as Record<(typeof degreeArray)[number], string[]>;
 
-// Extract the keys of ALIASES
-type AliasKeys = keyof typeof ALIASES;
-const ALIAS_KEYS: AliasKeys[] = Object.keys(ALIASES) as AliasKeys[];
+const getColorNameByIndex = (index: number): string =>
+	Object.keys(colors)[index];
 
-// Extract the values of ALIASES and create a union type
-type AliasValues = (typeof ALIASES)[AliasKeys][number];
-
-const getColorNameByIndex = (index: number) =>
-	colorsArr[index] as (typeof colorsArr)[number];
-
-const getColorMap = (index: number) => {
+const getColorMap = (index: number, isDark?: boolean) => {
 	const hexRange = Object.values(colors[getColorNameByIndex(index)]);
+	const aliasMap = isDark ? aliasMapDark : aliasMapLight;
 
-	return ALIAS_KEYS.reduce(
+	return Object.keys(aliasMap).reduce(
 		(acc, alias) => {
-			for (const subAlias of ALIASES[alias]) {
-				acc[subAlias] = hexRange[RANGE.findIndex((i) => i === alias)];
+			for (const subAlias of aliasMap[alias as keyof typeof aliasMap]) {
+				acc[subAlias] = hexRange[degreeArray.findIndex((i) => i === alias)];
 			}
 
 			return acc;
 		},
-		{} as Record<AliasValues, string>,
+		{} as Record<(typeof aliasMap)[keyof typeof aliasMap][number], string>,
 	);
 };
 
 const PRIMARY_INDEX = 6;
 
-export {
-	colors,
-	colorsArr,
-	type RANGE,
-	getColorMap,
-	PRIMARY_INDEX,
-	type TagClassesType,
-};
+export { colors, getColorMap, PRIMARY_INDEX };

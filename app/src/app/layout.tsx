@@ -3,11 +3,12 @@ import { Analytics } from "@vercel/analytics/react";
 import { Zilla_Slab, Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import { cn } from "@/lib/utils";
 import Footer from "@/components/footer";
 import ScreenSizes from "~/app/tailwind.screens.config";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { SidebarProvider, Sidebar } from "@/components/sidebar";
 import VariableTransition from "@/components/variable-transition";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 
 import "./tailwind.css";
 
@@ -37,12 +38,18 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const isDark = true;
+
 	return (
-		<html lang="en" className="dark" suppressHydrationWarning>
+		<html
+			lang="en"
+			className={cn(isDark ? "dark" : "")}
+			suppressHydrationWarning
+		>
 			<body
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
-				<VariableTransition />
+				<VariableTransition isDark={isDark} />
 
 				<SidebarProvider>
 					<Sidebar />

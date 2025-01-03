@@ -3,9 +3,11 @@
 import chroma from "chroma-js";
 import { useState, useEffect, useRef } from "react";
 
-import { getColorMap, PRIMARY_INDEX, colorsArr } from "@/colors";
+import { getColorMap, PRIMARY_INDEX, colors } from "@/colors";
 
-const DURATION = 20 * 1000;
+const DURATION = 30 * 1000;
+
+const colorNamesArr = Object.keys(colors);
 
 // Function to set color on :root
 const setRootVar = (varName: string, hexValue: string) => {
@@ -21,12 +23,15 @@ const getRandomIndexExcept = (length: number, except: number) => {
 	return randomIndex;
 };
 
-const VariableTransition = ({ pause }: { pause?: boolean }) => {
+const VariableTransition = ({
+	pause,
+	isDark,
+}: { pause?: boolean; isDark?: boolean }) => {
 	const startTime = useRef<number | null>(null);
 	const animationFrame = useRef<number | null>(null);
 	const [activeColorIndex, setActiveColorIndex] = useState(PRIMARY_INDEX);
 	const [nextColorIndex, setNextColorIndex] = useState(() =>
-		getRandomIndexExcept(colorsArr.length, PRIMARY_INDEX),
+		getRandomIndexExcept(colorNamesArr.length, PRIMARY_INDEX),
 	);
 
 	useEffect(() => {
@@ -39,8 +44,8 @@ const VariableTransition = ({ pause }: { pause?: boolean }) => {
 			const ratio = Math.min((timestamp - startTime.current) / DURATION, 1);
 
 			// Get old & new color maps
-			const oldColors = getColorMap(activeColorIndex);
-			const newColors = getColorMap(nextColorIndex);
+			const oldColors = getColorMap(activeColorIndex, isDark);
+			const newColors = getColorMap(nextColorIndex, isDark);
 
 			// Interpolate each variable
 			for (const varKey of Object.keys(oldColors)) {
@@ -67,7 +72,7 @@ const VariableTransition = ({ pause }: { pause?: boolean }) => {
 
 				// Choose a new random color as the next "to" color
 				setNextColorIndex(
-					getRandomIndexExcept(colorsArr.length, nextColorIndex),
+					getRandomIndexExcept(colorNamesArr.length, nextColorIndex),
 				);
 			}
 		};
@@ -81,7 +86,7 @@ const VariableTransition = ({ pause }: { pause?: boolean }) => {
 				cancelAnimationFrame(animationFrame.current);
 			}
 		};
-	}, [activeColorIndex, nextColorIndex, pause]);
+	}, [activeColorIndex, nextColorIndex, pause, isDark]);
 
 	return null;
 };

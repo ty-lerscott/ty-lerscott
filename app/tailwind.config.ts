@@ -104,10 +104,8 @@ export default {
 			});
 
 			addBase({
-				":root": {
-					// "--background": ,
-				},
-				"html.dark": toCssVars(getColorMap(PRIMARY_INDEX)),
+				":root": toCssVars(getColorMap(PRIMARY_INDEX)),
+				"html.dark": toCssVars(getColorMap(PRIMARY_INDEX, true)),
 				"section ol li": {
 					"@apply list-none": "",
 				},
