@@ -10,13 +10,13 @@ const Conductors = async (req: Request, res: Response, next: NextFunction) => {
 		.replace(/^\//, "")
 		.split("/");
 
+	const newReq = req;
+	newReq.extendedPath = extendedPath;
+
 	const props: Conductor = {
 		res,
 		next,
-		req: {
-			...req,
-			extendedPath,
-		},
+		req: newReq,
 	};
 
 	switch (basePath) {

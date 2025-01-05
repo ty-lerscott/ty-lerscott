@@ -43,7 +43,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={cn("transition-colors duration-1000", isDark ? "dark" : "")}
+			className={cn(isDark ? "dark" : "")}
 			suppressHydrationWarning
 		>
 			<body

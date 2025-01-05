@@ -1,29 +1,27 @@
 import type { Conductor } from "@/types";
 import StatusCodes from "@/lib/status-codes";
-// import InProgressController from "./in-progress";
-import DeploymentSuccessController from "./deployment-success";
+import DeploymentStatusController from "./deployment-status";
 
-const GithubController = async ({ req: { body, method }, res }: Conductor) => {
-	if (method !== "POST" || body.pusher || body.state === "pending") {
-		res.status(StatusCodes.NOT_FOUND).end();
+const GithubController = async ({ req, res }: Conductor) => {
+	const { body, method } = req;
+
+	if (method !== "POST") {
+		res.status(StatusCodes.METHOD_NOT_ALLOWED).end();
 		return;
 	}
 
-	if (body.state === "success") {
-		await DeploymentSuccessController(body);
-		res.status(StatusCodes.OK).end();
-		return;
+	switch (req.get("x-github-event")) {
+		case "deployment_status":
+			await DeploymentStatusController(body);
+			res.status(StatusCodes.OK).end();
+			break;
+		default:
+			console.log("UNHANDLED GITHUB EVENT:", req.get("x-github-event"));
+			res.status(StatusCodes.NOT_FOUND).end();
+			return;
 	}
 
-	// if (body.action === "in_progress") {
-	// 	await InProgressController(body);
-	// 	res.status(StatusCodes.OK).end();
-	// 	return;
-	// }
-
-	// console.log("UNHANDLED GITHUB ACTION:", JSON.stringify(body));
-
-	res.status(StatusCodes.OK).end();
+	res.status(StatusCodes.NOT_FOUND).end();
 };
 
 export default GithubController;

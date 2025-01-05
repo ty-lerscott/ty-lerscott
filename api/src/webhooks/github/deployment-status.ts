@@ -4,33 +4,27 @@ import env from "@/lib/dotenv";
 import dayjs from "@/lib/dayjs";
 import discord from "@/lib/discord";
 import { logger } from "@/lib/logger";
-import type { GHCompletedAction } from "@/types";
+import type { GHDeploymentStatus } from "@/types";
 
 const restartTimeout = 30 * 1000;
 
-const CreatedController = async (body: GHCompletedAction): Promise<void> => {
+const DeploymentStatusController = async (
+	body: GHDeploymentStatus,
+): Promise<void> => {
 	const {
-		state,
+		deployment_status: { state, updated_at, description, creator },
 		sender,
 		repository,
-		updated_at,
-		description,
-		commit: {
-			author,
-			commit: { message },
-		},
 	} = body;
 
-	const level = state === "success" ? "success" : "critical";
-
 	await discord({
-		level,
 		url: repository.url,
-		title: `${repository.name}: ${message} - ${description}`,
+		title: `${repository.name}: ${description}`,
+		level: state === "success" ? "success" : "critical",
 		author: {
-			url: sender.url ?? author.url,
-			name: sender.login ?? author.login,
-			avatar: sender.avatar_url ?? author.avatar_url,
+			url: sender.url ?? creator.url,
+			name: sender.login ?? creator.login,
+			avatar: sender.avatar_url ?? creator.avatar_url,
 		},
 		fields: [
 			{
@@ -42,7 +36,7 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 
 	if (env.NODE_ENV === "production") {
 		logger.info(
-			`Restarting all PM2 processes in ${restartTimeout / 1000} seconds`,
+			`Restarting all PM2 processes in ${restartTimeout / 1000} seconds...`,
 		);
 
 		setTimeout(() => {
@@ -53,4 +47,4 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 	return Promise.resolve();
 };
 
-export default CreatedController;
+export default DeploymentStatusController;

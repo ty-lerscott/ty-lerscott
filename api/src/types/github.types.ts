@@ -99,69 +99,48 @@ type GHRepository = {
 	web_commit_signoff_required: boolean;
 };
 
-type GHCommit = {
-	author: GHAuthor;
-	comments_url: string;
-	commit: {
-		author: {
-			email: string;
-			name: string;
-			date: string;
-		};
-		comment_count: number;
-		committer: {
-			email: string;
-			name: string;
-			date: string;
-		};
-		message: string;
-		tree: {
-			sha: string;
-			url: string;
-		};
+export type GHDeploymentStatus = {
+	deployment_status: {
 		url: string;
-		verification: {
-			verified: boolean;
-			verified_at: null;
-			reason: string;
-			signature: null;
-			payload: null;
-		};
+		id: number;
+		node_id: string;
+		state: string;
+		creator: GHAuthor;
+		description: string;
+		environment: string;
+		target_url: string;
+		created_at: string;
+		updated_at: string;
+		deployment_url: string;
+		repository_url: string;
+		environment_url: string;
+		log_url: string;
+		performed_via_github_app: string | null;
 	};
-	committer: GHAuthor;
-	html_url: string;
-	node_id: string;
-	parents: {
-		html_url: string;
-		sha: string;
+	deployment: {
 		url: string;
-	}[];
-	sha: string;
-	url: string;
-};
-
-type GHBranch = {
-	name: string;
-	commit: {
+		id: number;
+		node_id: string;
+		task: string;
+		original_environment: string;
+		environment: string;
+		description: string;
+		created_at: string;
+		updated_at: string;
+		statuses_url: string;
+		repository_url: string;
+		creator: GHAuthor;
 		sha: string;
-		url: string;
+		ref: string;
+		payload: Record<string, unknown>;
+		transient_environment: boolean;
+		production_environment: boolean;
+		performed_via_github_app: string | null;
 	};
-	protected: boolean;
-};
-
-export type GHCompletedAction = {
-	state: "success";
-	avatar_url: string;
-	branches: GHBranch[];
-	commit: GHCommit;
-	context: string;
-	created_at: string;
-	description: string;
-	id: number;
-	name: string;
+	check_run: string | null;
+	workflow: string | null;
+	workflow_run: string | null;
+	action: string;
 	repository: GHRepository;
 	sender: GHAuthor;
-	sha: string;
-	target_url: string;
-	updated_at: string;
 };

@@ -2,7 +2,7 @@ import { ImageResponse } from "@vercel/og";
 
 import { getColorMap, PRIMARY_INDEX } from "@/colors";
 
-const primaryColor = getColorMap(PRIMARY_INDEX);
+const primaryColor = getColorMap(PRIMARY_INDEX, true);
 
 export async function GET(request: Request) {
 	const url = new URL(request.url);
