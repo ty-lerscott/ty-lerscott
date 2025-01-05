@@ -1,5 +1,5 @@
 import { getPosts } from "@/lib/cms";
-import PostCard from "@/components/post-card";
+import PostCardList from "@/components/post-card-list";
 
 const RecentPosts = async () => {
 	const posts = await getPosts();
@@ -11,11 +11,7 @@ const RecentPosts = async () => {
 			<div className="flex flex-col gap-4">
 				<h2>Recent Posts</h2>
 
-				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-					{posts.map((post) => {
-						return <PostCard key={post?.id} {...post} />;
-					})}
-				</div>
+				<PostCardList posts={posts} />
 			</div>
 		</section>
 	);

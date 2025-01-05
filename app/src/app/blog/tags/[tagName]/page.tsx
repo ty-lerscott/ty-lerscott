@@ -1,8 +1,8 @@
 import { cache } from "react";
 
 import { setMetadata, SITE_URL } from "@/lib/utils";
-import PostCard from "@/components/post-card";
 import { getTag, getPostsByTagSlug } from "@/lib/cms";
+import PostCardList from "@/components/post-card-list";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 
 const getTagData = cache(async (tagName: string) => getTag(tagName));
@@ -74,13 +74,7 @@ const TagPage = async ({
 
 			<h1>Tag: {name}</h1>
 
-			{posts?.length ? (
-				<div className="grid gap-4 grid-cols-3">
-					{posts.map((post) => {
-						return <PostCard key={post.id} {...post} />;
-					})}
-				</div>
-			) : null}
+			{posts?.length ? <PostCardList posts={posts} /> : null}
 		</>
 	);
 };
