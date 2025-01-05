@@ -11,30 +11,6 @@ const colors = {
 		800: "#7C0406",
 		900: "#3B0203",
 	},
-	persimmonOrange: {
-		50: "#FEF2EC",
-		100: "#FDE2D4",
-		200: "#FAC8AD",
-		300: "#F8AB82",
-		400: "#F58E56",
-		500: "#F3722C",
-		600: "#D9540C",
-		700: "#A43F09",
-		800: "#6F2B06",
-		900: "#351503",
-	},
-	miamiMarmalade: {
-		50: "#FEF3E6",
-		100: "#FEEAD2",
-		200: "#FCD5A6",
-		300: "#FBC179",
-		400: "#F9AC4D",
-		500: "#F8961E",
-		600: "#DA7B07",
-		700: "#A35C05",
-		800: "#6D3D03",
-		900: "#361F02",
-	},
 	seLeiOrange: {
 		50: "#FEF2EB",
 		100: "#FEE8DC",
@@ -46,30 +22,6 @@ const colors = {
 		700: "#BC4306",
 		800: "#7B2C04",
 		900: "#401702",
-	},
-	goBananas: {
-		50: "#FEF9EB",
-		100: "#FEF4DC",
-		200: "#FDE9BA",
-		300: "#FBDD97",
-		400: "#FAD170",
-		500: "#F9C74F",
-		600: "#F7B10D",
-		700: "#C08907",
-		800: "#805B04",
-		900: "#402E02",
-	},
-	laudableLime: {
-		50: "#F4F9F1",
-		100: "#EAF2E3",
-		200: "#D1E4C3",
-		300: "#BCD8A7",
-		400: "#A7CB8B",
-		500: "#90BE6D",
-		600: "#72A64A",
-		700: "#557C37",
-		800: "#385124",
-		900: "#1D2A13",
 	},
 	marineGreen: {
 		50: "#EDF8F4",
@@ -94,18 +46,6 @@ const colors = {
 		700: "#2E5655",
 		800: "#1E3838",
 		900: "#101E1D",
-	},
-	copenBlue: {
-		50: "#EFF2F5",
-		100: "#DCE3EA",
-		200: "#B9C8D5",
-		300: "#96ACC0",
-		400: "#7391AB",
-		500: "#577590",
-		600: "#455D72",
-		700: "#344656",
-		800: "#232F39",
-		900: "#11171D",
 	},
 	prominentBlue: {
 		50: "#E6F3F9",
@@ -185,6 +125,6 @@ const getColorMap = (index: number, isDark?: boolean) => {
 	);
 };
 
-const PRIMARY_INDEX = 6;
+const PRIMARY_INDEX = 2;
 
 export { colors, getColorMap, PRIMARY_INDEX };
