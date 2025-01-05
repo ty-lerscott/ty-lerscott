@@ -3,7 +3,10 @@ import { execSync } from "node:child_process";
 import env from "@/lib/dotenv";
 import dayjs from "@/lib/dayjs";
 import discord from "@/lib/discord";
+import { logger } from "@/lib/logger";
 import type { GHCompletedAction } from "@/types";
+
+const restartTimeout = 30 * 1000;
 
 const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 	const {
@@ -23,7 +26,7 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 	await discord({
 		level,
 		url: repository.url,
-		title: `${repository.name}: ${description ?? message}`,
+		title: `${repository.name}: ${message} - ${description}`,
 		author: {
 			url: sender.url ?? author.url,
 			name: sender.login ?? author.login,
@@ -38,7 +41,13 @@ const CreatedController = async (body: GHCompletedAction): Promise<void> => {
 	});
 
 	if (env.NODE_ENV === "production") {
-		execSync("pm2 restart all");
+		logger.info(
+			`Restarting all PM2 processes in ${restartTimeout / 1000} seconds`,
+		);
+
+		setTimeout(() => {
+			execSync("pm2 restart all");
+		}, restartTimeout);
 	}
 
 	return Promise.resolve();
