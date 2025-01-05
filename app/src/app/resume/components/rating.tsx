@@ -31,14 +31,14 @@ const Star = ({
 						offset={offset}
 						style={{
 							stopOpacity: 1,
-							stopColor: `var(${invert ? "--hover" : "--subtle"})`,
+							stopColor: `var(${invert ? "--hover" : "--ghost"})`,
 						}}
 					/>
 					<stop
 						offset={offset}
 						style={{
 							stopOpacity: 1,
-							stopColor: `var(${invert ? "--subtle" : "--hover"})`,
+							stopColor: `var(${invert ? "--ghost" : "--hover"})`,
 						}}
 					/>
 				</linearGradient>

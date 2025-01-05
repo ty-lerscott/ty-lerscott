@@ -89,7 +89,7 @@ const degreeArray = [
 const aliasMapLight = {
 	white: ["background"],
 	lighter: ["sidebar-background", "skeleton"],
-	medium: ["border", "subtle", "ghost", "hover"],
+	medium: ["border", "ghost", "hover"],
 	dark: ["foreground", "code"],
 	darker: ["heading", "hover-secondary", "strong"],
 	black: ["white"],
@@ -101,7 +101,7 @@ const aliasMapDark = {
 	"medium-light": ["hover", "strong"],
 	medium: ["foreground"],
 	dark: ["ghost"],
-	darker: ["border", "subtle"],
+	darker: ["border"],
 	darkest: ["sidebar-background", "skeleton"],
 	black: ["background"],
 } as Record<(typeof degreeArray)[number], string[]>;
