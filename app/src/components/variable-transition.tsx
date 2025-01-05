@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { getColorMap, PRIMARY_INDEX, colors } from "@/colors";
 
-const DURATION = 30 * 1000;
+const DURATION = 15 * 1000;
 
 const colorNamesArr = Object.keys(colors);
 

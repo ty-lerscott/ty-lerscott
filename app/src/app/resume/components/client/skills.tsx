@@ -72,7 +72,7 @@ const SkillRow = ({
 
 const Skill = ({ name, years, favorite, comfort_level }: ModifiedSkill) => {
 	return (
-		<div className="even:bg-[--sidebar-background] p-4">
+		<div className="even:bg-[--sidebar] p-4">
 			<p className="flex items-center gap-1 mb-2">
 				<span className="text-[--white] text-xs tracking-widest">{name}</span>
 				{favorite && <MdFavorite className="size-2.5 text-[--white]" />}

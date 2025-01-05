@@ -72,7 +72,7 @@ export async function GET(request: Request) {
 					alignItems: "center",
 					flexDirection: "column",
 					justifyContent: "center",
-					backgroundColor: primaryColor["sidebar-background"],
+					backgroundColor: primaryColor.sidebar,
 				}}
 			>
 				<img

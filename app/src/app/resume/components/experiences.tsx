@@ -20,7 +20,7 @@ const Experience = ({
 	return (
 		<div
 			data-testid="Experience"
-			className="p-4 flex flex-col gap-4 even:bg-[--sidebar-background]"
+			className="p-4 flex flex-col gap-4 even:bg-[--sidebar]"
 		>
 			<div data-testid="ExperienceHeader" className="flex flex-col gap-1">
 				<div className="flex justify-between items-end">

@@ -49,7 +49,7 @@ const styles = {
 		margin: ".5em 0",
 		overflow: "auto",
 		borderRadius: "0.25rem",
-		background: "var(--sidebar-background)",
+		background: "var(--sidebar)",
 	},
 	'pre[class*="language-"]::-moz-selection': {
 		color: "inherit",

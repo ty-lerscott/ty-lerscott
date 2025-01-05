@@ -42,13 +42,18 @@ const ImageBackground = ({
 	}, [image]);
 
 	return (
-		<div className={cn("w-full h-full rounded overflow-hidden", className)}>
+		<div
+			className={cn(
+				"w-full h-full rounded overflow-hidden relative",
+				className,
+			)}
+		>
 			{isAIGenerated && !loading ? (
 				<HiSparkles className="absolute bottom-2 right-2 text-[--ghost] size-6 z-20" />
 			) : null}
 			<div
 				className={cn(
-					"w-full h-full rounded",
+					"rounded",
 					"absolute top-0 left-0 right-0 bottom-0",
 					"transition-all bg-cover bg-no-repeat bg-center z-10",
 				)}
@@ -58,7 +63,9 @@ const ImageBackground = ({
 				title={image.description || ""}
 			/>
 
-			<Skeleton className="w-full h-full rounded absolute top-0 left-0 right-0 bottom-0 z-0" />
+			{loading ? (
+				<Skeleton className="w-full h-full rounded absolute top-0 left-0 right-0 bottom-0 z-0" />
+			) : null}
 		</div>
 	);
 };

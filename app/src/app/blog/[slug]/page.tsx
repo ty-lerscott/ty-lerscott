@@ -104,7 +104,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
 			{image ? (
 				<AspectRatio ratio={16 / 9} className="overflow-hidden">
-					<ImageBackground {...image} />
+					<ImageBackground {...image} className="border-2 border-[--border]" />
 				</AspectRatio>
 			) : null}
 

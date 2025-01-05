@@ -197,7 +197,7 @@ const Sidebar = forwardRef<
 			return (
 				<div
 					className={cn(
-						"flex h-full w-[--sidebar-width] flex-col text-[--ghost] bg-[--sidebar-background]",
+						"flex h-full w-[--sidebar-width] flex-col text-[--ghost] bg-[--sidebar]",
 						className,
 					)}
 					ref={ref}
@@ -218,7 +218,7 @@ const Sidebar = forwardRef<
 					<SheetContent
 						data-sidebar="sidebar"
 						data-mobile="true"
-						className="w-[--sidebar-width] bg-[--sidebar-background] p-0 [&>button]:hidden"
+						className="w-[--sidebar-width] bg-[--sidebar] p-0 [&>button]:hidden"
 						style={
 							{
 								"--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -268,7 +268,7 @@ const Sidebar = forwardRef<
 				>
 					<div
 						data-sidebar="sidebar"
-						className="flex h-full w-full flex-col bg-[--sidebar-background] group-data-[variant=floating]:rounded-md group-data-[variant=floating]:border-[--border] group-data-[variant=floating]:shadow"
+						className="flex h-full w-full flex-col bg-[--sidebar] group-data-[variant=floating]:rounded-md group-data-[variant=floating]:border-[--border] group-data-[variant=floating]:shadow"
 					>
 						{children}
 					</div>
@@ -290,7 +290,7 @@ const SidebarTrigger = forwardRef<
 			ref={ref}
 			variant={variant || "ghost"}
 			data-sidebar="trigger"
-			className={cn("p-1 bg-[--sidebar-background]", className)}
+			className={cn("p-1 bg-[--sidebar]", className)}
 			onClick={(event) => {
 				onClick?.(event);
 				toggleSidebar();
@@ -320,7 +320,7 @@ const SidebarRail = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
 					"absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] hover:after:bg-[--border] group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex",
 					"[[data-side=left]_&]:cursor-w-resize [[data-side=right]_&]:cursor-e-resize",
 					"[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
-					"group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full group-data-[collapsible=offcanvas]:hover:bg-[--sidebar-background]",
+					"group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full group-data-[collapsible=offcanvas]:hover:bg-[--sidebar]",
 					"[[data-side=left][data-collapsible=offcanvas]_&]:-right-2",
 					"[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
 					className,
@@ -373,10 +373,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 			<div
 				ref={ref}
 				data-sidebar="header"
-				className={cn(
-					"flex flex-col gap-2 p-2 bg-[--sidebar-background]",
-					className,
-				)}
+				className={cn("flex flex-col gap-2 p-2 bg-[--sidebar]", className)}
 				{...props}
 			/>
 		);
@@ -390,10 +387,7 @@ const SidebarFooter = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 			<div
 				ref={ref}
 				data-sidebar="footer"
-				className={cn(
-					"flex flex-col gap-2 p-2 bg-[--sidebar-background]",
-					className,
-				)}
+				className={cn("flex flex-col gap-2 p-2 bg-[--sidebar]", className)}
 				{...props}
 			/>
 		);
@@ -423,7 +417,7 @@ const SidebarContent = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 				ref={ref}
 				data-sidebar="content"
 				className={cn(
-					"flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden bg-[--sidebar-background]",
+					"flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden bg-[--sidebar]",
 					className,
 				)}
 				{...props}
