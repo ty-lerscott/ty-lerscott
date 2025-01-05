@@ -17,6 +17,10 @@ const DeploymentStatusController = async (
 		repository,
 	} = body;
 
+	if (state !== "success") {
+		return Promise.resolve();
+	}
+
 	await discord({
 		url: repository.url,
 		title: `${repository.name}: ${description}`,
