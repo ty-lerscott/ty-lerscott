@@ -55,7 +55,7 @@ const TagsPage = async () => {
 
 			<h1>Tags</h1>
 
-			<ul className="flex flex-wrap gap-4 list-none">
+			<ul className="flex flex-wrap gap-x-4 gap-y-2 list-none">
 				{orderBy(tags, "name").map(({ name, ...tag }) => (
 					<li key={tag.id}>
 						<Tag {...tag}>{name}</Tag>

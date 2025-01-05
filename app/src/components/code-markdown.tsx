@@ -220,6 +220,7 @@ const CodeBlock = ({
 	className,
 	...props
 }: { inline?: boolean; className?: string; children?: string }) => {
+	console.log({ props, inline });
 	const match = /language-(\w+)/.exec(className || "");
 	return !inline && match ? (
 		<SyntaxHighlighter

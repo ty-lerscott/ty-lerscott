@@ -117,6 +117,10 @@ const ContactDetails = async () => {
 
 	const { email, phone, socials } = contactDetails;
 
+	const _socials = socials.filter(
+		({ brand }) => !["instagram"].includes(brand as string),
+	);
+
 	return (
 		<>
 			<SectionHeader>Contact</SectionHeader>
@@ -130,7 +134,7 @@ const ContactDetails = async () => {
 					<SlScreenSmartphone />
 					<span>{phone}</span>
 				</p>
-				{(socials || []).map(({ id, brand, text, href }) => {
+				{(_socials || []).map(({ id, brand, text, href }) => {
 					const Icon = SocialMap[brand as keyof typeof SocialMap];
 
 					return (

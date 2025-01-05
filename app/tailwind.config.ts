@@ -55,6 +55,9 @@ export default {
 			"9xl": "8rem",
 		},
 		extend: {
+			transitionDuration: {
+				"30s": "30000ms",
+			},
 			colors: {
 				transparent: "transparent",
 			},
@@ -115,6 +118,7 @@ export default {
 			addBase({
 				"*": {
 					lineHeight: "1",
+					"@apply transition-colors duration-30s": "",
 				},
 				body: {
 					"@apply bg-[--background] text-[--foreground]": "",

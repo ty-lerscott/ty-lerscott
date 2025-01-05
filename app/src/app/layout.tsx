@@ -43,13 +43,13 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={cn(isDark ? "dark" : "")}
+			className={cn("transition-colors duration-1000", isDark ? "dark" : "")}
 			suppressHydrationWarning
 		>
 			<body
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
-				<VariableTransition isDark={isDark} />
+				<VariableTransition isDark={isDark} pause />
 
 				<SidebarProvider>
 					<Sidebar />
