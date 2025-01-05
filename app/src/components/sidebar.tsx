@@ -14,7 +14,6 @@ import {
 	SidebarMenuSub,
 	SidebarContent,
 	SidebarMenuItem,
-	SidebarGroupLabel,
 	SidebarMenuButton,
 	SidebarMenuSubItem,
 	SidebarGroupContent,
@@ -49,7 +48,6 @@ const Sidebar = async () => {
 				</SidebarHeader>
 				<SidebarContent>
 					<SidebarGroup>
-						<SidebarGroupLabel>App</SidebarGroupLabel>
 						<SidebarGroupContent>
 							<SidebarMenu>
 								{navigation.items.map(({ item }) => {
