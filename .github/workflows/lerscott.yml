@@ -30,7 +30,8 @@ jobs:
                 echo "NODE_ENV=production" >> ./api/.env
                 echo "API_PORT=${{ secrets.API_PORT }}" >> ./api/.env
                 echo "DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}" >> ./api/.env
-
+                echo "GH_WEBHOOK_SECRET=${{ secrets.GH_WEBHOOK_SECRET }}" >> ./api/.env
+                
             - name: Build config
               run: |
                 pnpm build;       
