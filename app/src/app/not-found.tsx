@@ -34,4 +34,5 @@ const NotFoundPage = async () => {
 	);
 };
 
+export const dynamic = "force-dynamic";
 export default NotFoundPage;
