@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
 				destination: "/api/favicon",
 			},
 			{
+				source: "/favicon.png",
+				destination: "/api/favicon",
+			},
+			{
 				source: "/rss.xml",
 				destination: "/api/rss",
 			},
