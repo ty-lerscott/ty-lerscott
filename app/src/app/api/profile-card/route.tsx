@@ -7,7 +7,7 @@ import { getContactDetails } from "@/lib/cms";
 import { setImageUrl, SITE_URL } from "@/lib/utils";
 import { getColorMap, PRIMARY_INDEX } from "@/colors";
 
-const primaryColor = getColorMap(PRIMARY_INDEX);
+const primaryColor = getColorMap(PRIMARY_INDEX, true);
 
 import {
 	AiFillGithub,
@@ -173,7 +173,7 @@ export async function GET(request: Request) {
 				</ul>
 				<p
 					style={{
-						color: primaryColor.subtle,
+						color: primaryColor.ghost,
 						alignSelf: "flex-end",
 						margin: 0,
 					}}
