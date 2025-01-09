@@ -7,14 +7,14 @@ import { getContactDetails } from "@/lib/cms";
 import { setImageUrl, SITE_URL } from "@/lib/utils";
 import { getColorMap, PRIMARY_INDEX } from "@/colors";
 
-const primaryColor = getColorMap(PRIMARY_INDEX, true);
-
 import {
 	AiFillGithub,
 	AiFillLinkedin,
 	AiFillInstagram,
 	AiFillTwitterSquare,
 } from "react-icons/ai";
+
+const primaryColor = getColorMap(PRIMARY_INDEX, true);
 
 const SOCIALS = {
 	github: AiFillGithub,

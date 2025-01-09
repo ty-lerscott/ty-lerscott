@@ -125,6 +125,6 @@ const getColorMap = (index: number, isDark?: boolean) => {
 	);
 };
 
-const PRIMARY_INDEX = 2;
+const PRIMARY_INDEX = 0;
 
 export { colors, getColorMap, PRIMARY_INDEX };
