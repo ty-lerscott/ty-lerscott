@@ -91,14 +91,14 @@ const aliasMapLight = {
 	lighter: ["sidebar", "skeleton"],
 	medium: ["border", "ghost", "hover"],
 	dark: ["foreground", "code"],
-	darker: ["heading", "hover-secondary", "strong"],
+	darker: ["heading", "strong"],
 	black: ["white"],
 } as Record<(typeof degreeArray)[number], string[]>;
 
 const aliasMapDark = {
-	white: ["heading", "hover-secondary", "white"],
+	white: ["heading", "white", "hover"],
 	lighter: ["code"],
-	"medium-light": ["hover", "strong"],
+	"medium-light": ["strong"],
 	medium: ["foreground"],
 	dark: ["ghost"],
 	darker: ["border"],
@@ -125,6 +125,6 @@ const getColorMap = (index: number, isDark?: boolean) => {
 	);
 };
 
-const PRIMARY_INDEX = 0;
+const PRIMARY_INDEX = 2;
 
 export { colors, getColorMap, PRIMARY_INDEX };
