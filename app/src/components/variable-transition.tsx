@@ -9,18 +9,10 @@ const DURATION = 15 * 1000;
 
 const colorNamesArr = Object.keys(colors);
 
-// Function to set color on :root
-const setRootVar = (varName: string, hexValue: string) => {
-	document.documentElement.style.setProperty(`--${varName}`, hexValue);
-};
-
 // Helper to get a random index that isn't the same as 'except'
 const getRandomIndexExcept = (length: number, except: number) => {
-	let randomIndex = except;
-	while (randomIndex === except) {
-		randomIndex = Math.floor(Math.random() * length);
-	}
-	return randomIndex;
+	const randomIndex = Math.floor(Math.random() * (length - 1));
+	return randomIndex >= except ? randomIndex + 1 : randomIndex;
 };
 
 const VariableTransition = ({
@@ -37,50 +29,51 @@ const VariableTransition = ({
 	useEffect(() => {
 		if (pause) return;
 
+		let oldColors = getColorMap(activeColorIndex, isDark);
+		let newColors = getColorMap(nextColorIndex, isDark);
+
 		const animate = (timestamp: number) => {
 			if (!startTime.current) {
 				startTime.current = timestamp;
 			}
 			const ratio = Math.min((timestamp - startTime.current) / DURATION, 1);
 
-			// Get old & new color maps
-			const oldColors = getColorMap(activeColorIndex, isDark);
-			const newColors = getColorMap(nextColorIndex, isDark);
+			// Collect CSS variable updates
+			const cssText = Object.keys(oldColors)
+				.map((varKey) => {
+					const oldValue = oldColors[varKey];
+					const newValue = newColors[varKey];
 
-			// Interpolate each variable
-			for (const varKey of Object.keys(oldColors)) {
-				const oldValue = oldColors[varKey];
-				const newValue = newColors[varKey];
+					if (chroma.valid(oldValue) && chroma.valid(newValue)) {
+						const interpolated = chroma.mix(oldValue, newValue, ratio).hex();
+						return `--${varKey}: ${interpolated};`;
+					}
+					return `--${varKey}: ${oldValue};`;
+				})
+				.join(" ");
 
-				if (chroma.valid(oldValue) && chroma.valid(newValue)) {
-					const interpolated = chroma.mix(oldValue, newValue, ratio).hex();
-					setRootVar(varKey, interpolated);
-				} else {
-					setRootVar(varKey, oldValue);
-				}
-			}
+			document.documentElement.style.cssText = cssText;
 
 			if (ratio < 1) {
-				// Still animating, schedule next frame
 				animationFrame.current = requestAnimationFrame(animate);
 			} else {
-				// Animation complete: prepare for next cycle
+				// Animation complete
 				startTime.current = null;
 
-				// The color we just animated to becomes the new "from" color
+				// Prepare for next cycle
 				setActiveColorIndex(nextColorIndex);
-
-				// Choose a new random color as the next "to" color
 				setNextColorIndex(
 					getRandomIndexExcept(colorNamesArr.length, nextColorIndex),
 				);
+
+				// Update cached colors
+				oldColors = newColors;
+				newColors = getColorMap(nextColorIndex, isDark);
 			}
 		};
 
-		// Kick off the animation
 		animationFrame.current = requestAnimationFrame(animate);
 
-		// Cleanup on unmount
 		return () => {
 			if (animationFrame.current) {
 				cancelAnimationFrame(animationFrame.current);
