@@ -1,12 +1,13 @@
 import { SphereGeometry, MeshBasicMaterial, Mesh, Scene, Vector3 } from "three";
 
 const particles: Mesh[] = [];
+const colors = [0x00ffff, 0xff00ff, 0xffff00];
 const velocities = new Map<Mesh, Vector3>();
 
 const createFood = (zoom: number) => {
     const geometry = new SphereGeometry(0.2, 16, 16);
     const material = new MeshBasicMaterial({
-        color: 0xffa500,
+        color: colors[Math.floor(Math.random() * colors.length)],
     });
 
     const mesh = new Mesh(geometry, material);
