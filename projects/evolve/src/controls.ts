@@ -1,6 +1,5 @@
 import { Mesh } from "three";
 
-// Step 4: Handle Player Movement
 const keys: Record<string, boolean> = {};
 
 const listenToKeyboard = () => {
@@ -8,7 +7,7 @@ const listenToKeyboard = () => {
     window.addEventListener('keyup', (e) => (keys[e.key] = false));
 }
 
-const movePlayer = (player: Mesh) => () => {
+const movePlayer = (player: Mesh) => {
     const speed = 0.1;
     if (keys['ArrowUp'] || keys['w']) player.position.y += speed;
     if (keys['ArrowDown'] || keys['s']) player.position.y -= speed;

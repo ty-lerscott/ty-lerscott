@@ -1,6 +1,7 @@
-import { SphereGeometry, MeshBasicMaterial, Mesh, Scene } from "three";
+import { SphereGeometry, MeshBasicMaterial, Mesh, Scene, Vector3 } from "three";
 
 const particles: Mesh[] = [];
+const velocities = new Map<Mesh, Vector3>();
 
 const createFood = (zoom: number) => {
     const geometry = new SphereGeometry(0.2, 16, 16);
@@ -17,6 +18,12 @@ const createFood = (zoom: number) => {
         zoom // Fixed Z position
     );
 
+    velocities.set(mesh, new Vector3(
+        (Math.random() - 0.5) * 0.02,
+        (Math.random() - 0.5) * 0.02,
+        0
+    ))
+
     return mesh;
 }
 
@@ -30,4 +37,20 @@ const createFoodParticles = ({ total, scene, zoom }: { total: number, scene: Sce
     return particles;
 }
 
+const moveFood = () => {
+    particles.forEach((food) => {
+        const velocity = velocities.get(food);
+
+        if (velocity) {
+            food.position.add(velocity);
+
+            // Reverse direction if food hits boundaries
+            if (food.position.x < -10 || food.position.x > 10) velocity.x *= -1;
+            if (food.position.y < -10 || food.position.y > 10) velocity.y *= -1;
+        }
+    });
+};
+
+
 export default createFoodParticles;
+export { moveFood };

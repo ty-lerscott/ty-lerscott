@@ -1,9 +1,9 @@
 import render from "./renderer";
 import listen from "./listeners";
 import gameEngine from './engine';
-import createPlayer from "./player";
+import createPlayer, { eatFood } from "./player";
 import movePlayer from "./controls";
-import createFoodParticles from "./food";
+import createFoodParticles, { moveFood } from "./food";
 
 const CONFIG = {
   zoom: -8
@@ -22,12 +22,18 @@ const { scene, camera, renderer } = render({
 const player = createPlayer({ zoom: CONFIG.zoom, scene });
 
 // Step 3: Create the Food
-createFoodParticles({ total: 50, scene, zoom: CONFIG.zoom });
+const food = createFoodParticles({ total: 50, scene, zoom: CONFIG.zoom });
 
 // Step 4: Add Listeners
 listen({ camera, renderer });
 
 // Step 5: Game Loop
-gameEngine({ controls: movePlayer(player), renderer, scene, camera })();
+gameEngine({
+  controls: () => {
+    movePlayer(player)
+    moveFood();
+    eatFood({ player, food, scene })
+  }, renderer, scene, camera
+})();
 
 
