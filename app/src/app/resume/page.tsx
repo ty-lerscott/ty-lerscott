@@ -1,14 +1,11 @@
-import Link from "next/link";
 import { cache } from "react";
-import { TfiEmail } from "react-icons/tfi";
-import { SlScreenSmartphone } from "react-icons/sl";
 
+import { getPage } from "@/lib/cms";
+import ResumeBio from "./components/bio";
 import Education from "./components/education";
-import SocialMap from "@/components/social-map";
 import Experiences from "./components/experiences";
-import { yearsAgo, setMetadata, SITE_URL } from "@/lib/utils";
-import { getPage, getContactDetails } from "@/lib/cms";
-import SectionHeader from "./components/section-header";
+import { setMetadata, SITE_URL } from "@/lib/utils";
+import ContactDetails from "./components/contact-details";
 import { ResumeHeader, Skills } from "./components/client";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
@@ -94,61 +91,6 @@ export const generateMetadata = async () => {
 		: null;
 };
 
-const ResumeBio = ({ bio }: { bio: string }) => {
-	const matches = bio.match(/{{(.*?)}}/);
-	const professionalExperience = Array.isArray(matches)
-		? yearsAgo(matches[1].split(":")[1])
-		: 0;
-
-	return (
-		<div>
-			<SectionHeader>About Me</SectionHeader>
-			<p className="p-4 tracking-widest text-center leading-4 text-xs">
-				{bio.replace(/{{(.*?)}}/, String(professionalExperience))}
-			</p>
-		</div>
-	);
-};
-
-const ContactDetails = async () => {
-	const contactDetails = await getContactDetails();
-
-	if (!contactDetails) return null;
-
-	const { email, phone, socials } = contactDetails;
-
-	const _socials = socials.filter(
-		({ brand }) => !["instagram"].includes(brand as string),
-	);
-
-	return (
-		<>
-			<SectionHeader>Contact</SectionHeader>
-
-			<div className="flex flex-col gap-2 my-4 text-xs items-center">
-				<p className="flex gap-2">
-					<TfiEmail />
-					<span>{email}</span>
-				</p>
-				<p className="flex gap-2">
-					<SlScreenSmartphone />
-					<span>{phone}</span>
-				</p>
-				{(_socials || []).map(({ id, brand, text, href }) => {
-					const Icon = SocialMap[brand as keyof typeof SocialMap];
-
-					return (
-						<Link key={id} target="_blank" href={href as string}>
-							<Icon className="inline-block" />
-							<span className="ml-2">{text}</span>
-						</Link>
-					);
-				})}
-			</div>
-		</>
-	);
-};
-
 const ResumePage = async () => {
 	const resume = await getResume();
 
@@ -165,34 +107,27 @@ const ResumePage = async () => {
 
 				<div
 					data-testid="ResumeBody"
-					className="flex flex-col md:grid md:grid-cols-10"
+					className="flex flex-col md:grid"
+					style={{
+						gridTemplateAreas: `
+							"bio experiences experiences experiences"
+							"contact experiences experiences experiences"
+							"skills experiences experiences experiences"
+							"skills education education education"
+						`,
+					}}
 				>
-					<div data-testid="Sidebar" className="col-span-3">
-						{resume_bio ? <ResumeBio bio={resume_bio} /> : null}
+					{resume_bio ? <ResumeBio bio={resume_bio} /> : null}
 
-						<ContactDetails />
+					<ContactDetails />
 
-						{skills?.length ? (
-							<Skills
-								skills={skills}
-								className="max-h-[50vh] md:max-h-[110rem] lg:max-h-[83rem] xl:max-h-[136vh] 2xl:max-h-[55rem]"
-							/>
-						) : null}
-					</div>
+					{experiences?.length ? (
+						<Experiences experiences={experiences} />
+					) : null}
 
-					<div
-						data-testid="Experiences"
-						className="col-span-7 border-l-2 border-[--ghost] relative"
-					>
-						{experiences?.length ? (
-							<Experiences
-								experiences={experiences}
-								className="h-[195vh] lg:h-[320vh] xl:h-[185vh] 2xl:h-[100vh]"
-							/>
-						) : null}
+					{education?.length ? <Education education={education} /> : null}
 
-						{education?.length ? <Education education={education} /> : null}
-					</div>
+					{skills?.length ? <Skills skills={skills} /> : null}
 				</div>
 			</div>
 		</>

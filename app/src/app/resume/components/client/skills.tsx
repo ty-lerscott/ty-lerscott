@@ -91,10 +91,7 @@ const Skill = ({ name, years, favorite, comfort_level }: ModifiedSkill) => {
 	);
 };
 
-const Skills = ({
-	skills,
-	className,
-}: { skills: SkillType[]; className: string }) => {
+const Skills = ({ skills }: { skills: SkillType[] }) => {
 	const [sortBy, setSortBy] = useState<SortBy>("default");
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(setSkill(skills));
@@ -122,7 +119,7 @@ const Skills = ({
 	};
 
 	return (
-		<>
+		<div style={{ gridArea: "skills" }} className="border-r-2 border-[--ghost]">
 			<SectionHeader>Skills</SectionHeader>
 			<div className="border-b-2 border-[--ghost] md:grid-cols-[5fr_4fr] grid-cols-2 sm:grid">
 				<Select onValueChange={handleSort}>
@@ -159,17 +156,12 @@ const Skills = ({
 					</span>
 				</div>
 			</div>
-			<div
-				className={cn(
-					"flex flex-col scrollbar-hide overflow-y-scroll sm:block",
-					className,
-				)}
-			>
+			<div className="flex flex-col max-h-[62rem] scrollbar-hide overflow-y-scroll sm:block">
 				{sortedSkills.map((props) => {
 					return <Skill {...props} key={props.name} />;
 				})}
 			</div>
-		</>
+		</div>
 	);
 };
 

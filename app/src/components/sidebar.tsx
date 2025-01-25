@@ -113,6 +113,7 @@ const Sidebar = async () => {
 					<SidebarFooter className="mb-2">
 						<ul className="flex justify-center gap-1 list-none">
 							{(socials.items || []).map(({ item }) => {
+								if (!item) return null;
 								const { brand, href } = item as LinkType;
 								const Icon = SOCIALS[brand as keyof typeof SOCIALS];
 

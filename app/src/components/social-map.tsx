@@ -13,8 +13,8 @@ const SOCIALS = {
 	instagram: dynamic(() =>
 		import("react-icons/ai").then((module) => module.AiFillInstagram),
 	),
-	twitter: dynamic(() =>
-		import("react-icons/ai").then((module) => module.AiFillTwitterSquare),
+	bluesky: dynamic(() =>
+		import("react-icons/fa6").then((module) => module.FaBluesky),
 	),
 };
 

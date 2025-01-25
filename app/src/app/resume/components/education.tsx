@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 
 const Education = ({ education }: { education: string[][] }) => {
 	return (
-		<div className="bg-[--background] mdgit:absolute bottom-0 left-0 right-0">
+		<div style={{ gridArea: "education" }}>
 			<SectionHeader>Education</SectionHeader>
 
 			<div className="grid grid-cols-[1fr_auto_1fr]">

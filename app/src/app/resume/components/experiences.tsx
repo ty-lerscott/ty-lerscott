@@ -34,10 +34,7 @@ const Experience = ({
 	);
 };
 
-const Experiences = ({
-	experiences,
-	className,
-}: { experiences: ExperienceType[]; className: string }) => {
+const Experiences = ({ experiences }: { experiences: ExperienceType[] }) => {
 	/**
 	 * NOTE:
 	 *      I would prefer Array.prototype.toReversed(), but that's not part of the standard yet
@@ -47,15 +44,15 @@ const Experiences = ({
 	const ordered = experiences.slice().reverse() as ExperienceType[];
 
 	return (
-		<>
+		<div style={{ gridArea: "experiences" }}>
 			<SectionHeader>Experience</SectionHeader>
 
-			<div className={cn("xs:scrollbar-hide overflow-y-scroll", className)}>
+			<div className="xs:scrollbar-hide overflow-y-scroll max-h-[90rem]">
 				{ordered.map((exp) => {
 					return <Experience key={exp.id} {...exp} />;
 				})}
 			</div>
-		</>
+		</div>
 	);
 };
 
