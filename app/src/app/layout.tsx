@@ -49,7 +49,7 @@ export default function RootLayout({
 			<body
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
-				<VariableTransition isDark={isDark} />
+				<VariableTransition isDark={isDark} pause />
 
 				<SidebarProvider>
 					<Sidebar />

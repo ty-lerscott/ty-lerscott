@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
 				source: "/profile-card.png",
 				destination: "/api/profile-card",
 			},
+			{
+				source: "/.well-known/atproto-did",
+				destination: "/api/at-proto",
+			},
 		];
 	},
 };
