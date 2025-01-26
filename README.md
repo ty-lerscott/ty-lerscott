@@ -6,7 +6,7 @@
 ty.lerscott.com
 </h1>
 
-![image](https://ty.lerscott.com/profile-card.png?v=0.0.0)
+![image](https://ty.lerscott.com/profile-card.png?v=0.0.1)
 
 ## Technologies Used
 
