@@ -7,12 +7,8 @@ import { getContactDetails } from "@/lib/cms";
 import { setImageUrl, SITE_URL } from "@/lib/utils";
 import { getColorMap, PRIMARY_INDEX } from "@/colors";
 
-import {
-	AiFillGithub,
-	AiFillLinkedin,
-	AiFillInstagram,
-	AiFillTwitterSquare,
-} from "react-icons/ai";
+import { FaBluesky } from "react-icons/fa6";
+import { AiFillGithub, AiFillLinkedin, AiFillInstagram } from "react-icons/ai";
 
 const primaryColor = getColorMap(PRIMARY_INDEX, true);
 
@@ -20,7 +16,7 @@ const SOCIALS = {
 	github: AiFillGithub,
 	linkedin: AiFillLinkedin,
 	instagram: AiFillInstagram,
-	twitter: AiFillTwitterSquare,
+	bluesky: FaBluesky,
 };
 
 const itemStyles = {
