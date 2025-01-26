@@ -1,5 +1,6 @@
 "use client";
 
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 
@@ -12,6 +13,7 @@ const Markdown = ({
 	<ReactMarkdown
 		className={className}
 		remarkPlugins={[remarkGfm]}
+		rehypePlugins={[rehypeRaw]}
 		components={{
 			code: CodeBlock,
 		}}
