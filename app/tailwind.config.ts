@@ -163,8 +163,7 @@ export default {
 						"",
 				},
 				ul: {
-					"@apply list-disc list-inside [&:not([class])>li:not(:first-of-type)]:mt-2":
-						"",
+					"@apply list-disc list-inside": "",
 				},
 				li: {
 					"@apply leading-6 break-words": "",
