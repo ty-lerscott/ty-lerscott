@@ -1,6 +1,7 @@
 packages:
   - "cms"
   - "app"
+  - "claw"
   - "config"
   - "api"
   - "projects/*"

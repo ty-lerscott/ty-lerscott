@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"https:all": "caddy run",
-		"dev": "turbo https start:cms dev",
+		"dev": "turbo https:all start:cms dev --parallel",
 		"build": "turbo build",
 		"start": "turbo start",
 		"start:pm2": "turbo start:pm2",
@@ -28,6 +28,7 @@
 	"packageManager": "pnpm@9.15.1",
 	"dependencies": {
 		"@repo/app": "workspace:app",
+		"@repo/claw": "workspace:claw",
 		"@repo/cms": "workspace:cms",
 		"@repo/config": "workspace:config"
 	},
