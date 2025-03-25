@@ -1,12 +1,12 @@
 import { cache } from "react";
 
 import { getPage } from "@/lib/cms";
-import ResumeBio from "./components/bio";
-import Education from "./components/education";
-import Experiences from "./components/experiences";
+import ResumeBio from "@/components/resume/bio";
 import { setMetadata, SITE_URL } from "@/lib/utils";
-import ContactDetails from "./components/contact-details";
-import { ResumeHeader, Skills } from "./components/client";
+import Education from "@/components/resume/education";
+import Experiences from "@/components/resume/experiences";
+import ContactDetails from "@/components/resume/contact-details";
+import { ResumeHeader, Skills } from "@/components/resume/client";
 import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
 

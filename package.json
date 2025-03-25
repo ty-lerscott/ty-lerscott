@@ -3,8 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"https:all": "caddy run",
-		"dev": "turbo https:all start:cms dev --parallel",
+		"dev": "turbo dev --parallel",
 		"build": "turbo build",
 		"start": "turbo start",
 		"start:pm2": "turbo start:pm2",
@@ -22,7 +21,7 @@
 			"email": "ty@lerscott.com",
 			"website": "https://ty.lerscott.com",
 			"profession": "Senior Software Engineer",
-			"linkedin": "linkedin.com/in/ty"
+			"linkedin": "linkedin.com/in/ty-lerscott"
 		}
 	},
 	"packageManager": "pnpm@9.15.1",

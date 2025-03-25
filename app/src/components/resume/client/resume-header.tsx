@@ -8,16 +8,18 @@ const Header = ({ roles }: { roles: string[] }) => {
 	const controls = useAnimation();
 
 	useEffect(() => {
-		const timer = setInterval(async () => {
-			await controls.start({ top: "0.5rem", opacity: 0 }, { duration: 0.25 });
+		if (Array.isArray(roles) && roles.length > 0) {
+			const timer = setInterval(async () => {
+				await controls.start({ top: "0.5rem", opacity: 0 }, { duration: 0.25 });
 
-			setPosition((state) => (state === roles.length - 1 ? 0 : state + 1));
-		}, 3000);
+				setPosition((state) => (state === roles.length - 1 ? 0 : state + 1));
+			}, 3000);
 
-		return () => clearInterval(timer);
-	});
+			return () => clearInterval(timer);
+		}
+	}, [roles, controls]);
 
-	return (
+	return Array.isArray(roles) && roles.length > 0 ? (
 		<div data-testid="ResumeHeader" className="text-center">
 			<div className="relative flex flex-col items-center p-8">
 				<h1 className="uppercase w-max border-2 border-[--ghost] rounded text-3xl md:text-5xl px-10 py-8">
@@ -37,7 +39,7 @@ const Header = ({ roles }: { roles: string[] }) => {
 				</div>
 			</div>
 		</div>
-	);
+	) : null;
 };
 
 export default Header;

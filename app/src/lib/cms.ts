@@ -82,6 +82,7 @@ const getPage = async <PageType = Page>(
 	slug: string,
 	fields?: string[],
 ): Promise<PageType> => {
+	console.log("getPage", slug, fields);
 	try {
 		const resp = await client.request<PageType[]>(
 			readItems("Pages", {

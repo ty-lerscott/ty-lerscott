@@ -6,11 +6,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer";
 import ScreenSizes from "~/app/tailwind.screens.config";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { SidebarProvider, Sidebar } from "@/components/sidebar";
-import VariableTransition from "@/components/variable-transition";
 
-import "./tailwind.css";
+import "../tailwind.css";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -38,38 +35,22 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const isDark = true;
-
 	return (
-		<html
-			lang="en"
-			className={cn(isDark ? "dark" : "")}
-			suppressHydrationWarning
-		>
+		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${inter.className} ${zillaSlab.variable} relative h-full w-full`}
 			>
-				<VariableTransition isDark={isDark} />
+				<main
+					style={{
+						maxWidth: ScreenSizes["2xl"],
+					}}
+					className="p-4 md:px-6 md:py-4 w-full flex flex-col gap-4 mx-auto 2xl:mx-0"
+				>
+					{children}
+				</main>
 
-				<SidebarProvider>
-					<Sidebar />
-
-					<main
-						style={{
-							maxWidth: ScreenSizes["2xl"],
-						}}
-						className="p-4 md:px-6 md:py-4 w-full flex flex-col gap-4 mx-auto 2xl:mx-0"
-					>
-						<div className="relative lg:hidden z-0">
-							<SidebarTrigger variant="ghost" />
-						</div>
-						{children}
-						<Footer />
-					</main>
-
-					<Analytics />
-					<SpeedInsights />
-				</SidebarProvider>
+				<Analytics />
+				<SpeedInsights />
 			</body>
 		</html>
 	);
