@@ -7,19 +7,10 @@ import { getPage } from "@/lib/cms";
 import { setMetadata, SITE_URL } from "@/lib/utils";
 // import ContactDetails from "../../(styled)/resume/components/contact-details";
 // import { ResumeHeader, Skills } from "../../(styled)/resume/components/client";
-import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
 import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
-
-const BREADCRUMBS = [
-	{
-		title: "Home",
-		href: "/",
-	},
-	{
-		title: "Resume",
-		href: "/resume",
-	},
-] as Breadcrumb[];
+import { ResumeHeader } from "@/components/resume/client";
+import ResumeBio from "@/components/resume/bio";
+import ContactDetails from "@/components/resume/contact-details";
 
 type APIResumePage = Omit<ResumePageType, "experiences" | "skills" | "body"> & {
 	experiences: {
@@ -101,25 +92,19 @@ const ResumePage = async () => {
 	return (
 		<>
 			<div className="border-[--ghost] border-2 rounded w-full mx-auto">
-				{/* <ResumeHeader roles={body as string[]} /> */}
+				<ResumeHeader roles={[body?.[0] as string]} />
 
-				<div
-					data-testid="ResumeBody"
-					className="flex flex-col md:grid"
-					style={{
-						gridTemplateAreas: `
-							"bio experiences experiences experiences"
-							"contact experiences experiences experiences"
-							"skills experiences experiences experiences"
-							"skills education education education"
-						`,
-					}}
-				>
-					{/* {resume_bio ? <ResumeBio bio={resume_bio} /> : null}
+				<div data-testid="ResumeBody" className="flex flex-col">
+					{resume_bio ? (
+						<ResumeBio
+							bio={resume_bio}
+							className="h3>w-[3rem] break-all items-center"
+						/>
+					) : null}
 
-					<ContactDetails />
+					<ContactDetails isSimple />
 
-					{experiences?.length ? (
+					{/* {experiences?.length ? (
 						<Experiences experiences={experiences} />
 					) : null}
 

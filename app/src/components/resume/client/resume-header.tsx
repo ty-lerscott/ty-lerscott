@@ -8,7 +8,7 @@ const Header = ({ roles }: { roles: string[] }) => {
 	const controls = useAnimation();
 
 	useEffect(() => {
-		if (Array.isArray(roles) && roles.length > 0) {
+		if (Array.isArray(roles) && roles.length > 1) {
 			const timer = setInterval(async () => {
 				await controls.start({ top: "0.5rem", opacity: 0 }, { duration: 0.25 });
 
