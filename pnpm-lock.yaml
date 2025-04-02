@@ -249,58 +249,6 @@ importers:
         specifier: '5'
         version: 5.7.2
 
-  claw:
-    dependencies:
-      '@radix-ui/react-slot':
-        specifier: 1.1.1
-        version: 1.1.1(@types/react@19.0.2)(react@19.0.0)
-      '@types/lodash.mergewith':
-        specifier: 4.6.9
-        version: 4.6.9
-      clsx:
-        specifier: 2.1.1
-        version: 2.1.1
-      lodash.mergewith:
-        specifier: 4.6.2
-        version: 4.6.2
-      lucide-react:
-        specifier: 0.469.0
-        version: 0.469.0(react@19.0.0)
-      next:
-        specifier: 15.2.3
-        version: 15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.0.0(react@19.0.0)
-      react-icons:
-        specifier: 5.4.0
-        version: 5.4.0(react@19.0.0)
-      tailwind-merge:
-        specifier: 2.5.5
-        version: 2.5.5
-    devDependencies:
-      '@tailwindcss/postcss':
-        specifier: ^4
-        version: 4.0.14
-      '@types/node':
-        specifier: ^20
-        version: 20.17.10
-      '@types/react':
-        specifier: ^19
-        version: 19.0.2
-      '@types/react-dom':
-        specifier: ^19
-        version: 19.0.2(@types/react@19.0.2)
-      tailwindcss:
-        specifier: ^4
-        version: 4.0.14
-      typescript:
-        specifier: ^5
-        version: 5.6.3
-
   cms:
     dependencies:
       directus:
@@ -1951,17 +1899,8 @@ packages:
   '@next/env@15.1.3':
     resolution: {integrity: sha512-Q1tXwQCGWyA3ehMph3VO+E6xFPHDKdHFYosadt0F78EObYxPio0S09H9UGYznDe6Wc8eLKLG89GqcFJJDiK5xw==}
 
-  '@next/env@15.2.3':
-    resolution: {integrity: sha512-a26KnbW9DFEUsSxAxKBORR/uD9THoYoKbkpFywMN/AFvboTt94b8+g/07T8J6ACsdLag8/PDU60ov4rPxRAixw==}
-
   '@next/swc-darwin-arm64@15.1.3':
     resolution: {integrity: sha512-aZtmIh8jU89DZahXQt1La0f2EMPt/i7W+rG1sLtYJERsP7GRnNFghsciFpQcKHcGh4dUiyTB5C1X3Dde/Gw8gg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@next/swc-darwin-arm64@15.2.3':
-    resolution: {integrity: sha512-uaBhA8aLbXLqwjnsHSkxs353WrRgQgiFjduDpc7YXEU0B54IKx3vU+cxQlYwPCyC8uYEEX7THhtQQsfHnvv8dw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -1972,20 +1911,8 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@15.2.3':
-    resolution: {integrity: sha512-pVwKvJ4Zk7h+4hwhqOUuMx7Ib02u3gDX3HXPKIShBi9JlYllI0nU6TWLbPT94dt7FSi6mSBhfc2JrHViwqbOdw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-
   '@next/swc-linux-arm64-gnu@15.1.3':
     resolution: {integrity: sha512-YbdaYjyHa4fPK4GR4k2XgXV0p8vbU1SZh7vv6El4bl9N+ZSiMfbmqCuCuNU1Z4ebJMumafaz6UCC2zaJCsdzjw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@next/swc-linux-arm64-gnu@15.2.3':
-    resolution: {integrity: sha512-50ibWdn2RuFFkOEUmo9NCcQbbV9ViQOrUfG48zHBCONciHjaUKtHcYFiCwBVuzD08fzvzkWuuZkd4AqbvKO7UQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -1996,20 +1923,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@15.2.3':
-    resolution: {integrity: sha512-2gAPA7P652D3HzR4cLyAuVYwYqjG0mt/3pHSWTCyKZq/N/dJcUAEoNQMyUmwTZWCJRKofB+JPuDVP2aD8w2J6Q==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
   '@next/swc-linux-x64-gnu@15.1.3':
     resolution: {integrity: sha512-uzafnTFwZCPN499fNVnS2xFME8WLC9y7PLRs/yqz5lz1X/ySoxfaK2Hbz74zYUdEg+iDZPd8KlsWaw9HKkLEVw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@next/swc-linux-x64-gnu@15.2.3':
-    resolution: {integrity: sha512-ODSKvrdMgAJOVU4qElflYy1KSZRM3M45JVbeZu42TINCMG3anp7YCBn80RkISV6bhzKwcUqLBAmOiWkaGtBA9w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2020,32 +1935,14 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@15.2.3':
-    resolution: {integrity: sha512-ZR9kLwCWrlYxwEoytqPi1jhPd1TlsSJWAc+H/CJHmHkf2nD92MQpSRIURR1iNgA/kuFSdxB8xIPt4p/T78kwsg==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
   '@next/swc-win32-arm64-msvc@15.1.3':
     resolution: {integrity: sha512-6RxKjvnvVMM89giYGI1qye9ODsBQpHSHVo8vqA8xGhmRPZHDQUE4jcDbhBwK0GnFMqBnu+XMg3nYukNkmLOLWw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-arm64-msvc@15.2.3':
-    resolution: {integrity: sha512-+G2FrDcfm2YDbhDiObDU/qPriWeiz/9cRR0yMWJeTLGGX6/x8oryO3tt7HhodA1vZ8r2ddJPCjtLcpaVl7TE2Q==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-
   '@next/swc-win32-x64-msvc@15.1.3':
     resolution: {integrity: sha512-VId/f5blObG7IodwC5Grf+aYP0O8Saz1/aeU3YcWqNdIUAmFQY3VEPKPaIzfv32F/clvanOb2K2BR5DtDs6XyQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-
-  '@next/swc-win32-x64-msvc@15.2.3':
-    resolution: {integrity: sha512-gHYS9tc+G2W0ZC8rBL+H6RdtXIyk40uLiaos0yj5US85FNhbFEndMA2nW3z47nzOWiSvXTZ5kBClc3rD0zJg0w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -3043,82 +2940,6 @@ packages:
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
-
-  '@tailwindcss/node@4.0.14':
-    resolution: {integrity: sha512-Ux9NbFkKWYE4rfUFz6M5JFLs/GEYP6ysxT8uSyPn6aTbh2K3xDE1zz++eVK4Vwx799fzMF8CID9sdHn4j/Ab8w==}
-
-  '@tailwindcss/oxide-android-arm64@4.0.14':
-    resolution: {integrity: sha512-VBFKC2rFyfJ5J8lRwjy6ub3rgpY186kAcYgiUr8ArR8BAZzMruyeKJ6mlsD22Zp5ZLcPW/FXMasJiJBx0WsdQg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [android]
-
-  '@tailwindcss/oxide-darwin-arm64@4.0.14':
-    resolution: {integrity: sha512-U3XOwLrefGr2YQZ9DXasDSNWGPZBCh8F62+AExBEDMLDfvLLgI/HDzY8Oq8p/JtqkAY38sWPOaNnRwEGKU5Zmg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@tailwindcss/oxide-darwin-x64@4.0.14':
-    resolution: {integrity: sha512-V5AjFuc3ndWGnOi1d379UsODb0TzAS2DYIP/lwEbfvafUaD2aNZIcbwJtYu2DQqO2+s/XBvDVA+w4yUyaewRwg==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-
-  '@tailwindcss/oxide-freebsd-x64@4.0.14':
-    resolution: {integrity: sha512-tXvtxbaZfcPfqBwW3f53lTcyH6EDT+1eT7yabwcfcxTs+8yTPqxsDUhrqe9MrnEzpNkd+R/QAjJapfd4tjWdLg==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [freebsd]
-
-  '@tailwindcss/oxide-linux-arm-gnueabihf@4.0.14':
-    resolution: {integrity: sha512-cSeLNWWqIWeSTmBntQvyY2/2gcLX8rkPFfDDTQVF8qbRcRMVPLxBvFVJyfSAYRNch6ZyVH2GI6dtgALOBDpdNA==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [linux]
-
-  '@tailwindcss/oxide-linux-arm64-gnu@4.0.14':
-    resolution: {integrity: sha512-bwDWLBalXFMDItcSXzFk6y7QKvj6oFlaY9vM+agTlwFL1n1OhDHYLZkSjaYsh6KCeG0VB0r7H8PUJVOM1LRZyg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@tailwindcss/oxide-linux-arm64-musl@4.0.14':
-    resolution: {integrity: sha512-gVkJdnR/L6iIcGYXx64HGJRmlme2FGr/aZH0W6u4A3RgPMAb+6ELRLi+UBiH83RXBm9vwCfkIC/q8T51h8vUJQ==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@tailwindcss/oxide-linux-x64-gnu@4.0.14':
-    resolution: {integrity: sha512-EE+EQ+c6tTpzsg+LGO1uuusjXxYx0Q00JE5ubcIGfsogSKth8n8i2BcS2wYTQe4jXGs+BQs35l78BIPzgwLddw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@tailwindcss/oxide-linux-x64-musl@4.0.14':
-    resolution: {integrity: sha512-KCCOzo+L6XPT0oUp2Jwh233ETRQ/F6cwUnMnR0FvMUCbkDAzHbcyOgpfuAtRa5HD0WbTbH4pVD+S0pn1EhNfbw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@tailwindcss/oxide-win32-arm64-msvc@4.0.14':
-    resolution: {integrity: sha512-AHObFiFL9lNYcm3tZSPqa/cHGpM5wOrNmM2uOMoKppp+0Hom5uuyRh0QkOp7jftsHZdrZUpmoz0Mp6vhh2XtUg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-
-  '@tailwindcss/oxide-win32-x64-msvc@4.0.14':
-    resolution: {integrity: sha512-rNXXMDJfCJLw/ZaFTOLOHoGULxyXfh2iXTGiChFiYTSgKBKQHIGEpV0yn5N25WGzJJ+VBnRjHzlmDqRV+d//oQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-
-  '@tailwindcss/oxide@4.0.14':
-    resolution: {integrity: sha512-M8VCNyO/NBi5vJ2cRcI9u8w7Si+i76a7o1vveoGtbbjpEYJZYiyc7f2VGps/DqawO56l3tImIbq2OT/533jcrA==}
-    engines: {node: '>= 10'}
-
-  '@tailwindcss/postcss@4.0.14':
-    resolution: {integrity: sha512-+uIR6KtKhla1XeIanF27KtrfYy+PX+R679v5LxbkmEZlhQe3g8rk+wKj7Xgt++rWGRuFLGMXY80Ek8JNn+kN/g==}
 
   '@tootallnate/once@1.1.2':
     resolution: {integrity: sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==}
@@ -4387,10 +4208,6 @@ packages:
 
   end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
-
-  enhanced-resolve@5.18.1:
-    resolution: {integrity: sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg==}
-    engines: {node: '>=10.13.0'}
 
   entities@2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
@@ -5888,27 +5705,6 @@ packages:
       sass:
         optional: true
 
-  next@15.2.3:
-    resolution: {integrity: sha512-x6eDkZxk2rPpu46E1ZVUWIBhYCLszmUY6fvHBFcbzJ9dD+qRX6vcHusaqqDlnY+VngKzKbAiG2iRCkPbmi8f7w==}
-    engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@opentelemetry/api': ^1.1.0
-      '@playwright/test': ^1.41.2
-      babel-plugin-react-compiler: '*'
-      react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-      react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      '@opentelemetry/api':
-        optional: true
-      '@playwright/test':
-        optional: true
-      babel-plugin-react-compiler:
-        optional: true
-      sass:
-        optional: true
-
   node-abi@3.71.0:
     resolution: {integrity: sha512-SZ40vRiy/+wRTf21hxkkEjPJZpARzUMVcJoQse2EF8qkUWbbO2z7vd5oA/H6bVH6SZQ5STGcu0KRDS7biNRfxw==}
     engines: {node: '>=10'}
@@ -7223,13 +7019,6 @@ packages:
     resolution: {integrity: sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
-
-  tailwindcss@4.0.14:
-    resolution: {integrity: sha512-92YT2dpt671tFiHH/e1ok9D987N9fHD5VWoly1CdPD/Cd1HMglvZwP3nx2yTj2lbXDAHt8QssZkxTLCCTNL+xw==}
-
-  tapable@2.2.1:
-    resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
-    engines: {node: '>=6'}
 
   tar-fs@2.1.1:
     resolution: {integrity: sha512-V0r2Y9scmbDRLCNex/+hYzvp/zyYjvFbHPNgVTKfQvVrb6guiE/fxP+XblDNR011utopbkex2nM4dHNV6GDsng==}
@@ -8702,9 +8491,9 @@ snapshots:
       '@directus/constants': 12.0.1
       '@directus/env': 4.1.0(vue@3.5.11(typescript@5.7.2))
       '@directus/errors': 1.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
-      '@directus/extensions-registry': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
-      '@directus/extensions-sdk': 12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(lightningcss@1.29.2)(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions-registry': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions-sdk': 12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(lightningcss@1.29.2)(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)
       '@directus/format-title': 11.0.0
       '@directus/memory': 2.0.6(vue@3.5.11(typescript@5.7.2))
       '@directus/pressure': 2.0.5(vue@3.5.11(typescript@5.7.2))
@@ -8924,10 +8713,10 @@ snapshots:
       '@directus/storage': 11.0.1
       ms: 2.1.3
 
-  '@directus/extensions-registry@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/extensions-registry@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/errors': 1.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       ky: 1.7.2
       lodash-es: 4.17.21
@@ -8949,13 +8738,13 @@ snapshots:
       - vue
       - vue-router
 
-  '@directus/extensions-sdk@12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(lightningcss@1.29.2)(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)':
+  '@directus/extensions-sdk@12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(lightningcss@1.29.2)(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)':
     dependencies:
       '@directus/composables': 11.1.5(vue@3.5.11(typescript@5.7.2))
       '@directus/constants': 12.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/themes': 1.0.5(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(vue@3.5.11(typescript@5.7.2))
-      '@directus/types': 12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/types': 12.2.2(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       '@rollup/plugin-commonjs': 25.0.8(rollup@3.29.4)
       '@rollup/plugin-json': 6.1.0(rollup@3.29.4)
@@ -9000,11 +8789,11 @@ snapshots:
       - typescript
       - vue-router
 
-  '@directus/extensions@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/extensions@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/constants': 12.0.1
       '@directus/themes': 1.0.5(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(vue@3.5.11(typescript@5.7.2))
-      '@directus/types': 12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/types': 12.2.2(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       '@types/express': 4.17.21
       fs-extra: 11.2.0
@@ -9137,7 +8926,7 @@ snapshots:
       pinia: 2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
       vue: 3.5.11(typescript@5.7.2)
 
-  '@directus/types@12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/types@12.2.2(knex@3.1.0(pg@8.13.0)(sqlite3@5.1.7))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/constants': 12.0.1
       '@directus/schema': 12.1.1(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
@@ -9889,54 +9678,28 @@ snapshots:
 
   '@next/env@15.1.3': {}
 
-  '@next/env@15.2.3': {}
-
   '@next/swc-darwin-arm64@15.1.3':
-    optional: true
-
-  '@next/swc-darwin-arm64@15.2.3':
     optional: true
 
   '@next/swc-darwin-x64@15.1.3':
     optional: true
 
-  '@next/swc-darwin-x64@15.2.3':
-    optional: true
-
   '@next/swc-linux-arm64-gnu@15.1.3':
-    optional: true
-
-  '@next/swc-linux-arm64-gnu@15.2.3':
     optional: true
 
   '@next/swc-linux-arm64-musl@15.1.3':
     optional: true
 
-  '@next/swc-linux-arm64-musl@15.2.3':
-    optional: true
-
   '@next/swc-linux-x64-gnu@15.1.3':
-    optional: true
-
-  '@next/swc-linux-x64-gnu@15.2.3':
     optional: true
 
   '@next/swc-linux-x64-musl@15.1.3':
     optional: true
 
-  '@next/swc-linux-x64-musl@15.2.3':
-    optional: true
-
   '@next/swc-win32-arm64-msvc@15.1.3':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@15.2.3':
-    optional: true
-
   '@next/swc-win32-x64-msvc@15.1.3':
-    optional: true
-
-  '@next/swc-win32-x64-msvc@15.2.3':
     optional: true
 
   '@noble/ciphers@1.1.3': {}
@@ -10957,68 +10720,6 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
-
-  '@tailwindcss/node@4.0.14':
-    dependencies:
-      enhanced-resolve: 5.18.1
-      jiti: 2.4.2
-      tailwindcss: 4.0.14
-
-  '@tailwindcss/oxide-android-arm64@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-darwin-arm64@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-darwin-x64@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-freebsd-x64@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-linux-arm-gnueabihf@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-linux-arm64-gnu@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-linux-arm64-musl@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-linux-x64-gnu@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-linux-x64-musl@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-win32-arm64-msvc@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide-win32-x64-msvc@4.0.14':
-    optional: true
-
-  '@tailwindcss/oxide@4.0.14':
-    optionalDependencies:
-      '@tailwindcss/oxide-android-arm64': 4.0.14
-      '@tailwindcss/oxide-darwin-arm64': 4.0.14
-      '@tailwindcss/oxide-darwin-x64': 4.0.14
-      '@tailwindcss/oxide-freebsd-x64': 4.0.14
-      '@tailwindcss/oxide-linux-arm-gnueabihf': 4.0.14
-      '@tailwindcss/oxide-linux-arm64-gnu': 4.0.14
-      '@tailwindcss/oxide-linux-arm64-musl': 4.0.14
-      '@tailwindcss/oxide-linux-x64-gnu': 4.0.14
-      '@tailwindcss/oxide-linux-x64-musl': 4.0.14
-      '@tailwindcss/oxide-win32-arm64-msvc': 4.0.14
-      '@tailwindcss/oxide-win32-x64-msvc': 4.0.14
-
-  '@tailwindcss/postcss@4.0.14':
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      '@tailwindcss/node': 4.0.14
-      '@tailwindcss/oxide': 4.0.14
-      lightningcss: 1.29.2
-      postcss: 8.5.1
-      tailwindcss: 4.0.14
 
   '@tootallnate/once@1.1.2':
     optional: true
@@ -12236,11 +11937,6 @@ snapshots:
     dependencies:
       once: 1.4.0
 
-  enhanced-resolve@5.18.1:
-    dependencies:
-      graceful-fs: 4.2.11
-      tapable: 2.2.1
-
   entities@2.2.0: {}
 
   entities@4.5.0: {}
@@ -13230,7 +12926,8 @@ snapshots:
 
   jiti@1.21.7: {}
 
-  jiti@2.4.2: {}
+  jiti@2.4.2:
+    optional: true
 
   joi@17.13.3:
     dependencies:
@@ -13418,6 +13115,7 @@ snapshots:
       lightningcss-linux-x64-musl: 1.29.2
       lightningcss-win32-arm64-msvc: 1.29.2
       lightningcss-win32-x64-msvc: 1.29.2
+    optional: true
 
   lilconfig@2.1.0: {}
 
@@ -14136,31 +13834,6 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.1.3
       '@next/swc-win32-arm64-msvc': 15.1.3
       '@next/swc-win32-x64-msvc': 15.1.3
-      sharp: 0.33.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
-  next@15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
-    dependencies:
-      '@next/env': 15.2.3
-      '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.15
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001690
-      postcss: 8.4.31
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-      styled-jsx: 5.1.6(react@19.0.0)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 15.2.3
-      '@next/swc-darwin-x64': 15.2.3
-      '@next/swc-linux-arm64-gnu': 15.2.3
-      '@next/swc-linux-arm64-musl': 15.2.3
-      '@next/swc-linux-x64-gnu': 15.2.3
-      '@next/swc-linux-x64-musl': 15.2.3
-      '@next/swc-win32-arm64-msvc': 15.2.3
-      '@next/swc-win32-x64-msvc': 15.2.3
       sharp: 0.33.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -15805,10 +15478,6 @@ snapshots:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
-
-  tailwindcss@4.0.14: {}
-
-  tapable@2.2.1: {}
 
   tar-fs@2.1.1:
     dependencies:
