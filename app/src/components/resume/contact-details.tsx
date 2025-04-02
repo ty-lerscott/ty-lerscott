@@ -47,12 +47,13 @@ const ContactDetails = async ({
 			>
 				<p className="flex items-center">
 					<TfiEmail className="inline-block size-4" />
-					<span className="text-lg ml-2">{email}</span>
+					<span className="ml-2">{email}</span>
 				</p>
 				<p className="flex items-center">
 					<SlScreenSmartphone className="inline-block size-4" />
-					<span className="text-lg ml-2">{phone}</span>
+					<span className="ml-2">{phone}</span>
 				</p>
+
 				{(_socials || []).map(({ id, brand, text, href }) => {
 					const Icon = SocialMap[brand as keyof typeof SocialMap];
 
@@ -64,7 +65,7 @@ const ContactDetails = async ({
 							className="flex items-center"
 						>
 							<Icon className="inline-block size-4" />
-							<span className="text-lg ml-2">{text}</span>
+							<span className="ml-2">{text}</span>
 						</Link>
 					);
 				})}

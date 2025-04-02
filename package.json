@@ -29,7 +29,8 @@
 		"@repo/app": "workspace:app",
 		"@repo/claw": "workspace:claw",
 		"@repo/cms": "workspace:cms",
-		"@repo/config": "workspace:config"
+		"@repo/config": "workspace:config",
+		"puppeteer": "^24.4.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",

@@ -8,9 +8,11 @@ import { setMetadata, SITE_URL } from "@/lib/utils";
 // import ContactDetails from "../../(styled)/resume/components/contact-details";
 // import { ResumeHeader, Skills } from "../../(styled)/resume/components/client";
 import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
-import { ResumeHeader } from "@/components/resume/client";
+import { ResumeHeader, Skills } from "@/components/resume/client";
 import ResumeBio from "@/components/resume/bio";
+import Education from "@/components/resume/education";
 import ContactDetails from "@/components/resume/contact-details";
+import Experiences from "@/components/resume/experiences";
 
 type APIResumePage = Omit<ResumePageType, "experiences" | "skills" | "body"> & {
 	experiences: {
@@ -104,13 +106,15 @@ const ResumePage = async () => {
 
 					<ContactDetails isSimple />
 
-					{/* {experiences?.length ? (
-						<Experiences experiences={experiences} />
-					) : null}
-
 					{education?.length ? <Education education={education} /> : null}
 
-					{skills?.length ? <Skills skills={skills} /> : null} */}
+					<div className="flex">
+						{experiences?.length ? (
+							<Experiences experiences={experiences} isSimple />
+						) : null}
+
+						{skills?.length ? <Skills skills={skills} isSimple /> : null}
+					</div>
 				</div>
 			</div>
 		</>

@@ -78,7 +78,7 @@ const Skill = ({ name, years, favorite, comfort_level }: ModifiedSkill) => {
 				{favorite && <MdFavorite className="size-2.5 text-[--white]" />}
 			</p>
 			<SkillRow
-				title="Comfort Level"
+				title="Comfort"
 				value={<Rating rating={comfort_level / 2} invert />}
 			/>
 			<Separator className="h-[1px] my-1" data-testid="separator" />
@@ -91,7 +91,10 @@ const Skill = ({ name, years, favorite, comfort_level }: ModifiedSkill) => {
 	);
 };
 
-const Skills = ({ skills }: { skills: SkillType[] }) => {
+const Skills = ({
+	skills,
+	isSimple,
+}: { skills: SkillType[]; isSimple?: boolean }) => {
 	const [sortBy, setSortBy] = useState<SortBy>("default");
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [sortedSkills, setSkills] = useState<ModifiedSkill[]>(setSkill(skills));
@@ -119,45 +122,56 @@ const Skills = ({ skills }: { skills: SkillType[] }) => {
 	};
 
 	return (
-		<div style={{ gridArea: "skills" }} className="border-r-2 border-[--ghost]">
-			<SectionHeader>Skills</SectionHeader>
-			<div className="border-b-2 border-[--ghost] md:grid-cols-[5fr_4fr] grid-cols-2 sm:grid">
-				<Select onValueChange={handleSort}>
-					<SelectPlaceholder
-						className="border-0 border-r-2"
-						placeholder="Default"
-					/>
-
-					<SelectContent>
-						<SelectItem value="default">Default</SelectItem>
-						<SelectItem value="name">Alphabetical</SelectItem>
-						<SelectItem value="comfort_level">Comfort Level</SelectItem>
-						<SelectItem value="favorite">Preferred</SelectItem>
-						<SelectItem value="years">Years of Experience</SelectItem>
-					</SelectContent>
-				</Select>
-				<div className="flex justify-between items-center p-4">
-					<span
-						className="text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground]"
-						data-state={sortBy === "default" ? "disabled" : "enabled"}
-					>
-						desc
-					</span>
-					<Switch
-						checked={isChecked}
-						onCheckedChange={toggleOrder}
-						disabled={sortBy === "default"}
-					/>
-					<span
-						className="text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground]"
-						data-state={sortBy === "default" ? "disabled" : "enabled"}
-					>
-						asc
-					</span>
-				</div>
+		<div style={{ gridArea: "skills" }}>
+			<div className={cn("flex flex-col border-y-2 border-[--ghost]")}>
+				<h3 className="p-4 text-center uppercase tracking-widest">Skills</h3>
 			</div>
-			<div className="flex flex-col max-h-[62rem] scrollbar-hide overflow-y-scroll sm:block">
-				{sortedSkills.map((props) => {
+			{!isSimple && (
+				<div className="border-b-2 border-[--ghost] md:grid-cols-[5fr_4fr] grid-cols-2 sm:grid">
+					<Select onValueChange={handleSort}>
+						<SelectPlaceholder
+							className="border-0 border-r-2"
+							placeholder="Default"
+						/>
+
+						<SelectContent>
+							<SelectItem value="default">Default</SelectItem>
+							<SelectItem value="name">Alphabetical</SelectItem>
+							<SelectItem value="comfort_level">Comfort Level</SelectItem>
+							<SelectItem value="favorite">Preferred</SelectItem>
+							<SelectItem value="years">Years of Experience</SelectItem>
+						</SelectContent>
+					</Select>
+					<div className="flex justify-between items-center p-4">
+						<span
+							className="text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground]"
+							data-state={sortBy === "default" ? "disabled" : "enabled"}
+						>
+							desc
+						</span>
+						<Switch
+							checked={isChecked}
+							onCheckedChange={toggleOrder}
+							disabled={sortBy === "default"}
+						/>
+						<span
+							className="text-xs font-semibold data-[state=disabled]:text-[--ghost] data-[state=enabled]:text-[--foreground]"
+							data-state={sortBy === "default" ? "disabled" : "enabled"}
+						>
+							asc
+						</span>
+					</div>
+				</div>
+			)}
+			<div
+				className={cn(
+					"flex flex-col",
+					isSimple
+						? ""
+						: "max-h-[62rem] scrollbar-hide overflow-y-scroll sm:block",
+				)}
+			>
+				{sortedSkills.slice(0, 20).map((props) => {
 					return <Skill {...props} key={props.name} />;
 				})}
 			</div>

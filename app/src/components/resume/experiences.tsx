@@ -34,20 +34,35 @@ const Experience = ({
 	);
 };
 
-const Experiences = ({ experiences }: { experiences: ExperienceType[] }) => {
+const Experiences = ({
+	isSimple,
+	experiences,
+}: {
+	isSimple?: boolean;
+	experiences: ExperienceType[];
+}) => {
 	/**
 	 * NOTE:
 	 *      I would prefer Array.prototype.toReversed(), but that's not part of the standard yet
 	 *      using slice reverse as a hacky alternative
-	 *  TODO: Replace with toReversed when it's standardized
+	 *  TODO:
+	 * 		Replace with toReversed when it's standardized
 	 */
 	const ordered = experiences.slice().reverse() as ExperienceType[];
 
 	return (
-		<div style={{ gridArea: "experiences" }}>
-			<SectionHeader>Experience</SectionHeader>
+		<div>
+			<div className={cn("flex flex-col border-y-2 border-[--ghost]")}>
+				<h3 className="p-4 text-center uppercase tracking-widest">
+					Experiences
+				</h3>
+			</div>
 
-			<div className="xs:scrollbar-hide overflow-y-scroll max-h-[90rem]">
+			<div
+				className={cn(
+					isSimple ? "" : "xs:scrollbar-hide overflow-y-scroll max-h-[90rem]",
+				)}
+			>
 				{ordered.map((exp) => {
 					return <Experience key={exp.id} {...exp} />;
 				})}

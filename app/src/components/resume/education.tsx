@@ -1,13 +1,15 @@
 import { Fragment } from "react";
 import { createId } from "@paralleldrive/cuid2";
 
-import SectionHeader from "./section-header";
+import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 
 const Education = ({ education }: { education: string[][] }) => {
 	return (
 		<div style={{ gridArea: "education" }}>
-			<SectionHeader>Education</SectionHeader>
+			<div className={cn("flex flex-col border-y-2 border-[--ghost]")}>
+				<h3 className="p-4 text-center uppercase tracking-widest">Education</h3>
+			</div>
 
 			<div className="grid grid-cols-[1fr_auto_1fr]">
 				{education.map(([line1, line2], index) => {
