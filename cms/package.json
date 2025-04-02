@@ -11,7 +11,7 @@
   "description": "",
   "packageManager": "pnpm@9.15.1",
   "dependencies": {
-    "directus": "11.3.5",
+    "directus": "11.6.1",
     "sqlite3": "5.1.7"
   }
 }

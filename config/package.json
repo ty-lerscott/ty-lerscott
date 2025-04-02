@@ -12,6 +12,6 @@
 	"packageManager": "pnpm@9.15.1",
 	"dependencies": {
 		"@types/node": "20",
-		"tsup": "8.1.0"
+		"tsup": "8.3.5"
 	}
 }
