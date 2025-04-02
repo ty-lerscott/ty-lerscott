@@ -27,10 +27,8 @@
 	"packageManager": "pnpm@9.15.1",
 	"dependencies": {
 		"@repo/app": "workspace:app",
-		"@repo/claw": "workspace:claw",
 		"@repo/cms": "workspace:cms",
-		"@repo/config": "workspace:config",
-		"puppeteer": "^24.4.0"
+		"@repo/config": "workspace:config"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
