@@ -144,3 +144,16 @@ export type GHDeploymentStatus = {
 	repository: GHRepository;
 	sender: GHAuthor;
 };
+
+export type GHWorkflowJob = {
+	head_branch: string;
+	html_url: string;
+	status: string;
+	head_sha: string;
+};
+
+export type GHInProgressAction = {
+	sender: GHAuthor;
+	repository: GHRepository;
+	workflow_job: GHWorkflowJob;
+};

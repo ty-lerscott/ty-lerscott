@@ -30,9 +30,11 @@
 		},
 		"dev": {
 			"cache": false,
-			"persistent": true
+			"persistent": true,
+			"dependsOn": ["^dev"],
+			"outputs": []
 		},
-		"https": {
+		"https:all": {
 			"cache": false
 		}
 	}

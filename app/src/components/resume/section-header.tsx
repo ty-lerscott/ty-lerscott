@@ -7,7 +7,7 @@ const SectionHeader = ({
 }: PropsWithChildren & { className?: string }) => {
 	return (
 		<div className={cn("flex flex-col", className)}>
-			<h3 className="p-4 border-y-2 border-[--ghost] text-center uppercase tracking-widest">
+			<h3 className="p-4 border-r-2 border-[--ghost] text-center uppercase tracking-widest">
 				{children}
 			</h3>
 		</div>

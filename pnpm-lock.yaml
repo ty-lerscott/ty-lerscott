@@ -251,12 +251,12 @@ importers:
 
   cms:
     dependencies:
+      better-sqlite3:
+        specifier: ^11.9.1
+        version: 11.9.1
       directus:
         specifier: 11.3.5
-        version: 11.3.5(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(encoding@0.1.13)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
-      sqlite3:
-        specifier: 5.1.7
-        version: 5.1.7
+        version: 11.3.5(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(encoding@0.1.13)(lightningcss@1.29.2)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
 
   config:
     dependencies:
@@ -280,7 +280,11 @@ importers:
         version: 0.172.0
       vite-plugin-glsl:
         specifier: ^1.3.1
+<<<<<<< HEAD
+        version: 1.3.1(rollup@4.32.0)(vite@6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
+=======
         version: 1.3.1(rollup@4.34.6)(vite@6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
+>>>>>>> main
     devDependencies:
       '@types/react':
         specifier: '19'
@@ -293,13 +297,22 @@ importers:
         version: 0.172.0
       '@vitejs/plugin-react':
         specifier: ^4.3.4
+<<<<<<< HEAD
+        version: 4.3.4(vite@6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
+=======
         version: 4.3.4(vite@6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
+>>>>>>> main
       typescript:
         specifier: ~5.6.2
         version: 5.6.3
       vite:
+<<<<<<< HEAD
+        specifier: ^6.0.9
+        version: 6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
+=======
         specifier: ^6.0.11
         version: 6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
+>>>>>>> main
 
 packages:
 
@@ -3408,6 +3421,9 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
+  better-sqlite3@11.9.1:
+    resolution: {integrity: sha512-Ba0KR+Fzxh2jDRhdg6TSH0SJGzb8C0aBY4hR8w8madIdIzzC6Y1+kx5qR6eS1Z+Gy20h6ZU28aeyg0z1VIrShQ==}
+
   bignumber.js@9.1.2:
     resolution: {integrity: sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==}
 
@@ -4973,6 +4989,10 @@ packages:
     resolution: {integrity: sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==}
     hasBin: true
 
+  jiti@2.4.2:
+    resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
+    hasBin: true
+
   joi@17.13.3:
     resolution: {integrity: sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==}
 
@@ -5103,6 +5123,70 @@ packages:
   leven@2.1.0:
     resolution: {integrity: sha512-nvVPLpIHUxCUoRLrFqTgSxXJ614d8AgQoWl7zPe/2VadE8+1dpU3LBhowRuBAcuwruWtOdD8oYC9jDNJjXDPyA==}
     engines: {node: '>=0.10.0'}
+
+  lightningcss-darwin-arm64@1.29.2:
+    resolution: {integrity: sha512-cK/eMabSViKn/PG8U/a7aCorpeKLMlK0bQeNHmdb7qUnBkNPnL+oV5DjJUo0kqWsJUapZsM4jCfYItbqBDvlcA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  lightningcss-darwin-x64@1.29.2:
+    resolution: {integrity: sha512-j5qYxamyQw4kDXX5hnnCKMf3mLlHvG44f24Qyi2965/Ycz829MYqjrVg2H8BidybHBp9kom4D7DR5VqCKDXS0w==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  lightningcss-freebsd-x64@1.29.2:
+    resolution: {integrity: sha512-wDk7M2tM78Ii8ek9YjnY8MjV5f5JN2qNVO+/0BAGZRvXKtQrBC4/cn4ssQIpKIPP44YXw6gFdpUF+Ps+RGsCwg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [freebsd]
+
+  lightningcss-linux-arm-gnueabihf@1.29.2:
+    resolution: {integrity: sha512-IRUrOrAF2Z+KExdExe3Rz7NSTuuJ2HvCGlMKoquK5pjvo2JY4Rybr+NrKnq0U0hZnx5AnGsuFHjGnNT14w26sg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  lightningcss-linux-arm64-gnu@1.29.2:
+    resolution: {integrity: sha512-KKCpOlmhdjvUTX/mBuaKemp0oeDIBBLFiU5Fnqxh1/DZ4JPZi4evEH7TKoSBFOSOV3J7iEmmBaw/8dpiUvRKlQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  lightningcss-linux-arm64-musl@1.29.2:
+    resolution: {integrity: sha512-Q64eM1bPlOOUgxFmoPUefqzY1yV3ctFPE6d/Vt7WzLW4rKTv7MyYNky+FWxRpLkNASTnKQUaiMJ87zNODIrrKQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  lightningcss-linux-x64-gnu@1.29.2:
+    resolution: {integrity: sha512-0v6idDCPG6epLXtBH/RPkHvYx74CVziHo6TMYga8O2EiQApnUPZsbR9nFNrg2cgBzk1AYqEd95TlrsL7nYABQg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  lightningcss-linux-x64-musl@1.29.2:
+    resolution: {integrity: sha512-rMpz2yawkgGT8RULc5S4WiZopVMOFWjiItBT7aSfDX4NQav6M44rhn5hjtkKzB+wMTRlLLqxkeYEtQ3dd9696w==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  lightningcss-win32-arm64-msvc@1.29.2:
+    resolution: {integrity: sha512-nL7zRW6evGQqYVu/bKGK+zShyz8OVzsCotFgc7judbt6wnB2KbiKKJwBE4SGoDBQ1O94RjW4asrCjQL4i8Fhbw==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  lightningcss-win32-x64-msvc@1.29.2:
+    resolution: {integrity: sha512-EdIUW3B2vLuHmv7urfzMI/h2fmlnOQBk1xlsDxkN1tCWKjNFjfLhGxYk8C8mzpSfr+A6jFFIi8fU6LbQGsRWjA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  lightningcss@1.29.2:
+    resolution: {integrity: sha512-6b6gd/RUXKaw5keVdSEtqFVdzWnU5jMxTUjA2bVcMNPLwSQ08Sv/UodBVtETLCn7k4S1Ibxwh7k68IwLZPgKaA==}
+    engines: {node: '>= 12.0.0'}
 
   lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
@@ -8415,7 +8499,7 @@ snapshots:
       enabled: 2.0.0
       kuler: 2.0.0
 
-  '@directus/api@23.3.2(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(encoding@0.1.13)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/api@23.3.2(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(encoding@0.1.13)(lightningcss@1.29.2)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@authenio/samlify-node-xmllint': 2.0.0(samlify@2.8.10)
       '@aws-sdk/client-ses': 3.668.0
@@ -8423,13 +8507,13 @@ snapshots:
       '@directus/constants': 12.0.1
       '@directus/env': 4.1.0(vue@3.5.11(typescript@5.7.2))
       '@directus/errors': 1.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
-      '@directus/extensions-registry': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
-      '@directus/extensions-sdk': 12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions-registry': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions-sdk': 12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(lightningcss@1.29.2)(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)
       '@directus/format-title': 11.0.0
       '@directus/memory': 2.0.6(vue@3.5.11(typescript@5.7.2))
       '@directus/pressure': 2.0.5(vue@3.5.11(typescript@5.7.2))
-      '@directus/schema': 12.1.1(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
+      '@directus/schema': 12.1.1(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
       '@directus/specs': 11.1.0
       '@directus/storage': 11.0.1
       '@directus/storage-driver-azure': 11.1.2(vue@3.5.11(typescript@5.7.2))
@@ -8466,7 +8550,7 @@ snapshots:
       date-fns: 4.1.0
       deep-diff: 1.0.2
       destroy: 1.2.0
-      directus: 11.3.5(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(encoding@0.1.13)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
+      directus: 11.3.5(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(encoding@0.1.13)(lightningcss@1.29.2)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
       dotenv: 16.4.5
       encodeurl: 2.0.0
       eventemitter2: 6.4.9
@@ -8491,7 +8575,7 @@ snapshots:
       json2csv: 5.0.7
       jsonwebtoken: 9.0.2
       keyv: 5.1.0
-      knex: 3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
+      knex: 3.1.0(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
       ldapjs: 2.3.3
       liquidjs: 10.17.0
       lodash-es: 4.17.21
@@ -8645,10 +8729,10 @@ snapshots:
       '@directus/storage': 11.0.1
       ms: 2.1.3
 
-  '@directus/extensions-registry@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/extensions-registry@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/errors': 1.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       ky: 1.7.2
       lodash-es: 4.17.21
@@ -8670,13 +8754,13 @@ snapshots:
       - vue
       - vue-router
 
-  '@directus/extensions-sdk@12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)':
+  '@directus/extensions-sdk@12.1.4(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(lightningcss@1.29.2)(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(terser@5.37.0)(typescript@5.7.2)':
     dependencies:
       '@directus/composables': 11.1.5(vue@3.5.11(typescript@5.7.2))
       '@directus/constants': 12.0.1
-      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/extensions': 2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/themes': 1.0.5(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(vue@3.5.11(typescript@5.7.2))
-      '@directus/types': 12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/types': 12.2.2(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       '@rollup/plugin-commonjs': 25.0.8(rollup@3.29.4)
       '@rollup/plugin-json': 6.1.0(rollup@3.29.4)
@@ -8684,7 +8768,7 @@ snapshots:
       '@rollup/plugin-replace': 5.0.7(rollup@3.29.4)
       '@rollup/plugin-terser': 0.4.4(rollup@3.29.4)
       '@rollup/plugin-virtual': 3.0.2(rollup@3.29.4)
-      '@vitejs/plugin-vue': 4.6.2(vite@4.5.2(@types/node@22.10.2)(terser@5.37.0))(vue@3.5.11(typescript@5.7.2))
+      '@vitejs/plugin-vue': 4.6.2(vite@4.5.2(@types/node@22.10.2)(lightningcss@1.29.2)(terser@5.37.0))(vue@3.5.11(typescript@5.7.2))
       chalk: 5.3.0
       commander: 10.0.1
       esbuild: 0.17.19
@@ -8695,7 +8779,7 @@ snapshots:
       rollup: 3.29.4
       rollup-plugin-esbuild: 5.0.0(esbuild@0.17.19)(rollup@3.29.4)
       rollup-plugin-styles: 4.0.0(rollup@3.29.4)
-      vite: 4.5.2(@types/node@22.10.2)(terser@5.37.0)
+      vite: 4.5.2(@types/node@22.10.2)(lightningcss@1.29.2)(terser@5.37.0)
       vue: 3.5.11(typescript@5.7.2)
     transitivePeerDependencies:
       - '@types/node'
@@ -8721,18 +8805,18 @@ snapshots:
       - typescript
       - vue-router
 
-  '@directus/extensions@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/extensions@2.0.6(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(pino@9.4.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/constants': 12.0.1
       '@directus/themes': 1.0.5(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(vue@3.5.11(typescript@5.7.2))
-      '@directus/types': 12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
+      '@directus/types': 12.2.2(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))
       '@directus/utils': 12.0.5(vue@3.5.11(typescript@5.7.2))
       '@types/express': 4.17.21
       fs-extra: 11.2.0
       lodash-es: 4.17.21
       zod: 3.23.8
     optionalDependencies:
-      knex: 3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
+      knex: 3.1.0(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
       pino: 9.4.0
       vue: 3.5.11(typescript@5.7.2)
     transitivePeerDependencies:
@@ -8766,9 +8850,9 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@directus/schema@12.1.1(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)':
+  '@directus/schema@12.1.1(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)':
     dependencies:
-      knex: 3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
+      knex: 3.1.0(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
     transitivePeerDependencies:
       - better-sqlite3
       - mysql
@@ -8858,13 +8942,13 @@ snapshots:
       pinia: 2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
       vue: 3.5.11(typescript@5.7.2)
 
-  '@directus/types@12.2.2(knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
+  '@directus/types@12.2.2(better-sqlite3@11.9.1)(knex@3.1.0(better-sqlite3@11.9.1)(pg@8.13.0))(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)(vue@3.5.11(typescript@5.7.2))':
     dependencies:
       '@directus/constants': 12.0.1
-      '@directus/schema': 12.1.1(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
+      '@directus/schema': 12.1.1(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
       '@types/geojson': 7946.0.14
     optionalDependencies:
-      knex: 3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
+      knex: 3.1.0(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1)
       vue: 3.5.11(typescript@5.7.2)
     transitivePeerDependencies:
       - better-sqlite3
@@ -10921,20 +11005,28 @@ snapshots:
       react: 19.0.0
       vue: 3.5.11(typescript@5.7.2)
 
+<<<<<<< HEAD
+  '@vitejs/plugin-react@4.3.4(vite@6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))':
+=======
   '@vitejs/plugin-react@4.3.4(vite@6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))':
+>>>>>>> main
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
+<<<<<<< HEAD
+      vite: 6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
+=======
       vite: 6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
+>>>>>>> main
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@4.6.2(vite@4.5.2(@types/node@22.10.2)(terser@5.37.0))(vue@3.5.11(typescript@5.7.2))':
+  '@vitejs/plugin-vue@4.6.2(vite@4.5.2(@types/node@22.10.2)(lightningcss@1.29.2)(terser@5.37.0))(vue@3.5.11(typescript@5.7.2))':
     dependencies:
-      vite: 4.5.2(@types/node@22.10.2)(terser@5.37.0)
+      vite: 4.5.2(@types/node@22.10.2)(lightningcss@1.29.2)(terser@5.37.0)
       vue: 3.5.11(typescript@5.7.2)
 
   '@vue/compiler-core@3.5.11':
@@ -11145,6 +11237,11 @@ snapshots:
   base64-js@0.0.8: {}
 
   base64-js@1.5.1: {}
+
+  better-sqlite3@11.9.1:
+    dependencies:
+      bindings: 1.5.0
+      prebuild-install: 7.1.2
 
   bignumber.js@9.1.2: {}
 
@@ -11359,7 +11456,8 @@ snapshots:
 
   chownr@1.1.4: {}
 
-  chownr@2.0.0: {}
+  chownr@2.0.0:
+    optional: true
 
   chownr@3.0.0: {}
 
@@ -11692,9 +11790,9 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
-  directus@11.3.5(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(encoding@0.1.13)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)):
+  directus@11.3.5(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(encoding@0.1.13)(lightningcss@1.29.2)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)):
     dependencies:
-      '@directus/api': 23.3.2(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(encoding@0.1.13)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
+      '@directus/api': 23.3.2(@types/node@22.10.2)(@unhead/vue@1.11.14(vue@3.5.11(typescript@5.7.2)))(better-sqlite3@11.9.1)(encoding@0.1.13)(lightningcss@1.29.2)(lodash@4.17.21)(pinia@2.3.0(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2)))(terser@5.37.0)(typescript@5.7.2)(vue@3.5.11(typescript@5.7.2))
       '@directus/update-check': 12.0.2
     transitivePeerDependencies:
       - '@types/node'
@@ -12322,6 +12420,7 @@ snapshots:
   fs-minipass@2.1.0:
     dependencies:
       minipass: 3.3.6
+    optional: true
 
   fs.realpath@1.0.0: {}
 
@@ -12858,6 +12957,9 @@ snapshots:
 
   jiti@1.21.7: {}
 
+  jiti@2.4.2:
+    optional: true
+
   joi@17.13.3:
     dependencies:
       '@hapi/hoek': 9.3.0
@@ -12955,7 +13057,7 @@ snapshots:
     dependencies:
       '@keyv/serialize': 1.0.1
 
-  knex@3.1.0(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1):
+  knex@3.1.0(better-sqlite3@11.9.1)(mysql2@3.11.3)(pg@8.13.0)(sqlite3@5.1.7)(tedious@18.6.1):
     dependencies:
       colorette: 2.0.19
       commander: 10.0.1
@@ -12972,6 +13074,7 @@ snapshots:
       tarn: 3.0.2
       tildify: 2.0.0
     optionalDependencies:
+      better-sqlite3: 11.9.1
       mysql2: 3.11.3
       pg: 8.13.0
       sqlite3: 5.1.7
@@ -12999,6 +13102,52 @@ snapshots:
       verror: 1.10.1
 
   leven@2.1.0: {}
+
+  lightningcss-darwin-arm64@1.29.2:
+    optional: true
+
+  lightningcss-darwin-x64@1.29.2:
+    optional: true
+
+  lightningcss-freebsd-x64@1.29.2:
+    optional: true
+
+  lightningcss-linux-arm-gnueabihf@1.29.2:
+    optional: true
+
+  lightningcss-linux-arm64-gnu@1.29.2:
+    optional: true
+
+  lightningcss-linux-arm64-musl@1.29.2:
+    optional: true
+
+  lightningcss-linux-x64-gnu@1.29.2:
+    optional: true
+
+  lightningcss-linux-x64-musl@1.29.2:
+    optional: true
+
+  lightningcss-win32-arm64-msvc@1.29.2:
+    optional: true
+
+  lightningcss-win32-x64-msvc@1.29.2:
+    optional: true
+
+  lightningcss@1.29.2:
+    dependencies:
+      detect-libc: 2.0.3
+    optionalDependencies:
+      lightningcss-darwin-arm64: 1.29.2
+      lightningcss-darwin-x64: 1.29.2
+      lightningcss-freebsd-x64: 1.29.2
+      lightningcss-linux-arm-gnueabihf: 1.29.2
+      lightningcss-linux-arm64-gnu: 1.29.2
+      lightningcss-linux-arm64-musl: 1.29.2
+      lightningcss-linux-x64-gnu: 1.29.2
+      lightningcss-linux-x64-musl: 1.29.2
+      lightningcss-win32-arm64-msvc: 1.29.2
+      lightningcss-win32-x64-msvc: 1.29.2
+    optional: true
 
   lilconfig@2.1.0: {}
 
@@ -13612,8 +13761,10 @@ snapshots:
   minipass@3.3.6:
     dependencies:
       yallist: 4.0.0
+    optional: true
 
-  minipass@5.0.0: {}
+  minipass@5.0.0:
+    optional: true
 
   minipass@7.1.2: {}
 
@@ -13621,6 +13772,7 @@ snapshots:
     dependencies:
       minipass: 3.3.6
       yallist: 4.0.0
+    optional: true
 
   minizlib@3.0.1:
     dependencies:
@@ -13629,7 +13781,8 @@ snapshots:
 
   mkdirp-classic@0.5.3: {}
 
-  mkdirp@1.0.4: {}
+  mkdirp@1.0.4:
+    optional: true
 
   mkdirp@3.0.1: {}
 
@@ -13726,7 +13879,8 @@ snapshots:
     dependencies:
       semver: 7.6.3
 
-  node-addon-api@7.1.1: {}
+  node-addon-api@7.1.1:
+    optional: true
 
   node-addon-api@8.3.0: {}
 
@@ -15187,6 +15341,7 @@ snapshots:
     transitivePeerDependencies:
       - bluebird
       - supports-color
+    optional: true
 
   sqlstring@2.3.3:
     optional: true
@@ -15385,6 +15540,7 @@ snapshots:
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
+    optional: true
 
   tar@7.4.3:
     dependencies:
@@ -15715,14 +15871,21 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
+<<<<<<< HEAD
+  vite-plugin-glsl@1.3.1(rollup@4.32.0)(vite@6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)):
+    dependencies:
+      '@rollup/pluginutils': 5.1.4(rollup@4.32.0)
+      vite: 6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
+=======
   vite-plugin-glsl@1.3.1(rollup@4.34.6)(vite@6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)):
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.34.6)
       vite: 6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
+>>>>>>> main
     transitivePeerDependencies:
       - rollup
 
-  vite@4.5.2(@types/node@22.10.2)(terser@5.37.0):
+  vite@4.5.2(@types/node@22.10.2)(lightningcss@1.29.2)(terser@5.37.0):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.5.2
@@ -15730,9 +15893,14 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.10.2
       fsevents: 2.3.3
+      lightningcss: 1.29.2
       terser: 5.37.0
 
+<<<<<<< HEAD
+  vite@6.0.9(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1):
+=======
   vite@6.0.11(@types/node@22.10.2)(jiti@1.21.7)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1):
+>>>>>>> main
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.2
@@ -15740,7 +15908,8 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.10.2
       fsevents: 2.3.3
-      jiti: 1.21.7
+      jiti: 2.4.2
+      lightningcss: 1.29.2
       terser: 5.37.0
       tsx: 4.19.2
       yaml: 2.6.1
