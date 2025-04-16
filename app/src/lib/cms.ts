@@ -96,7 +96,9 @@ const getPage = async <PageType = Page>(
 			}),
 		);
 
-		return resp.length ? resp[0] : ({} as PageType);
+		if (resp.length === 0) throw new Error("Page not found");
+
+		return resp[0];
 	} catch (err) {
 		console.error(err);
 		return {} as PageType;

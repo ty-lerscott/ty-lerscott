@@ -1,25 +1,18 @@
 import { cache } from "react";
 
 import { getPage } from "@/lib/cms";
-import ResumeBio from "./components/bio";
-import Education from "./components/education";
-import Experiences from "./components/experiences";
+// import ResumeBio from "../../(styled)/resume/components/bio";
+// import Education from "../../(styled)/resume/components/education";
+// import Experiences from "../../(styled)/resume/components/experiences";
 import { setMetadata, SITE_URL } from "@/lib/utils";
-import ContactDetails from "./components/contact-details";
-import { ResumeHeader, Skills } from "./components/client";
-import Breadcrumbs, { type Breadcrumb } from "@/components/breadcrumbs";
+// import ContactDetails from "../../(styled)/resume/components/contact-details";
+// import { ResumeHeader, Skills } from "../../(styled)/resume/components/client";
 import type { ResumePage as ResumePageType, Skill, Experience } from "@/types";
-
-const BREADCRUMBS = [
-	{
-		title: "Home",
-		href: "/",
-	},
-	{
-		title: "Resume",
-		href: "/resume",
-	},
-] as Breadcrumb[];
+import { ResumeHeader, Skills } from "@/components/resume/client";
+import ResumeBio from "@/components/resume/bio";
+import Education from "@/components/resume/education";
+import ContactDetails from "@/components/resume/contact-details";
+import Experiences from "@/components/resume/experiences";
 
 type APIResumePage = Omit<ResumePageType, "experiences" | "skills" | "body"> & {
 	experiences: {
@@ -100,34 +93,28 @@ const ResumePage = async () => {
 
 	return (
 		<>
-			<Breadcrumbs breadcrumbs={BREADCRUMBS} />
-
 			<div className="border-[--ghost] border-2 rounded w-full mx-auto">
-				<ResumeHeader roles={body as string[]} />
+				<ResumeHeader roles={[body?.[0] as string]} />
 
-				<div
-					data-testid="ResumeBody"
-					className="flex flex-col md:grid"
-					style={{
-						gridTemplateAreas: `
-							"bio experiences experiences experiences"
-							"contact experiences experiences experiences"
-							"skills experiences experiences experiences"
-							"skills education education education"
-						`,
-					}}
-				>
-					{resume_bio ? <ResumeBio bio={resume_bio} /> : null}
-
-					<ContactDetails />
-
-					{experiences?.length ? (
-						<Experiences experiences={experiences} />
+				<div data-testid="ResumeBody" className="flex flex-col">
+					{resume_bio ? (
+						<ResumeBio
+							bio={resume_bio}
+							className="h3>w-[3rem] break-all items-center"
+						/>
 					) : null}
+
+					<ContactDetails isSimple />
 
 					{education?.length ? <Education education={education} /> : null}
 
-					{skills?.length ? <Skills skills={skills} /> : null}
+					<div className="flex">
+						{experiences?.length ? (
+							<Experiences experiences={experiences} isSimple />
+						) : null}
+
+						{skills?.length ? <Skills skills={skills} isSimple /> : null}
+					</div>
 				</div>
 			</div>
 		</>

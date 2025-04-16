@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
+		"dev": "caddy run --config Caddyfile",
 		"start:pm2": "pm2 start ./dist/pm2.config.js",
 		"stop:pm2": "pm2 stop all",
 		"restart:pm2": "pm2 restart all",

@@ -1,4 +1,24 @@
-const colors = {
+type HEX_CODES =
+	| 0
+	| 1
+	| 2
+	| 3
+	| 4
+	| 5
+	| 6
+	| 7
+	| 8
+	| 9
+	| "A"
+	| "B"
+	| "C"
+	| "D"
+	| "E"
+	| "F";
+type Hex =
+	`#${HEX_CODES}${HEX_CODES}${HEX_CODES}${HEX_CODES}${HEX_CODES}${HEX_CODES}`; // @ts-ignore
+
+const colors: Record<string, Record<number, Hex>> = {
 	tomatoFrog: {
 		50: "#FEEBEC",
 		100: "#FED7D8",
@@ -71,7 +91,20 @@ const colors = {
 		800: "#24152D",
 		900: "#14091B",
 	},
-} as Record<string, Record<string | number, string>>;
+	tuscanSunset: {
+		50: "#eac891",
+		100: "#eac891",
+		150: "#eac891",
+		200: "#D06224",
+		300: "#eac891",
+		400: "#8a8635",
+		500: "#eac891",
+		600: "#8a8635",
+		700: "#8a8635",
+		800: "#8a8635",
+		900: "#AEc313",
+	},
+};
 
 const degreeArray = [
 	"white",
@@ -109,7 +142,7 @@ const aliasMapDark = {
 const getColorNameByIndex = (index: number): string =>
 	Object.keys(colors)[index];
 
-const getColorMap = (index: number, isDark?: boolean) => {
+const getColorMap = (index: number, isDark?: boolean): Record<string, Hex> => {
 	const hexRange = Object.values(colors[getColorNameByIndex(index)]);
 	const aliasMap = isDark ? aliasMapDark : aliasMapLight;
 
@@ -125,6 +158,6 @@ const getColorMap = (index: number, isDark?: boolean) => {
 	);
 };
 
-const PRIMARY_INDEX = 2;
+const PRIMARY_INDEX = 3;
 
 export { colors, getColorMap, PRIMARY_INDEX };
