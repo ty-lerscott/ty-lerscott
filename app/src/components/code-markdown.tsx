@@ -28,6 +28,7 @@ const styles = {
 		MozHyphens: "none",
 		msHyphens: "none",
 		hyphens: "none",
+		display: "inline-block",
 	},
 	'pre[class*="language-"]': {
 		color: "#a9b7c6",

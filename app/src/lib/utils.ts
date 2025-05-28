@@ -14,7 +14,7 @@ const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 const SITE_URL = (args?: { isCMS?: boolean }) => {
 	const isCMS = args?.isCMS ?? false;
 
-	return `https://${isCMS ? "cms" : "ty"}.lerscott.${LOCAL_DEV ? "local" : "com"}`;
+	return LOCAL_DEV ? `http://localhost:${isCMS ? 8050 : 3000}` : `https://${isCMS ? "cms" : "ty"}.lerscott.${LOCAL_DEV ? "local" : "com"}`;
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
