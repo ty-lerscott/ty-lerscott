@@ -1,6 +1,0 @@
-packages:
-  - "cms"
-  - "app"
-  - "config"
-  - "api"
-  - "projects/*"
