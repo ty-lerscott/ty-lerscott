@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
 	h1,h2,h3,h4,h5,h6 {
 		font-family: "Merriweather", serif;
 		margin: 0;
+		letter-spacing: 0.10rem
 	}
 	main {
 		margin-top: 3.9rem;
